@@ -51,7 +51,7 @@ class ProductAdminController extends BaseController {
         }
     }
 
-    void updateFields(product) {
+    protected void updateFields(product) {
         product.name = inputValidationService.checkAndEncodeName(params.name, product)
         product.timeNeeded =
             inputValidationService.checkAndEncodeInteger(params, "timeNeeded", "product.timeNeeded")

@@ -126,7 +126,7 @@ class ShopController extends BaseController {
     }
 
 
-    void fetchWares(Shop shop) {
+    protected void fetchWares(Shop shop) {
         shop.itemTypes = itemService.fetchItemTypes(shop)
     }
 

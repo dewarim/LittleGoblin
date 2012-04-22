@@ -56,12 +56,12 @@ class CategoryAdminController extends BaseController {
         }
     }
 
-    void updateFields(category) {
+    protected void updateFields(category) {
         category.name = inputValidationService.checkAndEncodeName(params.name, category)
 
     }
 
-    void updateRelations(category) {
+    protected void updateRelations(category) {
         def itemTypes = params.list("itemTypes").collect {
             inputValidationService.checkObject ItemType.class, it
         }

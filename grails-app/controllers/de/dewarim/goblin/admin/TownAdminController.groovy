@@ -51,7 +51,7 @@ class TownAdminController extends BaseController {
         }
     }
 
-    void updateFields(town){
+    protected void updateFields(town){
         town.name = inputValidationService.checkAndEncodeName(params.name, town)
         town.description =
             inputValidationService.checkAndEncodeText(params, "description", "town.description")

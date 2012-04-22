@@ -53,7 +53,7 @@ class FeatureAdminController extends BaseController {
         }
     }
 
-    void updateFields(feature) {
+    protected void updateFields(feature) {
         feature.name = inputValidationService.checkAndEncodeName(params.name, feature)
         feature.internalName = inputValidationService.checkAndEncodeText(params, "internalName", "feature.internalName")
         if(grailsApplication.config.featureScripts?.find{it == params.script}){

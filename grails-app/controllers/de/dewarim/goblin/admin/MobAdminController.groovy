@@ -52,7 +52,7 @@ class MobAdminController extends BaseController {
         }
     }
 
-    void updateFields(e) {
+    protected void updateFields(e) {
         MobTemplate mob = (MobTemplate) e
         mob.name = inputValidationService.checkAndEncodeName(params.name, mob)
         if(params.description){

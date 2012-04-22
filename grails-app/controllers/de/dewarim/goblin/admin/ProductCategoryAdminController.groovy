@@ -50,7 +50,7 @@ class ProductCategoryAdminController extends BaseController {
         }
     }
 
-    void updateFields(category) {
+    protected void updateFields(category) {
         category.name = inputValidationService.checkAndEncodeName(params.name, category)
         if(params.description){
             category.description =

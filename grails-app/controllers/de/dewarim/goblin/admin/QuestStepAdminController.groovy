@@ -58,7 +58,7 @@ class QuestStepAdminController extends BaseController {
         }
     }
 
-    void updateFields(qStep) {
+    protected void updateFields(qStep) {
         QuestStep questStep = (QuestStep) qStep // casting to QuestStep so IDE will provide method suggestions
         questStep.name = inputValidationService.checkAndEncodeName(params.name, questStep)
         questStep.description =

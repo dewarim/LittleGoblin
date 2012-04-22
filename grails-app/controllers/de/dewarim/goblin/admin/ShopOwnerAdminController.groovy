@@ -52,7 +52,7 @@ class ShopOwnerAdminController extends BaseController {
         }
     }
 
-    void updateFields(shopOwner){
+    protected void updateFields(shopOwner){
         shopOwner.name = inputValidationService.checkAndEncodeName(params.name, shopOwner)
         shopOwner.description =
             inputValidationService.checkAndEncodeText(params, "description", "shopOwner.description")

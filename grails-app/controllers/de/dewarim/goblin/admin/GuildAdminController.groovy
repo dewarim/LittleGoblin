@@ -56,7 +56,7 @@ class GuildAdminController extends BaseController {
         }
     }
 
-    void updateGuildAcademies(guild) {
+    protected void updateGuildAcademies(guild) {
         def academyList = params.list("academies").collect { academy ->
             inputValidationService.checkObject(Academy.class, academy)
         }
@@ -77,7 +77,7 @@ class GuildAdminController extends BaseController {
         }
     }
 
-    void updateFields(guild){
+    protected void updateFields(guild){
         guild.name = inputValidationService.checkAndEncodeName(params.name, guild)
         guild.description =
             inputValidationService.checkAndEncodeText(params, "description", "guild.description")

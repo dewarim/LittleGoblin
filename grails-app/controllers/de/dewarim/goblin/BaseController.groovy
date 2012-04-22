@@ -17,7 +17,7 @@ class BaseController {
      * Fetch the player character specified by the "pc" parameter.
      * Make sure that it is a pc belonging to the logged in user to prevent impersonation attacks.
      */
-    PlayerCharacter fetchPc(session) {
+    protected PlayerCharacter fetchPc(session) {
         def pc = null
         if (params.pc) {
             pc = PlayerCharacter.get(params.pc)
@@ -38,7 +38,7 @@ class BaseController {
         return pc
     }
 
-    UserAccount fetchUser() {
+    protected UserAccount fetchUser() {
         return (UserAccount) springSecurityService.currentUser
     }
 
@@ -47,11 +47,11 @@ class BaseController {
      * as text content.
      * @param e the exception you want to render.
      */
-    void renderException(Exception e) {
+    protected void renderException(Exception e) {
         render(status: 503, text: message(code: e.getLocalizedMessage()))
     }
 
-    Item fetchItem(PlayerCharacter pc) {
+    protected Item fetchItem(PlayerCharacter pc) {
         if (!pc) {
             throw new RuntimeException('error.no.pc')
         }

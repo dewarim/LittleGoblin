@@ -51,7 +51,7 @@ class CronController {
         }
     }
 
-    Boolean requestAllowed() {
+    protected Boolean requestAllowed() {
 //      log.debug("requestURI:${request.requestURI}")
 //      return request.getRemoteAddr().equals(request.getLocalAddr())
         def id = params.id
@@ -61,7 +61,7 @@ class CronController {
         return result
     }
 
-    void sendAway() {
+    protected void sendAway() {
         render(status: 503, text: 'You are not authorized to access this service!')
     }
 }

@@ -101,7 +101,7 @@ class ComponentAdminController extends BaseController {
         }
     }
 
-    void updateFields(Component component) {
+    protected void updateFields(Component component) {
         component.amount = inputValidationService.checkAndEncodeInteger(params, "amount", "component.amount")
         component.type = (ComponentType) inputValidationService.checkEnum(ComponentType.class,  params.type)
         component.itemType = (ItemType) inputValidationService.checkObject(ItemType.class, params.itemType)

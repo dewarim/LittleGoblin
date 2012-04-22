@@ -92,7 +92,7 @@ class RepMessageAdminController extends BaseController {
         }
     }
 
-    void updateFields(ReputationMessage repMessage) {
+    protected void updateFields(ReputationMessage repMessage) {
         repMessage.reputation = inputValidationService.checkAndEncodeInteger(params, "reputation", "rmm.message.reputation")
         repMessage.messageId = inputValidationService.checkAndEncodeText(params, "messageId", "rmm.message.id")
 
@@ -102,7 +102,7 @@ class RepMessageAdminController extends BaseController {
         fixReputation(repMessage)
     }
 
-    void fixReputation(ReputationMessage repMessage) {
+    protected void fixReputation(ReputationMessage repMessage) {
         log.debug("lowerReputation")
         def rm = ReputationMessage.
                 find("from ReputationMessage r where r.repMessageMap = ? and r.reputation = ?",

@@ -51,7 +51,7 @@ class ItemAdminController extends BaseController {
         }
     }
 
-    void updateFields(itemType) {
+    protected void updateFields(itemType) {
         itemType.name = inputValidationService.checkAndEncodeName(params.name, itemType)
         itemType.description =
                 inputValidationService.checkAndEncodeText(params, "description", "itemType.description")

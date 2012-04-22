@@ -50,7 +50,7 @@ class ShopAdminController extends BaseController {
         }
     }
 
-    void updateFields(shop) {
+    protected void updateFields(shop) {
         shop.name = inputValidationService.checkAndEncodeName(params.name, shop)
         if(params.description){
             shop.description =

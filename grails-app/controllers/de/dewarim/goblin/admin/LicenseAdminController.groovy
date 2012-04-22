@@ -50,7 +50,7 @@ class LicenseAdminController extends BaseController {
         }
     }
 
-    void updateFields(license) {
+    protected void updateFields(license) {
         license.name = inputValidationService.checkAndEncodeName(params.name, license)
         license.description =
             inputValidationService.checkAndEncodeText(params, "description", "license.description")

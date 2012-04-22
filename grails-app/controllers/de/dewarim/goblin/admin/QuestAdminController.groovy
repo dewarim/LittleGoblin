@@ -50,7 +50,7 @@ class QuestAdminController extends BaseController {
         }
     }
 
-    void updateFields(questTemplate) {
+    protected void updateFields(questTemplate) {
         questTemplate.name = inputValidationService.checkAndEncodeName(params.name, questTemplate)
         questTemplate.description =
                 inputValidationService.checkAndEncodeText(params, "description", "questTemplate.description")

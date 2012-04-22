@@ -58,7 +58,7 @@ class FactionAdminController extends BaseController {
         }
     }
 
-    void updateFields(faction){
+    protected void updateFields(faction){
         faction.name = inputValidationService.checkAndEncodeName(params.name ?: faction.name, faction)
         faction.description =
             inputValidationService.checkAndEncodeText(params, "description", "faction.description")

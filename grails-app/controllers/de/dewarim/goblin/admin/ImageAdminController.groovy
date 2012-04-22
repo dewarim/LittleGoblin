@@ -66,7 +66,7 @@ class ImageAdminController extends BaseController {
         }
     }
 
-    void updateFields(image) {
+    protected void updateFields(image) {
         image.name = inputValidationService.checkAndEncodeName(params.name, image)
         image.description =
             inputValidationService.checkAndEncodeText(params, "description", "image.description")

@@ -52,7 +52,7 @@ class EncounterAdminController extends BaseController {
         }
     }
 
-    void updateFields(e) {
+    protected void updateFields(e) {
         Encounter encounter = (Encounter) e
         encounter.name = inputValidationService.checkAndEncodeName(params.name, encounter)
         encounter.includesCombat = inputValidationService.checkAndEncodeBoolean(params, 'includesCombat', 'encounter.includesCombat')

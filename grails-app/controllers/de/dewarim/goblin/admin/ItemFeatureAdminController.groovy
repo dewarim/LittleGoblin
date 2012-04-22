@@ -51,7 +51,7 @@ class ItemFeatureAdminController extends BaseController {
     }
   }
 
-  void updateFields(itemFeature) {
+  protected void updateFields(itemFeature) {
     itemFeature.feature = inputValidationService.checkObject(Feature.class, params.feature)  // TODO: param is script.
     itemFeature.itemType = inputValidationService.checkObject(ItemType.class, params.itemType)
     itemFeature.config = inputValidationService.checkXmlText(params.config)

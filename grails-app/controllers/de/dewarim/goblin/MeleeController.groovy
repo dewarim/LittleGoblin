@@ -182,7 +182,7 @@ class MeleeController extends BaseController {
         }
     }
 
-    Map fetchViewParameters(PlayerCharacter pc) {
+    protected Map fetchViewParameters(PlayerCharacter pc) {
         def items = []
         def fighters
         def opponents = []

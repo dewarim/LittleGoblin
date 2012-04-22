@@ -53,7 +53,7 @@ class RmmAdminController extends BaseController {
         }
     }
 
-    void updateFields(rmm) {
+    protected void updateFields(rmm) {
         rmm.name = inputValidationService.checkAndEncodeName(params.name, rmm)
         if (params.faction?.equals('null') && rmm.faction) {
             rmmService.removeFaction(rmm)

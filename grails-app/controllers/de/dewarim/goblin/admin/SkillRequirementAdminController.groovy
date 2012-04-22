@@ -99,7 +99,7 @@ class SkillRequirementAdminController extends BaseController {
         }
     }
 
-    void updateFields(SkillRequirement requirement) {
+    protected void updateFields(SkillRequirement requirement) {
         requirement.level = inputValidationService.checkAndEncodeInteger(params, "level", "requirement.level")
         requirement.skill = inputValidationService.checkObject(Skill.class, params.skill)
     }
