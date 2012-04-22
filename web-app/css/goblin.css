@@ -1,0 +1,410 @@
+/* css for all pages */
+body.main {background-color:#FFF; }
+
+/* css for landing page */
+.landing_body { }
+
+/* facebook features */
+.fb-like {margin-left:50px;padding-top:5px}
+.fb-login-button {padding-top:10px}
+
+
+h1.landing_title {
+    text-align:center;
+	/*font-size: 150%;*/
+	color: black;
+	padding-bottom:30px;
+    font-family:"Comic sans ms";
+    font-size:40px;
+    text-shadow:5px 2px 10px #444;
+}
+
+.navigation {
+    height:40px;
+    background-image:url(../images/design/col2top.png);
+    background-position:left;
+    background-repeat:no-repeat;
+    background-color:#E78A00;
+    position:relative;
+    margin:0;
+}
+
+div.header {
+    width:100%;
+    height:200px;
+    background-image:url(../images/design/banner.png);
+    background-position:center;
+    background-repeat:no-repeat;
+    background-color:#000;
+    color:#FFF;
+    font-family:"Comic sans ms";
+    font-weight:bold;
+    font-size:15px;
+}
+
+div.header span {
+    position:relative;
+    top:10px;
+    left:25px;
+
+}
+
+
+
+div.landing_about {
+	float:left;
+	margin:10px;
+	padding:10px;	
+	color:#FFF;
+    text-align:justify;
+/*	background-color: #B2FF7F; */
+}
+
+div.landing_col1 {
+    display:none;
+}
+
+div.landing_highscore {
+	float:left;
+	padding:10px;
+}
+
+div.landing_login {
+    position:relative;
+    left:220px;
+	float:left;
+	width:30%;
+	color:#000;
+	background-color: #FFF;/*B2FF7F;*/
+    border:groove 2px #0AF;
+    padding:0 0 30px 30px;
+    -webkit-border-radius:20px;
+    -moz-border-radius:20px;
+    border-radius:20px;
+}
+
+div.landing_col2 a, div.col2 a {
+    color:#05F;
+    text-decoration:none;
+}
+div.landing_col2 a:hover, div.col2 a:hover {
+    color:#0AF;
+    text-decoration:underline;
+}
+
+.logoimg {
+    position:relative;
+    top:15px;
+    left:40px;
+}
+
+.goblin {
+    background-image:url(../images/design/col2top.png);
+    background-image-position:top left;
+    background-repeat:repeat-y;
+    background-color:#E78A00;
+    position:relative;
+    left:200px;
+    -webkit-border-radius:20px;
+    -moz-border-radius:20px;
+    border-radius:20px;
+}
+
+div.documentation_info {
+    padding:0 30px 0 30px;
+}
+
+div.version_info {
+    margin:0 30px 20px 30px;
+    border:ridge 3px #0AF;
+    padding:30px;
+    font-weight:bold;
+    -webkit-border-radius:20px;
+    -moz-border-radius:20px;
+    border-radius:20px;
+}
+div.version_info ul {
+    font-weight:normal;
+}
+
+div.fight_opponent{
+
+}
+div.fight_character table{
+    color:#DDD;
+}
+
+div.clear{
+    clear:both;
+    padding:20px 30px 0 30px;
+}
+
+div.missing_image{
+	padding: 8px;
+	border: 1px black dotted;
+}
+
+div.artist_link{
+	font-size:small;
+}
+
+div.description{
+	padding:2ex;
+	/*border: 1px brown dashed;*/
+}
+
+div.quest_text{
+	
+}
+
+div.decision{
+	margin-top:1ex;
+	margin-bottom:1ex;
+}
+
+div.message_list{
+   /* max-height:10em;
+    max-width: 64ex;
+    overflow:scroll;  */
+    padding-bottom:50px;
+}
+
+/*div.navigation{
+    padding:8px;
+}       */
+
+div.logo{
+    max-width: 20ex;
+    max-height:4ex;
+    padding:1ex;
+    border-bottom:1px black dotted;
+
+}
+
+div.header{
+    top:1px;
+    border-bottom:1px black solid;
+}
+
+/* Tables */
+td.equip_cell {
+    padding-right:1ex;
+}
+td.sell_cell{
+    text-align:right;
+}
+
+td.application_cell{
+    width:20ex;
+}
+
+table.display_mail{
+    border-style:outset;
+    border-spacing:3px;
+    border-width:3px;
+    border-color:gray;
+    padding:0.5ex;
+}
+td.message_content{
+    border:1px black dotted;
+    padding:0.5ex;
+    word-wrap:break-word;
+    width:60em;
+    height:10em;
+}
+
+/* Text Content */
+div.description{
+    padding:0.5ex;
+    margin:0.5ex;
+    /*border: 1px dotted black;*/
+}
+
+div.inner_description{
+    margin-bottom:1ex;
+}
+
+div.order_description{
+    margin:1ex;
+}
+
+div.static_message{
+    padding:1ex;
+    margin:0.5ex;
+}
+
+/* Links and Navigation */
+.navigation ul {
+    margin-top:0;
+    list-style-type:none;
+}
+.navigation ul li {
+    display:inline-block;
+    padding:7px 60px 0 0;
+
+}
+.navigation a{
+    text-decoration:none;
+    font-weight:bold;
+    padding-left:60px;
+    color:#700;
+
+}
+.navigation a:hover {
+    color:#D00;
+}
+
+.nav {
+    margin-top:20px;
+}
+
+div.edit_description{
+    text-align:right;
+    font-size:small;
+}
+
+/* other */
+div.player_messages{
+}
+
+div.message {
+    background-color: #DFF;
+    color:black;
+    margin-top:1ex;
+    padding:1ex;
+}
+table.reputation_list > tbody > tr > td,th {
+    padding:1ex;
+}
+
+ul.no_bullets{
+    list-style-type:none;
+}
+
+div.chat_message_list{
+    height:20em;
+    overflow:scroll;
+}
+
+/* table cell formatting */
+.adminTable, .item_list, .order_list_table, .guild_list_table, .academy_skill_sets, .academy_list_table {
+    border:solid 1px #068;
+    border-collapse:collapse;
+    font-size:11.5px;
+    width:50%;
+}
+.adminTable td, .item_list td, .order_list_table td, .guild_list_table td, .academy_skill_sets td, .academy_list_table td {
+    padding:2px;
+    border-right:solid 1px #0CD;
+    border-top:solid 1px #068;
+}
+.adminTable th, .item_list th, .order_list_table th, .guild_list_table th, .academy_skill_sets th, .academy_list_table th {
+    border-right:solid 1px #0CD;
+}
+.adminTable thead, .item_list thead, .order_list_table thead, .guild_list_table thead, .academy_skill_sets thead, .academy_list_table thead {
+    text-align:center;
+    background-color:#09F;
+    color:#FFF;
+    text-shadow:0 0 5px #000;
+}
+.adminTable thead a, .item_list thead a {
+    color:#FFF;
+}
+.adminTable thead a:hover, .item_list thead a:hover {
+    color:#000;
+    text-shadow:none;
+    text-decoration:underline;
+}
+.adminTable tr:hover td, .item_list tr:hover td, .order_list_table tr:hover td, .guild_list_table tr:hover td, .academy_skill_sets tr:hover td, .academy_list_table tr:hover td {
+    /*background-color:#d5ffdc;*/
+}
+td.decimal{
+    text-align:center;
+}
+
+td.center{
+    text-align:center;
+}
+
+div.help{
+    padding-top:2ex;
+}
+
+div.intro{
+    padding:2ex;
+}
+
+li.editable_list{
+    padding:0.5ex;
+}
+
+span.category_filter_enabled{
+    padding-left: 1ex;
+    padding-right: 1ex;
+    text-transform: uppercase;
+}
+
+span.category_filter_disabled{
+    padding-left: 1ex;
+    padding-right: 1ex;
+    text-transform: lowercase;
+}
+
+td.where_used_list{
+    height:6ex;
+    overflow:scroll;
+}
+
+label.post_office{
+    width:12ex;
+    float:left;
+}
+
+/* quotes */
+.quotation{
+    margin-top: 1ex;
+}
+.citation{
+    float:left;
+}
+.attribution{
+    font-size: smaller;
+    float:right;
+}
+
+.spacer1{
+    height:1ex;
+}
+
+.spacer2{
+    height:2ex;
+}
+
+ul.item_list{
+    list-style-type: none;
+    list-style-image: none;
+    border: 0px;
+}
+
+li.equipped_item{
+    clear:both;
+}
+span.slotName{
+    float:left;
+}
+span.slotItem{
+    float:right;
+    padding-left: 5ex;
+}
+.item_table * td {
+    vertical-align: top;
+    padding: 1ex;
+}
+.item_table * th{
+    text-align:center;
+    width: 33%;
+}
+
+.right {
+    text-align: right;
+}

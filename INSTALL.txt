@@ -1,0 +1,30 @@
+Short installation instructions for the binary package of LittleGoblin (0.2.5)
+
+Java
+Download and install the Java 6 runtime from http://java.com/
+On Ubuntu: sudo apt-get install openjdk6-jre
+
+Tomcat 6
+Download and install tomcat6 from http://tomcat.apache.org
+On Ubuntu, use: sudo apt-get install tomcat6
+
+Download a database and configure it, either:
+http://mysql.com
+or
+http://postgresql.org
+Create a database user "goblin" with password "goblin" (for testing)
+
+Download a database driver for the database
+http://dev.mysql.com/downloads/connector/j/5.1.html
+or
+http://jdbc.postgresql.org/download.html
+Put the database driver .jar-file into Tomcat's "lib" directory
+
+To edit your database settings, create in you home directory a folder .grails
+ and inside a file goblin-config.groovy. You can download an example version from
+ http://sf.net/projects/littlegoblin.
+
+If you have any questions, you can:
+* Ask on the mailing list https://sourceforge.net/mailarchive/forum.php?forum_name=littlegoblin-main
+* Use the forum (Be the first!): https://sourceforge.net/projects/littlegoblin/forums/forum/1129360
+* Write me a mail ingo_wiarda@dewarim.de

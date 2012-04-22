@@ -1,0 +1,181 @@
+/* loosely based upon http://matthewjamestaylor.com/blog/perfect-3-column.htm */
+body{
+	margin:0;
+	padding:0;
+	border:0;			/* This removes the border around the viewport in old versions of IE */
+	width:100%;
+    font-family:Verdana, Arial, sans-serif;
+}
+
+.main {
+    background-color:#FFF;
+}
+
+/* column container */
+.colmask {
+	position:relative;	/* This fixes the IE7 overflow hidden bug */
+	clear:both;
+	float:left;
+	width:100%;			/* width of whole page */
+    background-color:#FFF;
+}
+
+/*.col1,
+.col2
+ {
+
+    /*height:90%;
+	float:left;
+	/*position:relative;
+	padding-top:1em;
+    padding-left:2%;
+    padding-right:2%;
+    height:100%;
+	/*overflow:hidden;*/
+
+   /* margin-top:-18px;
+}
+
+.col1 {
+
+    width:16%;			/* width of center column content (column width minus padding on either side)
+    background: #fef48c;	/* left column background colour
+}
+.col2 {
+    width:56%;			/* Width of left column content (column width minus padding on either side)
+    background: #c2fe78;
+
+}*/
+.col1 {
+    width:16%;
+    float:left;
+    padding:100px 0 0 30px;
+    background-image:url(../images/design/angle.png);
+    background-position: top left;
+    background-repeat:no-repeat;
+    background-size:150px;
+    height:100%;
+}
+.col2 {
+    width:60%;
+    overflow:hidden;
+    padding-left:30px;
+    list-style-image:url(../images/design/puce.png);
+    min-height:700px;
+}
+.col3 {
+	width:16%;			/* Width of right column content (column width minus padding on either side) */
+    background:-moz-linear-gradient(top, #777, #141414);           /* right column background colour */
+	background:-webkit-gradient(linear,left top, left bottom, from(#777), to(#141414));
+	filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#777777',EndColorStr='#141414',GradientType=0);
+    -moz-border-radius:20px 20px 0 0;
+    -webkit-border-radius:20px 20px 0 0;
+    border-radius:20px 20px 0 0;
+    position:absolute;
+    right:0;
+    top:-120px;
+    padding:50px 2% 70px 2%;
+    overflow:hidden;
+    height:100%;
+    color:#FFF;
+}
+.col3 a {
+    text-decoration:none;
+    color:#FFF;
+    text-shadow:1px 1px 2px #000;
+}
+.col3 a:hover {
+    text-decoration:underline;
+    color:#000;
+    text-shadow:1px 1px 2px #FFF;
+}
+
+.landing_col2 {
+    position:relative;
+    top:-27px;
+    margin:0;
+    width:80.5%;
+    background-image:url(../images/design/angle.png);
+    background-position: top left;
+    background-repeat:no-repeat;
+    background-size:300px;
+    background-color:#FFF;
+    height:100%;
+
+}
+
+.full_col2 {
+    position:relative;
+    margin:0;
+    width:70%;
+    background-image:url(../images/design/angle.png);
+    background-position: top left;
+    background-repeat:no-repeat;
+    background-size:300px;
+    background-color:#FFF;
+    padding:30px 20px 60px 270px;
+}
+.full_col2 a {
+    color:#05F;
+}
+.full_col2 a:hover {
+    color:#0AF;
+}
+
+
+/* Footer styles */
+.footer {
+    height:200px;
+    overflow:hidden;
+    margin:0;
+    padding-top:30px;
+    padding-left:30px;
+    background:-moz-linear-gradient(top, #777, #141414);           /* right column background colour */
+	background:-webkit-gradient(linear,left top, left bottom, from(#777), to(#141414));
+	filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#777777',EndColorStr='#141414',GradientType=0);
+
+    /*position:fixed;
+    bottom: 1%;
+	border-top:1px solid #000;*/
+}
+div.footer a {
+    color:#FFF;
+    text-decoration:none;
+}
+div.footer a:hover {
+    color:#00F;
+    text-decoration:underline;
+}
+
+div.imprintdiv {
+    min-height:200px;
+    background-image:url(../images/design/angle.png);
+    background-position: top left;
+    background-repeat:no-repeat;
+    background-size:300px;
+    position:relative;
+    padding-top:30px;
+}
+div.imprintdiv a {
+    color:#05F;
+    text-decoration:none;
+}
+div.imprintdiv a:hover {
+    color:#0AF;
+    text-decoration:underline;
+}
+
+
+div.registration{
+    width:40%;
+    margin-left:30%;
+    margin-right: 30%;
+    margin-top: 5em;
+    margin-bottom: 5em;
+}
+.registration h1{
+    text-align:center;
+}
+.registration_form{
+    margin-left: 10em;
+}
