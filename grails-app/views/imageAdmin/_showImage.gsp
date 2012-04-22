@@ -1,0 +1,1 @@
+<img class="image" src="${image.url}" alt="${image.description}" width="${image.width}" height="${image.height}">

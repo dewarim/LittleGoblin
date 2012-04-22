@@ -1,0 +1,1 @@
+<g:renderErrors bean="${errorObject}" as="list"/> 

@@ -1,0 +1,393 @@
+ status of project Goblin
+
+Iteration 1
+
+Basic Functionality
+
+You start the game with a goblin. You can fight one monster, Ork.
+Both you and your opponent have the same chance of winning.
+You can flee at any time, in which case you will be send back to the start
+page, where you can start a new fight, being completely healed.
+Winning a fight will net you 1 experience point.
+Loosing a fight will gain you an entry in the highscore list, which
+is sorted according to experience points.
+No matter if you loose or win, the game will start over and you can
+gain more experience points. Between fights, both combatants are set
+to 10 hit points.
+
+Iteration 2
+Automatic refresh of fight-page.
+Problem to solve: 
+<meta http-equiv="refresh" content="5;URL=/goblin/fight/fight?pc=${pc.id}&mob=${mob.id}"/>
+does work,
+<meta http-equiv="refresh" content="5;URL=/goblin/fight/fight?pc=${pc.id};mob=${mob.id}"/>
+does not work - error message: (Provided id of the wrong type for class de.dewarim.goblin.Character. Expected: class java.lang.Long, got class java.lang.String)
+
+Iteration 3
++ Added MobTemplate so it's possible to have more than one Monster of a given type. Also, it is now 
+possible to individualize monsters.
++ Added relation Character - 1..n - CombatMessages to store CMs along with the character.
+
+Iteration 4
++ moved CombatMessages relation to Combat class.
++ CombatMessages are displayed in i18n-version
+- unsolved: logging does not work.
+
+Iteration 5
++ added cause of death to highscore
+
+Iteration 6
+Groundwork:
+	added classes:
+		+Item, ItemType
+		+Character.slots + EquipmentSlot
+
+Iteration 7
++ Installed Jetty6 on dewarim.com
++ Uploaded goblin.war - though it does not redirect properly yet. Probably needsd  mod_jk
+
+Iteration 8 -/2010-02-23/ configure
+
+* Configured logging correctly. Debugging is much easier when you can actually see what happens.
+* Added this page. (on dewarim.com)
+* Configured apache for new domain (schedim.de). As soon as the DNS records are updated, it should function as a reverse proxy for the Jetty server on this machine.
+    
+Iteration 9 - /2010-02-24/ fix db
+
+* show current iteration # on each page
+* cleaned up domain classes (Dice is no longer serialized but a proper domain class now)
+
+Iteration 10 - /2010-02-24/ item
+* added the first test item
+* added TreasureService class, which will return a list of items for a mob. Currently: always
+return the one and only item available.
+* use Subversion for Version Control. 
+
+Iteration 11 - 2010-02-28 
+* user now starts with a list of characters and may choose one of them to fight. Currently: 1 available.
+* show inventory during fight.
+
+Iteration 12 - 2010-03-07
+* Added 6 Monsters for a little variety.
+* Show combat messages on death and victory screens so you what event ended the fight.
+* Fixed bug where combat messages were saved out of order which made it look like a dead char was still
+  fighting.
+
+Iteration 13 - 2010-03-09
+* Creatures now have maxHp (before, there was only one variable "hp")
+* Added a new Item: Potion of Healing
+* Items can have features now (which are little Groovy scriplets)
+* Items can have a number of uses.
+* Items may be rechargeable (otherwise, they are destroyed once they have been used).
+* Items have a type (before, each user would have received the same items. 
+  Now, new items are instantiated whenever treasure is found).
+* Added an imprint page (for legal reasons)
+
+Iteration 14 - 2010-03-12
+* Project management: Defined and organized open tasks.
+* Looking for artists who can create fantasy images.
+
+Iteration 15 - 2010-03-13
+* Fixed broken HTML (missing 'body' tag on some pages).
+* Added basic CSS stylesheet.
+* Added landing page.
+* Added ACEGI security plugin with registration & login.
+* Added EquipmentSlots (still without function, but initialized for each player character).
+* Added equipment - it is now possible to equip items (if appropriate). 
+* Added Item "Leather cap" (currently without function except to test equipment). 
+
+Iteration 16 - 2010-03-15
+* Added death count to PlayerCharacter (and show on Highscore).
+* Fixed HTML on some pages (missing closing <head> tag).
+* Adjusted CSS / layout on login page.
+* The effects of the healing potions now appear in the list of combat messages.
+
+Iteration 17 - 2010-03-16
+* Creatures may have gold.
+* Items may have a gold value which is initialized from the item type's base value.
+
+Iteration 18 - 2010-03-20
+* MobTypes may have images.
+* Monsters get one random image on creation. If a creature has no image, a help message is shown.
+
+Iteration 19 - 2010-03-21
+* A resurrected character is now restored to full health (instead of 10 HP).
+* Count a characters victories.
+
+Iteration 20 - 2010-04-06
+* Added (very simple) town page
+* Added (very) basic quest infrastructure - it's not much, but should work for the moment.
+
+Version 0.1.21
+* Quests have a level. A player is shown the top 10 quests for his current questlevel.
+* Changed from in-memory database to MySQL (Postgresql could not be installed on the server...)
+* Added Artist class + first image by Lucas Pandolfelli
+* MobImages may have height+width attribute set
+
+Version 0.1.22
+* show PC base data (HP, XP, Gold) in Town & Fight controller.
+* render character and mob data from a template.
+* added artist's name and a link to the artist's website for monster images.
+* added: quest.description
+* the player is shown the quest description before he starts the quest.
+* static images are now served from images.schedim.de (and are no longer included in the goblin.war)
+
+Version 0.1.23
+* added the first simple version of a shop. No inventory yet, but it can be selected in the town overview.
+
+Version 0.1.24
+* refactoring of Item classes: moving them into their own package.
+* refactoring of Feature class: item features are no longer scripts (which are ugly to debug) but classes.
+* Test-Char Gobi starts the game with 20 gold.
+* ItemTypes have an availability (= chance of appearing in a shop)
+* added first webtest: ShopWebTest (which logs in and tests if it is possible to buy an item)
+* PC is resurrected when he re-enters the town, not upon starting a quest.
+* fixed layout on death page slightly.
+* added some more quests for testing.
+* improved layout of fight page (event messages do no longer fill up the whole screen).
+* fixed GRE when fleeing
+* fixed "combat unfinished after flight" bug
+  (after login, user would be returned to the combat from which he ran away)
+* added info text on landing page (currently for schedim.de, where the test server is running)
+
+Version 0.1.25
+* Added functionality for quests with branches.
+* Quests may have rewards.
+* QuestsSteps may allow the player to pick up items and deliver them.
+* Added link from shop back to town.
+* Added ugly crone quest.
+* QuestSteps may have EncounterScripts which are executed when the player has an encounter.
+
+Version 0.1.26
+* Fixed HTML code
+* Fixed StaleObjectStateException bug (hopefully)
+* Added login name and password of test account to login screen.
+* Added new 3-column css layout, which looks ok (except on IE).
+
+Version 0.1.27
+* Filter solved quests from town view.
+* Reloading after server restart can lead to NPEs. Fixed some of those.
+* Added CombatAttributes: a weapon or creature (or PlayerCharacter) may have attacks modifiers now
+    like a fire or cold attack.
+* CombatAttributes also are used to the enable resistance modifiers to specific attack types.
+* Added straw man quest
+* Added some weapons
+* Fixed StackOverflowError in equipItem action
+* Added WebTest for equipItem
+
+Version 0.1.28
+* Fixed some HTML issues
+* Moved links to game status and imprint into left column to simplify layout
+
+Version 0.1.29
+* Introduced AJAX: Shopping and equipping your character is now a lot easier.
+* Inventory and equipment is shown outside of combat.
+* Removed empty "Background" element on start page
+* Implemented option to sell items in the shop.
+
+Version 0.1.30
+* Added DamageType "normal" to the short sword and long sword.
+* Added 2-handed Weapon long staff.
+* A user can create new characters.
+* New page: Character Sheet, available from town view.
+* Characters may have descriptions.
+* Fixed bug in Healing Potion.
+* Items may be used again.
+* First release of war file on Sourceforge.net for download.
+
+Version 0.1.31
+* Added PlayerMessages: Show the newest game events to the player.
+* Added reputation system. You can now gain or lose reputation levels with a faction.
+* Display reputation score and description on character sheet.
+* Added test factions dwarves and elves.
+* Added demo quest "A walk in the forest" to test reputation system.
+
+Version 0.1.32
+* HTTP Session now caches PlayerCharacter id which should reduce passing around of the pc.id parameter.
+* Added GlobalConfigService: fetch global values (like: email of admin, price of coins, etc)
+* Added the concept of coins for Admins who wish to commercialize a game based upon LittleGoblin
+* Creatures (and PlayerCharacters) may now be male or female (or none).
+* Added Guilds, which are called Orders in LittleGoblin. Players can join/leave/create etc a guild.
+
+Version 0.1.33
+* Added MailBoxController and message system: Inbox, Outbox for player.
+* Move messages from Inbox / Outbox to Archive, delete messages (still needs a nice icon).
+
+Version 0.1.34
+* Added ChatterBox to Orders.
+* Added classes for skills and crafting. (Currently unfinished, but compiles)
+
+Version 0.1.35
+* Fixed bug where monster's combatAttributes were not properly drawn from MobTemplate. 
+  https://sourceforge.net/tracker/?func=detail&aid=3027832&group_id=317345&atid=1334694
+* Moved from Prototype to jQuery (JavaScript library)
+* Added Academies (places to learn new skills)
+* Added Guilds (as organisations which grant access to academies and later on may enable crafting abilities)
+
+Version 0.1.36
+* Added Skills and SkillSets (which you can learn in the Academies) [working, but has no game effect yet]
+* Added LearningQueues for Skills.
+
+Version 0.1.37
+* Added API for cron process, which enables learning of skills after a given period of time has elapsed.
+* Combat Skills are factored into the fight calculations.
+* Show combat skills on character sheet.
+* Fixed bug where new characters could be created with arbitrary attribute values.
+
+Version 0.1.38
+* Added first version of crafting system.
+* Items have a location (currently: AT_HOME / ON_PERSON)
+* Items may be stackable.
+* Display stackable items correctly in Inventory
+* Improved code documentation
+* Fixed bug with logging code in script classes.
+* Fixed bug which prevented the "equip" action on items during combat.
+* Improved tests (which still fail due to unresolved canoo webtest <=> ajax issues)
+
+Version 0.1.39
+* Academies now only offer skills which are exactly the level of the player character.
+
+Version 0.1.40
+* Added logging messages during startup.
+* Moved highscores from landing page to their own page.
+* Added "Enter character name:" to start page so users will know what the text field is for.
+* Changed login link so player is redirected to character list after login.
+* Added logout link (placement is not optimal, but suffices for the moment).
+* Improved player's starting page.
+* Added the basis of a simple help system.
+
+Version 0.1.41
+* Updated security system to grails core security plugin.
+* Added administrative CRUD for CombatAttributeType as a first admin-feature.
+
+Version 0.1.42
+* Added mapping from image to artist class.
+* EquipmentSlots now belong to creatures.
+* Added administrative CRUD for EquipmentSlotType objects.
+* Fixed relational mapping between Features and ItemTypes.
+
+Version 0.1.43
+* Fixed field type in UserProperty.
+* Added relation to ItemType in RequiredSlot.
+* Improved documentation.
+* Added AcademyAdminController.
+
+Version 0.1.44
+* Added GuildAdminController.
+* Improved usability on AcademyAdminController.
+
+Version 0.1.45
+* Added TownAdminController.
+* Added ArtistAdminController
+* Global config entries now may have a description.
+* Added GlobalConfigAdminController
+* Added link to little goblin image on landing page.
+* Removed unnecessary class ShopTemplate.
+* Added DiceAdminController
+* Added ShopOwnerAdminController
+
+Version 0.1.46
+* Added Categories to ItemTypes and Shops.
+* Added CategoryAdminController
+* You can filter the items offered in the shop by multiple categories.
+* Renamed class User to UserAccount because "user" is a reserved word in PostgreSQL (and quoting the table name did not work).
+
+Version 0.1.47
+* Fixed: GetReward-Script croaks.
+* Fixed: Create new character fails.
+
+Version 0.1.48
+* Fixed NPE on some controllers (moved springSecurityService to BaseController) - reported by ra-hoor-khuit
+ https://sourceforge.net/tracker/?func=detail&aid=3200353&group_id=317345&atid=1334694
+* Upgraded to Grails 1.3.7
+* Fixed NPE when removing equipped items. - reported by ra-hoor-khuit
+ https://sourceforge.net/tracker/?func=detail&aid=3200354&group_id=317345&atid=1334694
+* Added a name field to Encounter class to improve reusability of encounter steps in multiple quests. Changed BootStrap to reflect this change.
+* Added LicenseAdminController: you can manage licenses for images (and later: other media objects)
+* Changed MobImage class to map n:m MobTemplates to MobImages. This is a more elegant solution to have one mob have several images.
+* Changed Image class and fight view to use direct URL instead of filename + hardcoded image path.
+* Added ImageAdminController: you can now manage images in LittleGoblin.
+
+Version 0.1.49
+* First version of Faction- and ReputationMessageMap-administration pages.
+* AdminController for products (including ComponentAdmin and SkillRequirementAdmin). You can now create products for crafting
+  which need components and require specific skills.
+* Added AdminController for ProductCategories.
+* Added ShopAdminController so it is now possible to create shops complete with inventory and owners.
+* Added QuestGivers
+* Added AdminController for QuestGivers and QuestTemplates.
+* Added AdminController for Encounters
+* New classes: EncounterMob, GoblinScript
+* Fixed bug in admin controllers where single value selections in multiple-select fields were handled incorrectly.
+* Added AdminController for QuestSteps
+
+Version 0.1.49a
+* Fix for QuestController (did not work with new EncounterMob)
+* Fix for mob images (did not work correctly with MobImage)
+* Fix for quest steps (StepChild class not used correctly in some places)
+* Fix for test quests: orc.encounter was assigned to other quest steps.
+
+Version 0.1.50
+* Fixed bug in canEquipItem check: the code did in some cases return false even though an item was "equippable".
+
+Version 0.1.51
+* Added MobAdminController
+* Added PostOfficeController: basic functionality to send items to other player characters (for a 10% fee).
+* Fixed Bug in Puppet quest (would throw GrailsException).
+* Added MeleeController - fight other players in a big melee. [This is not finished yet]
+* Advanced french translation by Pauline and Flora
+
+Version 0.2
+* Fixed bug in Mob class (Mob.name overwriting Creature.name) which could cause fights to throw a GRE.
+* Basic Grand Melee now works (with the limitation that you cannot use items during the melee yet).
+* Added CronGoblin module to repository.
+* Added new layout by keyznotized (first version)
+
+Version 0.2.1
+* Upgraded to jQuery 1.6.1.1
+* Upgraded to spring-security-plugin 1.1.3
+
+Version 0.2.2
+* Fixed little CSS bug
+
+Version 0.2.3
+* Updated the french translation.
+* Improved design and layout.
+* GrandMelee now allows players to use items.
+* Database schema changed.
+* Removed inventory from several pages where it was not really useful.
+* Move items from home to person and vice versa.
+
+Version 0.2.4
+* Refactored Quests, show QuestGivers in town.
+* Updated design and layout.
+
+Version 0.2.5 "Shopping Mall"
+* Fixed equip / remove equipment bug which rendered the main inventory section in the side inventory bar.
+* You can now sell part of a stack of items instead of the whole stack.
+* You can now define how many pieces of an item you want to buy.
+* Items bought in the shop are stacked to existing items in your inventory (if they are stackable)
+* ItemTypes have a package size - so it is possible to buy one set of 12 arrows.
+* First part of ItemAdminController implementation.
+
+Version 0.2.6 "ItemAdmin"
+* Improved ItemType admin interface: you can now edit how many equipment slots an item takes.
+* Updated french translation.
+* Enabled configuration file outside of war: you can now override DataSource and Config by adding a file
+  "classpath:$ {appName}-config.groovy", or
+  "file:$ {userHome}/.grails/${appName}-config.groovy" or
+  "file:$ {System.env.LITTLE_GOBLIN_HOME}/$ {appName}-config.groovy"
+  this makes for better control and easier configuration of the database settings.
+* Added an example configuration file.
+* New install.txt and updated readme.txt
+* Added optional Facebook like button (Don't worry, you can configure it and turn it on/off in your own game).
+  (Facebook integration was done by Pauline).
+
+Version 0.2.7
+* Fixed cronGoblin and CronController for recurring events (would previously go into an infinite loop).
+* Added configurable registration with confirmation mail.
+* Added testMode parameter to config file.
+* Updated spring-security-core plugin
+* Added FeatureAdminController.
+// Note: 0.2.7 will probably not work perfectly due to unfinished Grails 2 transition.
+
