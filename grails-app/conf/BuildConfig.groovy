@@ -1,8 +1,9 @@
+grails.servlet.version = "3.0"
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir	= "target/test-reports"
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
-grails.project.target.level = 1.7
+grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -12,6 +13,7 @@ grails.project.dependency.resolution = {
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
+        mavenLocal()
         grailsRepo "http://grails.org/plugins"
         grailsCentral()
         grailsPlugins()
@@ -34,14 +36,16 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.5'
-        runtime "org.grails.plugins:hibernate:$grailsVersion"
-        runtime "org.grails.plugins:jquery:1.7.1"
-        runtime "org.grails.plugins:resources:1.1.6"
-        compile "org.grails.plugins:spring-security-core:1.2.7.3"
-        compile "org.grails.plugins:mail:1.0"
         runtime 'postgresql:postgresql:9.1-901.jdbc4'
-        build "org.grails.plugins:tomcat:$grailsVersion"
 
+    }
+    
+    plugins{        
+        compile ":mail:1.0"
+        runtime ":hibernate:$grailsVersion"
+        runtime ":jquery:1.7.1"
+        runtime ":resources:1.1.6"
+        compile(':spring-security-core:1.2.7.3')
     }
 
 }
