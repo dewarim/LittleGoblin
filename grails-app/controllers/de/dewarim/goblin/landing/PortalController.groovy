@@ -11,8 +11,9 @@ class PortalController extends BaseController {
 
     def inputValidationService
     def globalConfigService
-    def mailService
-
+    def myMailService
+    def groovyPageRenderer
+    
     /**
      * The landing page (start page of Little Goblin)
      */
@@ -104,20 +105,18 @@ class PortalController extends BaseController {
             def regards =  mailConfig.regards
             def theSender = mailConfig.sender
             log.debug("newAccount: ${newAccount.dump()}")
-            mailService.sendMail{
-                from theSender
-                to newAccount.email
-                // bcc mailConfig.bcc
-                subject message(code:'registration.subject')
-                html g.render(template:'confirmMail', model:[appName:mailConfig.appName, confirmationLink:link, teamName:regards, sysAdmin:sysAdmin])
-            }
+            
+            def msgBody = groovyPageRenderer.render(template:'/portal/confirmMail', 
+                    model:[appName:mailConfig.appName, confirmationLink:link, teamName:regards, sysAdmin:sysAdmin]) 
+            myMailService.sendMail(theSender, [newAccount.email], message(code:'registration.subject'), msgBody)
+
             newAccount.confirmationMailSent
             // return::success
             flash.message = message(code: 'registration.mail.sent')
             return redirect(controller:'portal', action:'landing')
         }
         catch (Exception e) {
-            log.debug("registration.fail: " + e.message)
+            log.debug("registration.fail: ",e)
             session.name = params.name
             session.email = params.email
             flash.message = message(code: 'registration.fail', args: [message(code: e.message)])
