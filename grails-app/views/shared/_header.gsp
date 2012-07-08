@@ -1,4 +1,3 @@
-<g:javascript library="jquery" plugin="jquery"/>
 <link rel="stylesheet" type="text/css" href="${resource(dir:'css', file:'layout.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir:'css', file:'goblin.css')}">
 
