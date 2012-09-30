@@ -1,12 +1,12 @@
-Short installation instructions for the binary package of LittleGoblin (0.2.5)
+Short installation instructions for the binary package of LittleGoblin (0.2.7)
 
 Java
-Download and install the Java 6 runtime from http://java.com/
-On Ubuntu: sudo apt-get install openjdk6-jre
+Download and install the Java 7 runtime from http://java.com/
+On Ubuntu: sudo apt-get install openjdk-7-jre
 
-Tomcat 6
+Tomcat 7
 Download and install tomcat6 from http://tomcat.apache.org
-On Ubuntu, use: sudo apt-get install tomcat6
+On Ubuntu, use: sudo apt-get install tomcat7
 
 Download a database and configure it, either:
 http://mysql.com
