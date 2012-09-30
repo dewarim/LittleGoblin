@@ -2,15 +2,15 @@ Please install / configure the following software packages to get started with t
 
 h3. Download the binary package
 
-Download the binary package "Little Goblin Binary" : http://download.littlegoblin.de/files/current/goblin.war
+Download the binary package "Little Goblin Binary":http://download.littlegoblin.de/files/current/goblin.war
  
 h3. Java
 Download and install the Java 7 runtime from http://java.com/
 
-On Ubuntu: sudo apt-get install openjdk7-jre
+On Ubuntu: sudo apt-get install openjdk-7-jre
 
 h3. Tomcat 7
-Download and install tomcat6 from http://tomcat.apache.org
+Download and install Tomcat 7 from http://tomcat.apache.org
 
 On Ubuntu, use: sudo apt-get install tomcat7
 
