@@ -23,7 +23,7 @@
 <br>
 <label><g:message code="questStep.encounter"/> </label>
 <g:select from="${Encounter.listOrderByName()}" name="encounter"
-	    optionValue="${{message(code:it.name)}}" optionKey="id"           1
+	    optionValue="${{message(code:it.name)}}" optionKey="id"
 		value="${questStep?.encounter?.id}"/>
 <br>
 <label for="parentSteps_${qid}"><g:message code="questStep.parentSteps"/> </label><br>
