@@ -1,7 +1,5 @@
 dataSource {
 	pooled = true
-	driverClassName = "org.hsqldb.jdbcDriver"
-	username = "sa"
 	password = ""
 }
 hibernate {
@@ -44,15 +42,25 @@ environments {
             logSql = false
             // enable the following lines in exchange to the mysql-related ones
             // to use the postgresql database.
-//            driverClassName = "org.postgresql.Driver"
-//            dialect = "org.hibernate.dialect.PostgreSQLDialect"
-//            url = "jdbc:postgresql://127.0.0.1:5432/goblin"
-            driverClassName = "com.mysql.jdbc.Driver"
-			dialect = 'org.hibernate.dialect.MySQL5InnoDBDialect'
-			url = "jdbc:mysql://localhost:3306/goblin"
+            driverClassName = "org.postgresql.Driver"
+            dialect = "org.hibernate.dialect.PostgreSQLDialect"
+            url = "jdbc:postgresql://127.0.0.1:5432/goblin"
+//            driverClassName = "com.mysql.jdbc.Driver"
+//			dialect = 'org.hibernate.dialect.MySQL5InnoDBDialect'
+//			url = "jdbc:mysql://localhost:3306/goblin"
 			username = 'goblin'
 			password = 'goblin'
-            autoReconnect = true		
+            autoReconnect = true
+            properties {
+                maxActive = -1
+                minEvictableIdleTimeMillis=1800000
+                timeBetweenEvictionRunsMillis=1800000
+                numTestsPerEvictionRun=3
+                testOnBorrow=true
+                testWhileIdle=true
+                testOnReturn=true
+                validationQuery="SELECT 1"
+            }
 		}
 	}
 }
