@@ -87,18 +87,16 @@ log4j = {
             'org.apache.catalina',
             'org.apache.coyote',
             'org.apache.tomcat',
-            'org.codehaus.groovy.grails.web.pages.GroovyPageResourceLoader'
+            'org.codehaus.groovy.grails.web.pages.GroovyPageResourceLoader',
+            'org.codehaus.groovy.grails'
+
     debug 'grails.app.controller',
-            'grails.app.domain',
             'grails.app.domain.de.dewarim.goblin',
-            'grails.app.service',
             'grails.app.domain.de.dewarim.goblin.Creature',
-            'grails.app.filters',
-            'grails.app.routes',
             'grails.app.bootstrap',
             'de.dewarim.goblin.admin',
             'de.dewarim.goblin.admin.EquipmentSlotTypeAdminController'
-    
+
 //			'org.codehaus.groovy.grails.web.servlet',  //  controllers
 //			'org.codehaus.groovy.grails.web.pages', //  GSP
 //			'org.codehaus.groovy.grails.web.sitemesh', //  layouts
