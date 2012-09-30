@@ -1,0 +1,15 @@
+h2. Checkout the source code
+
+You can get the source code from the "Little Goblin GitHub repository":https://github.com/dewarim/LittleGoblin
+
+It is available as a "zip or tar archive":https://github.com/dewarim/LittleGoblin/downloads or (recommended) 
+as a git repository which you can clone via  
+bq. git clone git://github.com/dewarim/LittleGoblin.git
+
+h3. Prerequisites to running from source
+
+* you need Java, a database and the configuration file - see [Binary install instructions|guide:installation/binary].
+* Grails - which you will find on "Grails.org":http://grails.org
+
+After you have installed the dependencies, use the command line to run Grails in Little Goblin's main directory:
+@grails@ and start the application with @run-app@

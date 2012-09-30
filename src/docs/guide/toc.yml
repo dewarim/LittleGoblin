@@ -1,0 +1,8 @@
+introduction:
+  title: Introduction
+  changes: Change Log
+installation:
+  title: Installation
+  binary: Installing the binary package
+  source: Installing the source code
+  

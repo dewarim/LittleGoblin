@@ -1,0 +1,27 @@
+Little Goblin is an open source browser game framework that is intended to help you 
+to create browser games. The goal is to have all the infrastructure in place allowing you 
+to implement your idea as fast as possible, because the quickest way to bring (hobby) game 
+development to a halt is (in my experience) to get bogged down in a quagmire of administrative
+ tasks and configuration details. The Little Goblin framework strives to speed up your
+ development without having to handle all the fundamental stuff,
+like user accounts, security, administration features and so on. 
+
+Of course, as it is in Grails,
+so should be in this framework: just because the framework makes it easy to ignore the
+underlying complexity at first, you can always dig deeper and hack and improve the system.
+
+
+h2. License
+
+Little Goblin is licensed under the "Apache License 2.0":http://www.apache.org/licenses/LICENSE-2.0.html 
+- in short this means you can use it for commercial and non-commercial purposes and it comes without
+any warranties.
+
+h2. Contact / Links
+
+* Project Admin: Ingo Wiarda / ingo_wiarda@dewarim.de
+* Demo Website: http://schedim.de
+* Blog for LittleGoblin: http://dewarim.com
+* Documentation: http://littlegoblin.de
+* Sourceforge page: http://sourceforge.net/projects/littlegoblin
+* GitHub page: https://github.com/dewarim/LittleGoblin

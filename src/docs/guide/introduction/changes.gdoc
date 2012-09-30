@@ -1,0 +1,8 @@
+*Version 0.2.7*
+
+* Fixed cronGoblin and CronController for recurring events (would previously go into an infinite loop).
+* Added configurable registration with confirmation mail.
+* Added testMode parameter to config file.
+* Updated spring-security-core plugin
+* Added FeatureAdminController.
+* Upgraded to Grails 2.1.1

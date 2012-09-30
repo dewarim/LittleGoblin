@@ -1,0 +1,42 @@
+Please install / configure the following software packages to get started with the Little Goblin binary package:
+
+h3. Download the binary package
+
+Download the binary package "Little Goblin Binary" : http://download.littlegoblin.de/files/current/goblin.war
+ 
+h3. Java
+Download and install the Java 7 runtime from http://java.com/
+
+On Ubuntu: sudo apt-get install openjdk7-jre
+
+h3. Tomcat 7
+Download and install tomcat6 from http://tomcat.apache.org
+
+On Ubuntu, use: sudo apt-get install tomcat7
+
+h3. Install an RDBMS (Database)
+
+Download a database and configure it, either: "MySQL":http://mysql.com
+or "Postgresql":http://postgresql.org (the latter is recommended).
+
+Create a database user "goblin" with password "goblin" (for testing)
+
+If you want to use mysql, please download the database driver and place it into
+your Tomcat's lib folder. (It is not included in the goblin.war for license reasons.)
+
+h3. Configure your version
+
+Create in you home directory a folder .grails
+and inside a file goblin-config.groovy. 
+You can download an example version from
+"GitHub":https://github.com/dewarim/LittleGoblin/blob/master/goblin-config.example.groovy
+
+* Set the serverUrl to your machine's or server's name (http://localhost or your domain name)
+* Edit the database settings for the production database.
+* If you want to create a new database on every server start and delete the old data, 
+  keep the setting of dbCreate="create". Otherwise, set it to dbCreate="none"
+
+If you have any questions, you can:
+* Ask on the mailing list https://sourceforge.net/mailarchive/forum.php?forum_name=littlegoblin-main
+* Use the forum (Be the first!): https://sourceforge.net/projects/littlegoblin/forums/forum/1129360
+* Write me a mail: ingo_wiarda@dewarim.de
