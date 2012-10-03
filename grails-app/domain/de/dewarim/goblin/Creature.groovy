@@ -147,7 +147,8 @@ class Creature {
               CombatAttributeType cat = res.combatAttributeType
                 List modifiers = map.get(cat)
                 if(modifiers){
-                    map.put(cat, modifiers.add(res.damageModifier))
+                    modifiers.add(res.damageModifier)
+                    map.put(cat, modifiers)
                 }
                 else{
                     map.put(cat,[res.damageModifier])
@@ -156,7 +157,7 @@ class Creature {
         return map
     }
 
-    Map fetchItemCombatAttributeMap(){
+    Map<CombatAttributeType, List<Double> > fetchItemCombatAttributeMap(){
         List<ItemType> itemTypes = slots.findAll{it.item != null}.collect{it.item.type}
         Map map = [:]
         itemTypes.each{itemType ->
@@ -164,7 +165,8 @@ class Creature {
                 CombatAttributeType cat = ca.combatAttributeType
                 List modifiers = map.get(cat)
                 if(modifiers){
-                    map.put(cat, modifiers.add(ca.damageModifier))
+                    modifiers.add(ca.damageModifier)
+                    map.put(cat, modifiers )
                 }
                 else{
                     map.put(cat,[ca.damageModifier])
@@ -273,5 +275,40 @@ class Creature {
 
     List getItems(){
         return Item.findAll("from Item as i where i.owner=:creature", [creature:this])
+    }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Creature)) return false
+
+        Creature creature = (Creature) o
+
+        if (damage != creature.damage) return false
+        if (description != creature.description) return false
+        if (gold != creature.gold) return false
+        if (hp != creature.hp) return false
+        if (initiative != creature.initiative) return false
+        if (male != creature.male) return false
+        if (maxHp != creature.maxHp) return false
+        if (name != creature.name) return false
+        if (parry != creature.parry) return false
+        if (strike != creature.strike) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (description != null ? description.hashCode() : 0)
+        result = 31 * result + (name != null ? name.hashCode() : 0)
+        result = 31 * result + (maxHp != null ? maxHp.hashCode() : 0)
+        result = 31 * result + (hp != null ? hp.hashCode() : 0)
+        result = 31 * result + (strike != null ? strike.hashCode() : 0)
+        result = 31 * result + (parry != null ? parry.hashCode() : 0)
+        result = 31 * result + (damage != null ? damage.hashCode() : 0)
+        result = 31 * result + (initiative != null ? initiative.hashCode() : 0)
+        result = 31 * result + (gold != null ? gold.hashCode() : 0)
+        result = 31 * result + (male != null ? male.hashCode() : 0)
+        return result
     }
 }
