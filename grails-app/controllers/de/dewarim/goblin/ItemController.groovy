@@ -52,7 +52,8 @@ class ItemController extends BaseController {
 
         // Is the item usable? Then execute its script.
         if (itemType.usable && item.uses > 0) {
-            featureService.executeFeature(itemFeature, pc, combat.mobs.collect {(Creature) it}, item)
+            // TODO: convert to use MeleeAction with featureConfig.
+            featureService.executeFeature(itemFeature, '<config />',  pc, combat.mobs.collect {(Creature) it}, item)
             item.uses = item.uses - 1
             if (item.uses == 0) {
                 if (!itemType.rechargeable) {
