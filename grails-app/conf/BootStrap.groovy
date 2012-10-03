@@ -362,23 +362,27 @@ class BootStrap {
         log.debug("initialize armor")
         EquipmentSlotType body = EquipmentSlotType.findByName('slot.body')
         ItemType cloth = new ItemType(name: 'armor.cloth', baseValue: 4)
-        RequiredSlot rs = new RequiredSlot(body, cloth);
         cloth.save()
+        RequiredSlot rs = new RequiredSlot(body, cloth);
+        rs.save()
 
         EquipmentSlotType head = EquipmentSlotType.findByName('slot.head')
 
         ItemType cap = new ItemType(name: 'armor.leather_cap', baseValue: 4)
-        rs = new RequiredSlot(head, cap);
         cap.save()
+        rs = new RequiredSlot(head, cap);
+        rs.save()
 
         EquipmentSlotType hand = EquipmentSlotType.findByName('slot.hand')
         ItemType shield = new ItemType(name: 'item.armor.shield', availability: 500, baseValue: 20)
-        rs = new RequiredSlot(hand, shield)
         shield.save()
-
+        rs = new RequiredSlot(hand, shield)
+        rs.save()
+        
         def armory = [cloth, cap, shield]
         armory.each {armor ->
             ItemCategory armorCat = new ItemCategory(armor, 'armor')
+            armorCat.save()            
         }
     }
 
