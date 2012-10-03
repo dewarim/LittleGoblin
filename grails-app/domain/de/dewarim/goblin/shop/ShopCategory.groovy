@@ -25,4 +25,23 @@ class ShopCategory {
         category.removeFromShopCategories this
         delete()
     }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof ShopCategory)) return false
+
+        ShopCategory that = (ShopCategory) o
+
+        if (category != that.category) return false
+        if (shop != that.shop) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (shop != null ? shop.hashCode() : 0)
+        result = 31 * result + (category != null ? category.hashCode() : 0)
+        return result
+    }
 }

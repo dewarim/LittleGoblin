@@ -11,4 +11,22 @@ class GoblinScript {
     String name
     Class clazz
 
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof GoblinScript)) return false
+
+        GoblinScript that = (GoblinScript) o
+
+        if (clazz != that.clazz) return false
+        if (name != that.name) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (name != null ? name.hashCode() : 0)
+        result = 31 * result + (clazz != null ? clazz.hashCode() : 0)
+        return result
+    }
 }

@@ -17,5 +17,23 @@ class Artist {
 
 	String name
 	String website
-	
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Artist)) return false
+
+        Artist artist = (Artist) o
+
+        if (name != artist.name) return false
+        if (website != artist.website) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (name != null ? name.hashCode() : 0)
+        result = 31 * result + (website != null ? website.hashCode() : 0)
+        return result
+    }
 }

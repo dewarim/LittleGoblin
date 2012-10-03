@@ -18,4 +18,24 @@ class ReputationMessage {
     String messageId
     Integer reputation
 
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof ReputationMessage)) return false
+
+        ReputationMessage that = (ReputationMessage) o
+
+        if (messageId != that.messageId) return false
+        if (repMessageMap != that.repMessageMap) return false
+        if (reputation != that.reputation) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (messageId != null ? messageId.hashCode() : 0)
+        result = 31 * result + (reputation != null ? reputation.hashCode() : 0)
+        result = 31 * result + (repMessageMap != null ? repMessageMap.hashCode() : 0)
+        return result
+    }
 }

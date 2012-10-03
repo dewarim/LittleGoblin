@@ -1,6 +1,5 @@
 package de.dewarim.goblin.quest;
-import de.dewarim.goblin.IEncounterScript
-import de.dewarim.goblin.pc.PlayerCharacter
+
 import de.dewarim.goblin.GoblinScript
 import de.dewarim.goblin.mob.EncounterMob;
 
@@ -21,4 +20,26 @@ class Encounter {
     GoblinScript script
     String config
 
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Encounter)) return false
+
+        Encounter encounter = (Encounter) o
+
+        if (config != encounter.config) return false
+        if (includesCombat != encounter.includesCombat) return false
+        if (name != encounter.name) return false
+        if (script != encounter.script) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (name != null ? name.hashCode() : 0)
+        result = 31 * result + (includesCombat != null ? includesCombat.hashCode() : 0)
+        result = 31 * result + (script != null ? script.hashCode() : 0)
+        result = 31 * result + (config != null ? config.hashCode() : 0)
+        return result
+    }
 }

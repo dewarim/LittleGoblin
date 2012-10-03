@@ -59,4 +59,27 @@ class ShopOwner {
     Integer calculateSellPrice(item){
         return (item.type.baseValue / 2).intValue() +1
     }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof ShopOwner)) return false
+
+        ShopOwner shopOwner = (ShopOwner) o
+
+        if (description != shopOwner.description) return false
+        if (name != shopOwner.name) return false
+        if (priceModifier != shopOwner.priceModifier) return false
+        if (priceModifierDice != shopOwner.priceModifierDice) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (priceModifierDice != null ? priceModifierDice.hashCode() : 0)
+        result = 31 * result + (priceModifier != null ? priceModifier.hashCode() : 0)
+        result = 31 * result + (name != null ? name.hashCode() : 0)
+        result = 31 * result + (description != null ? description.hashCode() : 0)
+        return result
+    }
 }

@@ -23,4 +23,24 @@ class Feature {
 	// internal name, for example to differentiate between "heal 1w6" and "heal 3w6"
 	
 	String name // screen name (message-Id), to label a heal_1w6-item as "Lesser potion of healing"
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Feature)) return false
+
+        Feature feature = (Feature) o
+
+        if (internalName != feature.internalName) return false
+        if (name != feature.name) return false
+        if (script != feature.script) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (script != null ? script.hashCode() : 0)
+        result = 31 * result + (internalName != null ? internalName.hashCode() : 0)
+        result = 31 * result + (name != null ? name.hashCode() : 0)
+        return result
+    }
 }

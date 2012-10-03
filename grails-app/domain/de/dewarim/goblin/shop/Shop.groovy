@@ -17,5 +17,27 @@ class Shop {
 	 */
 	String name
 	String description
-	
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Shop)) return false
+
+        Shop shop = (Shop) o
+
+        if (description != shop.description) return false
+        if (name != shop.name) return false
+        if (owner != shop.owner) return false
+        if (town != shop.town) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (name != null ? name.hashCode() : 0)
+        result = 31 * result + (description != null ? description.hashCode() : 0)
+        result = 31 * result + (owner != null ? owner.hashCode() : 0)
+        result = 31 * result + (town != null ? town.hashCode() : 0)
+        return result
+    }
 }

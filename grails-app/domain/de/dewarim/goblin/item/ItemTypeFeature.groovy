@@ -33,4 +33,24 @@ class ItemTypeFeature {
         feature.addToItemTypeFeatures this
     }
 
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof ItemTypeFeature)) return false
+
+        ItemTypeFeature that = (ItemTypeFeature) o
+
+        if (config != that.config) return false
+        if (feature != that.feature) return false
+        if (itemType != that.itemType) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (config != null ? config.hashCode() : 0)
+        result = 31 * result + (itemType != null ? itemType.hashCode() : 0)
+        result = 31 * result + (feature != null ? feature.hashCode() : 0)
+        return result
+    }
 }

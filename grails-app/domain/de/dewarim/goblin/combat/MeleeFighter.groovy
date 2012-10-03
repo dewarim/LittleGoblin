@@ -30,4 +30,31 @@ class MeleeFighter {
 
     FighterState state = FighterState.ACTIVE
     PlayerCharacter pc
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof MeleeFighter)) return false
+
+        MeleeFighter that = (MeleeFighter) o
+
+        if (action != that.action) return false
+        if (melee != that.melee) return false
+        if (pc != that.pc) return false
+        if (place != that.place) return false
+        if (round != that.round) return false
+        if (state != that.state) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (action != null ? action.hashCode() : 0)
+        result = 31 * result + (place != null ? place.hashCode() : 0)
+        result = 31 * result + (round != null ? round.hashCode() : 0)
+        result = 31 * result + (state != null ? state.hashCode() : 0)
+        result = 31 * result + (pc != null ? pc.hashCode() : 0)
+        result = 31 * result + (melee != null ? melee.hashCode() : 0)
+        return result
+    }
 }

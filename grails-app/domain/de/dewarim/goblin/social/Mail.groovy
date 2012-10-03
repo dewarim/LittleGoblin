@@ -23,4 +23,33 @@ class Mail {
     String content
     Boolean shown = false
     Date sent = new Date()
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Mail)) return false
+
+        Mail mail = (Mail) o
+
+        if (box != mail.box) return false
+        if (content != mail.content) return false
+        if (recipient != mail.recipient) return false
+        if (sender != mail.sender) return false
+        if (sent != mail.sent) return false
+        if (shown != mail.shown) return false
+        if (subject != mail.subject) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (sender != null ? sender.hashCode() : 0)
+        result = 31 * result + (recipient != null ? recipient.hashCode() : 0)
+        result = 31 * result + (subject != null ? subject.hashCode() : 0)
+        result = 31 * result + (content != null ? content.hashCode() : 0)
+        result = 31 * result + (shown != null ? shown.hashCode() : 0)
+        result = 31 * result + (sent != null ? sent.hashCode() : 0)
+        result = 31 * result + (box != null ? box.hashCode() : 0)
+        return result
+    }
 }

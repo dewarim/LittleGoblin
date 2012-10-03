@@ -26,5 +26,23 @@ class MailBox {
     Boolean typeIsArchive(){
         return boxType.name.equals('mail.archive')
     }
-    
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof MailBox)) return false
+
+        MailBox mailBox = (MailBox) o
+
+        if (boxType != mailBox.boxType) return false
+        if (owner != mailBox.owner) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (boxType != null ? boxType.hashCode() : 0)
+        result = 31 * result + (owner != null ? owner.hashCode() : 0)
+        return result
+    }
 }

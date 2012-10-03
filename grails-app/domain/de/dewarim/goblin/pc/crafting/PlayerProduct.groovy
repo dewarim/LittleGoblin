@@ -29,4 +29,23 @@ class PlayerProduct {
         product.removeFromCrafters(this)
         delete()
     }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof PlayerProduct)) return false
+
+        PlayerProduct that = (PlayerProduct) o
+
+        if (pc != that.pc) return false
+        if (product != that.product) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (product != null ? product.hashCode() : 0)
+        result = 31 * result + (pc != null ? pc.hashCode() : 0)
+        return result
+    }
 }

@@ -28,4 +28,35 @@ class Image {
 	String sourceUrl
 	String description
     License license
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Image)) return false
+
+        Image image = (Image) o
+
+        if (artist != image.artist) return false
+        if (description != image.description) return false
+        if (height != image.height) return false
+        if (license != image.license) return false
+        if (name != image.name) return false
+        if (sourceUrl != image.sourceUrl) return false
+        if (url != image.url) return false
+        if (width != image.width) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (width != null ? width.hashCode() : 0)
+        result = 31 * result + (height != null ? height.hashCode() : 0)
+        result = 31 * result + (url != null ? url.hashCode() : 0)
+        result = 31 * result + (name != null ? name.hashCode() : 0)
+        result = 31 * result + (sourceUrl != null ? sourceUrl.hashCode() : 0)
+        result = 31 * result + (description != null ? description.hashCode() : 0)
+        result = 31 * result + (license != null ? license.hashCode() : 0)
+        result = 31 * result + (artist != null ? artist.hashCode() : 0)
+        return result
+    }
 }

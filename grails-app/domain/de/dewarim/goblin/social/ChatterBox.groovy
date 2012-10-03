@@ -27,4 +27,25 @@ class ChatterBox {
             }
         }
     }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof ChatterBox)) return false
+
+        ChatterBox that = (ChatterBox) o
+
+        if (goblinOrder != that.goblinOrder) return false
+        if (messages != that.messages) return false
+        if (name != that.name) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (messages != null ? messages.hashCode() : 0)
+        result = 31 * result + (name != null ? name.hashCode() : 0)
+        result = 31 * result + (goblinOrder != null ? goblinOrder.hashCode() : 0)
+        return result
+    }
 }

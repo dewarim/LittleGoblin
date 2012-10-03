@@ -22,5 +22,25 @@ class Town {
 	String name
 	String description
 	String shortDescription
-	
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Town)) return false
+
+        Town town = (Town) o
+
+        if (description != town.description) return false
+        if (name != town.name) return false
+        if (shortDescription != town.shortDescription) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (name != null ? name.hashCode() : 0)
+        result = 31 * result + (description != null ? description.hashCode() : 0)
+        result = 31 * result + (shortDescription != null ? shortDescription.hashCode() : 0)
+        return result
+    }
 }

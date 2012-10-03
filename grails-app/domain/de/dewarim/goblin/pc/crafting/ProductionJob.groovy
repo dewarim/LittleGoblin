@@ -51,4 +51,26 @@ class ProductionJob extends QueueElement {
         finished = new Date(finished.time + product.timeNeeded)
     }
 
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof ProductionJob)) return false
+
+        ProductionJob that = (ProductionJob) o
+
+        if (amount != that.amount) return false
+        if (pc != that.pc) return false
+        if (product != that.product) return false
+        if (ttl != that.ttl) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (amount != null ? amount.hashCode() : 0)
+        result = 31 * result + (ttl != null ? ttl.hashCode() : 0)
+        result = 31 * result + (product != null ? product.hashCode() : 0)
+        result = 31 * result + (pc != null ? pc.hashCode() : 0)
+        return result
+    }
 }

@@ -38,4 +38,24 @@ class RequiredSlot {
         itemType.addToRequiredSlots this
     }
 
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof RequiredSlot)) return false
+
+        RequiredSlot that = (RequiredSlot) o
+
+        if (amount != that.amount) return false
+        if (itemType != that.itemType) return false
+        if (slotType != that.slotType) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (amount != null ? amount.hashCode() : 0)
+        result = 31 * result + (itemType != null ? itemType.hashCode() : 0)
+        result = 31 * result + (slotType != null ? slotType.hashCode() : 0)
+        return result
+    }
 }

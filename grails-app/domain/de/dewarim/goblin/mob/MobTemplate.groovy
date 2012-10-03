@@ -16,4 +16,22 @@ class MobTemplate extends Creature {
 		// TODO: looks like asList creates a _new_ list every time.
 		return mobImages.asList().get( (Integer) (Math.random() * mobImages.size()) )
 	}
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof MobTemplate)) return false
+        if (!super.equals(o)) return false
+
+        MobTemplate that = (MobTemplate) o
+
+        if (xpValue != that.xpValue) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result = super.hashCode()
+        result = 31 * result + (xpValue != null ? xpValue.hashCode() : 0)
+        return result
+    }
 }

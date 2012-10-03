@@ -63,4 +63,35 @@ class Quest {
         QuestStep qs = currentStep?.nextSteps?.find{it.child.equals(nextStep)}?.child
         return qs != null
     }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Quest)) return false
+
+        Quest quest = (Quest) o
+
+        if (currentStep != quest.currentStep) return false
+        if (finished != quest.finished) return false
+        if (finishedDate != quest.finishedDate) return false
+        if (lastExecutedStep != quest.lastExecutedStep) return false
+        if (playerCharacter != quest.playerCharacter) return false
+        if (start != quest.start) return false
+        if (successful != quest.successful) return false
+        if (template != quest.template) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (start != null ? start.hashCode() : 0)
+        result = 31 * result + (finishedDate != null ? finishedDate.hashCode() : 0)
+        result = 31 * result + (currentStep != null ? currentStep.hashCode() : 0)
+        result = 31 * result + (lastExecutedStep != null ? lastExecutedStep.hashCode() : 0)
+        result = 31 * result + (successful != null ? successful.hashCode() : 0)
+        result = 31 * result + (finished != null ? finished.hashCode() : 0)
+        result = 31 * result + (template != null ? template.hashCode() : 0)
+        result = 31 * result + (playerCharacter != null ? playerCharacter.hashCode() : 0)
+        return result
+    }
 }

@@ -59,4 +59,24 @@ class Mob extends Creature{
         return dam
     }
 
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Mob)) return false
+
+        Mob mob = (Mob) o
+
+        if (image != mob.image) return false
+        if (type != mob.type) return false
+        if (xpValue != mob.xpValue) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (xpValue != null ? xpValue.hashCode() : 0)
+        result = 31 * result + (image != null ? image.hashCode() : 0)
+        result = 31 * result + (type != null ? type.hashCode() : 0)
+        return result
+    }
 }

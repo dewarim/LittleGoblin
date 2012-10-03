@@ -23,4 +23,27 @@ class Skill {
     void initSkill(PlayerCharacter pc){
         // do nothing
     }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Skill)) return false
+
+        Skill skill = (Skill) o
+
+        if (initParams != skill.initParams) return false
+        if (name != skill.name) return false
+        if (script != skill.script) return false
+        if (startLevel != skill.startLevel) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (script != null ? script.hashCode() : 0)
+        result = 31 * result + (name != null ? name.hashCode() : 0)
+        result = 31 * result + (startLevel != null ? startLevel.hashCode() : 0)
+        result = 31 * result + (initParams != null ? initParams.hashCode() : 0)
+        return result
+    }
 }

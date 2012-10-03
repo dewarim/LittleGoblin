@@ -14,5 +14,19 @@ class CombatAttributeType {
     static constraints = {
         name(blank:false, unique:true)
     }
-    
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof CombatAttributeType)) return false
+
+        CombatAttributeType that = (CombatAttributeType) o
+
+        if (name != that.name) return false
+
+        return true
+    }
+
+    int hashCode() {
+        return (name != null ? name.hashCode() : 0)
+    }
 }

@@ -22,4 +22,25 @@ class ReputationMessageMap {
         )
         return rm
     }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof ReputationMessageMap)) return false
+
+        ReputationMessageMap that = (ReputationMessageMap) o
+
+        if (faction != that.faction) return false
+        if (name != that.name) return false
+        if (repMessages != that.repMessages) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (name != null ? name.hashCode() : 0)
+        result = 31 * result + (faction != null ? faction.hashCode() : 0)
+        result = 31 * result + (repMessages != null ? repMessages.hashCode() : 0)
+        return result
+    }
 }

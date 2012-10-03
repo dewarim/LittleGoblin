@@ -43,27 +43,32 @@ class Item {
 		}
 	}
 
-
-	
-	// Note: hashCode & equals assume that there is a field long id.
-	@Override
-	public int hashCode() {
-		if(id == null){
-			id = 0
-		}
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
-	}
-
-    @Override
     boolean equals(o) {
-        if (this.is(o)) return true;
-        if (getClass() != o.class) return false;
-        Item item = (Item) o;
-        if (id != item.id) return false;
-        return true;
+        if (this.is(o)) return true
+        if (!(o instanceof Item)) return false
+
+        Item item = (Item) o
+
+        if (amount != item.amount) return false
+        if (equipped != item.equipped) return false
+        if (goldValue != item.goldValue) return false
+        if (location != item.location) return false
+        if (owner != item.owner) return false
+        if (type != item.type) return false
+        if (uses != item.uses) return false
+
+        return true
     }
 
+    int hashCode() {
+        int result
+        result = (uses != null ? uses.hashCode() : 0)
+        result = 31 * result + (equipped != null ? equipped.hashCode() : 0)
+        result = 31 * result + (amount != null ? amount.hashCode() : 0)
+        result = 31 * result + (goldValue != null ? goldValue.hashCode() : 0)
+        result = 31 * result + (location != null ? location.hashCode() : 0)
+        result = 31 * result + (type != null ? type.hashCode() : 0)
+        result = 31 * result + (owner != null ? owner.hashCode() : 0)
+        return result
+    }
 }

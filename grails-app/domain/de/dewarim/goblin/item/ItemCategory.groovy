@@ -29,4 +29,22 @@ class ItemCategory {
         delete()
     }
 
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof ItemCategory)) return false
+
+        ItemCategory that = (ItemCategory) o
+
+        if (category != that.category) return false
+        if (itemType != that.itemType) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (category != null ? category.hashCode() : 0)
+        result = 31 * result + (itemType != null ? itemType.hashCode() : 0)
+        return result
+    }
 }

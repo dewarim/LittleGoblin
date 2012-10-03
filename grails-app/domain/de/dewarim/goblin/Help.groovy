@@ -11,4 +11,18 @@ class Help {
 
     String messageId
 
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Help)) return false
+
+        Help help = (Help) o
+
+        if (messageId != help.messageId) return false
+
+        return true
+    }
+
+    int hashCode() {
+        return (messageId != null ? messageId.hashCode() : 0)
+    }
 }

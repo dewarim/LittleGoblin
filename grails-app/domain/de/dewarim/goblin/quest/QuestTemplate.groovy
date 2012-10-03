@@ -24,4 +24,28 @@ class QuestTemplate {
         return steps.find{it.firstStep}
     }
 
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof QuestTemplate)) return false
+
+        QuestTemplate that = (QuestTemplate) o
+
+        if (active != that.active) return false
+        if (description != that.description) return false
+        if (giver != that.giver) return false
+        if (level != that.level) return false
+        if (name != that.name) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (description != null ? description.hashCode() : 0)
+        result = 31 * result + (name != null ? name.hashCode() : 0)
+        result = 31 * result + (level != null ? level.hashCode() : 0)
+        result = 31 * result + (active != null ? active.hashCode() : 0)
+        result = 31 * result + (giver != null ? giver.hashCode() : 0)
+        return result
+    }
 }

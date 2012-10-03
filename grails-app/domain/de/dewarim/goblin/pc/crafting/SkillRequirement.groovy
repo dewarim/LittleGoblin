@@ -20,4 +20,25 @@ class SkillRequirement {
         skill.removeFromSkillRequirements(this)
         delete()
     }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof SkillRequirement)) return false
+
+        SkillRequirement that = (SkillRequirement) o
+
+        if (level != that.level) return false
+        if (product != that.product) return false
+        if (skill != that.skill) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (level != null ? level.hashCode() : 0)
+        result = 31 * result + (product != null ? product.hashCode() : 0)
+        result = 31 * result + (skill != null ? skill.hashCode() : 0)
+        return result
+    }
 }

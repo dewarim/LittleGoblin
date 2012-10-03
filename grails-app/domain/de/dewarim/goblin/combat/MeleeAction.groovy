@@ -39,4 +39,35 @@ class MeleeAction {
     // still, it is kind of redundant to recreate it here.
 
     Integer initiative = 0
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof MeleeAction)) return false
+
+        MeleeAction that = (MeleeAction) o
+
+        if (actor != that.actor) return false
+        if (feature != that.feature) return false
+        if (featureConfig != that.featureConfig) return false
+        if (initiative != that.initiative) return false
+        if (item != that.item) return false
+        if (melee != that.melee) return false
+        if (target != that.target) return false
+        if (type != that.type) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (type != null ? type.hashCode() : 0)
+        result = 31 * result + (melee != null ? melee.hashCode() : 0)
+        result = 31 * result + (actor != null ? actor.hashCode() : 0)
+        result = 31 * result + (target != null ? target.hashCode() : 0)
+        result = 31 * result + (item != null ? item.hashCode() : 0)
+        result = 31 * result + (feature != null ? feature.hashCode() : 0)
+        result = 31 * result + (featureConfig != null ? featureConfig.hashCode() : 0)
+        result = 31 * result + (initiative != null ? initiative.hashCode() : 0)
+        return result
+    }
 }

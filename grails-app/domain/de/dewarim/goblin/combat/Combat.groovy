@@ -36,4 +36,25 @@ class Combat {
 		}
 		return mobs.asList().get(0)
 	}
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Combat)) return false
+
+        Combat combat = (Combat) o
+
+        if (finished != combat.finished) return false
+        if (playerCharacter != combat.playerCharacter) return false
+        if (started != combat.started) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (started != null ? started.hashCode() : 0)
+        result = 31 * result + (finished != null ? finished.hashCode() : 0)
+        result = 31 * result + (playerCharacter != null ? playerCharacter.hashCode() : 0)
+        return result
+    }
 }

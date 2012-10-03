@@ -23,5 +23,24 @@ class GlobalConfigEntry {
      order.chatterboxes = Chatterboxes allowed per order.
 
      */
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof GlobalConfigEntry)) return false
 
+        GlobalConfigEntry that = (GlobalConfigEntry) o
+
+        if (description != that.description) return false
+        if (entryValue != that.entryValue) return false
+        if (name != that.name) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (name != null ? name.hashCode() : 0)
+        result = 31 * result + (entryValue != null ? entryValue.hashCode() : 0)
+        result = 31 * result + (description != null ? description.hashCode() : 0)
+        return result
+    }
 }

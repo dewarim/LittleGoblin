@@ -15,4 +15,23 @@ class Role {
 	static constraints = {
 		name(blank: false, unique: true)
 	}
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Role)) return false
+
+        Role role = (Role) o
+
+        if (description != role.description) return false
+        if (name != role.name) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (description != null ? description.hashCode() : 0)
+        result = 31 * result + (name != null ? name.hashCode() : 0)
+        return result
+    }
 }

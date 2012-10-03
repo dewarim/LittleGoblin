@@ -8,7 +8,11 @@ package de.dewarim.goblin.quest
 class StepChild {
 
     static belongsTo = [parent:QuestStep, child:QuestStep]
-
+    
+    static mapping = {
+        version: false
+    }
+    
     StepChild(){}
 
     StepChild(QuestStep parent, QuestStep child){
@@ -22,5 +26,24 @@ class StepChild {
         parent.removeFromNextSteps this
         child.removeFromParentSteps this
         delete()
+    }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof StepChild)) return false
+
+        StepChild stepChild = (StepChild) o
+
+        if (child != stepChild.child) return false
+        if (parent != stepChild.parent) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (child != null ? child.hashCode() : 0)
+        result = 31 * result + (parent != null ? parent.hashCode() : 0)
+        return result
     }
 }

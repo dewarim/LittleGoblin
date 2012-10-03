@@ -24,4 +24,24 @@ class WeaponAttribute implements ICombatAttribute{
         return damageModifier
     }
 
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof WeaponAttribute)) return false
+
+        WeaponAttribute that = (WeaponAttribute) o
+
+        if (combatAttributeType != that.combatAttributeType) return false
+        if (damageModifier != that.damageModifier) return false
+        if (itemType != that.itemType) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (damageModifier != null ? damageModifier.hashCode() : 0)
+        result = 31 * result + (itemType != null ? itemType.hashCode() : 0)
+        result = 31 * result + (combatAttributeType != null ? combatAttributeType.hashCode() : 0)
+        return result
+    }
 }

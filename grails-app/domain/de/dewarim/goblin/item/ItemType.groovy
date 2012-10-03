@@ -37,4 +37,39 @@ class ItemType {
     List getItems() {
         return Item.findAll("from Item as i where i.type=:type", [type: this])
     }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof ItemType)) return false
+
+        ItemType itemType = (ItemType) o
+
+        if (availability != itemType.availability) return false
+        if (baseValue != itemType.baseValue) return false
+        if (combatDice != itemType.combatDice) return false
+        if (description != itemType.description) return false
+        if (name != itemType.name) return false
+        if (packageSize != itemType.packageSize) return false
+        if (rechargeable != itemType.rechargeable) return false
+        if (stackable != itemType.stackable) return false
+        if (usable != itemType.usable) return false
+        if (uses != itemType.uses) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (name != null ? name.hashCode() : 0)
+        result = 31 * result + (description != null ? description.hashCode() : 0)
+        result = 31 * result + (usable != null ? usable.hashCode() : 0)
+        result = 31 * result + (rechargeable != null ? rechargeable.hashCode() : 0)
+        result = 31 * result + (uses != null ? uses.hashCode() : 0)
+        result = 31 * result + (baseValue != null ? baseValue.hashCode() : 0)
+        result = 31 * result + (availability != null ? availability.hashCode() : 0)
+        result = 31 * result + (combatDice != null ? combatDice.hashCode() : 0)
+        result = 31 * result + (stackable != null ? stackable.hashCode() : 0)
+        result = 31 * result + (packageSize != null ? packageSize.hashCode() : 0)
+        return result
+    }
 }

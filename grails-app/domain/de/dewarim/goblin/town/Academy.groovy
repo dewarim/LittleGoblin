@@ -32,4 +32,25 @@ class Academy {
     void purgeGuildAcademies(guildList){
 
     }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Academy)) return false
+
+        Academy academy = (Academy) o
+
+        if (description != academy.description) return false
+        if (name != academy.name) return false
+        if (town != academy.town) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (name != null ? name.hashCode() : 0)
+        result = 31 * result + (description != null ? description.hashCode() : 0)
+        result = 31 * result + (town != null ? town.hashCode() : 0)
+        return result
+    }
 }

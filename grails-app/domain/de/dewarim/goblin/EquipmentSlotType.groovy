@@ -14,5 +14,19 @@ class EquipmentSlotType {
 	}
 	
 	String name
-	
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof EquipmentSlotType)) return false
+
+        EquipmentSlotType that = (EquipmentSlotType) o
+
+        if (name != that.name) return false
+
+        return true
+    }
+
+    int hashCode() {
+        return (name != null ? name.hashCode() : 0)
+    }
 }

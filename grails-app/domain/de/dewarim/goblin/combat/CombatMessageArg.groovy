@@ -13,4 +13,25 @@ class CombatMessageArg {
     CombatMessageArg(String cma){
         this.cma = cma
     }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof CombatMessageArg)) return false
+
+        CombatMessageArg that = (CombatMessageArg) o
+
+        if (cma != that.cma) return false
+        if (combatMessage != that.combatMessage) return false
+        if (rank != that.rank) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (cma != null ? cma.hashCode() : 0)
+        result = 31 * result + (rank != null ? rank.hashCode() : 0)
+        result = 31 * result + (combatMessage != null ? combatMessage.hashCode() : 0)
+        return result
+    }
 }
