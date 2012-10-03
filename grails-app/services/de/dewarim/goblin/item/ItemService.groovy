@@ -63,7 +63,7 @@ class ItemService {
 
         def itemList = []
         itemTypes.each{ItemType type ->
-            if(type.itemCategories.collect{it.category}.containsAll(categories.toArray())){
+            if(type.itemCategories.collect{it.category}.containsAll(categories)){
                 itemList.add(type)
             }
         }
