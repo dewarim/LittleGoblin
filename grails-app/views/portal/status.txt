@@ -391,3 +391,13 @@ Version 0.2.7
 * Added FeatureAdminController.
 // Note: 0.2.7 will probably not work perfectly due to unfinished Grails 2 transition.
 
+Version 0.3.0 "Cleanup"
+(a lot of internal changes)
+* Update to Grails 2.1.1
+* Fixed session handling
+* Fixed HTML error in /goblinOrder/_order_list
+* Refactoring pages to use sitemesh layout instead of using homebrew solution.
+* Fixed item filter: remove unnecessary conversion of list to array. (ItemService)
+* Removed old prototyps JS-library files since we have been using jQuery for some time.
+* Fixed message id in highscore.gsp
+* Added more documentation.
