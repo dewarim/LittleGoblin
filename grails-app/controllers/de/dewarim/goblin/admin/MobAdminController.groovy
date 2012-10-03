@@ -62,10 +62,10 @@ class MobAdminController extends BaseController {
             mob.description = ''
         }
 
-        mob.strike = inputValidationService.checkObject(Dice.class, params.strike, true) ?: null
-        mob.parry =  inputValidationService.checkObject(Dice.class, params.parry, true) ?: null
-        mob.damage = inputValidationService.checkObject(Dice.class, params.damage, true) ?: null
-        mob.initiative = inputValidationService.checkObject(Dice.class, params.initiative, true) ?: null
+        mob.strike = (Dice) inputValidationService.checkObject(Dice.class, params.strike, true) ?: null
+        mob.parry =  (Dice) inputValidationService.checkObject(Dice.class, params.parry, true) ?: null
+        mob.damage = (Dice) inputValidationService.checkObject(Dice.class, params.damage, true) ?: null
+        mob.initiative = (Dice) inputValidationService.checkObject(Dice.class, params.initiative, true) ?: null
         mob.xpValue = inputValidationService.checkAndEncodeInteger(params, "xpValue", "mob.xpValue")
         mob.hp = inputValidationService.checkAndEncodeInteger(params, "hp", "mob.hp")
         mob.maxHp = inputValidationService.checkAndEncodeInteger(params, "maxHp", "mob.maxHp")
