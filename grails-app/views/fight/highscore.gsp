@@ -19,7 +19,7 @@
 		<th><g:message code="highscore.rank"/></th>
 		<th><g:message code="highscore.name"/></th>	
 		<th><g:message code="highscore.xp"/></th>
-		<th><g:message code="highscore.deaths"/></th>
+		<th><g:message code="highscore.death"/></th>
 		<th><g:message code="highscore.cause_of_death"/></th>
 	</tr>
 	<g:set var="counter" value="1"/>
