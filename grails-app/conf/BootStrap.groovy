@@ -401,7 +401,8 @@ class BootStrap {
         ItemType redShroom = new ItemType(name: 'item.mushroom.red', availability: 0, baseValue: 2)
         redShroom.save()
         ItemCategory mushroomCat = new ItemCategory(redShroom, 'mushroom')
-
+        mushroomCat.save()
+        
         ItemType blackShroom = new ItemType(name: 'item.mushroom.black', availability: 0, baseValue: 2)
         blackShroom.save()
         ItemCategory bsCat = new ItemCategory(blackShroom, 'mushroom')
