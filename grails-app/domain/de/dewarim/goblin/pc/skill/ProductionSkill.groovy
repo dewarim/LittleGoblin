@@ -1,6 +1,5 @@
 package de.dewarim.goblin.pc.skill
 
-import de.dewarim.goblin.pc.crafting.SkillRequirement
 import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.pc.crafting.Product
 import de.dewarim.goblin.pc.crafting.PlayerProduct
@@ -46,5 +45,5 @@ class ProductionSkill extends Skill{
         }
 
     }
-
+    
 }
