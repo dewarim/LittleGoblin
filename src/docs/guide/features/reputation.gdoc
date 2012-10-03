@@ -1,0 +1,38 @@
+Reputation is the sum off what a group of people have come to expect of you.
+
+In Little Goblin, you can define factions, which may align on race (Elves, Dwarves) or other
+distinguishing characteristics. If a player character makes a decision during a quest,
+his or her reputation in respect to the affected factions should change.
+
+If at a later state of the game the character interacts again with factions he has now
+a positive or negative reputation with, the options offered and behaviour displayed 
+should be influenced by this. 
+
+Reputation is not presented as a number to the player, because such a score is not very meaningful.
+For display, a reputation map is used, which contains descriptions for negative and positive
+reputation states. Note that reputation at this point is either positive, neutral or negative -
+the code does not define ambivalent feelings or track the reputation history, so the sentiment "She was once
+ a heroine and a force of good [reputation:1000], but she has fallen a long way [reputation:0],
+ still we should give her a chance." can currently not be expressed. But then, modeling
+ behaviour of NPCs according to the current reputation is sufficient - the memories of
+ an orcish trader do not need to be longer and more nuanced than that of the average voter.
+ 
+Example of a reputation message map which goes from -41 to +41:
+
+bc. repMessages = ['unknown': [0],
+               'good': [1], 'very.good': [11], 'very.very.good': [21],  'best': [41],
+               'bad': [-1], 'very.bad': [-11], 'extremely.bad': [-21], 'worst': [-41]]
+
+Example of reputation messages:
+       
+bc.    reputation.unknown=We have never heard of you.
+    reputation.good=We like you.
+    reputation.very.good=We think highly of you.
+    reputation.very.very.good=We love you.
+    reputation.best=Our lives are blessed by your very presence.
+    reputation.bad=We dislike you.
+    reputation.very.bad=We hate you.
+    reputation.extremely.bad=We will kill you on sight.
+    reputation.worst=We are going to kill you and leave your for the ravens
+
+(Of course, you can define the messages in a more appropriate way or from a 3rd-person point of view.)
