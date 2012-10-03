@@ -19,7 +19,7 @@ class MeleeController extends BaseController {
      * If now melee is running, the player may register for the next round.
      */
     @Secured(['ROLE_USER'])
-    def index = {
+    def index() {
         def pc = fetchPc()
         if (!pc) {
             return redirect(controller: 'portal', action: 'start')
@@ -32,7 +32,7 @@ class MeleeController extends BaseController {
      * player may join.
      */
     @Secured(['ROLE_USER'])
-    def join = {
+    def join() {
         def pc = fetchPc()
         if (!pc) {
             flash.message = message(code: 'melee.join.failed')
@@ -67,7 +67,7 @@ class MeleeController extends BaseController {
      * Leave a melee round. A player may leave at any time.
      */
     @Secured(['ROLE_USER'])
-    def leave = {
+    def leave() {
         def pc = fetchPc()
         if (!pc || pc.currentMelee == null) {
             flash.message = message(code: 'melee.leave.failed')
@@ -80,7 +80,7 @@ class MeleeController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def useItem = {
+    def useItem() {
         def pc = fetchPc()
         try {
             if (!pc) {
@@ -126,7 +126,7 @@ class MeleeController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def updateActions = {
+    def updateActions() {
         def pc = fetchPc()
         if (!pc) {
             return render(status: 503, text: message(code: 'melee.error'))
@@ -135,7 +135,7 @@ class MeleeController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def updateFighterList = {
+    def updateFighterList() {
         def pc = fetchPc()
         if (!pc) {
             return render(status: 503, text: message(code: 'melee.error'))
@@ -145,7 +145,7 @@ class MeleeController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def attack = {
+    def attack() {
         try {
             def pc = fetchPc()
             if (!pc) {

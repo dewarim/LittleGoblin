@@ -17,7 +17,7 @@ class GoblinOrderController extends BaseController{
      * Create a new order
      */
     @Secured(['ROLE_USER'])
-    def show = {
+    def show() {
         def pc = fetchPc()
 
         GoblinOrder order = GoblinOrder.get(params.order)
@@ -36,7 +36,7 @@ class GoblinOrderController extends BaseController{
      * create a new order
      */
     @Secured(['ROLE_USER'])
-    def save = {
+    def save() {
         def pc = fetchPc()
 
         if(pc.goblinOrder){
@@ -70,7 +70,7 @@ class GoblinOrderController extends BaseController{
     }
 
     // public ajax function
-    def checkOrderName = {
+    def checkOrderName() {
         log.debug("checkOrderName: ${params}")
         def name = params.order_name
         if(! name){
@@ -91,7 +91,7 @@ class GoblinOrderController extends BaseController{
      * List all orders
      */
     @Secured(['ROLE_USER'])
-    def list = {
+    def list() {
         def pc = fetchPc()
 
         def max = new Integer(params.max ?: 10)
@@ -107,7 +107,7 @@ class GoblinOrderController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def describe = {
+    def describe() {
         def pc = fetchPc()
         if(! pc){
             return render(status:503, text:message(code:'error.player_not_found'))
@@ -123,7 +123,7 @@ class GoblinOrderController extends BaseController{
     * Show the main order screen
      */
     @Secured(['ROLE_USER'])
-    def index = {
+    def index() {
         def pc = fetchPc()
 
         def max = new Integer(params.max ?: 10)
@@ -142,7 +142,7 @@ class GoblinOrderController extends BaseController{
      * Join an existing order
      */
     @Secured(['ROLE_USER'])
-    def apply = {
+    def apply() {
         def pc = fetchPc()
 
         GoblinOrder order = GoblinOrder.get(params.order)
@@ -162,7 +162,7 @@ class GoblinOrderController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def showMyOrder = {
+    def showMyOrder() {
         def pc = fetchPc()
 
         if(! pc.goblinOrder){
@@ -179,7 +179,7 @@ class GoblinOrderController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def leave = {
+    def leave() {
         def pc = fetchPc()
 
         if(! pc.goblinOrder){
@@ -205,7 +205,7 @@ class GoblinOrderController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def showMembers = {
+    def showMembers() {
         def pc = fetchPc()
 
         if(! pc.goblinOrder){
@@ -221,7 +221,7 @@ class GoblinOrderController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def showApplications = {
+    def showApplications() {
         def pc = fetchPc()
 
         if(! pc.goblinOrder){
@@ -241,7 +241,7 @@ class GoblinOrderController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def acceptApplication = {
+    def acceptApplication() {
         def pc = fetchPc()
 
         if(! pc.goblinOrder){

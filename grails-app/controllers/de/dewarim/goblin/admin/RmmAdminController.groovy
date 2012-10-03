@@ -11,13 +11,13 @@ class RmmAdminController extends BaseController {
     def inputValidationService
     def rmmService
 
-    def index = {
+    def index() {
         return [
                 rmms: ReputationMessageMap.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def rmm = ReputationMessageMap.get(params.id)
         if (!rmm) {
             return render(status: 503, text: message(code: 'error.unknown.rmm'))
@@ -27,7 +27,7 @@ class RmmAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def rmm = ReputationMessageMap.get(params.id)
         if (!rmm) {
             return render(status: 503, text: message(code: 'error.unknown.rmm'))
@@ -36,7 +36,7 @@ class RmmAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def rmm = ReputationMessageMap.get(params.id)
             if (!rmm) {
@@ -53,19 +53,19 @@ class RmmAdminController extends BaseController {
         }
     }
 
-    protected void updateFields(rmm) {
+    protected void updateFields(ReputationMessageMap rmm) {
         rmm.name = inputValidationService.checkAndEncodeName(params.name, rmm)
         if (params.faction?.equals('null') && rmm.faction) {
             rmmService.removeFaction(rmm)
         }
         if (params.faction && !params.faction.equals('null')) {
-            def faction = inputValidationService.checkObject(Faction.class, params.faction)
+            Faction faction = inputValidationService.checkObject(Faction.class, params.faction)
             rmmService.removeFaction(rmm)
             rmmService.addFaction(rmm, faction)
         }
     }
 
-    def save = {
+    def save() {
         log.debug("save new rmm")
         ReputationMessageMap rmm = new ReputationMessageMap()
         try {
@@ -78,7 +78,7 @@ class RmmAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         try {
             ReputationMessageMap rmm = (ReputationMessageMap) inputValidationService.checkObject(ReputationMessageMap.class, params.id)
             if (rmm.faction) {

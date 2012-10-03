@@ -13,13 +13,13 @@ class GuildAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 guilds: Guild.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def guild = Guild.get(params.id)
         if (!guild) {
             return render(status: 503, text: message(code: 'error.unknown.guild'))
@@ -28,7 +28,7 @@ class GuildAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def guild = Guild.get(params.id)
         if (!guild) {
             return render(status: 503, text: message(code: 'error.unknown.guild'))
@@ -37,7 +37,7 @@ class GuildAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def guild = Guild.get(params.id)
             if (!guild) {
@@ -86,7 +86,7 @@ class GuildAdminController extends BaseController {
         guild.incomeTax = params.incomeTax ? Double.parseDouble(params.incomeTax) : 0.99
     }
 
-    def save = {
+    def save() {
         Guild guild = new Guild()
         try {
            updateFields(guild)
@@ -101,7 +101,7 @@ class GuildAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         Guild guild = Guild.get(params.id)
         try {
             if (!guild) {

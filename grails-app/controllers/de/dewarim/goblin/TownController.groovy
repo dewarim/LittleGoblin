@@ -8,7 +8,7 @@ class TownController extends BaseController {
     def questService
 
     @Secured(['ROLE_USER'])
-    def show = {
+    def show() {
         def pc = fetchPc()
         if(! pc){
             return redirect(controllerName: 'portal', actionName:'start')

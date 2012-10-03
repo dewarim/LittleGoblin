@@ -11,13 +11,13 @@ class ShopOwnerAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 shopOwners: ShopOwner.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def shopOwner = ShopOwner.get(params.id)
         if (!shopOwner) {
             return render(status: 503, text: message(code: 'error.unknown.shopOwner'))
@@ -26,7 +26,7 @@ class ShopOwnerAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def shopOwner = ShopOwner.get(params.id)
         if (!shopOwner) {
             return render(status: 503, text: message(code: 'error.unknown.shopOwner'))
@@ -35,7 +35,7 @@ class ShopOwnerAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def shopOwner = ShopOwner.get(params.id)
             if (!shopOwner) {
@@ -66,7 +66,7 @@ class ShopOwnerAdminController extends BaseController {
         }
     }
 
-    def save = {
+    def save() {
         ShopOwner shopOwner = new ShopOwner()
         try {
            updateFields(shopOwner)
@@ -80,7 +80,7 @@ class ShopOwnerAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         ShopOwner shopOwner = ShopOwner.get(params.id)
         try {
             if (!shopOwner) {

@@ -12,13 +12,13 @@ class EncounterAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 encounters: Encounter.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def encounter = Encounter.get(params.id)
         if (!encounter) {
             return render(status: 503, text: message(code: 'error.unknown.encounter'))
@@ -28,7 +28,7 @@ class EncounterAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def encounter = Encounter.get(params.id)
         if (!encounter) {
             return render(status: 503, text: message(code: 'error.unknown.encounter'))
@@ -37,7 +37,7 @@ class EncounterAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def encounter = Encounter.get(params.id)
             if (!encounter) {
@@ -83,7 +83,7 @@ class EncounterAdminController extends BaseController {
         }
     }
 
-    def save = {
+    def save() {
         Encounter encounter = new Encounter()
         try {
             updateFields(encounter)
@@ -95,7 +95,7 @@ class EncounterAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         Encounter encounter = Encounter.get(params.id)
         try {
             if (!encounter) {

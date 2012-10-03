@@ -11,7 +11,7 @@ class ScoreController extends BaseController {
 	 * The Highscore list
 	 */
 	@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
-	def show = {
+	def show() {
 
 		return [
 		        highscore:HighScore.list(max:5, sort:'xp', order:'desc')

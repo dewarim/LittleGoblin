@@ -11,13 +11,13 @@ class ProductAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 products: Product.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def product = Product.get(params.id)
         if (!product) {
             return render(status: 503, text: message(code: 'error.unknown.product'))
@@ -26,7 +26,7 @@ class ProductAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def product = Product.get(params.id)
         if (!product) {
             return render(status: 503, text: message(code: 'error.unknown.product'))
@@ -35,7 +35,7 @@ class ProductAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def product = Product.get(params.id)
             if (!product) {
@@ -72,7 +72,7 @@ class ProductAdminController extends BaseController {
 //        }
     }
 
-    def save = {
+    def save() {
         Product product = new Product()
         try {
             updateFields(product)
@@ -85,7 +85,7 @@ class ProductAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         Product product = Product.get(params.id)
         try {
             if (!product) {

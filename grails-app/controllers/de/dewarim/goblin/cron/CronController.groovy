@@ -10,7 +10,7 @@ class CronController {
     def itemService
     def meleeService
 
-    def learning = {
+    def learning() {
         if (requestAllowed()) {
             // process learning queue
             Integer amount = skillService.checkFinishedSkills()
@@ -21,7 +21,7 @@ class CronController {
         }
     }
 
-    def makeProducts = {
+    def makeProducts() {
         if (requestAllowed()) {
             Integer items = productionService.makeProducts()
             itemService.cleanupItems()
@@ -32,7 +32,7 @@ class CronController {
         }
     }
 
-    def melee = {
+    def melee() {
         if (requestAllowed()) {
             Melee melee = Melee.findByStatus(MeleeStatus.RUNNING)
             if (melee) {

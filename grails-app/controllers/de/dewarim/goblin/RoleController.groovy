@@ -11,14 +11,14 @@ class RoleController {
 	// the delete, save and update actions only accept POST requests
 	static Map allowedMethods = [delete: 'POST', save: 'POST', update: 'POST']
 
-	def index = {
+	def index() {
 		redirect action: list, params: params
 	}
 
 	/**
 	 * Display the list authority page.
 	 */
-	def list = {
+	def list() {
 		if (!params.max) {
 			params.max = 10
 		}
@@ -28,7 +28,7 @@ class RoleController {
 	/**
 	 * Display the show authority page.
 	 */
-	def show = {
+	def show() {
 		def authority = Role.get(params.id)
 		if (!authority) {
 			flash.message = "Role not found with id $params.id"
@@ -42,7 +42,7 @@ class RoleController {
 	/**
 	 * Delete an authority.
 	 */
-	def delete = {
+	def delete() {
 		def authority = Role.get(params.id)
 		if (!authority) {
 			flash.message = "Role not found with id $params.id"
@@ -59,7 +59,7 @@ class RoleController {
 	/**
 	 * Display the edit authority page.
 	 */
-	def edit = {
+	def edit() {
 		def authority = Role.get(params.id)
 		if (!authority) {
 			flash.message = "Role not found with id $params.id"
@@ -73,7 +73,7 @@ class RoleController {
 	/**
 	 * Authority update action.
 	 */
-	def update = {
+	def update() {
 
 		def authority = Role.get(params.id)
 		if (!authority) {
@@ -102,14 +102,14 @@ class RoleController {
 	/**
 	 * Display the create new authority page.
 	 */
-	def create = {
+	def create() {
 		[authority: new Role()]
 	}
 
 	/**
 	 * Save a new authority.
 	 */
-	def save = {
+	def save() {
 
 		def authority = new Role()
 		authority.properties = params

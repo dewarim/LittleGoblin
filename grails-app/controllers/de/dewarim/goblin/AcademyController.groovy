@@ -16,7 +16,7 @@ class AcademyController extends BaseController {
      * Provide an overview of available academies
      */
     @Secured(['ROLE_USER'])
-    def index = {
+    def index() {
         def pc = fetchPc()
 
         Integer max = new Integer(params.max ?: 10)
@@ -36,7 +36,7 @@ class AcademyController extends BaseController {
        * Show a single academy
        */
     @Secured(['ROLE_USER'])
-    def show = {
+    def show() {
         def pc = fetchPc()
 
         def academy = Academy.get(params.academy)
@@ -69,7 +69,7 @@ class AcademyController extends BaseController {
      * Show the description of an academy. [AJAX]
      */
     @Secured(['ROLE_USER'])
-    def describe = {
+    def describe() {
         Academy academy = Academy.get(params.academy)
         if(! academy){
             return render(status:503, text:message(code:'error.academy.not_found'))
@@ -81,7 +81,7 @@ class AcademyController extends BaseController {
      * List academies  [Ajax]
      */
     @Secured(['ROLE_USER'])
-    def list = {
+    def list() {
         def pc = fetchPc()
 
         def max = new Integer(params.max ?: 10)
@@ -98,7 +98,7 @@ class AcademyController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def learnSkillSet = {
+    def learnSkillSet() {
         def pc = fetchPc()
         def academy = Academy.get(params.academy)
         if(! academy){
@@ -141,7 +141,7 @@ class AcademyController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def stopLearning = {
+    def stopLearning() {
         def pc = fetchPc()
 
         LearningQueueElement queueElement = LearningQueueElement.get(params.queueElement)

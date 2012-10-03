@@ -18,7 +18,7 @@ class QuestController extends BaseController {
      * Show the current quest and quest step
      */
     @Secured(['ROLE_USER'])
-    def show = {
+    def show() {
         def pc = fetchPc()
         if (! pc){
             flash.message = message(code:'error.player_not_found')
@@ -38,7 +38,7 @@ class QuestController extends BaseController {
      * Describe a quest prior to the user starting it
      */
     @Secured(['ROLE_USER'])
-    def describeQuest = {
+    def describeQuest() {
         def pc = fetchPc()
         if (! pc){
             flash.message = message(code:'error.player_not_found')
@@ -61,7 +61,7 @@ class QuestController extends BaseController {
      * Start a new Quest
      */
     @Secured(['ROLE_USER'])
-    def startQuest = {
+    def startQuest() {
         def pc = fetchPc()
         if (! pc){
             flash.message = message(code:'error.player_not_found')
@@ -104,7 +104,7 @@ class QuestController extends BaseController {
      * Start a new Quest
      */
     @Secured(['ROLE_USER'])
-    def continueQuest = {
+    def continueQuest() {
         def pc = fetchPc()
         if (! pc){
             flash.message = message(code:'error.player_not_found')
@@ -140,7 +140,7 @@ class QuestController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def showStep = {
+    def showStep() {
         def pc = fetchPc()
         if (!pc) {
             flash.message = message(code:'error.player_not_found')
@@ -165,7 +165,7 @@ class QuestController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def finishQuest = {
+    def finishQuest() {
         def pc = fetchPc()
         if (!pc) {
             flash.message = message(code:'error.player_not_found')
@@ -184,7 +184,7 @@ class QuestController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def nextStep = {
+    def nextStep() {
         def pc = fetchPc()
         if (!pc) {
             flash.message = message(code:'error.player_not_found')
@@ -202,7 +202,7 @@ class QuestController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def showQuestMaster = {
+    def showQuestMaster() {
         def pc = fetchPc()
          if (!pc) {
             flash.message = message(code:'error.player_not_found')

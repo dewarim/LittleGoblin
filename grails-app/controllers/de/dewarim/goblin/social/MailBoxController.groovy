@@ -13,7 +13,7 @@ class MailBoxController extends BaseController{
      * Show mailbox area
      */
     @Secured(['ROLE_USER'])
-    def index = {
+    def index() {
         def pc = fetchPc()
 
         def box = fetchMailBox(pc)
@@ -32,7 +32,7 @@ class MailBoxController extends BaseController{
      * Write a new mail
      */
     @Secured(['ROLE_USER'])
-    def writeMail = {
+    def writeMail() {
         def pc = fetchPc()
 
         return [
@@ -45,7 +45,7 @@ class MailBoxController extends BaseController{
      * Send a new mail
     */
     @Secured(['ROLE_USER'])
-    def sendMail = {
+    def sendMail() {
         def pc = fetchPc()
 
         PlayerCharacter recipient = PlayerCharacter.findByName(params.recipientName)
@@ -114,7 +114,7 @@ class MailBoxController extends BaseController{
     * Show a mailbox
     */
     @Secured(['ROLE_USER'])
-    def showBox = {
+    def showBox() {
         log.debug("params:${params}")
         def pc = fetchPc()
 
@@ -133,7 +133,7 @@ class MailBoxController extends BaseController{
     * render list of mails
     */
     @Secured(['ROLE_USER'])
-    def listMails = {
+    def listMails() {
         def pc = fetchPc()
         def box = fetchMailBox(pc)
         if(! box){
@@ -148,7 +148,7 @@ class MailBoxController extends BaseController{
     * render a single mail
     */
     @Secured(['ROLE_USER'])
-    def showMail = {
+    def showMail() {
         def pc = fetchPc()
 
         Mail mail = Mail.get(params.mail)
@@ -165,7 +165,7 @@ class MailBoxController extends BaseController{
      * Send a message via AJAX form.
      */
     @Secured(['ROLE_USER'])
-    def sendMessage = {
+    def sendMessage() {
         def pc = fetchPc()
         def recipient = PlayerCharacter.get(params.recipient)
         if(! recipient){
@@ -199,7 +199,7 @@ class MailBoxController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def deleteMail = {
+    def deleteMail() {
         def pc = fetchPc()
 
         Mail mail = Mail.get(params.mail)
@@ -214,7 +214,7 @@ class MailBoxController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def archiveMail = {
+    def archiveMail() {
         def pc = fetchPc()
 
         Mail mail = Mail.get(params.mail)

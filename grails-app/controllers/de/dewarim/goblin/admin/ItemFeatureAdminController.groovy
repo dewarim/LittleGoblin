@@ -12,13 +12,13 @@ class ItemFeatureAdminController extends BaseController {
   def inputValidationService
   def itemFeatureService
 
-  def index = {
+  def index() {
     return [
             itemFeatures: ItemTypeFeature.listOrderById()
     ]
   }
 
-  def edit = {
+  def edit() {
     def itemFeature = ItemTypeFeature.get(params.id)
     if (!itemFeature) {
       return render(status: 503, text: message(code: 'error.unknown.itemFeature'))
@@ -27,7 +27,7 @@ class ItemFeatureAdminController extends BaseController {
     return
   }
 
-  def cancelEdit = {
+  def cancelEdit() {
     def itemFeature = ItemTypeFeature.get(params.id)
     if (!itemFeature) {
       return render(status: 503, text: message(code: 'error.unknown.itemFeature'))
@@ -36,7 +36,7 @@ class ItemFeatureAdminController extends BaseController {
     return
   }
 
-  def update = {
+  def update() {
     try {
       def itemFeature = ItemTypeFeature.get(params.id)
       if (!itemFeature) {
@@ -57,7 +57,7 @@ class ItemFeatureAdminController extends BaseController {
     itemFeature.config = inputValidationService.checkXmlText(params.config)
   }
 
-  def save = {
+  def save() {
     ItemTypeFeature itemFeature = new ItemTypeFeature()
     try {
       updateFields(itemFeature)
@@ -69,7 +69,7 @@ class ItemFeatureAdminController extends BaseController {
     }
   }
 
-  def delete = {
+  def delete() {
     ItemTypeFeature itemFeature = ItemTypeFeature.get(params.id)
     try {
       if (!itemFeature) {

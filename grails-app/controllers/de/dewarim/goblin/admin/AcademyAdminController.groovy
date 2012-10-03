@@ -12,13 +12,13 @@ class AcademyAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 academies: Academy.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def academy = Academy.get(params.id)
         if (!academy) {
             return render(status: 503, text: message(code: 'error.unknown.academy'))
@@ -27,7 +27,7 @@ class AcademyAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def academy = Academy.get(params.id)
         if (!academy) {
             return render(status: 503, text: message(code: 'error.unknown.academy'))
@@ -36,7 +36,7 @@ class AcademyAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def academy = Academy.get(params.id)
             if (!academy) {
@@ -81,7 +81,7 @@ class AcademyAdminController extends BaseController {
         academy.town = (Town) inputValidationService.checkObject(Town.class, params.town)
     }
 
-    def save = {
+    def save() {
         Academy academy = new Academy()
         try {
            updateFields(academy)
@@ -96,7 +96,7 @@ class AcademyAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         Academy academy = Academy.get(params.id)
         try {
             if (!academy) {

@@ -10,13 +10,13 @@ class LicenseAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 licenses: License.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def license = License.get(params.id)
         if (!license) {
             return render(status: 503, text: message(code: 'error.unknown.license'))
@@ -25,7 +25,7 @@ class LicenseAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def license = License.get(params.id)
         if (!license) {
             return render(status: 503, text: message(code: 'error.unknown.license'))
@@ -34,7 +34,7 @@ class LicenseAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def license = License.get(params.id)
             if (!license) {
@@ -58,7 +58,7 @@ class LicenseAdminController extends BaseController {
             inputValidationService.checkAndEncodeText(params, "url", "license.url")
     }
 
-    def save = {
+    def save() {
         License license = new License()
         try {
             updateFields(license)
@@ -70,7 +70,7 @@ class LicenseAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         License license = License.get(params.id)
         try {
             if (!license) {

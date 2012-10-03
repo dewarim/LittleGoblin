@@ -12,7 +12,7 @@ class RepMessageAdminController extends BaseController {
     def inputValidationService
     def rmmService
 
-    def index = {
+    def index() {
         try {
             def rmm = inputValidationService.checkObject(ReputationMessageMap.class, params.id)
             return [
@@ -25,7 +25,7 @@ class RepMessageAdminController extends BaseController {
         }
     }
 
-    def edit = {
+    def edit() {
         try {
             def rm = inputValidationService.checkObject(ReputationMessage.class, params.id)
             render(template: 'edit', model: [rmm: rm.repMessageMap, repMessage: rm])
@@ -35,7 +35,7 @@ class RepMessageAdminController extends BaseController {
         }
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         try {
             def rm = inputValidationService.checkObject(ReputationMessage.class, params.id)
             render(template: 'update', model: [rmm: rm.repMessageMap, repMessage: rm])
@@ -45,7 +45,7 @@ class RepMessageAdminController extends BaseController {
         }
     }
 
-    def update = {
+    def update() {
         try {
             def rm = inputValidationService.checkObject(ReputationMessage.class, params.id)
             updateFields(rm)
@@ -60,7 +60,7 @@ class RepMessageAdminController extends BaseController {
     /**
      * Add a message to a reputationMessageMap. #AJAX
      */
-    def save = {
+    def save() {
         try {
             ReputationMessageMap rmm = (ReputationMessageMap) inputValidationService.checkObject(ReputationMessageMap.class, params.rmm)
             ReputationMessage repMessage = new ReputationMessage(repMessageMap: rmm)
@@ -78,7 +78,7 @@ class RepMessageAdminController extends BaseController {
     /**
      * Delete a message from a reputationMessageMap. #AJAX
      */
-    def delete = {
+    def delete() {
         try {
             ReputationMessage repMessage = (ReputationMessage) inputValidationService.checkObject(ReputationMessage, params.id)
             ReputationMessageMap rmm = repMessage.repMessageMap

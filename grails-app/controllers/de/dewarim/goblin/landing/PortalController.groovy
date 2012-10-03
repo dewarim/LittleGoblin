@@ -18,23 +18,23 @@ class PortalController extends BaseController {
      * The landing page (start page of Little Goblin)
      */
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
-    def landing = {
+    def landing() {
 
         return [
                 highscore: HighScore.list(max: 5, sort: 'xp', order: 'desc')
         ]
     }
 
-    def index = {
+    def index() {
         return redirect(action: landing)
     }
 
-    def imprint = {
+    def imprint() {
 
     }
 
     @Secured(['ROLE_USER'])
-    def start = {
+    def start() {
         def user = fetchUser()
 
         return [user: user,
@@ -43,7 +43,7 @@ class PortalController extends BaseController {
         ]
     }
 
-    def register = {
+    def register() {
         def minNameLength = globalConfigService.fetchValueAsInt('username.min.length', 3)
         def minPassLength = globalConfigService.fetchValueAsInt('password.min.length', 6)
         return [nameOfTheGame: grailsApplication.config.gameName ?: 'Little Goblin',
@@ -55,7 +55,7 @@ class PortalController extends BaseController {
         ]
     }
 
-    def doRegister = {
+    def doRegister() {
         try {
             if (params.username?.trim()?.length() == 0) {
                 throw new RuntimeException('registration.bad.name')
@@ -124,7 +124,7 @@ class PortalController extends BaseController {
         }
     }
 
-    def confirmRegistration = {
+    def confirmRegistration() {
         try{
             def uuid = params.uuid
             if(uuid){

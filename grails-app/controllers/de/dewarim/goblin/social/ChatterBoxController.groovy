@@ -8,7 +8,7 @@ class ChatterBoxController extends BaseController{
     def globalConfigService
 
     @Secured(['ROLE_USER'])
-    def showChatterBox = {
+    def showChatterBox() {
         def pc = fetchPc()
         ChatterBox box = ChatterBox.get(params.box)
         if(! box){
@@ -23,7 +23,7 @@ class ChatterBoxController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def sendChatMessage = {
+    def sendChatMessage() {
 //        log.debug("session: $session")
         def pc = fetchPc()
         ChatterBox box = ChatterBox.get(params.box)

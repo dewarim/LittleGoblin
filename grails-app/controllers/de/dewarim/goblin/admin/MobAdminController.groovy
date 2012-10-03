@@ -12,13 +12,13 @@ class MobAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 mobs: MobTemplate.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def mob = MobTemplate.get(params.id)
         if (!mob) {
             return render(status: 503, text: message(code: 'error.unknown.mob'))
@@ -28,7 +28,7 @@ class MobAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def mob = MobTemplate.get(params.id)
         if (!mob) {
             return render(status: 503, text: message(code: 'error.unknown.mob'))
@@ -37,7 +37,7 @@ class MobAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def mob = MobTemplate.get(params.id)
             if (!mob) {
@@ -91,7 +91,7 @@ class MobAdminController extends BaseController {
 
     }
 
-    def save = {
+    def save() {
         MobTemplate mob = new MobTemplate()
         try {
             updateFields(mob)
@@ -104,7 +104,7 @@ class MobAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         MobTemplate mob = MobTemplate.get(params.id)
         try {
             if (!mob) {

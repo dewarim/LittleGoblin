@@ -10,13 +10,13 @@ class ArtistAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 artists: Artist.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def artist = Artist.get(params.id)
         if (!artist) {
             return render(status: 503, text: message(code: 'error.unknown.artist'))
@@ -25,7 +25,7 @@ class ArtistAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def artist = Artist.get(params.id)
         if (!artist) {
             return render(status: 503, text: message(code: 'error.unknown.artist'))
@@ -34,7 +34,7 @@ class ArtistAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def artist = Artist.get(params.id)
             if (!artist) {
@@ -59,7 +59,7 @@ class ArtistAdminController extends BaseController {
         }
     }
 
-    def save = {
+    def save() {
         Artist artist = new Artist()
         try {
            updateFields(artist)
@@ -73,7 +73,7 @@ class ArtistAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         Artist artist = Artist.get(params.id)
         try {
             if (!artist) {

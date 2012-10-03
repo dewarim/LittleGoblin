@@ -15,7 +15,7 @@ class ComponentAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         try {
             def product = inputValidationService.checkObject(Product.class, params.id)
             return [
@@ -28,7 +28,7 @@ class ComponentAdminController extends BaseController {
         }
     }
 
-    def edit = {
+    def edit() {
         try {
             def component = inputValidationService.checkObject(Component.class, params.id)
             render(template: 'edit', model: [product: component.product, component: component])
@@ -38,7 +38,7 @@ class ComponentAdminController extends BaseController {
         }
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         try {
             def component = inputValidationService.checkObject(Component.class, params.id)
             render(template: 'update', model: [product: component.product, component: component])
@@ -48,7 +48,7 @@ class ComponentAdminController extends BaseController {
         }
     }
 
-    def update = {
+    def update() {
         try {
             def component = inputValidationService.checkObject(Component.class, params.id)
             updateFields(component)
@@ -63,7 +63,7 @@ class ComponentAdminController extends BaseController {
     /**
      * Add a Component to a product. #AJAX
      */
-    def save = {
+    def save() {
         try {
             Product product = (Product) inputValidationService.checkObject(Product.class, params.product)
             Component component = new Component(product: product)
@@ -87,7 +87,7 @@ class ComponentAdminController extends BaseController {
     /**
      * Delete a message from a reputationMessageMap. #AJAX
      */
-    def delete = {
+    def delete() {
         try {
             Component component = (Component) inputValidationService.checkObject(Component, params.id)
             Product product = component.product

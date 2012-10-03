@@ -9,7 +9,7 @@ package de.dewarim.goblin
  */
 class HelpController {
 
-    def summonHelp = {
+    def summonHelp() {
         String messageId = params.messageId
         Help help = Help.findByMessageId(messageId)
         if(help){

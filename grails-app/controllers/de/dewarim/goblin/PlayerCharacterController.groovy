@@ -8,7 +8,7 @@ class PlayerCharacterController extends BaseController{
 	def playerMessageService
     
 	@Secured(['ROLE_USER'])
-	def show = {
+	def show() {
         def pc = fetchPc()
 
 		return [
@@ -19,7 +19,7 @@ class PlayerCharacterController extends BaseController{
 	}
 
     @Secured(['ROLE_USER'])
-    def save = {
+    def save() {
         def user = fetchUser()
         if(! params.name){
             return redirect(controller:'portal', action:'start', params:[createError:'pc.name.empty'])
@@ -51,7 +51,7 @@ class PlayerCharacterController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def editDescription = {
+    def editDescription() {
         def pc = fetchPc()
         if(! pc){
             return render(status:503, text:message(code:'error.player_not_found'))
@@ -60,7 +60,7 @@ class PlayerCharacterController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def saveDescription = {
+    def saveDescription() {
         def pc = fetchPc()
         if(! pc){
             render(status:503, text:message(code:'error.player_not_found'))
@@ -75,7 +75,7 @@ class PlayerCharacterController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def fetchMessages = {
+    def fetchMessages() {
         def pc = fetchPc()
         def pcMessages = null
         if(pc){
@@ -85,7 +85,7 @@ class PlayerCharacterController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def fetchEquipment = {
+    def fetchEquipment() {
         def pc = fetchPc()
         if(pc){
             return render(template: '/shared/equipment', model:[pc:pc])

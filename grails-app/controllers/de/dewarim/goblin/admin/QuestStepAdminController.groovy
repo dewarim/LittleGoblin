@@ -12,13 +12,13 @@ class QuestStepAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 questSteps: QuestStep.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def questStep = QuestStep.get(params.id)
         if (!questStep) {
             return render(status: 503, text: message(code: 'error.unknown.questStep'))
@@ -33,7 +33,7 @@ class QuestStepAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def questStep = QuestStep.get(params.id)
         if (!questStep) {
             return render(status: 503, text: message(code: 'error.unknown.questStep'))
@@ -42,7 +42,7 @@ class QuestStepAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def questStep = QuestStep.get(params.id)
             if (!questStep) {
@@ -137,7 +137,7 @@ class QuestStepAdminController extends BaseController {
 
     }
 
-    def save = {
+    def save() {
         QuestStep questStep = new QuestStep()
         try {
             updateFields(questStep)
@@ -149,7 +149,7 @@ class QuestStepAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         QuestStep questStep = QuestStep.get(params.id)
         try {
             if (!questStep) {

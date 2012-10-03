@@ -9,7 +9,7 @@ class CombatAttributeAdminController extends BaseController{
 
     def inputValidationService
 
-    def index = {
+    def index() {
         if(params.indirectSubmit){
             flash.message = message(code:'warning.indirect.submit')
 //            redirect(controller: 'combatAttributeAdmin', action: params.indirectSubmit, params:params)
@@ -20,7 +20,7 @@ class CombatAttributeAdminController extends BaseController{
         ]
     }
 
-    def edit = {
+    def edit() {
         def combatAttribute = CombatAttributeType.get(params.attributeId)
         if(! combatAttribute){
             return render(status:503, text:message(code:'error.unknown.combatAttributeType'))
@@ -28,7 +28,7 @@ class CombatAttributeAdminController extends BaseController{
         return render(template:'/combatAttributeAdmin/edit', model:[combatAttribute:combatAttribute])
     }
 
-    def update = {
+    def update() {
         try{
             def combatAttribute =  CombatAttributeType.get(params.attributeId)
             if(! combatAttribute){
@@ -50,7 +50,7 @@ class CombatAttributeAdminController extends BaseController{
         }
     }
 
-    def save = {
+    def save() {
         CombatAttributeType cat = new CombatAttributeType()
         try{
             cat.name = inputValidationService.checkAndEncodeName(params.name, cat)
@@ -62,7 +62,7 @@ class CombatAttributeAdminController extends BaseController{
         }
     }
 
-    def delete = {
+    def delete() {
         CombatAttributeType cat = CombatAttributeType.get(params.attributeId)
         try{
             if(! cat){

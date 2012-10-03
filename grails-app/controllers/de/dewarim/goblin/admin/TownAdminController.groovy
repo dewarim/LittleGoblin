@@ -10,13 +10,13 @@ class TownAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 towns: Town.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def town = Town.get(params.id)
         if (!town) {
             return render(status: 503, text: message(code: 'error.unknown.town'))
@@ -25,7 +25,7 @@ class TownAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def town = Town.get(params.id)
         if (!town) {
             return render(status: 503, text: message(code: 'error.unknown.town'))
@@ -34,7 +34,7 @@ class TownAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def town = Town.get(params.id)
             if (!town) {
@@ -59,7 +59,7 @@ class TownAdminController extends BaseController {
             inputValidationService.checkAndEncodeText(params, "shortDescription", "town.shortDescription")
     }
 
-    def save = {
+    def save() {
         Town town = new Town()
         try {
            updateFields(town)
@@ -73,7 +73,7 @@ class TownAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         Town town = Town.get(params.id)
         try {
             if (!town) {

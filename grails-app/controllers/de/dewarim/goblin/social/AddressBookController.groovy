@@ -9,17 +9,17 @@ import grails.plugins.springsecurity.Secured
 class AddressBookController extends BaseController {
 
     @Secured(['ROLE_USER'])
-    def list = {
+    def list() {
 
     }
 
     @Secured(['ROLE_USER'])
-    def removeRecipient = {
+    def removeRecipient() {
 
     }
 
     @Secured(['ROLE_USER'])
-    def addRecipient = {
+    def addRecipient() {
 
     }
 }

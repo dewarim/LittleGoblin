@@ -20,7 +20,7 @@ class FightController extends BaseController {
       * Show opponent, option fight or flee.
       */
     @Secured(['ROLE_USER'])
-    def index = {
+    def index() {
         def user = fetchUser()
 
         Combat combat = Combat.get(params.combat)
@@ -51,7 +51,7 @@ class FightController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def flee = {
+    def flee() {
         def user = fetchUser()
 
         Combat combat = Combat.get(params.combat)
@@ -89,7 +89,7 @@ class FightController extends BaseController {
       * Show fight result
       */
     @Secured(['ROLE_USER'])
-    def fight = {
+    def fight() {
         def user = fetchUser()
 
         flash.message = ""
@@ -129,7 +129,7 @@ class FightController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def victory = {
+    def victory() {
         // TODO: set mob to dead.
         // TODO: add mob to pc.history
         // TODO: set queststep to finished, get next queststep or redirect to town.
@@ -175,7 +175,7 @@ class FightController extends BaseController {
       * Charakter is dead, show death message and high score.
       */
     @Secured(['ROLE_USER'])
-    def death = {
+    def death() {
         def user = fetchUser()
 
         Combat combat = Combat.get(params.combat)
@@ -208,7 +208,7 @@ class FightController extends BaseController {
                 combat: Combat.get(params.combat)]
     }
 
-    def highscore = {
+    def highscore() {
         def pc = PlayerCharacter.get(params.pc)
         // def mob = Mob.get(params.mob)
 

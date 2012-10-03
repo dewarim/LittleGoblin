@@ -19,7 +19,7 @@ class ItemController extends BaseController {
      * Use an item belonging to the player in the context of a combat setting.
      */
     @Secured(['ROLE_USER'])
-    def useItem = {
+    def useItem() {
         def user = fetchUser()
 
         def item = Item.get(params.item)
@@ -71,7 +71,7 @@ class ItemController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def equipItem = {
+    def equipItem() {
         def pc = fetchPc()
         try {
             if (!pc) {
@@ -109,7 +109,7 @@ class ItemController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def unequipItem = {
+    def unequipItem() {
         try {
             def pc = fetchPc()
             Item item = (Item) inputValidationService.checkObject(Item.class, params.item)
@@ -141,7 +141,7 @@ class ItemController extends BaseController {
 
 
     @Secured(['ROLE_USER'])
-    def showInventory = {
+    def showInventory() {
         // TODO: if pc is on a quest or in combat, prevent him from moving stuff from home to person.
         def pc = fetchPc()
         if (!pc) {
@@ -151,7 +151,7 @@ class ItemController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def renderInventory = {
+    def renderInventory() {
         def pc = fetchPc()
 //        render tem
     }
@@ -162,7 +162,7 @@ class ItemController extends BaseController {
      * would need to be considerably expanded.
      */
     @Secured(['ROLE_USER'])
-    def carryItem = {
+    def carryItem() {
         try {
             def pc = fetchPc()
             def item = fetchItem(pc)
@@ -204,7 +204,7 @@ class ItemController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def dropItem = {
+    def dropItem() {
         try {
             def pc = fetchPc()
             def item = fetchItem(pc)

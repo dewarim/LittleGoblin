@@ -14,7 +14,7 @@ class SkillRequirementAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         try {
             def product = inputValidationService.checkObject(Product.class, params.id)
             return [
@@ -27,7 +27,7 @@ class SkillRequirementAdminController extends BaseController {
         }
     }
 
-    def edit = {
+    def edit() {
         try {
             def requirement = inputValidationService.checkObject(SkillRequirement.class, params.id)
             render(template: 'edit', model: [product: requirement.product, requirement: requirement])
@@ -37,7 +37,7 @@ class SkillRequirementAdminController extends BaseController {
         }
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         try {
             def requirement = inputValidationService.checkObject(SkillRequirement.class, params.id)
             render(template: 'update', model: [product: requirement.product, requirement: requirement])
@@ -47,7 +47,7 @@ class SkillRequirementAdminController extends BaseController {
         }
     }
 
-    def update = {
+    def update() {
         try {
             def requirement = inputValidationService.checkObject(SkillRequirement.class, params.id)
             updateFields(requirement)
@@ -62,7 +62,7 @@ class SkillRequirementAdminController extends BaseController {
     /**
      * Add a SkillRequirement to a product. #AJAX
      */
-    def save = {
+    def save() {
         try {
             Product product = (Product) inputValidationService.checkObject(Product.class, params.product)
             SkillRequirement requirement = new SkillRequirement(product: product)
@@ -85,7 +85,7 @@ class SkillRequirementAdminController extends BaseController {
     /**
      * Delete a message from a reputationMessageMap. #AJAX
      */
-    def delete = {
+    def delete() {
         try {
             SkillRequirement requirement = (SkillRequirement) inputValidationService.checkObject(SkillRequirement, params.id)
             Product product = requirement.product

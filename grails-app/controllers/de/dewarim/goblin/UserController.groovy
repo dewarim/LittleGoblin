@@ -17,18 +17,18 @@ class UserController {
 	// the delete, save and update actions only accept POST requests
 	static Map allowedMethods = [delete: 'POST', save: 'POST', update: 'POST']
 
-	def index = {
+	def index() {
 		redirect action: list, params: params
 	}
 
-	def list = {
+	def list() {
 		if (!params.max) {
 			params.max = 10
 		}
 		[personList: UserAccount.list(params)]
 	}
 
-	def show = {
+	def show() {
 		def person = UserAccount.get(params.id)
 		if (!person) {
 			flash.message = "User not found with id $params.id"
@@ -49,7 +49,7 @@ class UserController {
 	 * Person delete action. Before removing an existing person,
 	 * he should be removed from those authorities which he is involved.
 	 */
-	def delete = {
+	def delete() {
 
 		def person = UserAccount.get(params.id)
 		if (person) {
@@ -72,7 +72,7 @@ class UserController {
 		redirect action: list
 	}
 
-	def edit = {
+	def edit() {
 
 		def person = UserAccount.get(params.id)
 		if (!person) {
@@ -87,7 +87,7 @@ class UserController {
 	/**
 	 * Person update action.
 	 */
-	def update = {
+	def update() {
 
 		def person = UserAccount.get(params.id)
 		if (!person) {
@@ -119,14 +119,14 @@ class UserController {
 		}
 	}
 
-	def create = {
+	def create() {
 		[person: new UserAccount(params), authorityList: Role.list()]
 	}
 
 	/**
 	 * Person save action.
 	 */
-	def save = {
+	def save() {
 
 		def person = new UserAccount()
 		person.properties = params

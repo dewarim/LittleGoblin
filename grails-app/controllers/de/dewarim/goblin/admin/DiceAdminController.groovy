@@ -20,13 +20,13 @@ class DiceAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 dices: Dice.list(sort:params.sort ?: 'name', order: params.order ?: 'asc')
         ]
     }
 
-    def edit = {
+    def edit() {
         def dice = Dice.get(params.id)
         if (!dice) {
             return render(status: 503, text: message(code: 'error.unknown.dice'))
@@ -35,7 +35,7 @@ class DiceAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def dice = Dice.get(params.id)
         if (!dice) {
             return render(status: 503, text: message(code: 'error.unknown.dice'))
@@ -44,7 +44,7 @@ class DiceAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def dice = Dice.get(params.id)
             if (!dice) {
@@ -70,7 +70,7 @@ class DiceAdminController extends BaseController {
             inputValidationService.checkAndEncodeInteger(params, 'bonus', 'dice.bonus')
     }
 
-    def save = {
+    def save() {
         Dice dice = new Dice()
         try {
            updateFields(dice)
@@ -83,7 +83,7 @@ class DiceAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         Dice dice = Dice.get(params.id)
         try {
             if (!dice) {

@@ -12,13 +12,13 @@ class ItemAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
              itemTypes: ItemType.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def itemType = ItemType.get(params.id)
         if (!itemType) {
             return render(status: 503, text: message(code: 'error.unknown.itemType'))
@@ -27,7 +27,7 @@ class ItemAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def itemType = ItemType.get(params.id)
         if (!itemType) {
             return render(status: 503, text: message(code: 'error.unknown.itemType'))
@@ -36,7 +36,7 @@ class ItemAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def itemType = ItemType.get(params.id)
             if (!itemType) {
@@ -65,7 +65,7 @@ class ItemAdminController extends BaseController {
         itemType.combatDice = inputValidationService.checkObject(Dice.class, params.combatDice, true)
     }
 
-    def save = {
+    def save() {
         ItemType itemType = new ItemType()
         try {
             updateFields(itemType)
@@ -77,7 +77,7 @@ class ItemAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         ItemType itemType = ItemType.get(params.id)
         try {
             if (!itemType) {
@@ -94,7 +94,7 @@ class ItemAdminController extends BaseController {
         }
     }
 
-    def updateRequiredSlots = {
+    def updateRequiredSlots() {
         try {
             ItemType itemType = inputValidationService.checkObject(ItemType.class, params.id)
             def slots = params.keySet().findAll{key ->

@@ -17,13 +17,13 @@ class FactionAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 factions: Faction.list(sort:params.sort ?: 'name', order: params.order ?: 'asc')
         ]
     }
 
-    def edit = {
+    def edit() {
         def faction = Faction.get(params.id)
         if (!faction) {
             return render(status: 503, text: message(code: 'error.unknown.faction'))
@@ -33,7 +33,7 @@ class FactionAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def faction = Faction.get(params.id)
         if (!faction) {
             return render(status: 503, text: message(code: 'error.unknown.faction'))
@@ -42,7 +42,7 @@ class FactionAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def faction = Faction.get(params.id)
             if (!faction) {
@@ -72,7 +72,7 @@ class FactionAdminController extends BaseController {
         }
     }
 
-    def save = {
+    def save() {
         Faction faction = new Faction()
         try {
            updateFields(faction)
@@ -85,7 +85,7 @@ class FactionAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         Faction faction = Faction.get(params.id)
         try {
             if (!faction) {

@@ -12,13 +12,13 @@ class ImageAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 images: Image.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def image = Image.get(params.id)
         if (!image) {
             return render(status: 503, text: message(code: 'error.unknown.image'))
@@ -27,7 +27,7 @@ class ImageAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def image = Image.get(params.id)
         if (!image) {
             return render(status: 503, text: message(code: 'error.unknown.image'))
@@ -36,7 +36,7 @@ class ImageAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def image = Image.get(params.id)
             if (!image) {
@@ -53,7 +53,7 @@ class ImageAdminController extends BaseController {
         }
     }
 
-    def showImage = {
+    def showImage() {
         try{
             def image = Image.get(params.id)
             if (!image) {
@@ -82,7 +82,7 @@ class ImageAdminController extends BaseController {
         image.width = inputValidationService.checkAndEncodeInteger(params, 'width', 'image.width')
     }
 
-    def save = {
+    def save() {
         Image image = new Image()
         try {
             updateFields(image)
@@ -95,7 +95,7 @@ class ImageAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         Image image = Image.get(params.id)
         try {
             if (!image) {

@@ -9,13 +9,13 @@ class ConfigAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 configEntries: GlobalConfigEntry.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def configEntry = GlobalConfigEntry.get(params.id)
         if (!configEntry) {
             return render(status: 503, text: message(code: 'error.unknown.configEntry'))
@@ -24,7 +24,7 @@ class ConfigAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def configEntry = GlobalConfigEntry.get(params.id)
         if (!configEntry) {
             return render(status: 503, text: message(code: 'error.unknown.configEntry'))
@@ -33,7 +33,7 @@ class ConfigAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def configEntry = GlobalConfigEntry.get(params.id)
             if (!configEntry) {
@@ -68,7 +68,7 @@ class ConfigAdminController extends BaseController {
         }
     }
 
-    def save = {
+    def save() {
         GlobalConfigEntry configEntry = new GlobalConfigEntry()
         try {
            updateFields(configEntry)
@@ -82,7 +82,7 @@ class ConfigAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         GlobalConfigEntry configEntry = GlobalConfigEntry.get(params.id)
         try {
             if (!configEntry) {

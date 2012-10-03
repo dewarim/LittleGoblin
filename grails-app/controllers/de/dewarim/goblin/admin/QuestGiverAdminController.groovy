@@ -9,13 +9,13 @@ class QuestGiverAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 questGivers: QuestGiver.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def questGiver = QuestGiver.get(params.id)
         if (!questGiver) {
             return render(status: 503, text: message(code: 'error.unknown.questGiver'))
@@ -24,7 +24,7 @@ class QuestGiverAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def questGiver = QuestGiver.get(params.id)
         if (!questGiver) {
             return render(status: 503, text: message(code: 'error.unknown.questGiver'))
@@ -33,7 +33,7 @@ class QuestGiverAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def questGiver = QuestGiver.get(params.id)
             if (!questGiver) {
@@ -54,7 +54,7 @@ class QuestGiverAdminController extends BaseController {
                 inputValidationService.checkAndEncodeText(params, "description", "questGiver.description")
     }
 
-    def save = {
+    def save() {
         QuestGiver questGiver = new QuestGiver()
         try {
             updateFields(questGiver)
@@ -66,7 +66,7 @@ class QuestGiverAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         QuestGiver questGiver = QuestGiver.get(params.id)
         try {
             if (!questGiver) {

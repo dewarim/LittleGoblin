@@ -11,13 +11,13 @@ class ShopAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 shops: Shop.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def shop = Shop.get(params.id)
         if (!shop) {
             return render(status: 503, text: message(code: 'error.unknown.shop'))
@@ -26,7 +26,7 @@ class ShopAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def shop = Shop.get(params.id)
         if (!shop) {
             return render(status: 503, text: message(code: 'error.unknown.shop'))
@@ -35,7 +35,7 @@ class ShopAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def shop = Shop.get(params.id)
             if (!shop) {
@@ -63,7 +63,7 @@ class ShopAdminController extends BaseController {
         shop.town = inputValidationService.checkObject(Town.class, params.town)
     }
 
-    def save = {
+    def save() {
         Shop shop = new Shop()
         try {
             updateFields(shop)
@@ -75,7 +75,7 @@ class ShopAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         Shop shop = Shop.get(params.id)
         try {
             if (!shop) {

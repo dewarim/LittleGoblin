@@ -11,13 +11,13 @@ class QuestAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 questTemplates: QuestTemplate.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def questTemplate = QuestTemplate.get(params.id)
         if (!questTemplate) {
             return render(status: 503, text: message(code: 'error.unknown.questTemplate'))
@@ -26,7 +26,7 @@ class QuestAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def questTemplate = QuestTemplate.get(params.id)
         if (!questTemplate) {
             return render(status: 503, text: message(code: 'error.unknown.questTemplate'))
@@ -35,7 +35,7 @@ class QuestAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def questTemplate = QuestTemplate.get(params.id)
             if (!questTemplate) {
@@ -59,7 +59,7 @@ class QuestAdminController extends BaseController {
         questTemplate.giver = inputValidationService.checkObject(QuestGiver.class, params.giver)
     }
 
-    def save = {
+    def save() {
         QuestTemplate questTemplate = new QuestTemplate()
         try {
             updateFields(questTemplate)
@@ -71,7 +71,7 @@ class QuestAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         QuestTemplate questTemplate = QuestTemplate.get(params.id)
         try {
             if (!questTemplate) {

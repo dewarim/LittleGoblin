@@ -12,7 +12,7 @@ class CaptchaController {
 
 	private static final String SOURCECHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-	def index = {
+	def index() {
 		response.setContentType('image/png')
 		response.setHeader('Cache-control', 'no-cache')
 

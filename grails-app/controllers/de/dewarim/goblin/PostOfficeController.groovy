@@ -14,7 +14,7 @@ class PostOfficeController extends BaseController {
      * Main overview of post office
      */
     @Secured(['ROLE_USER'])
-    def index = {
+    def index() {
         def pc = fetchPc()
         if(! pc){
             return redirect(controller: 'portal', action: 'start')
@@ -26,7 +26,7 @@ class PostOfficeController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def sendItem = {
+    def sendItem() {
         def pc = fetchPc()
         try {
             // 1. find the recipient.
@@ -67,7 +67,7 @@ class PostOfficeController extends BaseController {
     }
 
     @Secured(['ROLE_USER'])
-    def loadInventory = {
+    def loadInventory() {
         def pc = fetchPc()
         if(! pc){
             render(status: 503, text:message(code:'error.player_not_found'))

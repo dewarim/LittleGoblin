@@ -12,13 +12,13 @@ class FeatureAdminController extends BaseController {
     def inputValidationService
     def featureService
 
-    def index = {
+    def index() {
         return [
                 features: Feature.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def feature = Feature.get(params.id)
         if (!feature) {
             return render(status: 503, text: message(code: 'error.unknown.feature'))
@@ -28,7 +28,7 @@ class FeatureAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def feature = Feature.get(params.id)
         if (!feature) {
             return render(status: 503, text: message(code: 'error.unknown.feature'))
@@ -37,7 +37,7 @@ class FeatureAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def feature = Feature.get(params.id)
             if (!feature) {
@@ -65,7 +65,7 @@ class FeatureAdminController extends BaseController {
 
     }
 
-    def save = {
+    def save() {
         Feature feature = new Feature()
         try {
             updateFields(feature)
@@ -77,7 +77,7 @@ class FeatureAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         Feature feature = Feature.get(params.id)
         try {
             if (!feature) {

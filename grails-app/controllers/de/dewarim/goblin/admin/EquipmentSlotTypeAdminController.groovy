@@ -9,13 +9,13 @@ class EquipmentSlotTypeAdminController extends BaseController {
 
     def inputValidationService
 
-    def index = {
+    def index() {
         return [
                 slotList:EquipmentSlotType.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def equipmentSlot = EquipmentSlotType.get(params.slotId)
         if(! equipmentSlot){
             return render(status:503, text:message(code:'error.unknown.equipmentSlotType'))
@@ -23,7 +23,7 @@ class EquipmentSlotTypeAdminController extends BaseController {
         return render(template:'/equipmentSlotTypeAdmin/edit', model:[equipmentSlotType:equipmentSlot])
     }
 
-    def update = {
+    def update() {
         try{
             def equipmentSlot =  EquipmentSlotType.get(params.slotId)
             if(! equipmentSlot){
@@ -40,7 +40,7 @@ class EquipmentSlotTypeAdminController extends BaseController {
         }
     }
 
-    def save = {
+    def save() {
         EquipmentSlotType slotType = new EquipmentSlotType()
         try{
             slotType.name = inputValidationService.checkAndEncodeName(params.name, slotType)
@@ -52,7 +52,7 @@ class EquipmentSlotTypeAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         EquipmentSlotType slotType = EquipmentSlotType.get(params.slotId)
         try{
             if(! slotType){

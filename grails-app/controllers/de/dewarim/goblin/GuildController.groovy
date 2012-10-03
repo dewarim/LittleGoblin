@@ -12,7 +12,7 @@ class GuildController extends BaseController{
      * Main overview of guilds
      */
     @Secured(['ROLE_USER'])
-    def index = {
+    def index() {
         def pc = fetchPc()
 
         def max = new Integer(params.max ?: 10)
@@ -26,7 +26,7 @@ class GuildController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def show = {
+    def show() {
         def pc = fetchPc()
 
         def guild = Guild.get(params.guild)
@@ -46,7 +46,7 @@ class GuildController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def showMyGuilds = {
+    def showMyGuilds() {
         def pc = fetchPc()
 
         def max = new Integer(params.max ?: 10)
@@ -62,7 +62,7 @@ class GuildController extends BaseController{
      * Join a guild
      */
     @Secured(['ROLE_USER'])
-    def join = {
+    def join() {
         def pc = fetchPc()
 
         Guild guild = Guild.get(params.guild)
@@ -100,7 +100,7 @@ class GuildController extends BaseController{
     * Leave a guild
      */
     @Secured(['ROLE_USER'])
-    def leave = {
+    def leave() {
         def pc = fetchPc()
 
         Guild guild = Guild.get(params.guild)
@@ -128,7 +128,7 @@ class GuildController extends BaseController{
      * List guilds  [Ajax]
      */
     @Secured(['ROLE_USER'])
-    def list = {
+    def list() {
         def pc = fetchPc()
 
         def max = new Integer(params.max ?: 10)
@@ -144,7 +144,7 @@ class GuildController extends BaseController{
     }
 
     @Secured(['ROLE_USER'])
-    def describe = {
+    def describe() {
         def pc = fetchPc()
 
         Guild guild = Guild.get(params.guild)

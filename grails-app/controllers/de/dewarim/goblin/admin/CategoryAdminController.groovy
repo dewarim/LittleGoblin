@@ -12,13 +12,13 @@ class CategoryAdminController extends BaseController {
     def inputValidationService
     def categoryService
 
-    def index = {
+    def index() {
         return [
                 categories: Category.listOrderByName()
         ]
     }
 
-    def edit = {
+    def edit() {
         def category = Category.get(params.id)
         if (!category) {
             return render(status: 503, text: message(code: 'error.unknown.category'))
@@ -30,7 +30,7 @@ class CategoryAdminController extends BaseController {
         return
     }
 
-    def cancelEdit = {
+    def cancelEdit() {
         def category = Category.get(params.id)
         if (!category) {
             return render(status: 503, text: message(code: 'error.unknown.category'))
@@ -39,7 +39,7 @@ class CategoryAdminController extends BaseController {
         return
     }
 
-    def update = {
+    def update() {
         try {
             def category = Category.get(params.id)
             if (!category) {
@@ -72,7 +72,7 @@ class CategoryAdminController extends BaseController {
         categoryService.updateShopCategories(category, shops)
     }
 
-    def save = {
+    def save() {
         Category category = new Category()
         try {
             updateFields(category)
@@ -85,7 +85,7 @@ class CategoryAdminController extends BaseController {
         }
     }
 
-    def delete = {
+    def delete() {
         Category category = Category.get(params.id)
         try {
             if (!category) {
