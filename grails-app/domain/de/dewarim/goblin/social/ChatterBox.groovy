@@ -16,10 +16,7 @@ class ChatterBox {
 
     void rightSize(newSize){
         def messages = chatMessages.sort{ it.sent.time }.reverse()
-        if(newSize >= messages.size()){
-            return // nothing to do.
-        }
-        else{
+        if(newSize < messages.size()){
             def toDelete = messages.getAt(newSize .. messages.size()-1)
             toDelete.each{cmsg ->
                 removeFromChatMessages(cmsg)
