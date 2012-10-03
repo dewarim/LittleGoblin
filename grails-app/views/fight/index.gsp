@@ -1,9 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-
-	<g:render template="/shared/header" />
-
+    <meta name="layout" content="main"/>
 	
 </head>
 <body class="main">

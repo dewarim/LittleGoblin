@@ -3,7 +3,7 @@
 <head>
 
     <meta name="layout" content="main"/>
-    <g:render template="/shared/header"/>	
+   	
 
     <g:if test="${grailsApplication.config.facebook.enabled}">
         <script type="text/javascript">(function(d, s, id) {

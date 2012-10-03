@@ -3,7 +3,7 @@
 <head>
 
 <meta name="layout" content="main"/>
-    <g:render template="/shared/header"/>
+   
     
 <style type='text/css' media='screen'>
 #login {

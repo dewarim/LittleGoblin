@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta name="layout" content="main"/>
-    <g:render template="/shared/header"/>	
+   	
 
 	
 </head>
