@@ -1,0 +1,34 @@
+Players characters and more generally creatures (mobs) may have skills. 
+Skills can be learned at academies.
+Access to academies requires membership in a guild. In Little Goblin, guilds are
+organizations for all those pursuing a specific trade, like in the middle ages.
+They are _not_ created by the players. Players may create "orders" (in the sense of
+  a military and / or religious organization, for example the Knights Templar).
+
+Academies like the fighter's guild will offer skills, or more precisely, skill sets.
+A "skill set" is a course which confers a specific skill like "fighting 101" to a player
+character - for a price and requiring a certain amount of time. It is possible to have 
+multiple academies teaching the same skill via differently prices skill sets (courses).
+Skill sets have a required level relevant to the academy that teaches them - so a player
+character may only learn them in a specific order.
+
+Skills are scriptable: you can associate a class with a skill which will be run when a
+player character learns this skill. The class will receive the PC, the CreatureSkill instance 
+which connects the character with this skill instance and the skill's configuration field as
+parameters. The configuration field is an XML string and may hold initialization values.
+
+h3. Combat Skills
+
+Combat skills extend the basic skill class with combat specific fields. Currently, those are Dice objects
+which offer bonuses for:
+ 
+* strike
+* parry
+* initiative
+* damage
+
+h3. Production Skills
+ 
+Production skills extend the basic skill class and allow a player use create new products (items).
+When a PC learns a new production skill, a range of new products may become available for crafting.
+

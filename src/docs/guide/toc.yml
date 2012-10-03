@@ -5,4 +5,9 @@ installation:
   title: Installation
   binary: Installing the binary package
   source: Installing the source code
-  
+features:
+  title: Features
+  infrastructure: Infrastructure
+  combat: Combat
+  reputation: Reputation
+  skills: Skills

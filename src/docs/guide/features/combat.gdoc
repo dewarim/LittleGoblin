@@ -1,0 +1,47 @@
+Combat in Little Goblin currently is the fight between a player character and a monster or, 
+ in the case of the Grand Melee (see below) between all willing player characters. A fight is started
+ by meeting a monster during a quest encounter. The fight will go on until the player wins, flees or
+ is defeated.
+ 
+Combat is round-based. At the moment, the player has the option to 
+
+* use items from his or her inventory
+* to attack the opponent
+* run away
+
+Running away is always successful and terminates the current quest.
+Attacking uses the currently equipped weapon(s) and passive abilities to determine the effects
+  on the opponent. 
+  
+h3. A closeup of a fight
+
+A round of combat consists of the following steps:
+
+* determine initiative (rolling a d20 at the moment, add bonuses)
+* attacker rolls to strike
+* defender rolls to parry
+* in case of a hit, compute damage from all items that contribute to damage dealt.
+* check if both combatants are alive
+* counter attack of the defender (strike, parry, deal damage, check result)
+* either finish the combat sequence or start a new round
+
+h4. Special damage and mitigation
+
+Items or a creature's natural abilities may deal special damage (for example, a dragon breathing fire).
+This is included via a damage multiplier, so a dragon may deal fire damage which increases its base
+damage by a factor of 1.2. If this dragon is also for some reason a creature of chaos, it may increase
+the damage further by another factor of 1.3. Likewise, the abilities or items of a fighter may reduce
+the damage dealt by a certain factor. A ring of protection from chaos may reduce damage with chaotic
+influence by a factor of 0.5 (so chaos damage is reduced by 50%).
+ 
+Note that in this simple combat model an armor of protection from fire will reduce the _total_ damage, 
+not the percentage of the damage that is actually dealt be heat. So, attacking a creature that is virtually
+immune to fire with a +20 burning sword of [fire,death,chaos,poison] is not the best strategy.
+
+h3. The Grand Melee
+
+The Grand Melee is Highlander-style combat szenario where all participants will fight each other
+until only the winner is left standing. It is round based with a fixed timeout to prevent players
+  from waiting too long before committing to an action. (If a player does not submit an action,
+  his character will attack a random opponent).
+
