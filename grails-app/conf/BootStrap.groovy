@@ -439,11 +439,13 @@ class BootStrap {
         die.save()
         ItemType fireWhip = new ItemType(name: 'weapon.fire_whip', availability: 1000,
                 baseValue: 50, combatDice: die)
-        RequiredSlot rs = new RequiredSlot(hand, fireWhip);
+
         CombatAttributeType catFire = CombatAttributeType.findByName('attribute.fire')
         WeaponAttribute fire = new WeaponAttribute(damageModifier: 2.0, combatAttributeType: catFire)
         fireWhip.addToCombatAttributes(fire)
         fireWhip.save()
+        RequiredSlot rs = new RequiredSlot(hand, fireWhip);
+        rs.save()
 
         CombatAttributeType catNormal = CombatAttributeType.findByName('attribute.normal')
         WeaponAttribute normalDamage = new WeaponAttribute(damageModifier: 1.0, combatAttributeType: catNormal)
@@ -451,46 +453,53 @@ class BootStrap {
         die.save()
         ItemType shortSword = new ItemType(name: 'weapon.short_sword', availability: 750,
                 baseValue: 5, combatDice: die)
-        RequiredSlot rsSword = new RequiredSlot(hand, shortSword);
         shortSword.addToCombatAttributes(normalDamage)
         shortSword.save()
+        RequiredSlot rsSword = new RequiredSlot(hand, shortSword);
+        rsSword.save()
 
         die = new Dice(sides: 6, amount: 2)
         die.save()
         ItemType longSword = new ItemType(name: 'weapon.long_sword', availability: 750,
                 baseValue: 30, combatDice: die)
-        RequiredSlot rsLongSword = new RequiredSlot(hand, longSword);
-        RequiredSlot rsLongSword2 = new RequiredSlot(hand, longSword);
         longSword.addToCombatAttributes(normalDamage)
         longSword.save()
+        RequiredSlot rsLongSword = new RequiredSlot(hand, longSword);
+        rsLongSword.save()
+        RequiredSlot rsLongSword2 = new RequiredSlot(hand, longSword);
+        rsLongSword2.save()
 
         die = new Dice(sides: 5, amount: 2, bonus: 2)
         die.save()
         ItemType longStaff = new ItemType(name: 'weapon.long_staff', availability: 350,
                 baseValue: 23, combatDice: die)
-        RequiredSlot rsLongStaff = new RequiredSlot(hand, longStaff);
-        RequiredSlot rsLongStaff2 = new RequiredSlot(hand, longStaff);
         longStaff.addToCombatAttributes(normalDamage)
         longStaff.save()
+        RequiredSlot rsLongStaff = new RequiredSlot(hand, longStaff);
+        rsLongStaff.save()
+        RequiredSlot rsLongStaff2 = new RequiredSlot(hand, longStaff);
+        rsLongSword2.save()
 
         die = new Dice(sides: 1, amount: 1, bonus: 6)
         die.save()
         ItemType toothpick = new ItemType(name: 'weapon.toothpick_of_death', availability: 500,
                 baseValue: 10, combatDice: die)
         CombatAttributeType catDeath = CombatAttributeType.findByName('attribute.death')
-        RequiredSlot rsPick = new RequiredSlot(hand, toothpick);
         def death = new WeaponAttribute(damageModifier: 2.0, combatAttributeType: catDeath)
         toothpick.addToCombatAttributes death
         toothpick.save()
+        RequiredSlot rsPick = new RequiredSlot(hand, toothpick);
+        rsPick.save()
 
         die = new Dice(sides: 4, amount: 1)
         die.save()
         ItemType torch = new ItemType(name: 'weapon.torch', availability: 1000,
                 baseValue: 1, combatDice: die)
-        RequiredSlot rsTorch = new RequiredSlot(hand, torch)
         WeaponAttribute torchFire = new WeaponAttribute(damageModifier: 1.25, combatAttributeType: catFire)
         torch.addToCombatAttributes(torchFire)
         torch.save()
+        RequiredSlot rsTorch = new RequiredSlot(hand, torch)
+        rsTorch.save()        
 
         def weapons = [fireWhip, shortSword, longSword, longStaff, toothpick, torch]
         weapons.each {weapon ->
