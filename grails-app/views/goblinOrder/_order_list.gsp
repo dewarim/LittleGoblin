@@ -1,22 +1,23 @@
 <%@ page import="de.dewarim.goblin.pc.GoblinOrder" %>
 <div id="order_list">
-	<div id="order_description">&nbsp;</div>
 	<table class="order_list_table" border="1">
+        <thead>
 		<tr>
-            <thead>
                 <th><g:message code="order.name"/></th>
                 <th><g:message code="order.score"/></th>
                 <th><g:message code="order.members.th"/></th>
                 <th><g:message code="order.description.th"/></th>
-            </thead>
 		</tr>
-		<g:each in="${orders.sort{it.name}}" var="order">
+        </thead>
+        <g:each in="${orders.sort{it.name}}" var="order">
 			<tr>
 				<td><g:link action="show" controller="goblinOrder" params="[order:order.id, pc:pc.id]"> <g:message code="${order.name}"/></g:link></td>
 				<td>${order.score}</td>
 				<td>${order.members?.size()}</td>
 				<td>
-					<g:remoteLink action="describe" controller="goblinOrder" update="order_description" params="[order:order.id, pc:pc.id]">
+					<g:remoteLink action="describe" controller="goblinOrder"
+                                  update="[success:'order-description', failure:'order-description']" 
+                                  params="[order:order.id, pc:pc.id]">
 						<g:message code="order.info"/>
 					</g:remoteLink>
 				</td>
