@@ -2,8 +2,8 @@
 <%@ page import="de.dewarim.goblin.GlobalConfigService" %>
 <html>
 <head>
-
-	<g:render template="/shared/header"/>
+    <meta name="layout" content="main"/>
+    <g:render template="/shared/header"/>	
 
 	
 </head>
@@ -25,7 +25,7 @@
 
 			<h1 class="order_hall"><g:message code="order.hall"/></h1>
 
-			<div id="order.description" class="order_description">
+			<div id="order-description" class="order_description">
 				<g:message code="order.hall.description"/>
 			</div>
 

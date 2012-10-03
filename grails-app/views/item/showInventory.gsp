@@ -2,9 +2,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-
-    <g:render template="/shared/header"/>
     <title><g:message code="showInventory.title"/></title>
+    <meta name="layout" content="main"/>
+    <g:render template="/shared/header"/>
+    
 </head>
 
 <body class=" main ">

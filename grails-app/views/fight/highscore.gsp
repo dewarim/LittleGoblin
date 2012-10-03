@@ -1,7 +1,8 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
 <head>
-	<g:render template="/shared/header"/>
+	<meta name="layout" content="main"/>
+    <g:render template="/shared/header"/>	
 
 	
 </head>

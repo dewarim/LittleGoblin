@@ -3,7 +3,8 @@
 <html>
 <head>
 
-    <g:render template="/shared/header"/>
+    <meta name="layout" content="main"/>
+    <g:render template="/shared/header"/>	
 
 </head>
 

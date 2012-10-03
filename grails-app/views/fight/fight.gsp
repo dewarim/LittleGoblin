@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<g:render template="/shared/header"/>
+	<meta name="layout" content="main"/>
+    <g:render template="/shared/header"/>	
 
 	<!--
  <meta http-equiv="refresh" content="5;URL=/goblin/fight/fight?pc=${pc.id}&mob=${mob.id}&combat=${combat.id}"/>
