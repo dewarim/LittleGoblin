@@ -39,8 +39,8 @@ class PlayerCharacterController extends BaseController{
 
         PlayerCharacter pc = new PlayerCharacter(name:params.name)
         pc.user = user
-        pc.initializePlayerCharacter()
         if(pc.save(flush:true)){
+            pc.initializePlayerCharacter()
             flash.message = message(code:"pc.create.success", args:[pc.name])
             return redirect(controller:'town', action:'show',params:[pc:pc.id] )
         }

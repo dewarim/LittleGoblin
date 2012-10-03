@@ -22,73 +22,74 @@ import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.social.MailBoxType
 import de.dewarim.goblin.combat.Melee
 
-class PlayerCharacter extends Creature{
-	
-	static hasMany = [
-            reputations:Reputation,
-            pcMessages:PlayerMessage,
-            mailBoxes:MailBox,
-            productionJobs:ProductionJob,
-            guildMemberships:GuildMember,
-            academyLevels:AcademyLevel,
-            learningQueueElements:LearningQueueElement,
-            playerProducts:PlayerProduct
+class PlayerCharacter extends Creature {
+
+    static hasMany = [
+            reputations: Reputation,
+            pcMessages: PlayerMessage,
+            mailBoxes: MailBox,
+            productionJobs: ProductionJob,
+            guildMemberships: GuildMember,
+            academyLevels: AcademyLevel,
+            learningQueueElements: LearningQueueElement,
+            playerProducts: PlayerProduct
     ]
 
-	static mapping = {
-	}
+    static mapping = {
+    }
 
-	static belongsTo = [user:UserAccount,
-            town:Town,
-            currentCombat:Combat,
-            currentQuest:Quest,
-            goblinOrder:GoblinOrder,
+    static belongsTo = [user: UserAccount,
+            town: Town,
+            currentCombat: Combat,
+            currentQuest: Quest,
+            goblinOrder: GoblinOrder,
     ]
 
     static constraints = {
-        currentMelee( nullable: true)
-		town nullable:true
-		currentCombat nullable:true
-		currentQuest nullable:true
-        goblinOrder nullable:true
-	}
+        currentMelee(nullable: true)
+        town nullable: true
+        currentCombat nullable: true
+        currentQuest nullable: true
+        goblinOrder nullable: true
+    }
 
-	Long xp = 0
+    Long xp = 0
     Long spentExperience = 0
-	Boolean alive = true
-	Integer deaths = 0
-	Integer victories = 0
-	Long questLevel = 0
+    Boolean alive = true
+    Integer deaths = 0
+    Integer victories = 0
+    Long questLevel = 0
     Long level = 1
 
     Melee currentMelee
 
-    void resurrect(){
-        if(xp > 0){
+    void resurrect() {
+        if (xp > 0) {
             xp--
         }
         hp = maxHp
         alive = true
     }
 
-    void initializePlayerCharacter(){
+    void initializePlayerCharacter() {
         Dice d20 = Dice.findByName('d20')
         gold = 20
-		strike = d20
-		parry = d20
-		initiative = d20
+        strike = d20
+        parry = d20
+        initiative = d20
         Dice d6 = Dice.findByName('d6')
-		damage = d6
+        damage = d6
         town = Town.findByName('town.default.name')
         initializeEquipmentSlots()
         initializeMailboxes()
-	}
+    }
 
-    void initializeMailboxes(){
+    void initializeMailboxes() {
         def boxes = ['mail.inbox', 'mail.outbox', 'mail.archive']
         boxes.each {name ->
             def type = MailBoxType.findByName(name)
             def box = new MailBox(this, type)
+            box.save()
         }
     }
 
@@ -100,7 +101,7 @@ class PlayerCharacter extends Creature{
      * @param component
      * @return true if the player has the needed amount of this component
      */
-    Boolean checkComponent(Component component){
+    Boolean checkComponent(Component component) {
         ItemType type = component.itemType
         Integer amount = component.amount
         Integer total = calculateSumOfItems(type)
@@ -112,43 +113,43 @@ class PlayerCharacter extends Creature{
      * @param type the item type
      * @return the sum of all items of this type the player character owns
      */
-    Integer calculateSumOfItems(ItemType type){
-        def items = Item.findAll("from Item i where i.owner=:owner and i.type=:type", [owner:this, type:type])
+    Integer calculateSumOfItems(ItemType type) {
+        def items = Item.findAll("from Item i where i.owner=:owner and i.type=:type", [owner: this, type: type])
         Integer total = 0
-        items.each{total = total + it.amount}
+        items.each {total = total + it.amount}
         return total
     }
 
-	/**
-	 * A player character should have individual EquipmentSlots, as
-	 * they may very well be removed... (eg, loose your right hand) 
-	 */
-	void initializeEquipmentSlots(){
+    /**
+     * A player character should have individual EquipmentSlots, as
+     * they may very well be removed... (eg, loose your right hand) 
+     */
+    void initializeEquipmentSlots() {
         // TODO: change from hard coded to soft coded and make them applicable for generic creatures, too.
-		def names = [ head:'slot.head', neck:'slot.neck', body:'slot.body',
-		     'left.hand':'slot.hand', 'left.ringfinger':'slot.finger', 
-			 'right.hand':'slot.hand','right.ringfinger':'slot.finger', 
-			 'legs':'slot.legs', feet:'slot.feet']
-		Integer rank = 1
-		names.each{key,value->
-			EquipmentSlotType est = EquipmentSlotType.findByName(value)
-			EquipmentSlot slot = new EquipmentSlot(name:key, type:est, rank:rank++, creature:this)
+        def names = [head: 'slot.head', neck: 'slot.neck', body: 'slot.body',
+                'left.hand': 'slot.hand', 'left.ringfinger': 'slot.finger',
+                'right.hand': 'slot.hand', 'right.ringfinger': 'slot.finger',
+                'legs': 'slot.legs', feet: 'slot.feet']
+        Integer rank = 1
+        names.each {key, value ->
+            EquipmentSlotType est = EquipmentSlotType.findByName(value)
+            EquipmentSlot slot = new EquipmentSlot(name: key, type: est, rank: rank++, creature: this)
             est.addToEquipmentSlots slot
 //            slot.save()
             this.addToSlots(slot)
         }
-	}
-
-    MailBox fetchInbox(){
-        return mailBoxes.find{it.boxType.name.equals('mail.inbox')}
     }
 
-    MailBox fetchOutBox(){
-        return mailBoxes.find{it.boxType.name.equals('mail.outbox')}
+    MailBox fetchInbox() {
+        return mailBoxes.find {it.boxType.name.equals('mail.inbox')}
     }
 
-    MailBox fetchArchiveBox(){
-        return mailBoxes.find{it.boxType.name.equals('mail.archive')}
+    MailBox fetchOutBox() {
+        return mailBoxes.find {it.boxType.name.equals('mail.outbox')}
+    }
+
+    MailBox fetchArchiveBox() {
+        return mailBoxes.find {it.boxType.name.equals('mail.archive')}
     }
 
 
@@ -176,7 +177,7 @@ class PlayerCharacter extends Creature{
         return (name != null ? name.hashCode() : 0);
     }
 
-    List<Quest> fetchOpenQuests(){
-        return Quest.findAll("from Quest q where q.playerCharacter=:pc and q.finished=false", [pc:this])
+    List<Quest> fetchOpenQuests() {
+        return Quest.findAll("from Quest q where q.playerCharacter=:pc and q.finished=false", [pc: this])
     }
 }
