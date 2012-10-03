@@ -13,7 +13,7 @@ class ShopController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def show = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         session.filters = [] // start with showing all items.
         Shop shop = Shop.get(params.shop)
         if (!pc?.town?.shops?.find {it.equals(shop)}) {
@@ -42,7 +42,7 @@ class ShopController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def addCategory = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         try {
             Category cat = (Category) inputValidationService.checkObject(Category.class, params.category)
             Shop shop = (Shop) inputValidationService.checkObject(Shop.class, params.shop)
@@ -68,7 +68,7 @@ class ShopController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def removeCategory = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         try {
             Category cat = (Category) inputValidationService.checkObject(Category.class, params.category)
             Shop shop = (Shop) inputValidationService.checkObject(Shop.class, params.shop)
@@ -95,7 +95,7 @@ class ShopController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def reloadCategories = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         try {
             Shop shop = (Shop) inputValidationService.checkObject(Shop.class, params.shop)
             def itemCategoryMap = itemService.fetchItemCategoryTypeMap(shop.itemTypes)
@@ -110,7 +110,7 @@ class ShopController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def showAllCategories = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         try {
             Shop shop = (Shop) inputValidationService.checkObject(Shop.class, params.shop)
             session.categoryFilters = []
@@ -132,7 +132,7 @@ class ShopController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def buy = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         Shop shop = Shop.get(params.shop)
         log.debug("shop: $shop")
         log.debug("player town: ${pc.town}")
@@ -177,7 +177,7 @@ class ShopController extends BaseController {
     @Secured(['ROLE_USER'])
     def sell = {
         try {
-            def pc = fetchPc(session)
+            def pc = fetchPc()
             Shop shop = (Shop) inputValidationService.checkObject(Shop.class, params.shop)
 
             if (!pc?.town?.shops?.find {it.equals(shop)}) {

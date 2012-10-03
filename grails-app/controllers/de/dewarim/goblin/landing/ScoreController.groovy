@@ -6,7 +6,6 @@ import de.dewarim.goblin.HighScore
 import grails.plugins.springsecurity.Secured
 
 class ScoreController extends BaseController {
-	def session
 
 	/**
 	 * The Highscore list

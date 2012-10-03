@@ -17,7 +17,7 @@ class ProductionController extends BaseController{
      */
     @Secured(['ROLE_USER'])
     def workshop = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if(! pc){
             return redirect(action:'start', controller:'portal')
         }
@@ -30,7 +30,7 @@ class ProductionController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def listProducts = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if(! pc){
             return redirect(action:'start', controller:'portal')
         }
@@ -55,7 +55,7 @@ class ProductionController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def selectComponents = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if(! pc){
             redirect(action:'start', controller:'portal')
         }
@@ -85,7 +85,7 @@ class ProductionController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def listProductionJobs = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if(! pc){
             return redirect(action:'start', controller:'portal')
         }
@@ -104,7 +104,7 @@ class ProductionController extends BaseController{
      */
     @Secured(['ROLE_USER'])
     def startProduction = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if(! pc){
             return redirect(action:'start', controller:'portal')
         }
@@ -150,7 +150,7 @@ class ProductionController extends BaseController{
      */
     @Secured(['ROLE_USER'])
     def cancelProductionJob = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if(! pc){
             return redirect(action:'start', controller:'portal')
         }

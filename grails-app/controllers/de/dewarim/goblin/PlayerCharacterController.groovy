@@ -5,12 +5,11 @@ import de.dewarim.goblin.pc.PlayerCharacter
 
 class PlayerCharacterController extends BaseController{
 	
-	def session
 	def playerMessageService
     
 	@Secured(['ROLE_USER'])
 	def show = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
 		return [
 		        pc:pc,
@@ -53,7 +52,7 @@ class PlayerCharacterController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def editDescription = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if(! pc){
             return render(status:503, text:message(code:'error.player_not_found'))
         }
@@ -62,7 +61,7 @@ class PlayerCharacterController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def saveDescription = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if(! pc){
             render(status:503, text:message(code:'error.player_not_found'))
         }
@@ -77,7 +76,7 @@ class PlayerCharacterController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def fetchMessages = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         def pcMessages = null
         if(pc){
             pcMessages = playerMessageService.fetchPlayerMessages(pc)
@@ -87,7 +86,7 @@ class PlayerCharacterController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def fetchEquipment = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if(pc){
             return render(template: '/shared/equipment', model:[pc:pc])
         }

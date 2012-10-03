@@ -71,7 +71,7 @@ class ItemController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def equipItem = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         try {
             if (!pc) {
                 return render(status: 503, text: message(code: 'error.no.pc'))
@@ -110,7 +110,7 @@ class ItemController extends BaseController {
     @Secured(['ROLE_USER'])
     def unequipItem = {
         try {
-            def pc = fetchPc(session)
+            def pc = fetchPc()
             Item item = (Item) inputValidationService.checkObject(Item.class, params.item)
             if (!pc.equals(item.owner)) {
                 throw new RuntimeException('error.wrong_owner')
@@ -142,7 +142,7 @@ class ItemController extends BaseController {
     @Secured(['ROLE_USER'])
     def showInventory = {
         // TODO: if pc is on a quest or in combat, prevent him from moving stuff from home to person.
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if (!pc) {
             return redirect(controller: 'portal', action: 'start')
         }
@@ -151,7 +151,7 @@ class ItemController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def renderInventory = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 //        render tem
     }
 
@@ -163,7 +163,7 @@ class ItemController extends BaseController {
     @Secured(['ROLE_USER'])
     def carryItem = {
         try {
-            def pc = fetchPc(session)
+            def pc = fetchPc()
             def item = fetchItem(pc)
             if (item.location == ItemLocation.ON_PERSON) {
                 // nothing to do.
@@ -205,7 +205,7 @@ class ItemController extends BaseController {
     @Secured(['ROLE_USER'])
     def dropItem = {
         try {
-            def pc = fetchPc(session)
+            def pc = fetchPc()
             def item = fetchItem(pc)
             if (item.location == ItemLocation.AT_HOME) {
                 // nothing to do.

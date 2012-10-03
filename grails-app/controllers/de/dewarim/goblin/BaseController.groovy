@@ -9,7 +9,6 @@ import de.dewarim.goblin.item.Item
 
 class BaseController {
 
-    def session
     def springSecurityService
     def inputValidationService
 
@@ -17,7 +16,7 @@ class BaseController {
      * Fetch the player character specified by the "pc" parameter.
      * Make sure that it is a pc belonging to the logged in user to prevent impersonation attacks.
      */
-    protected PlayerCharacter fetchPc(session) {
+    protected PlayerCharacter fetchPc() {
         def pc = null
         if (params.pc) {
             pc = PlayerCharacter.get(params.pc)

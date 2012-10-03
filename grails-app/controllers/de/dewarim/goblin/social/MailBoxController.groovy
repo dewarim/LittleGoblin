@@ -9,14 +9,12 @@ import de.dewarim.goblin.pc.PlayerCharacter
  */
 class MailBoxController extends BaseController{
 
-    def session
-
     /**
      * Show mailbox area
      */
     @Secured(['ROLE_USER'])
     def index = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         def box = fetchMailBox(pc)
         def mails = fetchMails(pc, box)
@@ -35,7 +33,7 @@ class MailBoxController extends BaseController{
      */
     @Secured(['ROLE_USER'])
     def writeMail = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         return [
                 pc:pc,
@@ -48,7 +46,7 @@ class MailBoxController extends BaseController{
     */
     @Secured(['ROLE_USER'])
     def sendMail = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         PlayerCharacter recipient = PlayerCharacter.findByName(params.recipientName)
         params.subject = params.subject?.encodeAsHTML()
@@ -118,7 +116,7 @@ class MailBoxController extends BaseController{
     @Secured(['ROLE_USER'])
     def showBox = {
         log.debug("params:${params}")
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         def box = fetchMailBox(pc)
         if(! box){
@@ -136,7 +134,7 @@ class MailBoxController extends BaseController{
     */
     @Secured(['ROLE_USER'])
     def listMails = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         def box = fetchMailBox(pc)
         if(! box){
             return render(status:503, text:message(code:'error.mailbx.not_found'))
@@ -151,7 +149,7 @@ class MailBoxController extends BaseController{
     */
     @Secured(['ROLE_USER'])
     def showMail = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         Mail mail = Mail.get(params.mail)
         if(mail.recipient.equals(pc)){
@@ -168,7 +166,7 @@ class MailBoxController extends BaseController{
      */
     @Secured(['ROLE_USER'])
     def sendMessage = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         def recipient = PlayerCharacter.get(params.recipient)
         if(! recipient){
             return render(status:503, text:message(code:'error.mail.recipient.missing'))
@@ -202,7 +200,7 @@ class MailBoxController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def deleteMail = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         Mail mail = Mail.get(params.mail)
         if(mail.recipient.equals(pc)){
@@ -217,7 +215,7 @@ class MailBoxController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def archiveMail = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         Mail mail = Mail.get(params.mail)
         if(mail.recipient.equals(pc)){

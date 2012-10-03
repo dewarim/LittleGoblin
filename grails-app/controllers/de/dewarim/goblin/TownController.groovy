@@ -9,7 +9,7 @@ class TownController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def show = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if(! pc){
             return redirect(controllerName: 'portal', actionName:'start')
         }

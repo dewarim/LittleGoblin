@@ -20,7 +20,7 @@ class MeleeController extends BaseController {
      */
     @Secured(['ROLE_USER'])
     def index = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if (!pc) {
             return redirect(controller: 'portal', action: 'start')
         }
@@ -33,7 +33,7 @@ class MeleeController extends BaseController {
      */
     @Secured(['ROLE_USER'])
     def join = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if (!pc) {
             flash.message = message(code: 'melee.join.failed')
             return redirect(controller: 'melee', action: 'index')
@@ -68,7 +68,7 @@ class MeleeController extends BaseController {
      */
     @Secured(['ROLE_USER'])
     def leave = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if (!pc || pc.currentMelee == null) {
             flash.message = message(code: 'melee.leave.failed')
         }
@@ -81,7 +81,7 @@ class MeleeController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def useItem = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         try {
             if (!pc) {
                 throw new RuntimeException('melee.error')
@@ -127,7 +127,7 @@ class MeleeController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def updateActions = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if (!pc) {
             return render(status: 503, text: message(code: 'melee.error'))
         }
@@ -136,7 +136,7 @@ class MeleeController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def updateFighterList = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if (!pc) {
             return render(status: 503, text: message(code: 'melee.error'))
         }
@@ -147,7 +147,7 @@ class MeleeController extends BaseController {
     @Secured(['ROLE_USER'])
     def attack = {
         try {
-            def pc = fetchPc(session)
+            def pc = fetchPc()
             if (!pc) {
                 throw new RuntimeException('melee.error')
             }

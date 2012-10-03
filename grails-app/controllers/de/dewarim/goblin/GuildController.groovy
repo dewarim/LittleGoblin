@@ -5,7 +5,6 @@ import de.dewarim.goblin.guild.Guild
 
 class GuildController extends BaseController{
 
-    def session
     def academyService
     def guildMemberService
 
@@ -14,7 +13,7 @@ class GuildController extends BaseController{
      */
     @Secured(['ROLE_USER'])
     def index = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         def max = new Integer(params.max ?: 10)
         def offset = new Integer(params.offset ?: 0)
@@ -28,7 +27,7 @@ class GuildController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def show = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         def guild = Guild.get(params.guild)
         if(! guild){
@@ -48,7 +47,7 @@ class GuildController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def showMyGuilds = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         def max = new Integer(params.max ?: 10)
         def offset = new Integer(params.offset ?: 0)
@@ -64,7 +63,7 @@ class GuildController extends BaseController{
      */
     @Secured(['ROLE_USER'])
     def join = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         Guild guild = Guild.get(params.guild)
         if(! guild){
@@ -102,7 +101,7 @@ class GuildController extends BaseController{
      */
     @Secured(['ROLE_USER'])
     def leave = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         Guild guild = Guild.get(params.guild)
         if(! guild){
@@ -130,7 +129,7 @@ class GuildController extends BaseController{
      */
     @Secured(['ROLE_USER'])
     def list = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         def max = new Integer(params.max ?: 10)
         def offset = new Integer(params.offset ?: 0)
@@ -146,7 +145,7 @@ class GuildController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def describe = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         Guild guild = Guild.get(params.guild)
         if(! guild){

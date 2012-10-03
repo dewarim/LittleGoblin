@@ -19,7 +19,7 @@ class QuestController extends BaseController {
      */
     @Secured(['ROLE_USER'])
     def show = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if (! pc){
             flash.message = message(code:'error.player_not_found')
             return redirect(controller: "portal", action: "start")
@@ -39,7 +39,7 @@ class QuestController extends BaseController {
      */
     @Secured(['ROLE_USER'])
     def describeQuest = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if (! pc){
             flash.message = message(code:'error.player_not_found')
             return redirect(controller: "portal", action: "start")
@@ -62,7 +62,7 @@ class QuestController extends BaseController {
      */
     @Secured(['ROLE_USER'])
     def startQuest = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if (! pc){
             flash.message = message(code:'error.player_not_found')
             return redirect(controller: "portal", action: "start")
@@ -105,7 +105,7 @@ class QuestController extends BaseController {
      */
     @Secured(['ROLE_USER'])
     def continueQuest = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if (! pc){
             flash.message = message(code:'error.player_not_found')
             return redirect(controller: "portal", action: "start")
@@ -141,7 +141,7 @@ class QuestController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def showStep = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if (!pc) {
             flash.message = message(code:'error.player_not_found')
             return redirect(controller: "portal", action: "start")
@@ -166,7 +166,7 @@ class QuestController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def finishQuest = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if (!pc) {
             flash.message = message(code:'error.player_not_found')
             return redirect(controller: "portal", action: "start")
@@ -185,7 +185,7 @@ class QuestController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def nextStep = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if (!pc) {
             flash.message = message(code:'error.player_not_found')
             return redirect(controller: "portal", action: "start")
@@ -203,7 +203,7 @@ class QuestController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def showQuestMaster = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
          if (!pc) {
             flash.message = message(code:'error.player_not_found')
             return redirect(controller: "portal", action: "start")

@@ -12,7 +12,7 @@ import de.dewarim.goblin.pc.PlayerCharacter
 
 
 class FightController extends BaseController {
-    def session
+    
     def treasureService
     def fightService
 
@@ -134,7 +134,7 @@ class FightController extends BaseController {
         // TODO: add mob to pc.history
         // TODO: set queststep to finished, get next queststep or redirect to town.
         def user = fetchUser()
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         def mob = Mob.get(params.mob)
 
         if (!pc.currentCombat) {

@@ -5,12 +5,11 @@ import de.dewarim.goblin.BaseController
 
 class ChatterBoxController extends BaseController{
 
-    def session
     def globalConfigService
 
     @Secured(['ROLE_USER'])
     def showChatterBox = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         ChatterBox box = ChatterBox.get(params.box)
         if(! box){
             return render(status:503, text:message(code:'error.chatterbox.not.found'))
@@ -26,7 +25,7 @@ class ChatterBoxController extends BaseController{
     @Secured(['ROLE_USER'])
     def sendChatMessage = {
 //        log.debug("session: $session")
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         ChatterBox box = ChatterBox.get(params.box)
         if(! box){
             return render(status:503, text:message(code:'error.chatterbox.not.found'))

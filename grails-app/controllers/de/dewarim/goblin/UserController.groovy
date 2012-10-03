@@ -11,7 +11,6 @@ import grails.plugins.springsecurity.Secured
 @Secured(['ROLE_ADMIN'])
 class UserController {
 
-	def session
 	def springSecurityService
 
 	// the delete, save and update actions only accept POST requests

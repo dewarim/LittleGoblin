@@ -17,7 +17,7 @@ class AcademyController extends BaseController {
      */
     @Secured(['ROLE_USER'])
     def index = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         Integer max = new Integer(params.max ?: 10)
         Integer offset = new Integer(params.offset ?: 0)
@@ -37,7 +37,7 @@ class AcademyController extends BaseController {
        */
     @Secured(['ROLE_USER'])
     def show = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         def academy = Academy.get(params.academy)
         if(! academy){
@@ -82,7 +82,7 @@ class AcademyController extends BaseController {
      */
     @Secured(['ROLE_USER'])
     def list = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         def max = new Integer(params.max ?: 10)
         def offset = new Integer(params.offset ?: 0)
@@ -99,7 +99,7 @@ class AcademyController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def learnSkillSet = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         def academy = Academy.get(params.academy)
         if(! academy){
             flash.message = message(code: 'error.academy.not_found')
@@ -142,7 +142,7 @@ class AcademyController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def stopLearning = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         LearningQueueElement queueElement = LearningQueueElement.get(params.queueElement)
         if(! queueElement){

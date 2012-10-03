@@ -11,7 +11,6 @@ import de.dewarim.goblin.pc.PlayerCharacter
  */
 class GoblinOrderController extends BaseController{
 
-    def session
     def globalConfigService
 
     /**
@@ -19,7 +18,7 @@ class GoblinOrderController extends BaseController{
      */
     @Secured(['ROLE_USER'])
     def show = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         GoblinOrder order = GoblinOrder.get(params.order)
         if(! order){
@@ -38,7 +37,7 @@ class GoblinOrderController extends BaseController{
      */
     @Secured(['ROLE_USER'])
     def save = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         if(pc.goblinOrder){
             flash.message = message(code:'error.order.already_a_member')
@@ -93,7 +92,7 @@ class GoblinOrderController extends BaseController{
      */
     @Secured(['ROLE_USER'])
     def list = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         def max = new Integer(params.max ?: 10)
         def offset = new Integer(params.offset ?: 0)
@@ -109,7 +108,7 @@ class GoblinOrderController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def describe = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if(! pc){
             return render(status:503, text:message(code:'error.player_not_found'))
         }
@@ -125,7 +124,7 @@ class GoblinOrderController extends BaseController{
      */
     @Secured(['ROLE_USER'])
     def index = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         def max = new Integer(params.max ?: 10)
         def offset = new Integer(params.offset ?: 0)
@@ -144,7 +143,7 @@ class GoblinOrderController extends BaseController{
      */
     @Secured(['ROLE_USER'])
     def apply = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         GoblinOrder order = GoblinOrder.get(params.order)
         if(! order){
@@ -164,7 +163,7 @@ class GoblinOrderController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def showMyOrder = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         if(! pc.goblinOrder){
             flash.message = message(code:'error.order.orderless')
@@ -181,7 +180,7 @@ class GoblinOrderController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def leave = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         if(! pc.goblinOrder){
             flash.message = message(code:'error.order.orderless')
@@ -207,7 +206,7 @@ class GoblinOrderController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def showMembers = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         if(! pc.goblinOrder){
             flash.message = message(code:'error.order.orderless')
@@ -223,7 +222,7 @@ class GoblinOrderController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def showApplications = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         if(! pc.goblinOrder){
             flash.message = message(code:'error.order.orderless')
@@ -243,7 +242,7 @@ class GoblinOrderController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def acceptApplication = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         if(! pc.goblinOrder){
             return render(status:503, text: message(code:'error.order.orderless'))
@@ -269,7 +268,7 @@ class GoblinOrderController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def denyApplication= {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         if(! pc.goblinOrder){
             return render(status:503, text: message(code:'error.order.orderless'))
@@ -290,7 +289,7 @@ class GoblinOrderController extends BaseController{
 
     @Secured(['ROLE_USER'])
     def kickMember= {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
 
         if(! pc.goblinOrder){
             return render(status:503, text: message(code:'error.order.orderless'))

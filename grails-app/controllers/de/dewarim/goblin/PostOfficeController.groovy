@@ -7,7 +7,6 @@ import de.dewarim.goblin.pc.PlayerCharacter
 
 class PostOfficeController extends BaseController {
 
-    def session
     def inputValidationService
     def postOfficeService
 
@@ -16,7 +15,7 @@ class PostOfficeController extends BaseController {
      */
     @Secured(['ROLE_USER'])
     def index = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if(! pc){
             return redirect(controller: 'portal', action: 'start')
         }
@@ -28,7 +27,7 @@ class PostOfficeController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def sendItem = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         try {
             // 1. find the recipient.
             PlayerCharacter recipient = PlayerCharacter.find("from PlayerCharacter as pc where lower(pc.name) = lower(:name)",[name:params.recipient])
@@ -69,7 +68,7 @@ class PostOfficeController extends BaseController {
 
     @Secured(['ROLE_USER'])
     def loadInventory = {
-        def pc = fetchPc(session)
+        def pc = fetchPc()
         if(! pc){
             render(status: 503, text:message(code:'error.player_not_found'))
         }
