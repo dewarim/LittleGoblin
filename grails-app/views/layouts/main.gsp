@@ -23,7 +23,7 @@
         <g:if test="${pc}">
         /* This looks for updates to player_messages every 5 seconds. */
         function messageReload(){
-            $('#player_messages').load('${createLink(controller:"playerCharacter", action:"fetchMessages", params:[pc:pc.id])}"/>');
+            $('#player_messages').load('${createLink(controller:"playerCharacter", action:"fetchMessages", params:[pc:pc.id]) }');
         }
         </g:if>
 
