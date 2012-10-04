@@ -98,7 +98,7 @@ class ShopController extends BaseController {
         def pc = fetchPc()
         try {
             Shop shop = (Shop) inputValidationService.checkObject(Shop.class, params.shop)
-            def itemCategoryMap = itemService.fetchItemCategoryTypeMap(shop.itemTypes)
+//            def itemCategoryMap = itemService.fetchItemCategoryTypeMap(shop.itemTypes)
             render(template: 'categoryFilter', model: [shop: shop,
                     pc: pc,
                     categories: shopService.fetchCategoryList(shop).sort {message(code: it.name)}])
