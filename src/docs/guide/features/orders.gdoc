@@ -1,0 +1,15 @@
+Players may create orders (which are called guilds in some games). An order offers a means to
+communicate with friends by using the Chatterbox (private chat channel on the order page).
+
+Each player may create his or her own order and wait for other players to send application messages
+for their characters, which can be accepted or denied. The founder of a guild is also its master.
+A player character may only be the member of one order.
+
+h3. Roadmap for orders
+
+Orders are currently very simple. They will probably be extended to include:
+
+* A treasure chest for exchanging items for free.
+* A production / crafting facility to share tools / machines.
+* An organization chart for large orders.
+* The option to add a logo and a more detailed description.
