@@ -30,7 +30,7 @@
 		<g:form name="writeChatMessage">
 			<input type="hidden" name="box" value="${currentBox.id}"/>
 			<g:message code="chatterbox.your.message"/><br>
-			<g:textArea name="chatMessage" rows="4" columns="60"/>
+			<g:textArea name="chatMessage" rows="4" cols="60"/>
 			<g:submitToRemote update="[success:'inner_chatterbox', failure:'message']"
 				url="[action:'sendChatMessage', controller:'chatterBox']"
 				value="${message(code:'chatterbox.send')}"/>
