@@ -38,7 +38,7 @@ class ChatterBoxController extends BaseController{
 //        log.debug("${pc?.goblinOrder}")
         if(box.goblinOrder.equals(pc.goblinOrder)){
             ChatMessage cm = new ChatMessage(sender:pc,
-                    content:msg.encodeAsHTML(),
+                    content:msg,
                     chatterBox:box
             )
             box.addToChatMessages(cm)
