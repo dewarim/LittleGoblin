@@ -12,7 +12,6 @@ import de.dewarim.goblin.quest.QuestGiver
 class QuestController extends BaseController {
 
     def questService
-    def inputValidationService
 
     /**
      * Show the current quest and quest step

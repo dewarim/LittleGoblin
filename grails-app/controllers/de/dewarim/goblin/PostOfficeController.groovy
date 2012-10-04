@@ -7,7 +7,6 @@ import de.dewarim.goblin.pc.PlayerCharacter
 
 class PostOfficeController extends BaseController {
 
-    def inputValidationService
     def postOfficeService
 
     /**

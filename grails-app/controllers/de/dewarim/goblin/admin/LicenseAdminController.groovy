@@ -8,8 +8,6 @@ import de.dewarim.goblin.Image
 @Secured(["ROLE_ADMIN"])
 class LicenseAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 licenses: License.listOrderByName()

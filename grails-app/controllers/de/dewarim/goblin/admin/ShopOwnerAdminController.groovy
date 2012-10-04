@@ -9,8 +9,6 @@ import de.dewarim.goblin.shop.Shop
 @Secured(["ROLE_ADMIN"])
 class ShopOwnerAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 shopOwners: ShopOwner.listOrderByName()

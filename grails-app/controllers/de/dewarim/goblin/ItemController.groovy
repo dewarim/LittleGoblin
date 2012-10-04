@@ -11,7 +11,6 @@ import de.dewarim.goblin.shop.Shop
 
 class ItemController extends BaseController {
 
-    def inputValidationService
     def featureService
     def itemService
 

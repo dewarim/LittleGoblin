@@ -8,8 +8,6 @@ import de.dewarim.goblin.Artist
 @Secured(["ROLE_ADMIN"])
 class ArtistAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 artists: Artist.listOrderByName()

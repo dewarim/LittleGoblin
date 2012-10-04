@@ -9,9 +9,6 @@ import de.dewarim.goblin.item.ItemType
 @Secured(["ROLE_ADMIN"])
 class ItemFeatureAdminController extends BaseController {
 
-  def inputValidationService
-  def itemFeatureService
-
   def index() {
     return [
             itemFeatures: ItemTypeFeature.listOrderById()

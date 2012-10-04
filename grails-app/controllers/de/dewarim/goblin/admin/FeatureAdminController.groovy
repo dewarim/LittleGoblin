@@ -9,9 +9,6 @@ import grails.plugins.springsecurity.Secured
 @Secured(["ROLE_ADMIN"])
 class FeatureAdminController extends BaseController {
 
-    def inputValidationService
-    def featureService
-
     def index() {
         return [
                 features: Feature.listOrderByName()

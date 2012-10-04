@@ -12,8 +12,6 @@ import de.dewarim.goblin.pc.skill.Skill
  */
 class SkillRequirementAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         try {
             def product = inputValidationService.checkObject(Product.class, params.id)

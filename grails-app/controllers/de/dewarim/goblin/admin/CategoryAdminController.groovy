@@ -9,7 +9,6 @@ import de.dewarim.goblin.shop.Shop
 @Secured(["ROLE_ADMIN"])
 class CategoryAdminController extends BaseController {
 
-    def inputValidationService
     def categoryService
 
     def index() {

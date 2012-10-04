@@ -10,8 +10,6 @@ import de.dewarim.goblin.RequiredSlot
 @Secured(["ROLE_ADMIN"])
 class ItemAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
              itemTypes: ItemType.listOrderByName()

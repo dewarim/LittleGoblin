@@ -7,8 +7,6 @@ import grails.plugins.springsecurity.Secured
 @Secured(["ROLE_ADMIN"])
 class QuestGiverAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 questGivers: QuestGiver.listOrderByName()

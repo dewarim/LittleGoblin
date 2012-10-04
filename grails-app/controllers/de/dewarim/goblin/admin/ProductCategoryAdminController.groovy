@@ -8,8 +8,6 @@ import de.dewarim.goblin.pc.crafting.Product
 @Secured(["ROLE_ADMIN"])
 class ProductCategoryAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 categories: ProductCategory.listOrderByName()

@@ -13,8 +13,6 @@ import de.dewarim.goblin.item.ItemType
  */
 class ComponentAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         try {
             def product = inputValidationService.checkObject(Product.class, params.id)

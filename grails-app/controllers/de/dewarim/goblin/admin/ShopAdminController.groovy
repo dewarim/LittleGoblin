@@ -9,8 +9,6 @@ import de.dewarim.goblin.town.Town
 @Secured(["ROLE_ADMIN"])
 class ShopAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 shops: Shop.listOrderByName()

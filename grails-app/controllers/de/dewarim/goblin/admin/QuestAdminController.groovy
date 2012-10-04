@@ -9,8 +9,6 @@ import de.dewarim.goblin.quest.QuestGiver
 @Secured(["ROLE_ADMIN"])
 class QuestAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 questTemplates: QuestTemplate.listOrderByName()

@@ -9,7 +9,6 @@ import de.dewarim.goblin.reputation.ReputationMessage
 @Secured(["ROLE_ADMIN"])
 class RepMessageAdminController extends BaseController {
 
-    def inputValidationService
     def rmmService
 
     def index() {

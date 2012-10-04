@@ -7,8 +7,6 @@ import de.dewarim.goblin.BaseController
 @Secured(["ROLE_ADMIN"])
 class EquipmentSlotTypeAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 slotList:EquipmentSlotType.listOrderByName()

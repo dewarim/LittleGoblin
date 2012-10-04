@@ -15,8 +15,6 @@ import de.dewarim.goblin.reputation.ReputationMessageMap
 @Secured(["ROLE_ADMIN"])
 class FactionAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 factions: Faction.list(sort:params.sort ?: 'name', order: params.order ?: 'asc')

@@ -10,8 +10,6 @@ import de.dewarim.goblin.mob.MobImage
 @Secured(["ROLE_ADMIN"])
 class ImageAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 images: Image.listOrderByName()

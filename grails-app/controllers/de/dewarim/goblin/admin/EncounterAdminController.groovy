@@ -10,8 +10,6 @@ import de.dewarim.goblin.mob.EncounterMob
 @Secured(["ROLE_ADMIN"])
 class EncounterAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 encounters: Encounter.listOrderByName()

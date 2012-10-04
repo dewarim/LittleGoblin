@@ -10,8 +10,6 @@ import de.dewarim.goblin.town.GuildAcademy
 @Secured(["ROLE_ADMIN"])
 class AcademyAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 academies: Academy.listOrderByName()

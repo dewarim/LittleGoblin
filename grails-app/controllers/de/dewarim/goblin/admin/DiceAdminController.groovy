@@ -18,8 +18,6 @@ import de.dewarim.goblin.shop.ShopOwner
 @Secured(["ROLE_ADMIN"])
 class DiceAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 dices: Dice.list(sort:params.sort ?: 'name', order: params.order ?: 'asc')

@@ -10,8 +10,6 @@ import de.dewarim.goblin.quest.StepChild
 @Secured(["ROLE_ADMIN"])
 class QuestStepAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 questSteps: QuestStep.listOrderByName()

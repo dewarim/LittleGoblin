@@ -10,8 +10,6 @@ import de.dewarim.goblin.mob.MobImage
 @Secured(["ROLE_ADMIN"])
 class MobAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 mobs: MobTemplate.listOrderByName()

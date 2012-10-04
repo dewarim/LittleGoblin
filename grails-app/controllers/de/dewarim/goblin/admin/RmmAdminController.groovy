@@ -8,7 +8,6 @@ import de.dewarim.goblin.reputation.Faction
 @Secured(["ROLE_ADMIN"])
 class RmmAdminController extends BaseController {
 
-    def inputValidationService
     def rmmService
 
     def index() {

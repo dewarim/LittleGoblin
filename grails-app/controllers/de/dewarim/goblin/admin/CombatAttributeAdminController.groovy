@@ -7,8 +7,6 @@ import de.dewarim.goblin.BaseController
 @Secured(["ROLE_ADMIN"])
 class CombatAttributeAdminController extends BaseController{
 
-    def inputValidationService
-
     def index() {
         if(params.indirectSubmit){
             flash.message = message(code:'warning.indirect.submit')

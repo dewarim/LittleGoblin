@@ -10,7 +10,6 @@ import de.dewarim.goblin.item.ItemTypeFeature
 
 class MeleeController extends BaseController {
 
-    def inputValidationService
     def meleeService
     def itemService
 

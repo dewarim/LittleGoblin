@@ -7,8 +7,6 @@ import grails.plugins.springsecurity.Secured
 @Secured(["ROLE_ADMIN"])
 class ConfigAdminController extends BaseController {
 
-    def inputValidationService
-
     def index() {
         return [
                 configEntries: GlobalConfigEntry.listOrderByName()

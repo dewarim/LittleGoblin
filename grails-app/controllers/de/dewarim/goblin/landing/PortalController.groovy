@@ -9,7 +9,6 @@ import de.dewarim.goblin.Role
 
 class PortalController extends BaseController {
 
-    def inputValidationService
     def globalConfigService
     def myMailService
     def groovyPageRenderer
