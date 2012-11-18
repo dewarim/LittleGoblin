@@ -362,7 +362,7 @@ Version 0.2.4
 * Refactored Quests, show QuestGivers in town.
 * Updated design and layout.
 
-Version 0.2.5 "Shopping Mall"
+Version 0.2.5 "Shopping Mall" / 2011-08-28
 * Fixed equip / remove equipment bug which rendered the main inventory section in the side inventory bar.
 * You can now sell part of a stack of items instead of the whole stack.
 * You can now define how many pieces of an item you want to buy.
@@ -370,7 +370,7 @@ Version 0.2.5 "Shopping Mall"
 * ItemTypes have a package size - so it is possible to buy one set of 12 arrows.
 * First part of ItemAdminController implementation.
 
-Version 0.2.6 "ItemAdmin"
+Version 0.2.6 "ItemAdmin" / 2011-10-01
 * Improved ItemType admin interface: you can now edit how many equipment slots an item takes.
 * Updated french translation.
 * Enabled configuration file outside of war: you can now override DataSource and Config by adding a file
@@ -383,7 +383,7 @@ Version 0.2.6 "ItemAdmin"
 * Added optional Facebook like button (Don't worry, you can configure it and turn it on/off in your own game).
   (Facebook integration was done by Pauline).
 
-Version 0.2.7
+Version 0.2.7 / 2011-10-29
 * Fixed cronGoblin and CronController for recurring events (would previously go into an infinite loop).
 * Added configurable registration with confirmation mail.
 * Added testMode parameter to config file.
@@ -391,7 +391,7 @@ Version 0.2.7
 * Added FeatureAdminController.
 // Note: 0.2.7 will probably not work perfectly due to unfinished Grails 2 transition.
 
-Version 0.3.0 "Cleanup"
+Version 0.3.0 "Cleanup" / 2012-11-18
 (a lot of internal changes)
 * Updated to Grails 2.1.1.
 * Fixed session handling.
