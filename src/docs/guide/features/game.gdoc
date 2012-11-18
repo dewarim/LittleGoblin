@@ -1,0 +1,5 @@
+When started with an empty database, Little Goblin can create a ready-to run fantasy game
+with a test account and a few quests, items, monsters and so on, allowing you to test 
+the basic game features.
+ 
+The reference implementation is a game that tries to use all the features offered by the framework.

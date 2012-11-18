@@ -1,0 +1,52 @@
+The main goal of the Little Goblin framework is to enable you to quickly turn
+your ideas into a working software project. To this end, the following is provided:
+
+h3. User registration
+
+User registration works via sending a confirmation link to the user's email address.
+If the user clicks on the link therein, his account will be activated.
+
+h3. License management
+
+Depending on the system's configuration, it's possible to let users create their own content.
+In this case, you really need to get the licensing done right - as well as in the case where
+you use media assets from the public domain (for example, Wikimedia). Often, the artist requires
+ his name to appear in the context of the artwork - and even when there is no such request, it
+ is the right and polite thing to do. And you never know when a lawyer comes a-knocking because
+ someone mistakenly thinks you did use one of their images without permission.
+ 
+Little Goblin allows you to create license objects which can be assigned to images (and perhaps
+later on other assets). Currently this is implemented for monster images, which can be tagged with
+a license. [TODO: display licenses, not just store them - but at least the artist credit works.]
+
+h3. Artist management
+
+As with licenses, you can also manage artists in Little Goblin. Currently, when a monster is displayed,
+a link is shown which leads to the artist's web site. An artist may own any number of images associated
+with him. [TODO: public display of artist gallery]
+
+h3. Image management
+
+With the artist and licenses defined, you can assign them to images and those to one or more game assets 
+(at the moment: to monsters). This way, a image can be re-used for more than one creature. While in an
+ideal game, you would use images only exactly once, it may be a way for budget games to re-use them until
+better and more artwork is available. 
+
+More than one image can be assigned to a creature and they will be used randomly, so you can add some 
+visual spice for the users.  
+Also, in the case of unique creatures / mobs of a certain type, it is possible to assign the generic image 
+(for example: when you generate an encounter with a special named mob, it could show up with the image for "Boss mob [orc]",
+the only difference being the mob's combat values, like in many action RPGs). 
+
+h3. In-Game messaging
+
+h4. Simple messages
+
+Little Goblin offers in-game messaging via a simple inbox model. Users can write messages to other characters,
+and reply to them. The messages can be archived or deleted. [TODO: implement sent-as-email feature]
+
+h4. Guild's chatterbox
+
+Guilds offer a special feature: a chatterbox were all guild members can exchange messages in life chat. This
+is intended for non-persistent communication, as older messages will be deleted once the box fills up with new
+chatter.

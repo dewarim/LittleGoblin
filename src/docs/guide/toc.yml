@@ -8,6 +8,7 @@ installation:
 features:
   title: Features
   infrastructure: Infrastructure
+  game: The Game
   combat: Combat
   reputation: Reputation
   skills: Skills
