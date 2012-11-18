@@ -13,7 +13,6 @@ class GoblinGrailsPlugin {
             "grails-app/views/error.gsp"
     ]
 
-    // TODO Fill in these fields
     def title = "Little Goblin Plugin" // Headline display name of the plugin
     def author = "Ingo Wiarda"
     def authorEmail = "ingo_wiarda@dewarim.de"
