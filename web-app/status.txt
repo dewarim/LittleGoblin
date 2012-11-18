@@ -404,3 +404,5 @@ Version 0.3.0 "Cleanup"
 * Added custom equals & hashCode to many domain classes.
 * Fixed: do not double-encode chatterbox messages.
 * Fixed: textarea in chatterbox.
+* Removed redundant "def inputValidationService", which is inherited from BaseController.
+* Started work on extended documentation.
