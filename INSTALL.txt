@@ -1,4 +1,4 @@
-Short installation instructions for the binary package of LittleGoblin (0.2.7)
+Short installation instructions for the binary package of LittleGoblin (0.3.0)
 
 Java
 Download and install the Java 7 runtime from http://java.com/
@@ -14,15 +14,15 @@ or
 http://postgresql.org
 Create a database user "goblin" with password "goblin" (for testing)
 
-Download a database driver for the database
+Download a database driver for MySQL if needed 
 http://dev.mysql.com/downloads/connector/j/5.1.html
-or
-http://jdbc.postgresql.org/download.html
-Put the database driver .jar-file into Tomcat's "lib" directory
+Put the mysql driver .jar-file into Tomcat's "lib" directory
+
+(Postgres JDBC driver is included in the war file)
 
 To edit your database settings, create in you home directory a folder .grails
  and inside a file goblin-config.groovy. You can download an example version from
- http://sf.net/projects/littlegoblin.
+GitHub: https://github.com/dewarim/LittleGoblin/blob/master/goblin-config.example.groovy
 
 If you have any questions, you can:
 * Ask on the mailing list https://sourceforge.net/mailarchive/forum.php?forum_name=littlegoblin-main
