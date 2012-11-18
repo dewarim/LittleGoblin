@@ -97,38 +97,32 @@
 
         <div class="version_info">
             <pre>
-                Version 0.2.7 "Registration" / 2011-10-29
-                * Fixed cronGoblin and CronController for recurring events (would previously go into an infinite loop).
-                * Added configurable registration with confirmation mail.
-                * Added testMode parameter to config file.
-                * Updated spring-security-core plugin
-
-                Version 0.2.6 "ItemAdmin.a" / 2011-10-01
-                * Improved ItemType admin interface: you can now edit how many equipment slots an item takes.
-                * Updated french translation.
-                * Enabled configuration file outside of war: you can now override DataSource and Config by adding a file
-                "classpath:$ {appName}-config.groovy", or
-                "file:$ {userHome}/.grails/$ {appName}-config.groovy" or
-                "file:$ {System.env.LITTLE_GOBLIN_HOME}/$ {appName}-config.groovy"
-                this makes for better control and easier configuration of the database settings.
-                * Added an example configuration file.
-                * New install.txt and updated readme.txt
-                * Added optional Facebook like button (Don't worry, you can configure it in your own game).
-
-                Version 0.2.5 "Shopping Mall" / 2011-08-28
-                * Fixed equip / remove equipment bug which rendered the main inventory section in the side inventory bar.
-                * You can now sell part of a stack of items instead of the whole stack.
-                * You can now define how many pieces of an item you want to buy.
-                * Items bought in the shop are stacked to existing items in your inventory (if they are stackable)
-                * ItemTypes have a package size - so it is possible to buy one set of 12 arrows.
-                * First part of ItemAdminController implementation.
+                Version 0.3.0 "Cleanup" / 2012-11-18
+                (a lot of internal changes)
+                * Updated to Grails 2.1.1.
+                * Fixed session handling.
+                * Fixed HTML error in /goblinOrder/_order_list
+                * Refactoring pages to use sitemesh layout instead of using homebrew solution.
+                * Fixed item filter: remove unnecessary conversion of list to array. (ItemService).
+                * Removed old prototyps JS-library files since we have been using jQuery for some time.
+                * Fixed message id in highscore.gsp.
+                * Added more documentation.
+                * Added custom equals & hashCode to many domain classes.
+                * Fixed: do not double-encode chatterbox messages.
+                * Fixed: textarea in chatterbox.
+                * Removed redundant "def inputValidationService", which is inherited from BaseController.
+                * Started work on extended documentation.
 
             </pre>
-
+            
+            <div class="">
+                <a href="${resource(dir: '/', file: 'status.txt')}" target="_blank"><g:message code="link.to.status.old"/></a>
+            </div>
+            
             <div class="highscore_link">
                 <g:link action="show" controller="score"><g:message code="link.to.score"/></g:link>
             </div>
-
+            
 
             <div class="langSelect">
                 <br>
