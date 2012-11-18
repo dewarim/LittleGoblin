@@ -11,8 +11,9 @@ grails.project.dependency.resolution = {
     inherits( "global" ) {
         // uncomment to disable ehcache
         // excludes 'ehcache'
+        excludes "xercesImpl", "xmlParserAPIs", "xml-apis", 'groovy';
     }
-    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    log "debug" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
         mavenLocal()
         grailsRepo "http://grails.org/plugins"
@@ -38,7 +39,9 @@ grails.project.dependency.resolution = {
 
         // runtime 'mysql:mysql-connector-java:5.1.5'
         runtime 'postgresql:postgresql:9.1-901.jdbc4'
-
+        compile("org.codehaus.groovy.modules.http-builder:http-builder:0.5.2"){
+            excludes "groovy"
+        }
     }
     
     plugins{        
