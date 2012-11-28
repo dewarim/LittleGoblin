@@ -1,0 +1,19 @@
+Quests are multi-step events that a player character experiences and whose outcome is more or less dependent on the
+player's choices and possible random factors.
+
+Quests are granted by a QuestGiver, a non-player-character, which may have a short description and an introductory
+text. The player decides whether to take on a quest or leave it. If the player character dies or runs away from a 
+quest, it is counted as failed and cannot be repeated.
+
+Each quest consists of several steps, which are QuestStep objects chained together by the game designer. You can
+create extremely long quests, with random encounters and scripted outcomes depending on special circumstances. It
+  is even possible to have looping quests. For example, if the player returns repeatedly to a series of quest steps,
+  until he makes the correct (or final) decision which ends the quest successfully or causes it to fail.
+
+At the end of quest (or, by script, during a quest step), rewards can be given to a character. Those may take the
+ form of items or non-material bonuses like reputation changes. The reference implementation has an example quest
+ where the player decides if he wants to rescue an elven girl and reunite her with her family or give her to 
+ the dwarves. The decision results in a change to reputation with both factions (elves and dwarves).
+ 
+Entry criteria for quests are planned, but not implemented yet. For example, I would like to implement reputation
+dependent quests - if a player character is known as a friend of the gnomes, he may get some quests from them...
