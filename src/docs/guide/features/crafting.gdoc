@@ -1,0 +1,41 @@
+Crafting in games can be defined as the controlled and repeatable creation of items by player characters,
+ based on their personal resources (materials, skills, time).
+
+The Little Goblin crafting system allows for production of all kinds of items that a character might want to use.
+To create an item, a PC should have a corresponding crafting skill, the material components and the proper tools.
+As with many other online games, crafting takes time - you can define how long it will take a player to create
+an item. 
+
+.h3 Tools
+
+Many crafting systems require the presence of components, but few consider the use of multiple tools for crafting.
+Little Goblin offers the chance to create recipes for items that define what other non-consumable items the player
+(or, later on, his order) has to own to craft a new item.
+
+At the moment, the quality of tools is not mapped to the crafted item's quality, but that could be an interesting
+ idea for further extensions.
+
+.h3 Production lines
+
+Currently, a player can start the production of create several items of a each kind, as long as he has the required 
+components to create at least one item of this type. When the required time is up, the code checks if the resources
+are available and then generates the item. 
+So it is possible to start a "create 99 gold-tipped arrows, which requires 10 hours"
+production task while owning only one gold nugget, and then start another process to 
+"create 98 gold nuggets from gold ore in 9 hours"
+
+Note: Work in progress: The crafting and the skill learning system currently rely on external "ticks", that is http calls
+to the API made by a cron job, which causes specific service classes to check if items are to be generated or skills
+will be learned by characters etc. This is sub-optimal and will be replaced by background-threads in the future.
+
+.h4 Design considerations
+
+A more "realistic" way would be to subtract the required resources each time an item is generated, but on the other
+hand it is a better system than requiring all resources up front, which would mean that in our example the player has 
+to login after 9 hours, when the 99 gold nuggets are ready, and then create the next 10 hour job of crafting the arrows.
+This leads to unhealthy gaming patterns where players will stay up late or rise early, 
+just to submit a task to an online game on time.
+
+
+ 
+ 
