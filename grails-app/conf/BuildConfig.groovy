@@ -48,10 +48,10 @@ grails.project.dependency.resolution = {
 //        compile ":mail:1.0"
         runtime ":hibernate:$grailsVersion"
         build ":tomcat:$grailsVersion"
-        runtime ":jquery:1.8.0"
+        compile ":release:2.2.0"
+        runtime ":jquery:1.8.3"
         runtime ":resources:1.1.6"
-        compile ':spring-security-core:1.2.7.3'
-        compile ":release:2.0.4"
+        compile ':spring-security-core:1.2.7.3'        
         compile ":webxml:1.4.1"
     }
 
