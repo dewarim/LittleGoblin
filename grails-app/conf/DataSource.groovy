@@ -35,7 +35,7 @@ environments {
 	}
 	production {
 		dataSource {
-			dbCreate = "create"
+			dbCreate = "update"
 //			url = "jdbc:hsqldb:mem:devDB"
 //			url = "jdbc:hsqldb:file:prodDb;shutdown=true"
 			pooling = true
