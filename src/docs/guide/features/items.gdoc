@@ -1,0 +1,101 @@
+Items are among the most complex features of Little Goblin. 
+A player character may own any number of them, and they may have special uses and effects which can be activated
+ when the time is right.
+ 
+.h2 Item types
+
+All items have a specific item type which defines:
+
+.h3 Required slots
+
+To equip an item (so it can be used), one or more free equipment slots are necessary.
+An equipment slot may be a body part (an iron helmet requires a free head slot) or,
+in a later version of the framework, a space ship (a photon torpedo needs a weapons bay).
+
+Current equipment slot types (in the reference implementation - you are free to change them in
+your game):
+
+* head
+* neck
+* body
+* hand
+* finger
+* legs
+* feet
+
+A character may have more than one of each slot type (of course, having two heads only makes
+sense if you play an Ettin...)
+
+.h3 Attributes
+
+An item may have any number of item attributes. A sword of flames will have a weapon attribute of type
+"fire" and a corresponding damage modified. Combat attributes are used to calculate damage - a sword of 
+fire will do more damage against an ice monster. 
+
+Current combat attributes include:
+
+* fire
+* acid
+* water
+* cold
+* electricity
+* death
+* light
+* chaos
+* sound
+* poision
+* shards
+* normal
+
+.h3 Item categories
+
+Categories are used group items according to their basic aspects, you can think of them as tags for 
+item properties. For example, a magic potion of healing will belong to the categories 'potion' and 'magic'
+- and perhaps 'healing', if you expect to have a lot of healing items. Shops will not always carry 
+items of all categories and some may in fact only carry potions or weapons.
+
+Initial item categories (for the handful of test items):
+ 
+* potion
+* magic
+* mushroom
+* metal
+* armor
+* weapon
+ 
+.h3 Combat damage
+
+A weapon is simply defined as an item which has a combat dice value set. Dice determine the base
+damage an item will do via the formula ( number of sides * number of dice) + bonus value. You can name
+your dice and reuse them for different items, for example "Dice: short swords" or "Dice: Phasers".
+
+.h3 Stackable and package size
+
+Items may be combined to stacks. The package size determines the amount of this items you will receive
+from a shop keeper. For example, buying "a dozen arrows" will add a stack of 12 arrows to your quiver.
+
+.h3 Usable and rechargeable items
+
+Some items can be used (activated) to create special effects, which may consume the item or reduce its
+ life expectancy by one. A potion will have only one use, while a laster blaster may have a 100 shots
+  before it can be recharged.
+
+.h3 Value and availability
+
+Availability is currently defined in 0.1% steps - so it's a number from 0 to 1000. Items with an 
+  availability of zero will never be found in a shop, while others will be on sale some or all the time.
+The base value of an item is used to calculate the price a shop keeper will pay for it.
+
+.h2 Item properties
+
+An item has other properties besides its type. Those are:
+
+* an owner: a Creature (may be a mob, but most likely it's a player character)
+* a location: currently, two location types are defined: ON_PERSON and AT_HOME
+* a gold value: game events may change the value of an item.
+* amount: for stacked items, default is 1
+* equipped flag: true if the item is currently in use.
+* number of uses left
+* resources: an item may be designed to be used as a production resource in crafting.
+    A player may choose between several stacks of raw materials to use for a product,
+    and the chosen stack is marked internally for consumption.
