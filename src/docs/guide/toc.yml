@@ -13,3 +13,7 @@ features:
   reputation: Reputation
   skills: Skills
   guilds: Guilds
+  items: Items
+  crafting: Crafting
+  orders: Orders
+  quests: Quests
