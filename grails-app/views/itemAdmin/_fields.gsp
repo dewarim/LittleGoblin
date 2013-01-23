@@ -1,4 +1,4 @@
-<%@ page import="de.dewarim.goblin.Dice" %><g:set var="iid" value="${itemType?.id}"/>
+<%@ page import="de.dewarim.goblin.item.ItemCategory; de.dewarim.goblin.Dice" %><g:set var="iid" value="${itemType?.id}"/>
 <tr>
     <td><label for="name_${iid}"><g:message code="name"/></label></td>
     <td><g:textField id="name_${iid}" name="name" value="${itemType?.name}"/></td>
@@ -42,4 +42,13 @@
                   optionKey="id" optionValue="${{it.toString() +' :: '+message(code:it.name) }}"
                   noSelection="${[null:'---']}"
                   value="${itemType?.combatDice?.id}"/></td>
+</tr>
+<tr>
+    <td><label for="categories_${iid}"><g:message code="itemType.categories"/></label></td>
+    <td>
+        <g:select id="categories_${iid}" name="category" from="${de.dewarim.goblin.Category.list()}"
+            optionKey="id" optionValue="${{message(code:it.name)}}"
+            multiple="true" value="${itemCategoryIdList}"
+        />
+    </td>
 </tr>

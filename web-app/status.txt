@@ -406,3 +406,8 @@ Version 0.3.0 "Cleanup" / 2012-11-18
 * Fixed: textarea in chatterbox.
 * Removed redundant "def inputValidationService", which is inherited from BaseController.
 * Started work on extended documentation.
+
+Version 0.3.1 "Resume" / 2013-01-
+* Fixed: admin can edit ItemTypes again.
+* New: admin can assign categories to item types.
+* Fixed: inputValidationService no longer croaks on 'null'-String.

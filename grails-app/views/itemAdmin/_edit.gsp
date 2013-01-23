@@ -1,10 +1,10 @@
 <td colspan="11">
-    <g:form>
-        <input type="hidden" name="id" value="${iid}"/>
+    <g:form>      
+        <input type="hidden" name="id" value="${itemType.id}"/>
         <h2><g:message code="itemType.basic.values"/></h2>
         <table>
             <tbody>
-            <g:render template="fields" model="[itemType:itemType]"/>
+            <g:render template="fields" model="[itemType:itemType, itemCategoryIdList:itemCategoryIdList]"/>
             <tr>
                 <td>&nbsp;</td>
                 <td class="right">

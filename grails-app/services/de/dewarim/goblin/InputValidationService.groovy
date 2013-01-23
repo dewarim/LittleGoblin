@@ -79,7 +79,7 @@ class InputValidationService {
      */
     Object checkObject(clazz, String id, nullAllowed) {
         log.debug("nullAllowed: ${nullAllowed}, id:${id}")
-        if (id == null || !id || id.trim().length() == 0) {
+        if (id == null || id == 'null' || !id || id.trim().length() == 0) {
             log.debug("id == null")
             if (nullAllowed) {
                 return null;
