@@ -40,14 +40,14 @@ class ProductionService {
      * @return a map of items that this PC owns which may be used to create the product
      */
     Map fetchItemMap(Product product, PlayerCharacter pc){
-        Map<Component, Item> itemMap = new HashMap<Component,List<Item>>()
+        Map<Component, List<Item>> itemMap = new HashMap<Component,List<Item>>()
         log.debug("inputItems: ${product.fetchInputItems()?.size()}")
         product.fetchInputItems().each{component->
             def myItems = Item.findAll("from Item i where i.owner=:owner and i.type=:type", [owner:pc, type:component.itemType])
             log.debug("myItems: ${myItems?.dump()}")
             myItems.each{item ->
                 if(itemMap.get(component)){
-                    itemMap.put(component, item)
+                    itemMap.get(component).add(item)
                 }
                 else{
                     List<Item> items = new ArrayList<Item>()
