@@ -28,7 +28,6 @@ class FactionAdminController extends BaseController {
         }
         def rmmList = ReputationMessageMap.list().find{it.faction == null}
         render(template: '/factionAdmin/edit', model: [faction: faction, rmmList:rmmList])
-        return
     }
 
     def cancelEdit() {
@@ -37,7 +36,6 @@ class FactionAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.faction'))
         }
         render(template: '/factionAdmin/update', model: [faction: faction])
-        return
     }
 
     def update() {

@@ -23,7 +23,6 @@ class EncounterAdminController extends BaseController {
         }
         def mobList = encounter.mobs.collect {it.mob}
         render(template: 'edit', model: [encounter: encounter, mobList: mobList])
-        return
     }
 
     def cancelEdit() {
@@ -32,7 +31,6 @@ class EncounterAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.encounter'))
         }
         render(template: 'update', model: [encounter: encounter])
-        return
     }
 
     def update() {

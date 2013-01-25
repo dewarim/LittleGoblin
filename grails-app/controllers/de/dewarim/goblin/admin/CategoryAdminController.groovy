@@ -26,7 +26,6 @@ class CategoryAdminController extends BaseController {
                 selectedShops: categoryService.fetchSelectedShops(category),
                 selectedItemTypes: categoryService.fetchSelectedItemTypes(category)
         ])
-        return
     }
 
     def cancelEdit() {
@@ -35,7 +34,6 @@ class CategoryAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.category'))
         }
         render(template: '/categoryAdmin/row', model: [category: category])
-        return
     }
 
     def update() {

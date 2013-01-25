@@ -19,7 +19,6 @@ class ConfigAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.configEntry'))
         }
         render(template: '/configAdmin/edit', model: [configEntry: configEntry])
-        return
     }
 
     def cancelEdit() {
@@ -28,7 +27,6 @@ class ConfigAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.configEntry'))
         }
         render(template: '/configAdmin/update', model: [configEntry: configEntry])
-        return
     }
 
     def update() {

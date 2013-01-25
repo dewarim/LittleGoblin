@@ -22,7 +22,6 @@ class AcademyAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.academy'))
         }
         render(template: '/academyAdmin/edit', model: [academy: academy])
-        return
     }
 
     def cancelEdit() {
@@ -31,7 +30,6 @@ class AcademyAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.academy'))
         }
         render(template: '/academyAdmin/update', model: [academy: academy])
-        return
     }
 
     def update() {
@@ -52,7 +50,7 @@ class AcademyAdminController extends BaseController {
         }
     }
 
-    void updateGuildAcademies(academy) {
+    void updateGuildAcademies(Academy academy) {
         def guildList = params.list("guilds").collect { guild ->
             inputValidationService.checkObject(Guild.class, guild)
         }
@@ -63,7 +61,7 @@ class AcademyAdminController extends BaseController {
             }
         }
         // add new guilds if necessary
-        guildList.each {guild ->
+        guildList.each {Guild guild ->
             log.debug "Guild: ${guild}"
             if (!academy.guildAcademies.find {it.guild.equals(guild)}) {
                 GuildAcademy ga = new GuildAcademy(guild, academy)

@@ -30,7 +30,6 @@ class DiceAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.dice'))
         }
         render(template: '/diceAdmin/edit', model: [dice: dice])
-        return
     }
 
     def cancelEdit() {
@@ -39,7 +38,6 @@ class DiceAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.dice'))
         }
         render(template: '/diceAdmin/update', model: [dice: dice])
-        return
     }
 
     def update() {

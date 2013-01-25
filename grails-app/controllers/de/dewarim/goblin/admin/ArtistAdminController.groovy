@@ -20,7 +20,6 @@ class ArtistAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.artist'))
         }
         render(template: '/artistAdmin/edit', model: [artist: artist])
-        return
     }
 
     def cancelEdit() {
@@ -29,7 +28,6 @@ class ArtistAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.artist'))
         }
         render(template: '/artistAdmin/update', model: [artist: artist])
-        return
     }
 
     def update() {
