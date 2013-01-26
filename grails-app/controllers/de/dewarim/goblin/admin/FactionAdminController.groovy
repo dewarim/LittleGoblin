@@ -24,7 +24,7 @@ class FactionAdminController extends BaseController {
     def edit() {
         def faction = Faction.get(params.id)
         if (!faction) {
-            return render(status: 503, text: message(code: 'error.unknown.faction'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         def rmmList = ReputationMessageMap.list().find{it.faction == null}
         render(template: '/factionAdmin/edit', model: [faction: faction, rmmList:rmmList])
@@ -33,7 +33,7 @@ class FactionAdminController extends BaseController {
     def cancelEdit() {
         def faction = Faction.get(params.id)
         if (!faction) {
-            return render(status: 503, text: message(code: 'error.unknown.faction'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/factionAdmin/update', model: [faction: faction])
     }
@@ -42,7 +42,7 @@ class FactionAdminController extends BaseController {
         try {
             def faction = Faction.get(params.id)
             if (!faction) {
-                throw new RuntimeException('error.unknown.faction')
+                throw new RuntimeException('error.object.not.found')
             }
             updateFields faction
             faction.save()

@@ -18,7 +18,7 @@ class ShopAdminController extends BaseController {
     def edit() {
         def shop = Shop.get(params.id)
         if (!shop) {
-            return render(status: 503, text: message(code: 'error.unknown.shop'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: 'edit', model: [shop: shop])
     }
@@ -26,7 +26,7 @@ class ShopAdminController extends BaseController {
     def cancelEdit() {
         def shop = Shop.get(params.id)
         if (!shop) {
-            return render(status: 503, text: message(code: 'error.unknown.shop'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: 'update', model: [shop: shop])
     }
@@ -35,7 +35,7 @@ class ShopAdminController extends BaseController {
         try {
             def shop = Shop.get(params.id)
             if (!shop) {
-                throw new RuntimeException('error.unknown.shop')
+                throw new RuntimeException('error.object.not.found')
             }
             updateFields shop
             shop.save()

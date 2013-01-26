@@ -27,7 +27,7 @@ class DiceAdminController extends BaseController {
     def edit() {
         def dice = Dice.get(params.id)
         if (!dice) {
-            return render(status: 503, text: message(code: 'error.unknown.dice'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/diceAdmin/edit', model: [dice: dice])
     }
@@ -35,7 +35,7 @@ class DiceAdminController extends BaseController {
     def cancelEdit() {
         def dice = Dice.get(params.id)
         if (!dice) {
-            return render(status: 503, text: message(code: 'error.unknown.dice'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/diceAdmin/update', model: [dice: dice])
     }
@@ -44,7 +44,7 @@ class DiceAdminController extends BaseController {
         try {
             def dice = Dice.get(params.id)
             if (!dice) {
-                throw new RuntimeException('error.unknown.dice')
+                throw new RuntimeException('error.object.not.found')
             }
             updateFields dice
             dice.save()

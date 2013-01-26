@@ -20,7 +20,7 @@ class GuildAdminController extends BaseController {
     def edit() {
         def guild = Guild.get(params.id)
         if (!guild) {
-            return render(status: 503, text: message(code: 'error.unknown.guild'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/guildAdmin/edit', model: [guild: guild])
     }
@@ -28,7 +28,7 @@ class GuildAdminController extends BaseController {
     def cancelEdit() {
         def guild = Guild.get(params.id)
         if (!guild) {
-            return render(status: 503, text: message(code: 'error.unknown.guild'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/guildAdmin/update', model: [guild: guild])
     }
@@ -37,7 +37,7 @@ class GuildAdminController extends BaseController {
         try {
             def guild = Guild.get(params.id)
             if (!guild) {
-                throw new RuntimeException('error.unknown.guild')
+                throw new RuntimeException('error.object.not.found')
             }
             log.debug("update for ${guild.name}")
             updateFields guild

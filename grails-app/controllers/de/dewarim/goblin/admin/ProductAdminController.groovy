@@ -18,7 +18,7 @@ class ProductAdminController extends BaseController {
     def edit() {
         def product = Product.get(params.id)
         if (!product) {
-            return render(status: 503, text: message(code: 'error.unknown.product'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/productAdmin/edit', model: [product: product])
     }
@@ -26,7 +26,7 @@ class ProductAdminController extends BaseController {
     def cancelEdit() {
         def product = Product.get(params.id)
         if (!product) {
-            return render(status: 503, text: message(code: 'error.unknown.product'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/productAdmin/update', model: [product: product])
     }
@@ -35,7 +35,7 @@ class ProductAdminController extends BaseController {
         try {
             def product = Product.get(params.id)
             if (!product) {
-                throw new RuntimeException('error.unknown.product')
+                throw new RuntimeException('error.object.not.found')
             }
             log.debug("update for ${product.name}")
             updateFields product

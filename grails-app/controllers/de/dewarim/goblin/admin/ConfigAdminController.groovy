@@ -16,7 +16,7 @@ class ConfigAdminController extends BaseController {
     def edit() {
         def configEntry = GlobalConfigEntry.get(params.id)
         if (!configEntry) {
-            return render(status: 503, text: message(code: 'error.unknown.configEntry'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/configAdmin/edit', model: [configEntry: configEntry])
     }
@@ -24,7 +24,7 @@ class ConfigAdminController extends BaseController {
     def cancelEdit() {
         def configEntry = GlobalConfigEntry.get(params.id)
         if (!configEntry) {
-            return render(status: 503, text: message(code: 'error.unknown.configEntry'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/configAdmin/update', model: [configEntry: configEntry])
     }
@@ -33,7 +33,7 @@ class ConfigAdminController extends BaseController {
         try {
             def configEntry = GlobalConfigEntry.get(params.id)
             if (!configEntry) {
-                throw new RuntimeException('error.unknown.configEntry')
+                throw new RuntimeException('error.object.not.found')
             }
             log.debug("update for ${configEntry.name}")
             updateFields configEntry

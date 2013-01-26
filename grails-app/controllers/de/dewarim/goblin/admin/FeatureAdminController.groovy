@@ -18,7 +18,7 @@ class FeatureAdminController extends BaseController {
     def edit() {
         def feature = Feature.get(params.id)
         if (!feature) {
-            return render(status: 503, text: message(code: 'error.unknown.feature'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/featureAdmin/edit', model: [feature: feature,
         ])
@@ -27,7 +27,7 @@ class FeatureAdminController extends BaseController {
     def cancelEdit() {
         def feature = Feature.get(params.id)
         if (!feature) {
-            return render(status: 503, text: message(code: 'error.unknown.feature'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/featureAdmin/row', model: [feature: feature])
     }
@@ -36,7 +36,7 @@ class FeatureAdminController extends BaseController {
         try {
             def feature = Feature.get(params.id)
             if (!feature) {
-                throw new RuntimeException('error.unknown.feature')
+                throw new RuntimeException('error.object.not.found')
             }
             log.debug("update for ${feature.name}")
             updateFields feature

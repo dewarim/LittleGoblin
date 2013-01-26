@@ -18,7 +18,7 @@ class ShopOwnerAdminController extends BaseController {
     def edit() {
         def shopOwner = ShopOwner.get(params.id)
         if (!shopOwner) {
-            return render(status: 503, text: message(code: 'error.unknown.shopOwner'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/shopOwnerAdmin/edit', model: [shopOwner: shopOwner])
     }
@@ -26,7 +26,7 @@ class ShopOwnerAdminController extends BaseController {
     def cancelEdit() {
         def shopOwner = ShopOwner.get(params.id)
         if (!shopOwner) {
-            return render(status: 503, text: message(code: 'error.unknown.shopOwner'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/shopOwnerAdmin/update', model: [shopOwner: shopOwner])
     }
@@ -35,7 +35,7 @@ class ShopOwnerAdminController extends BaseController {
         try {
             def shopOwner = ShopOwner.get(params.id)
             if (!shopOwner) {
-                throw new RuntimeException('error.unknown.shopOwner')
+                throw new RuntimeException('error.object.not.found')
             }
             log.debug("update for ${shopOwner.name}")
             updateFields shopOwner

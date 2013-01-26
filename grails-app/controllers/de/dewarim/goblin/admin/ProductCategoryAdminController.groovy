@@ -17,7 +17,7 @@ class ProductCategoryAdminController extends BaseController {
     def edit() {
         def category = ProductCategory.get(params.id)
         if (!category) {
-            return render(status: 503, text: message(code: 'error.unknown.category'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: 'edit', model: [category: category])
     }
@@ -25,7 +25,7 @@ class ProductCategoryAdminController extends BaseController {
     def cancelEdit() {
         def category = ProductCategory.get(params.id)
         if (!category) {
-            return render(status: 503, text: message(code: 'error.unknown.category'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: 'update', model: [category: category])
     }
@@ -34,7 +34,7 @@ class ProductCategoryAdminController extends BaseController {
         try {
             def category = ProductCategory.get(params.id)
             if (!category) {
-                throw new RuntimeException('error.unknown.category')
+                throw new RuntimeException('error.object.not.found')
             }
             log.debug("update for ${category.name}")
             updateFields category

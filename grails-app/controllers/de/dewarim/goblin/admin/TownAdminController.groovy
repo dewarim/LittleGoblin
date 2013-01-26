@@ -17,7 +17,7 @@ class TownAdminController extends BaseController {
     def edit() {
         def town = Town.get(params.id)
         if (!town) {
-            return render(status: 503, text: message(code: 'error.unknown.town'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/townAdmin/edit', model: [town: town])
     }
@@ -25,7 +25,7 @@ class TownAdminController extends BaseController {
     def cancelEdit() {
         def town = Town.get(params.id)
         if (!town) {
-            return render(status: 503, text: message(code: 'error.unknown.town'))
+            return render(status: 503, text: message(code: 'error.object.not.found'))
         }
         render(template: '/townAdmin/update', model: [town: town])
     }
@@ -34,7 +34,7 @@ class TownAdminController extends BaseController {
         try {
             def town = Town.get(params.id)
             if (!town) {
-                throw new RuntimeException('error.unknown.town')
+                throw new RuntimeException('error.object.not.found')
             }
             log.debug("update for ${town.name}")
             updateFields town
