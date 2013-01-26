@@ -20,7 +20,6 @@ class TownAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.town'))
         }
         render(template: '/townAdmin/edit', model: [town: town])
-        return
     }
 
     def cancelEdit() {
@@ -29,7 +28,6 @@ class TownAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.town'))
         }
         render(template: '/townAdmin/update', model: [town: town])
-        return
     }
 
     def update() {

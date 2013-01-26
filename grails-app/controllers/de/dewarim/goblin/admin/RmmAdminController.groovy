@@ -23,7 +23,6 @@ class RmmAdminController extends BaseController {
         }
         def factionList = Faction.list().findAll { (it.repMessageMap == null || it.repMessageMap?.equals(rmm))}
         render(template: '/rmmAdmin/edit', model: [rmm: rmm, factionList: factionList])
-        return
     }
 
     def cancelEdit() {
@@ -32,7 +31,6 @@ class RmmAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.rmm'))
         }
         render(template: '/rmmAdmin/update', model: [rmm: rmm])
-        return
     }
 
     def update() {

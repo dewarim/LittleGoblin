@@ -21,7 +21,6 @@ class ShopOwnerAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.shopOwner'))
         }
         render(template: '/shopOwnerAdmin/edit', model: [shopOwner: shopOwner])
-        return
     }
 
     def cancelEdit() {
@@ -30,7 +29,6 @@ class ShopOwnerAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.shopOwner'))
         }
         render(template: '/shopOwnerAdmin/update', model: [shopOwner: shopOwner])
-        return
     }
 
     def update() {

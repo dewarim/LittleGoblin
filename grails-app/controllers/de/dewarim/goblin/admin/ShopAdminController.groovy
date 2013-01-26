@@ -21,7 +21,6 @@ class ShopAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.shop'))
         }
         render(template: 'edit', model: [shop: shop])
-        return
     }
 
     def cancelEdit() {
@@ -30,7 +29,6 @@ class ShopAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.shop'))
         }
         render(template: 'update', model: [shop: shop])
-        return
     }
 
     def update() {

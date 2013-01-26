@@ -28,7 +28,6 @@ class QuestStepAdminController extends BaseController {
         render(template: 'edit', model: [
                 questStep: questStep, childSteps: childList, parentSteps: parentList, newSteps:newSteps
         ])
-        return
     }
 
     def cancelEdit() {
@@ -37,7 +36,6 @@ class QuestStepAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.questStep'))
         }
         render(template: 'update', model: [questStep: questStep])
-        return
     }
 
     def update() {

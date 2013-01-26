@@ -78,9 +78,9 @@ class UserController {
 		if (!person) {
 			flash.message = "User not found with id $params.id"
 			redirect action: list
-			return
+			return [:]
 		}
-
+        
 		return buildPersonModel(person)
 	}
 
