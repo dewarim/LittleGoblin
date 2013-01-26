@@ -20,7 +20,6 @@ class ProductCategoryAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.category'))
         }
         render(template: 'edit', model: [category: category])
-        return
     }
 
     def cancelEdit() {
@@ -29,7 +28,6 @@ class ProductCategoryAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.category'))
         }
         render(template: 'update', model: [category: category])
-        return
     }
 
     def update() {

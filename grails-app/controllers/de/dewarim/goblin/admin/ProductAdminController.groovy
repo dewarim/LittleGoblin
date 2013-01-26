@@ -21,7 +21,6 @@ class ProductAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.product'))
         }
         render(template: '/productAdmin/edit', model: [product: product])
-        return
     }
 
     def cancelEdit() {
@@ -30,7 +29,6 @@ class ProductAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.product'))
         }
         render(template: '/productAdmin/update', model: [product: product])
-        return
     }
 
     def update() {

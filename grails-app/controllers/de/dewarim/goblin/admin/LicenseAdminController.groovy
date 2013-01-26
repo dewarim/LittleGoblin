@@ -20,7 +20,6 @@ class LicenseAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.license'))
         }
         render(template: '/licenseAdmin/edit', model: [license: license])
-        return
     }
 
     def cancelEdit() {
@@ -29,7 +28,6 @@ class LicenseAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.license'))
         }
         render(template: '/licenseAdmin/update', model: [license: license])
-        return
     }
 
     def update() {

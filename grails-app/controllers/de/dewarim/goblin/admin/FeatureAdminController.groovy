@@ -22,7 +22,6 @@ class FeatureAdminController extends BaseController {
         }
         render(template: '/featureAdmin/edit', model: [feature: feature,
         ])
-        return
     }
 
     def cancelEdit() {
@@ -31,7 +30,6 @@ class FeatureAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.feature'))
         }
         render(template: '/featureAdmin/row', model: [feature: feature])
-        return
     }
 
     def update() {

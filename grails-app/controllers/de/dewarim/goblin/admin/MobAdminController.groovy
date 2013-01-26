@@ -23,7 +23,6 @@ class MobAdminController extends BaseController {
         }
         def imageList = mob.mobImages.collect {it.image}
         render(template: 'edit', model: [mob: mob, imageList:imageList])
-        return
     }
 
     def cancelEdit() {
@@ -32,7 +31,6 @@ class MobAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.mob'))
         }
         render(template: 'update', model: [mob: mob])
-        return
     }
 
     def update() {

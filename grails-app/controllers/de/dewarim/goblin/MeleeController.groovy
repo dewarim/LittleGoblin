@@ -86,7 +86,7 @@ class MeleeController extends BaseController {
                 throw new RuntimeException('melee.error')
             }
             def p = fetchViewParameters(pc)
-            PlayerCharacter adversary = inputValidationService.checkObject(PlayerCharacter.class, params.adversary)
+            PlayerCharacter adversary = (PlayerCharacter) inputValidationService.checkObject(PlayerCharacter.class, params.adversary)
             String itemFeature = params.itemFeature
             if (!itemFeature) {
                 throw new RuntimeException('melee.action.fail')
@@ -95,8 +95,8 @@ class MeleeController extends BaseController {
             if (ids.size() != 2) {
                 throw new RuntimeException('melee.action.fail')
             }
-            Item item = inputValidationService.checkObject(Item.class, ids[0])
-            ItemTypeFeature itemTypeFeature = inputValidationService.checkObject(ItemTypeFeature.class, ids[1])
+            Item item = (Item) inputValidationService.checkObject(Item.class, ids[0])
+            ItemTypeFeature itemTypeFeature = (ItemTypeFeature) inputValidationService.checkObject(ItemTypeFeature.class, ids[1])
             if (!item || !itemTypeFeature) {
                 throw new RuntimeException('melee.action.fail')
             }

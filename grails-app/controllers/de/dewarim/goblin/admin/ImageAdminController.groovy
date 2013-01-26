@@ -22,7 +22,6 @@ class ImageAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.image'))
         }
         render(template: '/imageAdmin/edit', model: [image: image])
-        return
     }
 
     def cancelEdit() {
@@ -31,7 +30,6 @@ class ImageAdminController extends BaseController {
             return render(status: 503, text: message(code: 'error.unknown.image'))
         }
         render(template: '/imageAdmin/update', model: [image: image])
-        return
     }
 
     def update() {

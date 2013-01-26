@@ -21,7 +21,6 @@ class ItemFeatureAdminController extends BaseController {
       return render(status: 503, text: message(code: 'error.unknown.itemFeature'))
     }
     render(template: '/itemFeatureAdmin/edit', model: [itemFeature: itemFeature])
-    return
   }
 
   def cancelEdit() {
@@ -30,7 +29,6 @@ class ItemFeatureAdminController extends BaseController {
       return render(status: 503, text: message(code: 'error.unknown.itemFeature'))
     }
     render(template: '/itemFeatureAdmin/row', model: [itemFeature: itemFeature])
-    return
   }
 
   def update() {
