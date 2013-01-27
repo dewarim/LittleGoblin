@@ -1,4 +1,4 @@
-Release notes for Little Goblin v 0.3.0
+Release notes for Little Goblin v 0.3.1
 
 Little Goblin is a browser game framework written in Groovy,
 Java and a little bit of JavaScript. The WAR file is a intended
@@ -27,3 +27,4 @@ Blog for LittleGoblin: http://dewarim.com
 Documentation: http://littlegoblin.de
 Sourceforge page: http://sourceforge.net/projects/littlegoblin
 GitHub page: https://github.com/dewarim/LittleGoblin
+Issue Tracker: https://github.com/dewarim/LittleGoblin
