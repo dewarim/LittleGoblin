@@ -6,7 +6,7 @@ To create an item, a PC should have a corresponding crafting skill, the material
 As with many other online games, crafting takes time - you can define how long it will take a player to create
 an item. 
 
-.h3 Tools
+h3 Tools
 
 Many crafting systems require the presence of components, but few consider the use of multiple tools for crafting.
 Little Goblin offers the chance to create recipes for items that define what other non-consumable items the player
@@ -15,7 +15,7 @@ Little Goblin offers the chance to create recipes for items that define what oth
 At the moment, the quality of tools is not mapped to the crafted item's quality, but that could be an interesting
  idea for further extensions.
 
-.h3 Production lines
+h3 Production lines
 
 Currently, a player can start the production of create several items of a each kind, as long as he has the required 
 components to create at least one item of this type. When the required time is up, the code checks if the resources
@@ -28,7 +28,7 @@ Note: Work in progress: The crafting and the skill learning system currently rel
 to the API made by a cron job, which causes specific service classes to check if items are to be generated or skills
 will be learned by characters etc. This is sub-optimal and will be replaced by background-threads in the future.
 
-.h4 Design considerations
+h4 Design considerations
 
 A more "realistic" way would be to subtract the required resources each time an item is generated, but on the other
 hand it is a better system than requiring all resources up front, which would mean that in our example the player has 
