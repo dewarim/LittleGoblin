@@ -6,7 +6,7 @@ To create an item, a PC should have a corresponding crafting skill, the material
 As with many other online games, crafting takes time - you can define how long it will take a player to create
 an item. 
 
-h3 Tools
+h3. Tools
 
 Many crafting systems require the presence of components, but few consider the use of multiple tools for crafting.
 Little Goblin offers the chance to create recipes for items that define what other non-consumable items the player
