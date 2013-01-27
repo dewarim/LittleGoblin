@@ -13,7 +13,7 @@ This software is licensed under the Apache License 2.0.
 Open source components contained therein may have different
 (but generally compatible) Licenses like LGPL or BSD.
 
-This is a Grails 2 application running on Java 6.
+This is a Grails 2.2 application running on Java 7.
 
 This code may link to images on the web which have their own copyright
  and licenses, which you should consider and review before going
