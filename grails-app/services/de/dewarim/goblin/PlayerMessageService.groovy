@@ -1,7 +1,6 @@
 package de.dewarim.goblin
 
 import de.dewarim.goblin.pc.PlayerMessage
-import org.codehaus.groovy.grails.commons.ApplicationHolder
 
 class PlayerMessageService {
 
@@ -9,18 +8,19 @@ class PlayerMessageService {
 
     static transactional = true
 
-    def taglib = getApplicationTagLib()
-
     /**
      * Create a new PlayerMessage based upon the character's settings,
      * connect it with the specified player character, save it and return a reference.
      */
-    PlayerMessage createMessage(pc, messageId, args) {
+    PlayerMessage createMessage(pc, String messageId, List args) {
         if (args ==  null ){
             args = []
         }
-        String pmMessage = taglib.message(code:messageId,
-                args:args.collect{taglib.message(code:it.toString())}, locale:pc.user.locale)
+//        String pmMessage = taglib.message(code:messageId,
+//                args:args.collect{taglib.message(code:it.toString())}, locale:pc.user.locale)
+        Locale locale = pc.user.locale
+        List translatedArgs = args.collect{ messageSource.getMessage(it.toString(), null, it.toString(), locale )}
+        String pmMessage = messageSource.getMessage(messageId, translatedArgs.toArray(), messageId, locale)
         PlayerMessage pm = new PlayerMessage(pcMessage:pmMessage, pc:pc)
         pm.save()
         pc.addToPcMessages(pm)
@@ -33,8 +33,4 @@ class PlayerMessageService {
         return pms
     }
 
-    def getApplicationTagLib(){
-        def ctx = ApplicationHolder.getApplication().getMainContext()
-        return ctx.getBean('org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib')
-    }
 }

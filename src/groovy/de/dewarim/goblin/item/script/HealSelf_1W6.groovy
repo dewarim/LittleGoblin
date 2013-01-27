@@ -5,7 +5,6 @@ import de.dewarim.goblin.ICombatScript
 import de.dewarim.goblin.Creature
 import de.dewarim.goblin.item.Item
 import de.dewarim.goblin.PlayerMessageService
-import org.codehaus.groovy.grails.commons.ApplicationHolder
 
 class HealSelf_1W6 implements ICombatScript{
 
@@ -18,11 +17,12 @@ class HealSelf_1W6 implements ICombatScript{
 		else{
 			pc.hp = pc.maxHp
 		}
-		getPMS().createMessage(pc, 'feature.heal_yourself', [pc.hp-old])
+        
+		getPMS(pc).createMessage(pc, 'feature.heal_yourself', [pc.hp-old])
 	}
 
-     PlayerMessageService getPMS(){
-        def ctx = ApplicationHolder.getApplication().getMainContext()
+     PlayerMessageService getPMS(pc){
+        def ctx = pc.domainClass.grailsApplication.mainContext
         return (PlayerMessageService) ctx.getBean('playerMessageService')
     }
 }
