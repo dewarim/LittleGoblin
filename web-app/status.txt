@@ -407,7 +407,11 @@ Version 0.3.0 "Cleanup" / 2012-11-18
 * Removed redundant "def inputValidationService", which is inherited from BaseController.
 * Started work on extended documentation.
 
-Version 0.3.1 "Resume" / 2013-01-
+Version 0.3.1 "Resume" / 2013-01-27
 * Fixed: admin can edit ItemTypes again.
 * New: admin can assign categories to item types.
 * Fixed: inputValidationService no longer croaks on 'null'-String.
+* Cleanup code.
+* Added more documentation (items, guilds)
+* Project is now language level Java 7
+* Grails 2.2.0
