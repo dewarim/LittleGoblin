@@ -33,10 +33,12 @@ You can download an example version from
 
 * Set the serverUrl to your machine's or server's name (http://localhost or your domain name)
 * Edit the database settings for the production database.
-* If you want to create a new database on every server start and delete the old data, 
-  keep the setting of dbCreate="create". Otherwise, set it to dbCreate="none"
+
+If you want to create a new database on every server start and delete the old data,  
+keep the setting of dbCreate="create". Otherwise, set it to dbCreate="none".
 
 If you have any questions, you can:
-* Ask on the mailing list https://sourceforge.net/mailarchive/forum.php?forum_name=littlegoblin-main
-* Use the forum (Be the first!): https://sourceforge.net/projects/littlegoblin/forums/forum/1129360
+
+* Ask on the "project mailing list":https://sourceforge.net/mailarchive/forum.php?forum_name=littlegoblin-main
+* Add a question to the "issue tracker on GitHub":https://github.com/dewarim/LittleGoblin/issues
 * Write me a mail: ingo_wiarda@dewarim.de
