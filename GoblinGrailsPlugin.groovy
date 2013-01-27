@@ -3,7 +3,7 @@ class GoblinGrailsPlugin {
 //    def packaging = "binary"
     def groupId = 'goblin'
     // the plugin version
-    def version = "0.3.0"
+    def version = "0.3.1"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.0 > *"
     // the other plugins this plugin depends on
@@ -35,7 +35,7 @@ Little Goblin is a browser game framework written in Grails.
 //    def developers = [ [ name: "Joe Bloggs", email: "joe@bloggs.net" ]]
 
     // Location of the plugin's issue tracker.
-//    def issueManagement = [ system: "JIRA", url: "http://jira.grails.org/browse/GPMYPLUGIN" ]
+    def issueManagement = [ system: "Github", url: "https://github.com/dewarim/LittleGoblin/issues" ]
 
     // Online location of the plugin's browseable source code.
     def scm = [ url: "https://github.com/dewarim/LittleGoblin" ]
