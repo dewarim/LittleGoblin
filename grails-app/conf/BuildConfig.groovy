@@ -13,7 +13,7 @@ grails.project.dependency.resolution = {
         // excludes 'ehcache'
         excludes "xercesImpl", "xmlParserAPIs", "xml-apis", 'groovy';
     }
-    log "debug" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
         mavenLocal()
         grailsRepo "http://grails.org/plugins"
