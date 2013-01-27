@@ -13,3 +13,18 @@ h3. Prerequisites to running from source
 
 After you have installed the dependencies, use the command line to run Grails in Little Goblin's main directory:
 @grails@ and start the application with @run-app@
+
+h3. Use as a plugin
+
+Add the following line to your Grails application's BuildConfig.groovy (in the plugins section):
+
+{code}
+    compile: ':little-goblin:0.3.1'
+{code}
+
+As a starting point, look at the BootStrap.groovy code in the plugin's source on how to populate the database
+with essential objects like an admin user. You can login to your application via http://localhost:8080/$appName/portal/landing,
+where $appName stands for your Grails application's name. Then it's time to begin customizing the game engine and 
+to add your own content. (Extensive documentation on how to do this will follow - if anything is unclear or does not work,
+please to not hesitate to "ask or add an issue":https://github.com/dewarim/LittleGoblinDoc/issues/ )
+ 

@@ -97,21 +97,15 @@
 
         <div class="version_info">
             <pre>
-                Version 0.3.0 "Cleanup" / 2012-11-18
-                (a lot of internal changes)
-                * Updated to Grails 2.1.1.
-                * Fixed session handling.
-                * Fixed HTML error in /goblinOrder/_order_list
-                * Refactoring pages to use sitemesh layout instead of using homebrew solution.
-                * Fixed item filter: remove unnecessary conversion of list to array. (ItemService).
-                * Removed old prototyps JS-library files since we have been using jQuery for some time.
-                * Fixed message id in highscore.gsp.
-                * Added more documentation.
-                * Added custom equals & hashCode to many domain classes.
-                * Fixed: do not double-encode chatterbox messages.
-                * Fixed: textarea in chatterbox.
-                * Removed redundant "def inputValidationService", which is inherited from BaseController.
-                * Started work on extended documentation.
+                Version 0.3.1 "Resume" / 2013-01-27
+
+                * Fixed: admin can edit ItemTypes again.
+                * New: admin can assign categories to item types.
+                * Fixed: inputValidationService no longer croaks on 'null'-String.
+                * Cleanup code.
+                * Added more documentation (items, guilds)
+                * Project is now language level Java 7
+                * Grails 2.2.0
 
             </pre>
             
