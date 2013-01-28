@@ -4,7 +4,7 @@
 
     <meta name="layout" content="main"/>
    	
-
+    <title><g:message code="portal.landing.title"/></title>
     <g:if test="${grailsApplication.config.facebook.enabled}">
         <script type="text/javascript">(function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];

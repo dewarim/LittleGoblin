@@ -415,3 +415,6 @@ Version 0.3.1 "Resume" / 2013-01-27
 * Added more documentation (items, guilds)
 * Project is now language level Java 7
 * Grails 2.2.0
+
+Version 0.3.2 /
+* Fixed #3: add gameName config parameter as default title to pages. 
