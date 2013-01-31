@@ -178,7 +178,8 @@ class AcademyService {
         LearningQueueElement queueElement =
             LearningQueueElement.find("from LearningQueueElement as l where l.pc=:pc and l.academySkillSet=:ass", [pc:pc, ass:ass])
         List<LearningQueueElement> newerElements =
-            LearningQueueElement.findAll("from LearningQueueElement where l.pc=:pc and l.finished > :qe.finished order by finished", [pc:pc, qe:queueElement])
+            LearningQueueElement.findAll("from LearningQueueElement l where l.pc=:pc and l.finished > :qeFinished order by finished",
+                    [pc:pc, qeFinished:queueElement.finished])
         Long currentTime = new Date().time
         newerElements.each{element ->
             element.finished = new Date(currentTime + element.academySkillSet.tellRequiredTime())
