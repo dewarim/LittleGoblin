@@ -5,7 +5,7 @@ Version: 2013-01-29 #1
 ## Introduction
 
 This document will collect the necessary tasks to add automated unit and integration tests for Little Goblin.
-The goal is to have automated tests which cover at least all functional aspects of the reference implementaton.
+The goal is to have automated tests which cover at least all functional aspects of the reference implementation.
 
 ## Current State
 
@@ -27,19 +27,19 @@ The tests will probably not run, even if the database driver issue is fixed.
 ## Planned State:
 
 As a first step, it would be good to use the code from BootStrap.groovy to create unit tests.
-The BootStrap code, upon finding an empty database, genereates the reference 
+The BootStrap code, upon finding an empty database, generates the reference 
 implementation of a game that uses every available feature. 
 So there is already much that can be reused in tests.
 
 ## Unit tests
 
 While writing the basic unit tests, it would be good to read up and implement current 
-best practices and employ new features availalbe in Grails 2.2. For example, when I started
+best practices and employ new features available in Grails 2.2. For example, when I started
 with Grails development, I ran into some problems with domain validation objects in Grails 1.3.x,
 so I mostly abandoned this approach. But now, years later, it looks like that would be useful
 for stuff like "ensure that: assert name.trim().length() != 0".
 
-A second aspect of the new unit tests will be to help refactoring the depenencies between domain classes.
+A second aspect of the new unit tests will be to help refactoring the dependencies between domain classes.
 There are probably too many tight couplings, especially in PlayerCharacter:
 
 	 static hasMany = [
