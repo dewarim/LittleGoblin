@@ -53,7 +53,10 @@ There are probably too many tight couplings, especially in PlayerCharacter:
             playerProducts: PlayerProduct
     ]
 
-Those objects have to be loaded every time the player object is required.
+Those referenced objects have to be loaded every time their collection is updated. In a browser game
+with potentially hundreds (or thousands) of concurrent users, it is certainly not advisable to load
+large collections (pcMessages, products, jobs) into memory whenever an element is added. Also, some
+parts may possible move to plugins (for example, a crafting plugin with domain classes and services).
 
 Links:
 
@@ -65,7 +68,26 @@ Links:
 
 ## Functional tests
 
-TODO
+The old integration tests were written with Canoo webtest as the browser automation and testing framework.
+It would be good to examine which new frameworks and plugins for writing test code have appeared since then
+and if they offer any improvements compared to the rarely updated webtest plugin.
 
+Potential candidates:
 
+* http://grails.org/plugin/spock
+* http://grails.org/plugin/webtest
+* http://grails.org/plugin/geb
+* http://grails.org/plugin/functional-test
+
+To test the JavaScript code in LittleGoblin:
+
+* https://www.assembla.com/spaces/sumatra/wiki
+* http://grails.org/plugin/jasmine
+
+## Continuous integration and continuous delivery
+
+Little Goblin should have a CI server and a CD solution which deploys new versions automatically to the
+public test server. Prerequisites for this are working tests and more research in how to best setup
+a comprehensive solution. This will probably entail the setup of a Jenkins server, an Artifactory instance
+and Puppet.
 
