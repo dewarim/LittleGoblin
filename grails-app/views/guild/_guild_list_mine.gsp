@@ -1,6 +1,6 @@
 <div id="guild_list">
 	<div id="guild_description">&nbsp;</div>
-	<table class="guild_list_table" bguild="1">
+	<table class="guild_list_table" border="1">
 		<tr>
 			<th><g:message code="guild.name"/></th>
 			<th><g:message code="guild.incomeTax"/> </th>
