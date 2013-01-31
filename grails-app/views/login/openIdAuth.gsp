@@ -56,7 +56,7 @@
 			<form action='${postUrl}' method='POST' id='loginForm' class='cssform'>
 				<p>
 					<label for='j_username'>OpenID Identity</label>
-					<input type='text' class='text_' name='j_username' />
+					<input type='text' id="j_username" class='text_' name='j_username' />
 				</p>
 				<p>
 					<input type='submit' value='Login' />
