@@ -4,12 +4,13 @@ import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.pc.skill.CreatureSkill
 
 import de.dewarim.goblin.pc.skill.SkillSet
+import de.dewarim.goblin.ticks.ITickListener
 import de.dewarim.goblin.town.AcademyLevel
 import de.dewarim.goblin.town.Academy
 import de.dewarim.goblin.town.AcademySkillSet
 import de.dewarim.goblin.pc.skill.LearningQueueElement
 
-class SkillService {
+class SkillService implements ITickListener {
 
     static transactional = true
 
@@ -80,5 +81,10 @@ class SkillService {
         }
 
         return finishedSkills.size()
+    }
+    
+    void tock(){
+        def amount = checkFinishedSkills()
+        log.debug("processed: $amount skills.")
     }
 }

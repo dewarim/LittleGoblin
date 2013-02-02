@@ -8,6 +8,7 @@ import de.dewarim.goblin.Feature
 import de.dewarim.goblin.Role
 import de.dewarim.goblin.EquipmentSlotType
 import de.dewarim.goblin.RequiredSlot
+import de.dewarim.goblin.ticks.Tick
 import de.dewarim.goblin.town.Town
 import de.dewarim.goblin.quest.Encounter
 import de.dewarim.goblin.quest.QuestStep
@@ -70,7 +71,8 @@ class BootStrap {
     def guildMemberService
     def academyService
     def grailsApplication
-
+    def tickService
+    
 //    def camelContext
 //    def brokerService
 
@@ -88,7 +90,7 @@ class BootStrap {
         if (!UserAccount.list().isEmpty()) {
             return
         }
-
+        
         log.debug("LITTLE_GOBLIN_HOME: ${System.env.LITTLE_GOBLIN_HOME}")
         log.debug("Facebook.config: ${grailsApplication.config.facebook}")
 
@@ -133,7 +135,8 @@ class BootStrap {
         if (MobTemplate.list().size() == 0) {
             initMobTemplates()
         }
-
+        
+        initTicks()
         initCategories()
         initItems(gob)
         initWeapons()
@@ -152,6 +155,16 @@ class BootStrap {
 
     }
 
+    void initTicks(){
+        log.debug("*** initialize ticks")
+        def tickListeners = ['skill', 'production', 'melee']
+        tickListeners.each{name ->
+            def tick = new Tick(name: "tick.service.$name", serviceName:name)
+            tick.save()
+        }
+        tickService.initialize()
+    }
+    
     void initScripts(){
         log.debug("create scripts")
         def scripts = ['script.pickupItem': PickupItem.class, 'script.deliverItem': DeliverItem.class,

@@ -8,8 +8,9 @@ import de.dewarim.goblin.combat.CombatMessage
 import de.dewarim.goblin.item.Item
 import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.item.ItemTypeFeature
+import de.dewarim.goblin.ticks.ITickListener
 
-class MeleeService {
+class MeleeService implements ITickListener{
 
     def globalConfigService
     def playerMessageService
@@ -344,5 +345,19 @@ class MeleeService {
         useItem.save()
         fetchMeleeFighter(pc).action = useItem
         return useItem
+    }
+    
+    void tock(){
+        Melee melee = Melee.findByStatus(MeleeStatus.RUNNING)
+        if (melee) {
+            fightMelee(melee)
+        }
+        else{
+            melee = findOrCreateMelee()
+            if (meleeIsReady(melee)) {
+                startMelee(melee)
+            }
+        }
+        log.debug("meleeStatus: ${melee.status} / round: ${melee.round}")
     }
 }

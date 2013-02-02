@@ -7,9 +7,12 @@ import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.pc.crafting.Component
 import de.dewarim.goblin.pc.crafting.ProductionJob
 import de.dewarim.goblin.pc.crafting.ProductionResource
+import de.dewarim.goblin.ticks.ITickListener
 
-class ProductionService {
-
+class ProductionService implements ITickListener{
+    
+    def itemService
+    
     static transactional = true
 
     /**
@@ -316,5 +319,11 @@ class ProductionService {
     void terminateJob(ProductionJob job){
         job.pc.removeFromProductionJobs job
         job.delete()
+    }
+    
+    void tock(){
+        Integer amount = makeProducts()
+        itemService.cleanupItems()
+        log.debug("created $amount items.")
     }
 }
