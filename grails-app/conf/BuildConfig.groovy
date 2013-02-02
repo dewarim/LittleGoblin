@@ -42,6 +42,7 @@ grails.project.dependency.resolution = {
         compile("org.codehaus.groovy.modules.http-builder:http-builder:0.5.2"){
             excludes "groovy"
         }
+        compile 'org.codehaus.gpars:gpars:1.0.0'
     }
     
     plugins{        
