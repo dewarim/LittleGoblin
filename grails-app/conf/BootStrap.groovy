@@ -156,10 +156,10 @@ class BootStrap {
     }
 
     void initTicks(){
-        log.debug("*** initialize ticks")
-        def tickListeners = ['skill', 'production', 'melee']
+        log.debug("initialize ticks")
+        def tickListeners = ['skillService', 'productionService', 'meleeService']
         tickListeners.each{name ->
-            def tick = new Tick(name: "tick.service.$name", serviceName:name)
+            def tick = new Tick(name: "tick.service.$name", beanName:name)
             tick.save()
         }
         tickService.initialize()

@@ -52,10 +52,10 @@ class TickActor extends DefaultActor {
                         running = false
                         return
                     }
-                    def grailsApp = tick.domainClass.grailsApplication
-                    def service = grailsApp.getMainContext().getBean("${tick.serviceName}Service")
-                    log.debug("service: ${service}")
-                    ((ITickListener) service).tock()
+                    
+                    def listener = tick.fetchListener()
+                    log.debug("listener: ${listener}")
+                    ((ITickListener) listener).tock()
                     tick.currentTick++
                     Thread.sleep(tick.tickLength)
                 }
