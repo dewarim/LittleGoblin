@@ -33,7 +33,7 @@ class SkillService implements ITickListener {
 
             // if a script for this type of skill exists, execute it.
             if(skill.script){
-                ISkillScript iss = null
+                ISkillScript iss
                 try {
                     iss = (ISkillScript) skill.script.newInstance();
                 }
