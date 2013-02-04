@@ -4,7 +4,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException
 
 class Tick {
     
-    transient  def grailsApplication
+    transient def grailsApplication
     
     static constraints = {
         name unique: true, blank: false
@@ -29,7 +29,7 @@ class Tick {
     /**
      * Time between two ticks in milliseconds
      */
-    Long tickLength = 60000
+    Long tickLength = 10000
     
     String beanName
     Long currentTick = 0
@@ -55,6 +55,6 @@ class Tick {
     }
     
     Object fetchListener(){
-        return domainClass.grailsApplication.getMainContext().getBean(beanName)
+        return grailsApplication.mainContext.getBean(beanName)
     }
 }
