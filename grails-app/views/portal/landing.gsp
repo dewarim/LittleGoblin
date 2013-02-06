@@ -144,7 +144,7 @@
     </div>
 </div>
 
-<g:render template="/shared/footer"/>
+
 <g:if test="${grailsApplication.config.facebook?.enabled}">
     <div id="fb-root"></div>
 </g:if>

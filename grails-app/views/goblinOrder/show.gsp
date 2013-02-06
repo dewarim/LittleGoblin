@@ -17,7 +17,7 @@
 		<div id="inventory" class="inventory">
 			<g:render template="/shared/sideInventory"/>
 		</div>
-		<g:render template="/shared/footer"/>
+		
 	</div>
 	<div class="col2">
 		<div class="pc_main">

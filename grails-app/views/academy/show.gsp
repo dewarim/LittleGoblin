@@ -112,6 +112,6 @@
         <g:render template="/shared/player_character" model="[showEquipment: true]"/>
     </div>
 </div>
-<g:render template="/shared/footer"/>
+
 </body>
 </html>

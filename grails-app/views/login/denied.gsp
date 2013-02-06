@@ -11,7 +11,7 @@
 
 	<div class='errors'>Sorry, you're not authorized to view this page.</div>
 </div>
-<g:render template="/shared/footer"/>
+
 
 </body>
 </html>

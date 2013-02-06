@@ -48,6 +48,6 @@
 <body class="main">
 <g:render template="/shared/logo"/>
 <g:render template="/shared/login"/>
-<g:render template="/shared/footer"/>
+
 </body>
 </html>

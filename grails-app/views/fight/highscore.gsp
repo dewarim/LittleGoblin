@@ -38,7 +38,7 @@
 &nbsp;|&nbsp;
 <g:link action="index">	<g:message code="fight.link.index"/></g:link>
 
-<g:render template="/shared/footer"/>
+
 
 </body>
 </html>

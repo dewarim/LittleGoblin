@@ -32,6 +32,6 @@
 	</div>
 
 </div>
-<g:render template="/shared/footer"/>
+
 </body>
 </html>

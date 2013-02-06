@@ -21,6 +21,6 @@ Contact: Ingo Wiarda / Bruchsaler Str. 6 / 75053 Gondelsheim / 0162 23 89 333 / 
 
 </div>
 
-<g:render template="/shared/footer"/>
+
 </body>
 </html>

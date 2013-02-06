@@ -16,7 +16,7 @@
 			<g:link controller="admin" action="index"><g:message code="link.to.admin"/> </g:link><br>
 			<g:link controller="productAdmin" action="index"><g:message code="link.to.productAdmin"/> </g:link>
 		</div>
-		<g:render template="/shared/footer"/>
+		
 	</div>
 	<div class="col2">
 

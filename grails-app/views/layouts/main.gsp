@@ -36,5 +36,6 @@
 <body>
 <g:layoutBody/>
 <r:layoutResources/>
+<g:render template="/shared/footer"/>
 </body>
 </html>

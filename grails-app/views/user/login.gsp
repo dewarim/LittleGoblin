@@ -8,4 +8,3 @@
 </g:if><br/>
 <g:render template="/shared/login"/>
 
-<g:render template="/shared/footer"/>

@@ -69,7 +69,7 @@
 	document.forms['loginForm'].elements['j_username'].focus();
 })();
 </script>
-<g:render template="/shared/footer"/>
+
 
 </body>
 </html>
