@@ -1,6 +1,5 @@
 dataSource {
 	pooled = true
-	password = ""
 }
 hibernate {
     cache.use_second_level_cache=false
@@ -29,8 +28,11 @@ environments {
 	}
 	test {
 		dataSource {
-			dbCreate = "update"
-            url = "jdbc:h2:mem:testDb"
+            driverClassName = "org.h2.Driver"
+            username = "sa"
+            password = ""
+            dbCreate = "update"
+            url = "jdbc:h2:mem:goblin"
 		}
 	}
 	production {

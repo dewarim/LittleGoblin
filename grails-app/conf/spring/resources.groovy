@@ -1,4 +1,4 @@
-import de.dewarim.goblin.quest.script.GetReward
+import de.dewarim.goblin.ticks.TickTestBean
 
 //import org.apache.camel.spring.CamelContextFactoryBean
 //import org.apache.camel.spring.CamelProducerTemplateFactoryBean
@@ -35,4 +35,7 @@ beans = {
 //    }
 
 //    learningDelayer(de.dewarim.goblin.camel.LearningDelayer)
+    
+    listenerTestBean(TickTestBean)
+    
 }

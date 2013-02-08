@@ -76,8 +76,6 @@ class BootStrap {
 //    def camelContext
 //    def brokerService
 
-    def connectionFactoryLocal
-
     def init = { servletContext ->
         // currently disabled
 //        brokerService.start()
@@ -152,12 +150,15 @@ class BootStrap {
     }
 
     def destroy = {
-
+        tickService.stopAll()
     }
 
     void initTicks(){
         log.debug("initialize ticks")
         def tickListeners = ['skillService', 'productionService', 'meleeService']
+        if (Environment.current == Environment.TEST){
+            tickListeners.add('listenerTestBean')
+        }        
         tickListeners.each{name ->
             def tick = new Tick(name: "tick.service.$name", beanName:name)
             tick.save()

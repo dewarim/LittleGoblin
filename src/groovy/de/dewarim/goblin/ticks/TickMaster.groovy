@@ -7,22 +7,21 @@ import org.slf4j.LoggerFactory
 /**
  *
  */
-class TickActor extends DefaultActor {
+class TickMaster extends DefaultActor {
 
     Logger log = LoggerFactory.getLogger(this.class)
 
     Long tickId
     Boolean running = true
-
+    TickRunner tickRunner
 
     protected void act() {
         loop {
-            react { command ->
+            react { TickCommand command ->
                 TickResult result = new TickResult()
                 try {
                     switch (command.type) {
-                        case TickCommandType.UPDATE_TICK: updateTick(command); break
-                        case TickCommandType.START_TICKING: startTicking(); break
+                        case TickCommandType.START_TICKING: startTicking(command); break
                         case TickCommandType.STOP_TICKING: stopTicking(); break
                     }
                     reply result
@@ -37,32 +36,33 @@ class TickActor extends DefaultActor {
         }
     }
 
-    def updateTick(command) {
-        tickId = command.tickId
-    }
-
-    def startTicking() {
+    def startTicking(TickCommand command) {
         try {
             running = true
-            while (running) {
-                Tick.withTransaction {
-                    Tick tick = Tick.get(tickId)
-                    if (!tick) {
-                        log.error("Tick $tickId does not exist. Stopping TickActor.")
-                        running = false
-                        return
-                    }
-                    
-                    def listener = tick.fetchListener()
-                    log.debug("listener: ${listener}")
-                    ((ITickListener) listener).tock()
-                    tick.currentTick++
-                    Thread.sleep(tick.tickLength)
-                }
+            if (! tickRunner){
+                tickRunner = new TickRunner()
+                tickRunner.start()
             }
+            TickCommand cmd = new TickCommand(type: TickCommandType.DO_TICK, tickId: command.tickId )
+            sendTick(cmd)
         }
         catch (Exception e) {
             log.warn("startTicking failed.", e)
+        }
+    }
+    
+    def sendTick(TickCommand cmd){
+        if (running){
+            TickCommand tc = new TickCommand(type: TickCommandType.DO_TICK, tickId: cmd.tickId)
+            tickRunner.sendAndContinue(tc){TickResult result ->
+                if (result.failed){
+                    log.warn("Tick failed: ${result.messages}")
+                }
+                else{
+//                    log.debug("tick-tock.")
+                    sendTick(tc)
+                }
+            } 
         }
     }
 

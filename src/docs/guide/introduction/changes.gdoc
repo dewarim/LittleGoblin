@@ -1,3 +1,6 @@
+*Version 0.3.2 "Tick-Tock"*
+* Run game ticks in a background thread (no more need for a cron job to run ticks)
+
 *Version 0.3.1 "Resume"*
 
 * Fixed: admin can edit ItemTypes again.

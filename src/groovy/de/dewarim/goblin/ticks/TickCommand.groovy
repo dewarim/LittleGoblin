@@ -1,7 +1,7 @@
 package de.dewarim.goblin.ticks
 
 /**
- * Command object send to a TickActor by the TickService 
+ * Command object send to a TickMaster by the TickService 
  * 
  */
 class TickCommand {

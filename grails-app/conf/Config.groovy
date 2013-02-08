@@ -90,7 +90,8 @@ log4j = {
             'org.codehaus.groovy.grails.web.pages.GroovyPageResourceLoader',
             'org.codehaus.groovy.grails',
             'org.apache.naming',
-            'grails.app.taglib.org.grails.plugin.resource.ResourceTagLib'
+            'grails.app.taglib.org.grails.plugin.resource.ResourceTagLib',
+            'org.apache.commons'
 
     debug 'grails.app.controller',
             'grails.app.domain.de.dewarim.goblin',

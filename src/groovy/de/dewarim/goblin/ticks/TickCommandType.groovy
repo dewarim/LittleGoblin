@@ -5,7 +5,7 @@ package de.dewarim.goblin.ticks
  */
 public enum TickCommandType {
     
-    UPDATE_TICK,
+    DO_TICK,
     START_TICKING,
     STOP_TICKING
 

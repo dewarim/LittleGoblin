@@ -202,8 +202,9 @@ class ProductionService implements ITickListener{
      * @return the number of processed production jobs.
      */
     Integer makeProducts(){
-        def jobs =  ProductionJob.findAll("from ProductionJob as pj where pj.finished < now()")
         def productCount = 0
+        ProductionJob.withTransaction {
+            def jobs =  ProductionJob.findAll("from ProductionJob as pj where pj.finished < now()")
         log.debug("found ${jobs.size()} production jobs")
         jobs.each{job ->
             // check if sufficient resources are available
@@ -225,6 +226,7 @@ class ProductionService implements ITickListener{
                 }
             }
             productCount++
+        }
         }
         return productCount
     }
