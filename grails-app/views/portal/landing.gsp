@@ -97,6 +97,13 @@
 
         <div class="version_info">
             <pre>
+                Version 0.3.2 "Tick-Tock" / 2013-02-12
+
+                * Fixed #3: add gameName config parameter as default title to pages.
+                * Changed: Run game ticks in a background thread (no more need for a cron job to run ticks).
+                * Fixed #14: Version link in footer was broken.
+                
+                
                 Version 0.3.1 "Resume" / 2013-01-27
 
                 * Fixed: admin can edit ItemTypes again.
