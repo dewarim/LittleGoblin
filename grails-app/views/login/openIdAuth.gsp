@@ -46,7 +46,7 @@
 </head>
 
 <body class="main">
-<g:render template="/shared/logo"/>
+
 	<div id='login'>
 		<div class='inner'>
 			<g:if test='${flash.message}'>

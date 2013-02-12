@@ -5,7 +5,7 @@
 	
 </head>
 <body class=" main quest ">
-<g:render template="/shared/logo"/>
+
      <div class="navigation">
 		    <g:link controller="town" action="show" params="[pc:pc.id]"><g:message code="link.to.town"/></g:link>
 	 </div>

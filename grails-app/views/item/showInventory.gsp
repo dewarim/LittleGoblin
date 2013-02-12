@@ -9,7 +9,7 @@
 </head>
 
 <body class=" main ">
-<g:render template="/shared/logo"/>
+
 
     <div class="navigation">
         <ul class="nav_list">

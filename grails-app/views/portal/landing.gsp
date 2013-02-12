@@ -22,7 +22,7 @@
 </head>
 
 <body class="landing_body main">
-<g:render template="/shared/logo"/>
+
 
 <div class="navigation">
     <g:if test="${grailsApplication.config.facebook?.enableLikeButton}">

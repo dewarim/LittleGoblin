@@ -34,6 +34,7 @@
 </head>
 
 <body>
+<g:render template="/shared/logo"/>
 <g:layoutBody/>
 <r:layoutResources/>
 <g:render template="/shared/footer"/>

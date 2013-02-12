@@ -7,7 +7,7 @@
 
 </head>
 <body class="main">
-<g:render template="/shared/logo"/>
+
     <div class="navigation">
         <g:link controller="portal" action="landing"><g:message code="link.to.home"/></g:link>
         <g:link controller="admin" action="index"><g:message code="link.to.admin"/></g:link>

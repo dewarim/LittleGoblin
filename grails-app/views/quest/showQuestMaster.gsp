@@ -8,7 +8,7 @@
 </head>
 
 <body class=" main quest ">
-<g:render template="/shared/logo"/>
+
 <div class="navigation">
 </div>
 

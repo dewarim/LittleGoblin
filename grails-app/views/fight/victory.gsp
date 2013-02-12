@@ -7,7 +7,7 @@
 
 </head>
 <body class="main">
-<g:render template="/shared/logo"/>
+
     <div class="navigation">
 
 	</div>

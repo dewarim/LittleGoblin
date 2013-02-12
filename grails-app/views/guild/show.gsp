@@ -9,7 +9,7 @@
 
 </head>
 <body class=" main ">
-<g:render template="/shared/logo"/>
+
     <div class="navigation">
         <g:link controller="town" action="show"><g:message code="link.to.town"/></g:link>
         <g:link controller="guild" action="index"><g:message code="link.to.guilds"/></g:link>

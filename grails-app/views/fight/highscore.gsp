@@ -7,7 +7,7 @@
 	
 </head>
 <body class="main">
-<g:render template="/shared/logo"/>
+
 
 <h1><g:message code="fight.highscore.title"/></h1>
 

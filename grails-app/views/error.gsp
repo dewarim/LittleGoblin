@@ -24,7 +24,7 @@
   </head>
 
   <body>
-<g:render template="/shared/logo"/>  
+  
     <h1>Grails Runtime Exception</h1>
     <h2>Error Details</h2>
 

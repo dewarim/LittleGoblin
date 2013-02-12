@@ -46,7 +46,7 @@
 </style>
 </head>
 <body class="main">
-<g:render template="/shared/logo"/>
+
 <g:render template="/shared/login"/>
 
 </body>

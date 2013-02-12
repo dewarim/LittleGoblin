@@ -8,7 +8,7 @@
 	
 </head>
 <body class=" main ">
-<g:render template="/shared/logo"/>
+
 <div class="colmask ">
 	<div class="col1">
 		<div class="navigation">
