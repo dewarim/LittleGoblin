@@ -1,5 +1,5 @@
 <footer class="footer">
-    <strong><a href="http://dewarim.com/browsergame/status"><g:message code="version.info"/></a></strong>
+    <strong><a href="http://dewarim.com/little-goblin/status"><g:message code="version.info"/></a></strong>
     <br/><br/>
 
     <div class="imprint">
