@@ -48,10 +48,10 @@ This code may link to images on the web which have their own copyright
 
 ## Links and Contact
 
-Project Admin: Ingo Wiarda / ingo_wiarda@dewarim.de
-Demo Website: http://schedim.de
-Blog for LittleGoblin: http://dewarim.com
-Documentation: http://littlegoblin.de
-Sourceforge page: http://sourceforge.net/projects/littlegoblin
-GitHub page: https://github.com/dewarim/LittleGoblin
-Issue Tracker: https://github.com/dewarim/LittleGoblin/issues
+* Project Admin: Ingo Wiarda / ingo_wiarda@dewarim.de
+* Demo Website: http://schedim.de
+* Documentation: http://littlegoblin.de
+* GitHub page: https://github.com/dewarim/LittleGoblin
+* Issue Tracker: https://github.com/dewarim/LittleGoblin/issues
+* Blog for LittleGoblin: http://dewarim.com
+* Sourceforge page: http://sourceforge.net/projects/littlegoblin
