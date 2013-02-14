@@ -1,4 +1,5 @@
 package de.dewarim.goblin.landing;
+
 import de.dewarim.goblin.HighScore
 
 import grails.plugins.springsecurity.Secured
@@ -12,7 +13,7 @@ class PortalController extends BaseController {
     def globalConfigService
     def myMailService
     def groovyPageRenderer
-    
+
     /**
      * The landing page (start page of Little Goblin)
      */
@@ -35,11 +36,15 @@ class PortalController extends BaseController {
     @Secured(['ROLE_USER'])
     def start() {
         def user = fetchUser()
-
-        return [user: user,
-                chars: user.characters?.sort {a, b -> a.name.toLowerCase() <=> b.name.toLowerCase()},
-                createError: params.createError
-        ]
+        if (user.checkRole('ROLE_ADMIN')) {
+            redirect(controller: 'admin', action: 'index')
+        }
+        else {
+            return [user: user,
+                    chars: user.characters?.sort { a, b -> a.name.toLowerCase() <=> b.name.toLowerCase() },
+                    createError: params.createError
+            ]
+        }
     }
 
     def register() {
@@ -84,13 +89,13 @@ class PortalController extends BaseController {
 
             // check if we know this email
             UserAccount existingUser = UserAccount.findByEmail(email.toLowerCase())
-            if(existingUser){
+            if (existingUser) {
                 log.debug("user with email $email already exists as ${existingUser.username}")
-                throw new RuntimeException(message(code:'registration.used.email'))
+                throw new RuntimeException(message(code: 'registration.used.email'))
             }
 
             // create user
-            UserAccount newAccount = new UserAccount(username:username, email:email, userRealName: username)
+            UserAccount newAccount = new UserAccount(username: username, email: email, userRealName: username)
             newAccount.passwd = password
             newAccount.save()
             Role role = Role.findByName('ROLE_USER')
@@ -101,52 +106,52 @@ class PortalController extends BaseController {
             def mailConfig = grailsApplication.config.registration
             def link = "http://${mailConfig.serverUrl}/portal/confirmRegistration?uuid=${newAccount.mailConfirmationToken}"
             def sysAdmin = mailConfig.sysAdmin
-            def regards =  mailConfig.regards
+            def regards = mailConfig.regards
             def theSender = mailConfig.sender
             log.debug("newAccount: ${newAccount.dump()}")
-            
-            def msgBody = groovyPageRenderer.render(template:'/portal/confirmMail', 
-                    model:[appName:mailConfig.appName, confirmationLink:link, teamName:regards, sysAdmin:sysAdmin]) 
-            myMailService.sendMail(theSender, [newAccount.email], message(code:'registration.subject'), msgBody)
+
+            def msgBody = groovyPageRenderer.render(template: '/portal/confirmMail',
+                    model: [appName: mailConfig.appName, confirmationLink: link, teamName: regards, sysAdmin: sysAdmin])
+            myMailService.sendMail(theSender, [newAccount.email], message(code: 'registration.subject'), msgBody)
 
             newAccount.confirmationMailSent
             // return::success
             flash.message = message(code: 'registration.mail.sent')
-            return redirect(controller:'portal', action:'landing')
+            return redirect(controller: 'portal', action: 'landing')
         }
         catch (Exception e) {
-            log.debug("registration.fail: ",e)
+            log.debug("registration.fail: ", e)
             session.name = params.name
             session.email = params.email
             flash.message = message(code: 'registration.fail', args: [message(code: e.message)])
-            return render(view:'register', model:params)
+            return render(view: 'register', model: params)
         }
     }
 
     def confirmRegistration() {
-        try{
+        try {
             def uuid = params.uuid
-            if(uuid){
+            if (uuid) {
                 UserAccount userAccount = UserAccount.findByMailConfirmationToken(uuid)
-                if(userAccount){
+                if (userAccount) {
                     userAccount.enabled = true
-                    flash.message = message(code:'registration.complete',
-                            args:[grailsApplication.config.registration?.appName,
+                    flash.message = message(code: 'registration.complete',
+                            args: [grailsApplication.config.registration?.appName,
                                     userAccount.username
                             ])
                     return render(view: 'landing')
                 }
-                else{
+                else {
                     throw new RuntimeException('error.missing.account')
                 }
             }
-            else{
+            else {
                 throw new RuntimeException('error.no.uuid')
             }
         }
-        catch (Exception e){
+        catch (Exception e) {
             flash.message = message(code: 'confirmation.fail', args: [message(code: e.message)])
-            return render(view:'landing', model:params)
+            return render(view: 'landing', model: params)
         }
     }
 
