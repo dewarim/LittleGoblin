@@ -22,8 +22,12 @@
 		</div>
 
 		<div class="admin_areas">
-			<p>TODO: organize into groups.</p>
 			<ul>
+                <li>
+                    <g:link controller="tickAdmin" action="list">
+                        <g:message code="link.to.tickAdmin"/>
+                    </g:link>
+                </li>
 				<li>
 					<g:link controller="combatAttributeAdmin" action="index">
 						<g:message code="link.to.combatAttributeAdmin"/>

@@ -1,11 +1,11 @@
 package de.dewarim.goblin.ticks
 
-import de.dewarim.goblin.admin.TickController
+import de.dewarim.goblin.admin.TickAdminController
 import grails.test.mixin.*
 
-@TestFor(TickController)
+@TestFor(TickAdminController)
 @Mock(Tick)
-class TickControllerTests {
+class TickAdminControllerTests {
 
     def populateValidParams(params) {
         assert params != null
