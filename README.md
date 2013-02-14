@@ -7,7 +7,7 @@ game environment as seen on the test server on http://schedim.de
 
 ## Getting started
 
-For instructions to install the binary version, see: INSTALL.txt
+For instructions to install the binary version, see: [INSTALL.md](INSTALL.md)
  
 * Checkout the source code from Github:
  
