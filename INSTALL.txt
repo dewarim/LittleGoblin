@@ -1,4 +1,4 @@
-Short installation instructions for the binary package of LittleGoblin (0.3.0)
+Short installation instructions for the binary package of LittleGoblin (0.3.2)
 
 Java
 Download and install the Java 7 runtime from http://java.com/
