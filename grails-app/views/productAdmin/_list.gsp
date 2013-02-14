@@ -21,5 +21,5 @@
 </table>
 	</g:if>
 <g:else>
-	<g:message code="product.admin.none.defined"/>
+	<g:message code="admin.none.defined"/>
 </g:else>

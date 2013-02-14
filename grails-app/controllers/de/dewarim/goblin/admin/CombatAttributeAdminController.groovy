@@ -9,7 +9,7 @@ class CombatAttributeAdminController extends BaseController{
 
     def index() {
         if(params.indirectSubmit){
-            flash.message = message(code:'warning.indirect.submit')
+            flash.message = message(code:'warning.indirect.submit') // TODO: what is that for again?
 //            redirect(controller: 'combatAttributeAdmin', action: params.indirectSubmit, params:params)
         }
 //        log(CombatAttributeType.list())

@@ -4,7 +4,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: tick, field: 'name', 'error')} required">
 	<label for="name">
-		<g:message code="tick.name.label" default="Name" />
+		<g:message code="name" default="Name" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="name" required="" value="${tick?.name}"/>

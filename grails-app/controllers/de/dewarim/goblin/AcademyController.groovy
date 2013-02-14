@@ -108,7 +108,7 @@ class AcademyController extends BaseController {
         if (academyService.checkPlayerAccess(pc, academy)) {
             AcademySkillSet ass = AcademySkillSet.get(params.ass)
             if(! ass ){
-                flash.message = message(code: 'error.skillset.not_found')
+                flash.message = message(code: 'error.skillset.not.found')
                 return redirect(controller:'town', action:'show')
             }
             def academySkillSets = academyService.filterSkillSets(pc, academy)

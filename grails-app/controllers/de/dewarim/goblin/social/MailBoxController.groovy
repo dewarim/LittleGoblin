@@ -120,7 +120,7 @@ class MailBoxController extends BaseController{
 
         def box = fetchMailBox(pc)
         if(! box){
-            return render(status:503, text:message(code:'error.mailbx.not_found'))
+            return render(status:503, text:message(code:'error.mailbx.not.found'))
         }
 
         def mails = fetchMails(pc, box)
@@ -137,7 +137,7 @@ class MailBoxController extends BaseController{
         def pc = fetchPc()
         def box = fetchMailBox(pc)
         if(! box){
-            return render(status:503, text:message(code:'error.mailbx.not_found'))
+            return render(status:503, text:message(code:'error.mailbx.not.found'))
         }
         
         def mails = fetchMails(pc, box)

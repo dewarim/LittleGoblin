@@ -95,7 +95,7 @@ class CategoryAdminController extends BaseController {
                 it.deleteFully()
             }
             category.delete()
-            render(text: message(code: 'category.deleted'))
+            render(text: message(code: 'object.deleted'))
         }
         catch (RuntimeException e) {
             renderException e

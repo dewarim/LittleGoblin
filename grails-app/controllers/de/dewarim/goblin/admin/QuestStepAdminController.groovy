@@ -155,7 +155,7 @@ class QuestStepAdminController extends BaseController {
                 throw new RuntimeException(("error.questStep.in.use"))
             }
             questStep.delete()
-            render(text: message(code: 'questStep.deleted'))
+            render(text: message(code: 'object.deleted'))
         }
         catch (RuntimeException e) {
             renderException e

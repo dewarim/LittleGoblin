@@ -424,3 +424,5 @@ Version 0.3.2 "Tick-Tock" / 2013-02-12
 Version 0.3.3 "Showman" / 2013-02-
 * New: Add Tick Controller for admins
 * Refactored GSPs.
+* New: Redirect admins directly to administration page after login.
+* Fixed #17: Check for missing message.properties entries 

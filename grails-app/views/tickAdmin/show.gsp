@@ -25,7 +25,7 @@
 			
 				<g:if test="${tick?.name}">
 				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="tick.name.label" default="Name" /></span>
+					<span id="name-label" class="property-label"><g:message code="name" default="Name" /></span>
 					
 						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${tick}" field="name"/></span>
 					

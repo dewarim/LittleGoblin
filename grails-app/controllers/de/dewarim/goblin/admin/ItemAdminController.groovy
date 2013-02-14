@@ -103,7 +103,7 @@ class ItemAdminController extends BaseController {
                 throw new RuntimeException("error.itemType.in.use")
             }
             itemType.delete()
-            render(text: message(code: 'itemType.deleted'))
+            render(text: message(code: 'object.deleted'))
         }
         catch (RuntimeException e) {
             renderException e

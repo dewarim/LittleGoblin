@@ -20,5 +20,5 @@
 </table>
 	</g:if>
 <g:else>
-	<g:message code="dice.admin.none.defined"/>
+	<g:message code="admin.none.defined"/>
 </g:else>

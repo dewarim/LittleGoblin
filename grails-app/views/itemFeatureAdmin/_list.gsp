@@ -19,5 +19,5 @@
 </table>
 	</g:if>
 <g:else>
-	<g:message code="itemFeature.admin.none.defined"/>
+	<g:message code="admin.none.defined"/>
 </g:else>

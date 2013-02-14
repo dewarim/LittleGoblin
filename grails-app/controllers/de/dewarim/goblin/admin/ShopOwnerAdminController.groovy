@@ -86,7 +86,7 @@ class ShopOwnerAdminController extends BaseController {
                 throw new RuntimeException("error.shopOwner.inhabited")
             }
             shopOwner.delete()
-            render(text: message(code: 'shopOwner.deleted'))
+            render(text: message(code: 'object.deleted'))
         }
         catch (RuntimeException e) {
             renderException e

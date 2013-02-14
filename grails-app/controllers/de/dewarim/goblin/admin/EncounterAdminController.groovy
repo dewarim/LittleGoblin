@@ -98,7 +98,7 @@ class EncounterAdminController extends BaseController {
                 throw new RuntimeException("error.object.not.found")
             }
             encounter.delete()
-            render(text: message(code: 'encounter.deleted'))
+            render(text: message(code: 'object.deleted'))
         }
         catch (RuntimeException e) {
             renderException e

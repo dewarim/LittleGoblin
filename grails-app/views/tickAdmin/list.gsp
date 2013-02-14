@@ -24,7 +24,7 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="name" title="${message(code: 'tick.name.label', default: 'Name')}" />
+						<g:sortableColumn property="name" title="${message(code: 'name', default: 'Name')}" />
 					
 						<g:sortableColumn property="beanName" title="${message(code: 'tick.beanName.label', default: 'Bean Name')}" />
 					
