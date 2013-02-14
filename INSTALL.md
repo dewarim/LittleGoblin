@@ -5,10 +5,13 @@ Download the WAR file from: [http://download.littlegoblin.de/files/current/gobli
 ## Java
 
 Download and install the Java 7 runtime from http://java.com/
+
 On Ubuntu: sudo apt-get install openjdk-7-jre
 
 ## Tomcat 7
+
 Download and install Tomcat 7 from http://tomcat.apache.org
+
 On Ubuntu, use: sudo apt-get install tomcat7
 
 ## Database

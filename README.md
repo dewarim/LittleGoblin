@@ -11,7 +11,7 @@ For instructions to install the binary version, see: [INSTALL.md](INSTALL.md)
  
 * Checkout the source code from Github:
  
-    git git@github.com:dewarim/LittleGoblin.git
+    git clone git@github.com:dewarim/LittleGoblin.git
  
 * Edit goblin-config.example.groovy according to your database settings and serverURL
  
