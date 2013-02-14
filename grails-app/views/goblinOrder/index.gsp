@@ -52,7 +52,7 @@
 					<table>
 						<tr>
 							<td><g:message code="order.description.th"/> </td>
-							<td><g:textArea name="order_description" value="" rows="6" columns="60"/></td>
+							<td><g:textArea name="order_description" value="" rows="6" cols="60"/></td>
 						</tr>
 						<tr>
 							<td><g:message code="order.name"/></td>
