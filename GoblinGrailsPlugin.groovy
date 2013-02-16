@@ -21,7 +21,7 @@ Little Goblin is a browser game framework written in Grails.
 '''
 
     // URL to the plugin's documentation
-    def documentation = "http://little-goblin.de"
+    def documentation = "http://littlegoblin.de"
 
     // Extra (optional) plugin metadata
 
