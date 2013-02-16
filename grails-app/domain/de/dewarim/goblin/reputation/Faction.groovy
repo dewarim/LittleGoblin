@@ -9,8 +9,8 @@ class Faction {
 
     static constraints = {
         repMessageMap nullable:true // so you can create a Faction without having an rmm.
-        name blank:false, nullable: false
-        description blank:false, nullable: false
+        name blank:false
+        description blank:false
     }
 
     String name
@@ -23,10 +23,10 @@ class Faction {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Faction)) return false
 
-        Faction faction = (Faction) o
+        Faction faction = o
 
         if (description != faction.description) return false
         if (name != faction.name) return false

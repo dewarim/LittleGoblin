@@ -1,7 +1,5 @@
 package de.dewarim.goblin.guild
 
-import de.dewarim.goblin.pc.PlayerCharacter
-import de.dewarim.goblin.town.Academy
 import de.dewarim.goblin.town.GuildAcademy
 
 /**
@@ -14,12 +12,12 @@ class Guild {
     String description
     Integer entryFee = 1
     // TODO: implement incomeTax.
-    Double incomeTax = 0.99 // a 1 percent tax on all income. 
+    Double incomeTax = 0.99 // a 1 percent tax on all income.
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Guild)) return false
 
-        Guild guild = (Guild) o
+        Guild guild = o
 
         if (description != guild.description) return false
         if (entryFee != guild.entryFee) return false

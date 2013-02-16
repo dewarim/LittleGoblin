@@ -10,7 +10,6 @@ class ChatMessage {
     static belongsTo = [chatterBox:ChatterBox]
 
     static constraints = {
-        sender nullable:false
         content size:1..1024
     }
 
@@ -19,10 +18,10 @@ class ChatMessage {
     Date sent = new Date()
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof ChatMessage)) return false
 
-        ChatMessage that = (ChatMessage) o
+        ChatMessage that = o
 
         if (chatterBox != that.chatterBox) return false
         if (content != that.content) return false

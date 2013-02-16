@@ -1,19 +1,19 @@
-package de.dewarim.goblin.item;
+package de.dewarim.goblin.item
 
-import de.dewarim.goblin.shop.Shop
 import de.dewarim.goblin.Category
-import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.ItemLocation
+import de.dewarim.goblin.pc.PlayerCharacter
+import de.dewarim.goblin.shop.Shop
 /**
  * ItemService: provide a list of item types for shops.
- * 
+ *
  * @author ingo
  *
  */
 class ItemService {
-	
+
 	/*
-	 * This simple version rolls for each ItemType if it is available. 
+	 * This simple version rolls for each ItemType if it is available.
 	 */
 	List<ItemType> fetchItemTypes(Shop shop){
 		return ItemType.list()
@@ -28,7 +28,7 @@ class ItemService {
      * @return Map of itemCategory to list of itemTypes.
      */
     Map<ItemCategory, List<ItemType>> fetchItemCategoryTypeMap(Collection<ItemType> itemTypes){
-        Map<ItemCategory, List<ItemType>> map = new HashMap<ItemCategory, List<ItemType>>()
+        Map<ItemCategory, List<ItemType>> map = [:]
         itemTypes.each{type ->
             type.itemCategories.each{category ->
                 if(map.get(category)){

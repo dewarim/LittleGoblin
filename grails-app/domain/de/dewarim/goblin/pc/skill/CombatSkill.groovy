@@ -22,17 +22,17 @@ class CombatSkill extends Skill{
         parry nullable: true
         damage nullable:true
     }
-    
+
     Dice strike
     Dice initiative
     Dice parry
     Dice damage
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof CombatSkill)) return false
 
-        CombatSkill that = (CombatSkill) o
+        CombatSkill that = o
 
         if (damage != that.damage) return false
         if (initiative != that.initiative) return false

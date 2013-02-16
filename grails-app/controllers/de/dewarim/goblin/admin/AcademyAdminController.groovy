@@ -19,7 +19,8 @@ class AcademyAdminController extends BaseController {
     def edit() {
         def academy = Academy.get(params.id)
         if (!academy) {
-            return render(status: 503, text: message(code: 'error.unknown.academy'))
+            render(status: 503, text: message(code: 'error.unknown.academy'))
+            return
         }
         render(template: '/academyAdmin/edit', model: [academy: academy])
     }
@@ -27,7 +28,8 @@ class AcademyAdminController extends BaseController {
     def cancelEdit() {
         def academy = Academy.get(params.id)
         if (!academy) {
-            return render(status: 503, text: message(code: 'error.unknown.academy'))
+            render(status: 503, text: message(code: 'error.unknown.academy'))
+            return
         }
         render(template: '/academyAdmin/update', model: [academy: academy])
     }

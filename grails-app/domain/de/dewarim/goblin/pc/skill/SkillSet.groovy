@@ -5,11 +5,7 @@ package de.dewarim.goblin.pc.skill
  */
 class SkillSet {
 
-    static hasMany = [skills:Skill  ]
-
-    static constraints = {
-       
-    }
+    static hasMany = [skills:Skill]
 
     String name
     String description
@@ -20,10 +16,10 @@ class SkillSet {
     Integer coinPrice = 0
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof SkillSet)) return false
 
-        SkillSet skillSet = (SkillSet) o
+        SkillSet skillSet = o
 
         if (coinPrice != skillSet.coinPrice) return false
         if (description != skillSet.description) return false

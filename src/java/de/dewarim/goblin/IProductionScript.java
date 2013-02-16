@@ -1,7 +1,7 @@
 package de.dewarim.goblin;
 
-import de.dewarim.goblin.pc.crafting.ProductionJob;
 import de.dewarim.goblin.pc.crafting.Product;
+import de.dewarim.goblin.pc.crafting.ProductionJob;
 
 public interface IProductionScript {
 

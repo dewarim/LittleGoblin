@@ -12,10 +12,10 @@ class Help {
     String messageId
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Help)) return false
 
-        Help help = (Help) o
+        Help help = o
 
         if (messageId != help.messageId) return false
 

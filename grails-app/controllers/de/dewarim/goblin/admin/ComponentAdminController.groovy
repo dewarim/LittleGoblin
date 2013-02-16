@@ -1,16 +1,16 @@
 package de.dewarim.goblin.admin
 
-import de.dewarim.goblin.BaseController
-import de.dewarim.goblin.pc.crafting.Product
-import de.dewarim.goblin.pc.crafting.Component
 import grails.plugins.springsecurity.Secured
+import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.ComponentType
 import de.dewarim.goblin.item.ItemType
+import de.dewarim.goblin.pc.crafting.Component
+import de.dewarim.goblin.pc.crafting.Product
 
-@Secured(["ROLE_ADMIN"])
 /**
  * Manage the components of a specific product.
  */
+@Secured(["ROLE_ADMIN"])
 class ComponentAdminController extends BaseController {
 
     def index() {
@@ -22,7 +22,8 @@ class ComponentAdminController extends BaseController {
         }
         catch (Exception e) {
             flash.message = message(code: 'error.invalid.object')
-            return redirect(controller: 'productAdmin', action: 'index')
+            redirect(controller: 'productAdmin', action: 'index')
+            return
         }
     }
 

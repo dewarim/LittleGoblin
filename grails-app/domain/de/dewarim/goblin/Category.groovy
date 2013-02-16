@@ -1,7 +1,7 @@
 package de.dewarim.goblin
 
-import de.dewarim.goblin.shop.ShopCategory
 import de.dewarim.goblin.item.ItemCategory
+import de.dewarim.goblin.shop.ShopCategory
 
 /**
  * Categories allow the game designer to create groups of items and shops which buy / sell them.
@@ -18,17 +18,17 @@ class Category{
     String name
 
     boolean equals(o) {
-        if (this.is(o)) return true;
-        if (!(o instanceof Category)) return false;
+        if (is(o)) return true
+        if (!(o instanceof Category)) return false
 
-        Category category = (Category) o;
+        Category category = o
 
-        if (name != category.name) return false;
+        if (name != category.name) return false
 
-        return true;
+        return true
     }
 
     int hashCode() {
-        return (name != null ? name.hashCode() : 0);
+        return (name != null ? name.hashCode() : 0)
     }
 }

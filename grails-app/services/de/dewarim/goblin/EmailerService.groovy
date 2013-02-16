@@ -1,5 +1,4 @@
 package de.dewarim.goblin
-;
 
 import javax.mail.MessagingException
 
@@ -16,7 +15,7 @@ import org.springframework.mail.SimpleMailMessage
  */
 class EmailerService {
 
-	boolean transactional = false
+	static transactional = false
 
 	def mailSender
 	def mailMessage // a "prototype" email instance

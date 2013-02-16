@@ -19,7 +19,8 @@ class RmmAdminController extends BaseController {
     def edit() {
         def rmm = ReputationMessageMap.get(params.id)
         if (!rmm) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         def factionList = Faction.list().findAll { (it.repMessageMap == null || it.repMessageMap?.equals(rmm))}
         render(template: '/rmmAdmin/edit', model: [rmm: rmm, factionList: factionList])
@@ -28,7 +29,8 @@ class RmmAdminController extends BaseController {
     def cancelEdit() {
         def rmm = ReputationMessageMap.get(params.id)
         if (!rmm) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         render(template: '/rmmAdmin/update', model: [rmm: rmm])
     }

@@ -3,6 +3,7 @@ package de.dewarim.goblin
 import grails.plugins.springsecurity.Secured
 import de.dewarim.goblin.guild.Guild
 
+@Secured(['ROLE_USER'])
 class GuildController extends BaseController{
 
     def academyService
@@ -11,7 +12,6 @@ class GuildController extends BaseController{
     /**
      * Main overview of guilds
      */
-    @Secured(['ROLE_USER'])
     def index() {
         def pc = fetchPc()
 
@@ -25,18 +25,19 @@ class GuildController extends BaseController{
         ]
     }
 
-    @Secured(['ROLE_USER'])
     def show() {
         def pc = fetchPc()
 
         def guild = Guild.get(params.guild)
         if(! guild){
             flash.message = message(code:'error.guild.not_found')
-            return redirect(controller:'town', action:'index')
+            redirect(controller:'town', action:'index')
+            return
         }
         if(! guildMemberService.checkMembership(pc, guild)){
             flash.message = message(code:'error.guild.no.member')
-            return redirect(controller:'guild', action:'show')
+            redirect(controller:'guild', action:'show')
+            return
         }
 
         return [
@@ -45,7 +46,6 @@ class GuildController extends BaseController{
         ]
     }
 
-    @Secured(['ROLE_USER'])
     def showMyGuilds() {
         def pc = fetchPc()
 
@@ -61,56 +61,56 @@ class GuildController extends BaseController{
     /**
      * Join a guild
      */
-    @Secured(['ROLE_USER'])
     def join() {
         def pc = fetchPc()
 
         Guild guild = Guild.get(params.guild)
         if(! guild){
             flash.message = message(code:'error.guild.not.found')
-            return redirect(action:'index', controller:'guild')
+            redirect(action:'index', controller:'guild')
+            return
         }
         if( guildMemberService.checkMembership(pc, guild)){
             flash.message = message(code:'error.guild.is.member')
-            return redirect (action:'index', controller:'guild')
+            redirect(action:'index', controller:'guild')
+            return
         }
         if( pc.gold < guild.entryFee){
             flash.message = message(code:'error.insufficient.gold')
-            return redirect(action:'index', controller:'guild')
+            redirect(action:'index', controller:'guild')
+            return
         }
         else{
             pc.gold = pc.gold - guild.entryFee
         }
 
-        // setup guild relationships        
+        // setup guild relationships
         guildMemberService.joinGuild(pc,guild)
 
         // add AcademyLevels
         academyService.joinGuild(pc,guild)
 
-
         flash.message = message(code:'guild.join.success', args:[message(code:guild.name)])
-        return redirect(action:'show', controller:'guild',params:[pc:pc.id, guild:guild.id])
+        redirect(action:'show', controller:'guild',params:[pc:pc.id, guild:guild.id])
+        return
     }
-
-
-
 
     /**
     * Leave a guild
      */
-    @Secured(['ROLE_USER'])
     def leave() {
         def pc = fetchPc()
 
         Guild guild = Guild.get(params.guild)
         if(! guild){
             flash.message = message(code:'error.guild.not.found')
-            return redirect(action:'index', controller:'guild')
+            redirect(action:'index', controller:'guild')
+            return
         }
         if( !  guildMemberService.checkMembership(pc, guild) ){
             flash.message = message(code:'error.guild.no.member')
-            return redirect(action:'index', controller:'guild')
+            redirect(action:'index', controller:'guild')
+            return
         }
 
         // check if the PC is expelled from one or more academies:
@@ -120,14 +120,13 @@ class GuildController extends BaseController{
         guildMemberService.leaveGuild(pc,guild)
 
         flash.message = message(code:'guild.leave.success', args:[message(code:guild.name)])
-        return redirect(action:'index', controller:'guild',params:[pc:pc.id])
+        redirect(action:'index', controller:'guild',params:[pc:pc.id])
+        return
     }
-
 
     /**
      * List guilds  [Ajax]
      */
-    @Secured(['ROLE_USER'])
     def list() {
         def pc = fetchPc()
 
@@ -143,16 +142,14 @@ class GuildController extends BaseController{
                 )
     }
 
-    @Secured(['ROLE_USER'])
     def describe() {
         def pc = fetchPc()
 
         Guild guild = Guild.get(params.guild)
         if(! guild){
-            return render(status:503, text:message(code:'error.guild.not_found'))
+            render(status:503, text:message(code:'error.guild.not_found'))
+            return
         }
-        return render(template:"/guild/guild_description", model:[guild:guild])
+        render(template:"/guild/guild_description", model:[guild:guild])
     }
-
-    
 }

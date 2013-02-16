@@ -1,7 +1,7 @@
 package de.dewarim.goblin.combat
 
-import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.ICombatAttribute
+import de.dewarim.goblin.item.ItemType
 
 /**
  * Mapping between ItemType and CombatAttributeType.
@@ -25,10 +25,10 @@ class WeaponAttribute implements ICombatAttribute{
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof WeaponAttribute)) return false
 
-        WeaponAttribute that = (WeaponAttribute) o
+        WeaponAttribute that = o
 
         if (combatAttributeType != that.combatAttributeType) return false
         if (damageModifier != that.damageModifier) return false

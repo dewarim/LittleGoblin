@@ -3,36 +3,38 @@ package de.dewarim.goblin.social
 import grails.plugins.springsecurity.Secured
 import de.dewarim.goblin.BaseController
 
+@Secured(['ROLE_USER'])
 class ChatterBoxController extends BaseController{
 
     def globalConfigService
 
-    @Secured(['ROLE_USER'])
     def showChatterBox() {
         def pc = fetchPc()
         ChatterBox box = ChatterBox.get(params.box)
         if(! box){
-            return render(status:503, text:message(code:'error.chatterbox.not.found'))
+            render(status:503, text:message(code:'error.chatterbox.not.found'))
+            return
         }
         if(box.goblinOrder.equals(pc.goblinOrder)){
-            return render(template:"/chatterBox/box", model:[currentBox:box, pc:pc])
+            render(template:"/chatterBox/box", model:[currentBox:box, pc:pc])
         }
         else{
-            return render(status:503, text:message(code:'error.chatterbox.foreign'))
+            render(status:503, text:message(code:'error.chatterbox.foreign'))
         }
     }
 
-    @Secured(['ROLE_USER'])
     def sendChatMessage() {
 //        log.debug("session: $session")
         def pc = fetchPc()
         ChatterBox box = ChatterBox.get(params.box)
         if(! box){
-            return render(status:503, text:message(code:'error.chatterbox.not.found'))
+            render(status:503, text:message(code:'error.chatterbox.not.found'))
+            return
         }
         def msg = params.chatMessage?.trim()
         if( msg == null || msg.length() == 0){
-            return render(status:503, text:message(code:'error.chatterbox.empty.message'))
+            render(status:503, text:message(code:'error.chatterbox.empty.message'))
+            return
         }
 //        log.debug("${box?.goblinOrder}")
 //        log.debug("${pc?.goblinOrder}")
@@ -47,10 +49,10 @@ class ChatterBoxController extends BaseController{
             if(box.chatMessages.size() > maxMessages ){
                 box.rightSize(maxMessages)
             }
-            return render(template:"/chatterBox/box", model:[currentBox:box, pc:pc])
+            render(template:"/chatterBox/box", model:[currentBox:box, pc:pc])
         }
         else{
-            return render(status:503, text:message(code:'error.chatterbox.foreign'))
+            render(status:503, text:message(code:'error.chatterbox.foreign'))
         }
     }
 }

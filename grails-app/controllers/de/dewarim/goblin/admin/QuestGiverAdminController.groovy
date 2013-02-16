@@ -16,7 +16,8 @@ class QuestGiverAdminController extends BaseController {
     def edit() {
         def questGiver = QuestGiver.get(params.id)
         if (!questGiver) {
-            return render(status: 503, text: message(code: 'error.unknown.questGiver'))
+            render(status: 503, text: message(code: 'error.unknown.questGiver'))
+            return
         }
         render(template: 'edit', model: [questGiver: questGiver])
     }
@@ -24,7 +25,8 @@ class QuestGiverAdminController extends BaseController {
     def cancelEdit() {
         def questGiver = QuestGiver.get(params.id)
         if (!questGiver) {
-            return render(status: 503, text: message(code: 'error.unknown.questGiver'))
+            render(status: 503, text: message(code: 'error.unknown.questGiver'))
+            return
         }
         render(template: 'update', model: [questGiver: questGiver])
     }

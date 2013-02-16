@@ -16,10 +16,10 @@ class License {
     String description
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof License)) return false
 
-        License license = (License) o
+        License license = o
 
         if (description != license.description) return false
         if (name != license.name) return false

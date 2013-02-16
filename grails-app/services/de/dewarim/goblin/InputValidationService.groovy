@@ -82,7 +82,7 @@ class InputValidationService {
         if (id == null || id == 'null' || !id || id.trim().length() == 0) {
             log.debug("id == null")
             if (nullAllowed) {
-                return null;
+                return null
             }
             else {
                 throw new RuntimeException("error.missing.id")

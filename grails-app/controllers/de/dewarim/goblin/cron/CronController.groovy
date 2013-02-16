@@ -1,7 +1,7 @@
 package de.dewarim.goblin.cron
 
-import de.dewarim.goblin.combat.Melee
 import de.dewarim.goblin.MeleeStatus
+import de.dewarim.goblin.combat.Melee
 
 class CronController {
 
@@ -10,58 +10,42 @@ class CronController {
     def itemService
     def meleeService
 
-    def learning() {
-        if (requestAllowed()) {
-            // process learning queue
-            Integer amount = skillService.checkFinishedSkills()
-            render(text: "processed: $amount skills.")
-        }
-        else {
-            sendAway()
-        }
-    }
-
-    def makeProducts() {
-        if (requestAllowed()) {
-            Integer items = productionService.makeProducts()
-            itemService.cleanupItems()
-            render(text: "created $items items.")
-        }
-        else {
-            sendAway()
-        }
-    }
-
-    def melee() {
-        if (requestAllowed()) {
-            Melee melee = Melee.findByStatus(MeleeStatus.RUNNING)
-            if (melee) {
-                meleeService.fightMelee(melee)
-            }
-            else{
-                melee = meleeService.findOrCreateMelee()
-                if (meleeService.meleeIsReady(melee)) {
-                    meleeService.startMelee(melee)
-                }
-            }
-            render(text: "meleeStatus: ${melee.status} / round: ${melee.round}")
-        }
-        else {
-            sendAway()
-        }
-    }
-
-    protected Boolean requestAllowed() {
+    def beforeInterceptor = {
 //      log.debug("requestURI:${request.requestURI}")
 //      return request.getRemoteAddr().equals(request.getLocalAddr())
         def id = params.id
         log.debug("cronId: $id GoblinId: ${grailsApplication.config.goblinId}")
-        def result = (id == grailsApplication.config.goblinId)
+        boolean result = (id == grailsApplication.config.goblinId)
         log.debug("access is ${result ? 'granted' : 'denied'}")
-        return result
+        if (!result) {
+            render(status: 503, text: 'You are not authorized to access this service!')
+            return false
+        }
     }
 
-    protected void sendAway() {
-        render(status: 503, text: 'You are not authorized to access this service!')
+    def learning() {
+        // process learning queue
+        Integer amount = skillService.checkFinishedSkills()
+        render(text: "processed: $amount skills.")
+    }
+
+    def makeProducts() {
+        Integer items = productionService.makeProducts()
+        itemService.cleanupItems()
+        render(text: "created $items items.")
+    }
+
+    def melee() {
+        Melee melee = Melee.findByStatus(MeleeStatus.RUNNING)
+        if (melee) {
+            meleeService.fightMelee(melee)
+        }
+        else{
+            melee = meleeService.findOrCreateMelee()
+            if (meleeService.meleeIsReady(melee)) {
+                meleeService.startMelee(melee)
+            }
+        }
+        render(text: "meleeStatus: ${melee.status} / round: ${melee.round}")
     }
 }

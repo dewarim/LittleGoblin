@@ -1,7 +1,7 @@
 package de.dewarim.goblin.combat
 
+import de.dewarim.goblin.MeleeStatus
 import de.dewarim.goblin.pc.PlayerCharacter
-import de.dewarim.goblin.MeleeStatus;
 
 class Melee{
 
@@ -18,10 +18,10 @@ class Melee{
     Integer round = 1
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Melee)) return false
 
-        Melee melee = (Melee) o
+        Melee melee = o
 
         if (round != melee.round) return false
         if (startTime != melee.startTime) return false

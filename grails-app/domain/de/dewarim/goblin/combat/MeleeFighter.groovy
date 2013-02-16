@@ -1,7 +1,7 @@
 package de.dewarim.goblin.combat
 
-import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.FighterState
+import de.dewarim.goblin.pc.PlayerCharacter
 
 class MeleeFighter {
 
@@ -32,10 +32,10 @@ class MeleeFighter {
     PlayerCharacter pc
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof MeleeFighter)) return false
 
-        MeleeFighter that = (MeleeFighter) o
+        MeleeFighter that = o
 
         if (action != that.action) return false
         if (melee != that.melee) return false

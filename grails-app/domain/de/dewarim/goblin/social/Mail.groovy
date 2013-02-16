@@ -10,8 +10,6 @@ class Mail {
     static belongsTo = [box:MailBox]
 
     static constraints = {
-        sender nullable:false
-        recipient nullable:false
         content size:1..2000
         subject blank:true, size:1..80
     }
@@ -25,10 +23,10 @@ class Mail {
     Date sent = new Date()
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Mail)) return false
 
-        Mail mail = (Mail) o
+        Mail mail = o
 
         if (box != mail.box) return false
         if (content != mail.content) return false

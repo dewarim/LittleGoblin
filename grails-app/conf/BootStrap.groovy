@@ -72,23 +72,23 @@ class BootStrap {
     def academyService
     def grailsApplication
     def tickService
-    
+
 //    def camelContext
 //    def brokerService
 
     def init = { servletContext ->
         // currently disabled
 //        brokerService.start()
-//        camelContext.addComponent("activemq", ActiveMQComponent.activeMQComponent("vm://localhost?broker.persistent=false"));
+//        camelContext.addComponent("activemq", ActiveMQComponent.activeMQComponent("vm://localhost?broker.persistent=false"))
 //        ((CamelContext) camelContext).addRoutes (new GoblinRouteBuilder())
 //        camelContext.start()
-//        ProducerTemplate template =  camelContext.createProducerTemplate();
+//        ProducerTemplate template =  camelContext.createProducerTemplate()
 //        template.sendBody('activemq:learning', 'boo')
 
         if (!UserAccount.list().isEmpty()) {
             return
         }
-        
+
         log.debug("LITTLE_GOBLIN_HOME: ${System.env.LITTLE_GOBLIN_HOME}")
         log.debug("Facebook.config: ${grailsApplication.config.facebook}")
 
@@ -97,10 +97,10 @@ class BootStrap {
         Role adminRole = new Role(description: 'Administrator', name: 'ROLE_ADMIN')
         adminRole.save(flush: true, failOnError: true)
         Role userRole = new Role(description: "User", name: 'ROLE_USER')
-        userRole.save(flush: true, failOnError: true);
+        userRole.save(flush: true, failOnError: true)
 
         log.debug("create admin user")
-        UserAccount admin = new UserAccount(username: 'admin', userRealName: 'Admin', enabled: true);
+        UserAccount admin = new UserAccount(username: 'admin', userRealName: 'Admin', enabled: true)
         admin.passwd = 'admin' // for local testing
         admin.save(flush: true, failOnError: true)
         UserRole adminAdminRole = new UserRole(user: admin, role: adminRole)
@@ -133,7 +133,7 @@ class BootStrap {
         if (MobTemplate.list().size() == 0) {
             initMobTemplates()
         }
-        
+
         initTicks()
         initCategories()
         initItems(gob)
@@ -158,14 +158,14 @@ class BootStrap {
         def tickListeners = ['skillService', 'productionService', 'meleeService']
         if (Environment.current == Environment.TEST){
             tickListeners.add('listenerTestBean')
-        }        
+        }
         tickListeners.each{name ->
             def tick = new Tick(name: "tick.service.$name", beanName:name)
             tick.save()
         }
         tickService.initialize()
     }
-    
+
     void initScripts(){
         log.debug("create scripts")
         def scripts = ['script.pickupItem': PickupItem.class, 'script.deliverItem': DeliverItem.class,
@@ -377,14 +377,14 @@ class BootStrap {
         EquipmentSlotType body = EquipmentSlotType.findByName('slot.body')
         ItemType cloth = new ItemType(name: 'armor.cloth', baseValue: 4)
         cloth.save()
-        RequiredSlot rs = new RequiredSlot(body, cloth);
+        RequiredSlot rs = new RequiredSlot(body, cloth)
         rs.save()
 
         EquipmentSlotType head = EquipmentSlotType.findByName('slot.head')
 
         ItemType cap = new ItemType(name: 'armor.leather_cap', baseValue: 4)
         cap.save()
-        rs = new RequiredSlot(head, cap);
+        rs = new RequiredSlot(head, cap)
         rs.save()
 
         EquipmentSlotType hand = EquipmentSlotType.findByName('slot.hand')
@@ -392,11 +392,11 @@ class BootStrap {
         shield.save()
         rs = new RequiredSlot(hand, shield)
         rs.save()
-        
+
         def armory = [cloth, cap, shield]
         armory.each {armor ->
             ItemCategory armorCat = new ItemCategory(armor, 'armor')
-            armorCat.save()            
+            armorCat.save()
         }
     }
 
@@ -420,7 +420,7 @@ class BootStrap {
         redShroom.save()
         ItemCategory mushroomCat = new ItemCategory(redShroom, 'mushroom')
         mushroomCat.save()
-        
+
         ItemType blackShroom = new ItemType(name: 'item.mushroom.black', availability: 0, baseValue: 2)
         blackShroom.save()
         ItemCategory bsCat = new ItemCategory(blackShroom, 'mushroom')
@@ -428,11 +428,11 @@ class BootStrap {
 
         // init items for products:
         def ore = new ItemType(name: 'item.iron.ore', availability: 900, baseValue: 10, stackable: true)
-        ore.save();
+        ore.save()
         ItemCategory oreCat = new ItemCategory(ore, 'metal')
         oreCat.save()
         def iron = new ItemType(name: 'item.iron.bar', availability: 900, baseValue: 40, stackable: true)
-        iron.save();
+        iron.save()
         ItemCategory ironCat = new ItemCategory(iron, 'metal')
         ironCat.save()
 
@@ -458,7 +458,7 @@ class BootStrap {
         WeaponAttribute fire = new WeaponAttribute(damageModifier: 2.0, combatAttributeType: catFire)
         fireWhip.addToCombatAttributes(fire)
         fireWhip.save()
-        RequiredSlot rs = new RequiredSlot(hand, fireWhip);
+        RequiredSlot rs = new RequiredSlot(hand, fireWhip)
         rs.save()
 
         CombatAttributeType catNormal = CombatAttributeType.findByName('attribute.normal')
@@ -469,7 +469,7 @@ class BootStrap {
                 baseValue: 5, combatDice: die)
         shortSword.addToCombatAttributes(normalDamage)
         shortSword.save()
-        RequiredSlot rsSword = new RequiredSlot(hand, shortSword);
+        RequiredSlot rsSword = new RequiredSlot(hand, shortSword)
         rsSword.save()
 
         die = new Dice(sides: 6, amount: 2)
@@ -478,9 +478,9 @@ class BootStrap {
                 baseValue: 30, combatDice: die)
         longSword.addToCombatAttributes(normalDamage)
         longSword.save()
-        RequiredSlot rsLongSword = new RequiredSlot(hand, longSword);
+        RequiredSlot rsLongSword = new RequiredSlot(hand, longSword)
         rsLongSword.save()
-        RequiredSlot rsLongSword2 = new RequiredSlot(hand, longSword);
+        RequiredSlot rsLongSword2 = new RequiredSlot(hand, longSword)
         rsLongSword2.save()
 
         die = new Dice(sides: 5, amount: 2, bonus: 2)
@@ -489,9 +489,9 @@ class BootStrap {
                 baseValue: 23, combatDice: die)
         longStaff.addToCombatAttributes(normalDamage)
         longStaff.save()
-        RequiredSlot rsLongStaff = new RequiredSlot(hand, longStaff);
+        RequiredSlot rsLongStaff = new RequiredSlot(hand, longStaff)
         rsLongStaff.save()
-        RequiredSlot rsLongStaff2 = new RequiredSlot(hand, longStaff);
+        RequiredSlot rsLongStaff2 = new RequiredSlot(hand, longStaff)
         rsLongSword2.save()
 
         die = new Dice(sides: 1, amount: 1, bonus: 6)
@@ -502,7 +502,7 @@ class BootStrap {
         def death = new WeaponAttribute(damageModifier: 2.0, combatAttributeType: catDeath)
         toothpick.addToCombatAttributes death
         toothpick.save()
-        RequiredSlot rsPick = new RequiredSlot(hand, toothpick);
+        RequiredSlot rsPick = new RequiredSlot(hand, toothpick)
         rsPick.save()
 
         die = new Dice(sides: 4, amount: 1)
@@ -513,7 +513,7 @@ class BootStrap {
         torch.addToCombatAttributes(torchFire)
         torch.save()
         RequiredSlot rsTorch = new RequiredSlot(hand, torch)
-        rsTorch.save()        
+        rsTorch.save()
 
         def weapons = [fireWhip, shortSword, longSword, longStaff, toothpick, torch]
         weapons.each {weapon ->
@@ -1070,7 +1070,7 @@ class BootStrap {
         ]
 
         settings.each {k, v ->
-            GlobalConfigEntry entry = new GlobalConfigEntry(name: k, entryValue: v);
+            GlobalConfigEntry entry = new GlobalConfigEntry(name: k, entryValue: v)
             entry.save()
         }
     }
@@ -1089,4 +1089,4 @@ class BootStrap {
         Help academyHelp = new Help(messageId: 'help.skillSets')
         academyHelp.save()
     }
-} 
+}

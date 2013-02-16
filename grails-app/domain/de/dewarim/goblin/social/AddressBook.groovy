@@ -11,10 +11,10 @@ class AddressBook {
     static belongsTo = [owner:PlayerCharacter]
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof AddressBook)) return false
 
-        AddressBook that = (AddressBook) o
+        AddressBook that = o
 
         if (owner != that.owner) return false
 

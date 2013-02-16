@@ -1,9 +1,9 @@
-package de.dewarim.goblin.mob;
+package de.dewarim.goblin.mob
 
 import de.dewarim.goblin.Creature
 
 class MobTemplate extends Creature {
-	
+
 	// TODO: translate mob name when displaying
 	static hasMany = [mobs:Mob, mobImages:MobImage, encounterMobs:EncounterMob]
 
@@ -18,11 +18,11 @@ class MobTemplate extends Creature {
 	}
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof MobTemplate)) return false
         if (!super.equals(o)) return false
 
-        MobTemplate that = (MobTemplate) o
+        MobTemplate that = o
 
         if (xpValue != that.xpValue) return false
 

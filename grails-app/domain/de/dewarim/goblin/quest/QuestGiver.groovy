@@ -10,10 +10,10 @@ class QuestGiver {
     String description
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof QuestGiver)) return false
 
-        QuestGiver that = (QuestGiver) o
+        QuestGiver that = o
 
         if (description != that.description) return false
         if (name != that.name) return false

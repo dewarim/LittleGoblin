@@ -1,10 +1,10 @@
 package de.dewarim.goblin.admin
 
+import grails.plugins.springsecurity.Secured
+import de.dewarim.goblin.Artist
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.Image
-import grails.plugins.springsecurity.Secured
 import de.dewarim.goblin.License
-import de.dewarim.goblin.Artist
 import de.dewarim.goblin.mob.MobImage
 
 @Secured(["ROLE_ADMIN"])
@@ -19,7 +19,8 @@ class ImageAdminController extends BaseController {
     def edit() {
         def image = Image.get(params.id)
         if (!image) {
-            return render(status: 503, text: message(code: 'error.unknown.image'))
+            render(status: 503, text: message(code: 'error.unknown.image'))
+            return
         }
         render(template: '/imageAdmin/edit', model: [image: image])
     }
@@ -27,7 +28,8 @@ class ImageAdminController extends BaseController {
     def cancelEdit() {
         def image = Image.get(params.id)
         if (!image) {
-            return render(status: 503, text: message(code: 'error.unknown.image'))
+            render(status: 503, text: message(code: 'error.unknown.image'))
+            return
         }
         render(template: '/imageAdmin/update', model: [image: image])
     }

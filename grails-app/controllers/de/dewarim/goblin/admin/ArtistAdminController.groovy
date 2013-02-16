@@ -17,7 +17,8 @@ class ArtistAdminController extends BaseController {
     def edit() {
         def artist = Artist.get(params.id)
         if (!artist) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         render(template: '/artistAdmin/edit', model: [artist: artist])
     }
@@ -25,7 +26,8 @@ class ArtistAdminController extends BaseController {
     def cancelEdit() {
         def artist = Artist.get(params.id)
         if (!artist) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         render(template: '/artistAdmin/update', model: [artist: artist])
     }

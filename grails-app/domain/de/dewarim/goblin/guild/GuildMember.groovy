@@ -8,20 +8,20 @@ import de.dewarim.goblin.pc.PlayerCharacter
 class GuildMember {
 
     static belongsTo = [guild:Guild, pc:PlayerCharacter]
-    
+
     static constraints = {
         guild unique: 'pc'
     }
-    
+
     static mapping = {
         version:false
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof GuildMember)) return false
 
-        GuildMember that = (GuildMember) o
+        GuildMember that = o
 
         if (guild != that.guild) return false
         if (pc != that.pc) return false

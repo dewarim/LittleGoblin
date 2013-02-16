@@ -22,10 +22,10 @@ class SkillRequirement {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof SkillRequirement)) return false
 
-        SkillRequirement that = (SkillRequirement) o
+        SkillRequirement that = o
 
         if (level != that.level) return false
         if (product != that.product) return false

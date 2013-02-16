@@ -15,10 +15,10 @@ class CreatureSkill {
     Integer level = 1
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof CreatureSkill)) return false
 
-        CreatureSkill that = (CreatureSkill) o
+        CreatureSkill that = o
 
         if (level != that.level) return false
         if (owner != that.owner) return false

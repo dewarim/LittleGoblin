@@ -20,7 +20,8 @@ class CategoryAdminController extends BaseController {
     def edit() {
         def category = Category.get(params.id)
         if (!category) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         render(template: '/categoryAdmin/edit', model: [category: category,
                 selectedShops: categoryService.fetchSelectedShops(category),
@@ -31,7 +32,8 @@ class CategoryAdminController extends BaseController {
     def cancelEdit() {
         def category = Category.get(params.id)
         if (!category) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         render(template: '/categoryAdmin/row', model: [category: category])
     }

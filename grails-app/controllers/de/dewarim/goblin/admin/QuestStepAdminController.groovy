@@ -19,7 +19,8 @@ class QuestStepAdminController extends BaseController {
     def edit() {
         def questStep = QuestStep.get(params.id)
         if (!questStep) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         def newSteps = QuestStep.findAll("from QuestStep s where s.questTemplate=:template and s!=:self",
                 [template:questStep.questTemplate, self:questStep])
@@ -33,7 +34,8 @@ class QuestStepAdminController extends BaseController {
     def cancelEdit() {
         def questStep = QuestStep.get(params.id)
         if (!questStep) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         render(template: 'update', model: [questStep: questStep])
     }

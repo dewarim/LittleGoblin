@@ -17,10 +17,10 @@ class Role {
 	}
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Role)) return false
 
-        Role role = (Role) o
+        Role role = o
 
         if (description != role.description) return false
         if (name != role.name) return false

@@ -1,7 +1,5 @@
 package de.dewarim.goblin
 
-import de.dewarim.goblin.item.ItemType;
-
 class EquipmentSlotType {
 
     /*
@@ -10,16 +8,16 @@ class EquipmentSlotType {
      */
     static hasMany = [requiredSlots:RequiredSlot, equipmentSlots:EquipmentSlot]
 	static constraints = {
-		name(blank:false, nullable:false)
+		name(blank:false)
 	}
-	
+
 	String name
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof EquipmentSlotType)) return false
 
-        EquipmentSlotType that = (EquipmentSlotType) o
+        EquipmentSlotType that = o
 
         if (name != that.name) return false
 

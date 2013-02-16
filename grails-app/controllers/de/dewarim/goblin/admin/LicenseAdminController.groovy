@@ -17,7 +17,8 @@ class LicenseAdminController extends BaseController {
     def edit() {
         def license = License.get(params.id)
         if (!license) {
-            return render(status: 503, text: message(code: 'error.unknown.license'))
+            render(status: 503, text: message(code: 'error.unknown.license'))
+            return
         }
         render(template: '/licenseAdmin/edit', model: [license: license])
     }
@@ -25,7 +26,8 @@ class LicenseAdminController extends BaseController {
     def cancelEdit() {
         def license = License.get(params.id)
         if (!license) {
-            return render(status: 503, text: message(code: 'error.unknown.license'))
+            render(status: 503, text: message(code: 'error.unknown.license'))
+            return
         }
         render(template: '/licenseAdmin/update', model: [license: license])
     }

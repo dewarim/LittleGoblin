@@ -1,11 +1,11 @@
 package de.dewarim.goblin.quest.script
 
+import org.apache.log4j.Logger
+
 import de.dewarim.goblin.IEncounterScript
+import de.dewarim.goblin.item.Item
 import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.quest.Quest
-
-import de.dewarim.goblin.item.Item
-import org.apache.log4j.Logger
 
 /**
  *
@@ -18,7 +18,7 @@ class DeliverItem implements IEncounterScript {
         log.debug("${pc.name} delivers items.")
         def nodes = new XmlSlurper().parseText(params)
         def itemNames = nodes.items.item.list()
-        Boolean complete = true
+        boolean complete = true
         itemNames.each{name ->
             if(! pc.items?.find{it.type.name.equals(name.text())}){
                 complete = false

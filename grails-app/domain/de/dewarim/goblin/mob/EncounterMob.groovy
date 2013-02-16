@@ -8,9 +8,9 @@ import de.dewarim.goblin.quest.Encounter
 class EncounterMob {
 
     static belongsTo = [mob:MobTemplate, encounter:Encounter]
-    
+
     EncounterMob(){}
-    
+
     EncounterMob(Encounter encounter, MobTemplate mob){
         this.encounter = encounter
         this.mob = mob
@@ -19,10 +19,10 @@ class EncounterMob {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof EncounterMob)) return false
 
-        EncounterMob that = (EncounterMob) o
+        EncounterMob that = o
 
         if (encounter != that.encounter) return false
         if (mob != that.mob) return false

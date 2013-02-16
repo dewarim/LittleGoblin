@@ -26,7 +26,7 @@ class ProductionWebTests extends BaseTest {
        3.times {
            setInputField name:'item_1', value:'3'
            clickButton  'Add product to queue'
-           
+
            verifyText   'will be created as soon as possible'
        }
        clickLink    'View job list'

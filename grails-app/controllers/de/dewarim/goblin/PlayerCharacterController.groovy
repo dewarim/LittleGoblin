@@ -1,13 +1,13 @@
-package de.dewarim.goblin;
+package de.dewarim.goblin
 
 import grails.plugins.springsecurity.Secured
 import de.dewarim.goblin.pc.PlayerCharacter
 
+@Secured(['ROLE_USER'])
 class PlayerCharacterController extends BaseController{
-	
+
 	def playerMessageService
-    
-	@Secured(['ROLE_USER'])
+
 	def show() {
         def pc = fetchPc()
 
@@ -18,23 +18,26 @@ class PlayerCharacterController extends BaseController{
 		]
 	}
 
-    @Secured(['ROLE_USER'])
     def save() {
         def user = fetchUser()
         if(! params.name){
-            return redirect(controller:'portal', action:'start', params:[createError:'pc.name.empty'])
+            redirect(controller:'portal', action:'start', params:[createError:'pc.name.empty'])
+            return
         }
         params.name = params.name.encodeAsHTML() // do not allow arbitrary HTML sequences.
         if(params.name.length() > 32){
-            return redirect(controller:'portal', action:'start', params:[createError:'pc.name.too_long'])
+            redirect(controller:'portal', action:'start', params:[createError:'pc.name.too_long'])
+            return
         }
         if(params.name.length() < 3){
-            return redirect(controller:'portal', action:'start', params:[createError:'pc.name.too_short']) 
+            redirect(controller:'portal', action:'start', params:[createError:'pc.name.too_short'])
+            return
         }
 
         def checkName = PlayerCharacter.findByName(params.name)
         if(checkName){
-            return redirect(controller:'portal', action:'start', params:[createError:'pc.name.exists'])
+            redirect(controller:'portal', action:'start', params:[createError:'pc.name.exists'])
+            return
         }
 
         PlayerCharacter pc = new PlayerCharacter(name:params.name)
@@ -42,24 +45,24 @@ class PlayerCharacterController extends BaseController{
         if(pc.save(flush:true)){
             pc.initializePlayerCharacter()
             flash.message = message(code:"pc.create.success", args:[pc.name])
-            return redirect(controller:'town', action:'show',params:[pc:pc.id] )
+            redirect(controller:'town', action:'show',params:[pc:pc.id] )
+            return
         }
-        else{            
-            return redirect(controller:'portal', action:'start')
+        else{
+            redirect(controller:'portal', action:'start')
+            return
         }
-
     }
 
-    @Secured(['ROLE_USER'])
     def editDescription() {
         def pc = fetchPc()
         if(! pc){
-            return render(status:503, text:message(code:'error.player_not_found'))
+            render(status:503, text:message(code:'error.player_not_found'))
+            return
         }
-        return render(template:'/playerCharacter/editDescription', model:[pc:pc])
+        render(template:'/playerCharacter/editDescription', model:[pc:pc])
     }
 
-    @Secured(['ROLE_USER'])
     def saveDescription() {
         def pc = fetchPc()
         if(! pc){
@@ -71,27 +74,25 @@ class PlayerCharacterController extends BaseController{
         else{
             pc.description = params.description
         }
-        return render(template:'/playerCharacter/showDescription', model:[pc:pc])
+        render(template:'/playerCharacter/showDescription', model:[pc:pc])
     }
 
-    @Secured(['ROLE_USER'])
     def fetchMessages() {
         def pc = fetchPc()
         def pcMessages = null
         if(pc){
             pcMessages = playerMessageService.fetchPlayerMessages(pc)
         }
-        return render(template:'/shared/playerMessages', model:[pcMessages:pcMessages, pc:pc])
+        render(template:'/shared/playerMessages', model:[pcMessages:pcMessages, pc:pc])
     }
 
-    @Secured(['ROLE_USER'])
     def fetchEquipment() {
         def pc = fetchPc()
         if(pc){
-            return render(template: '/shared/equipment', model:[pc:pc])
+            render(template: '/shared/equipment', model:[pc:pc])
         }
         else{
-            return render(status:500, text:'error.player.not.found')
+            render(status:500, text:'error.player.not.found')
         }
     }
 }

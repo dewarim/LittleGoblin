@@ -30,10 +30,10 @@ class ItemCategory {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof ItemCategory)) return false
 
-        ItemCategory that = (ItemCategory) o
+        ItemCategory that = o
 
         if (category != that.category) return false
         if (itemType != that.itemType) return false

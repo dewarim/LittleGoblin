@@ -18,7 +18,8 @@ class QuestAdminController extends BaseController {
     def edit() {
         def questTemplate = QuestTemplate.get(params.id)
         if (!questTemplate) {
-            return render(status: 503, text: message(code: 'error.unknown.questTemplate'))
+            render(status: 503, text: message(code: 'error.unknown.questTemplate'))
+            return
         }
         render(template: 'edit', model: [questTemplate: questTemplate])
     }
@@ -26,7 +27,8 @@ class QuestAdminController extends BaseController {
     def cancelEdit() {
         def questTemplate = QuestTemplate.get(params.id)
         if (!questTemplate) {
-            return render(status: 503, text: message(code: 'error.unknown.questTemplate'))
+            render(status: 503, text: message(code: 'error.unknown.questTemplate'))
+            return
         }
         render(template: 'update', model: [questTemplate: questTemplate])
     }

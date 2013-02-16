@@ -1,6 +1,6 @@
-package de.dewarim.goblin;
+package de.dewarim.goblin
 
-import de.dewarim.goblin.item.Item;
+import de.dewarim.goblin.item.Item
 
 /**
  * Mapping class between EquipmentSlotType and Creature.
@@ -9,21 +9,21 @@ import de.dewarim.goblin.item.Item;
  * to carry lasers, machine guns, missiles).
  */
 class EquipmentSlot {
-	
+
 	static belongsTo = [type:EquipmentSlotType, creature:Creature]
 	static constraints = {
-		name(blank:false,nullable:false)
+		name(blank:false)
 		item(nullable:true)
 	}
-	
+
 	String name // name like: "left hand" "right hand" "head 2"
 	Item item
 	Integer rank // for sorting the slots.
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof EquipmentSlot)) return false
 
-        EquipmentSlot that = (EquipmentSlot) o
+        EquipmentSlot that = o
 
         if (creature != that.creature) return false
         if (item != that.item) return false

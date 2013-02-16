@@ -19,10 +19,10 @@ class ReputationMessage {
     Integer reputation
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof ReputationMessage)) return false
 
-        ReputationMessage that = (ReputationMessage) o
+        ReputationMessage that = o
 
         if (messageId != that.messageId) return false
         if (repMessageMap != that.repMessageMap) return false

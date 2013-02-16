@@ -1,7 +1,6 @@
-package de.dewarim.goblin.mob;
+package de.dewarim.goblin.mob
 
 import de.dewarim.goblin.Creature
-import de.dewarim.goblin.CreatureAttribute
 import de.dewarim.goblin.combat.CombatAttributeType
 
 class Mob extends Creature{
@@ -25,8 +24,6 @@ class Mob extends Creature{
 		maxHp = type.hp
 		image = type.selectImage()
 	}
-
-    
 
      Map fetchResistanceAttributeMap(Creature opponent){
         Map map = opponent.fetchItemCombatAttributeMap()
@@ -60,10 +57,10 @@ class Mob extends Creature{
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Mob)) return false
 
-        Mob mob = (Mob) o
+        Mob mob = o
 
         if (image != mob.image) return false
         if (type != mob.type) return false

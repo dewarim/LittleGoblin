@@ -16,7 +16,7 @@ class LearningDelayer {
         String delay = xml.delay?.text()?.trim()
         log.debug("delay: $delay")
         if(delay){
-            return Long.parseLong(new Date().time + delay)
+            return Long.parseLong(System.currentTimeMillis() + delay)
         }
         return 0
     }

@@ -1,13 +1,11 @@
 package de.dewarim.goblin
 
-import de.dewarim.goblin.town.AcademyLevel
-import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.guild.Guild
-import de.dewarim.goblin.town.GuildAcademy
-import de.dewarim.goblin.town.Academy
-import de.dewarim.goblin.pc.skill.SkillSet
-import de.dewarim.goblin.town.AcademySkillSet
+import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.pc.skill.LearningQueueElement
+import de.dewarim.goblin.town.Academy
+import de.dewarim.goblin.town.AcademyLevel
+import de.dewarim.goblin.town.AcademySkillSet
 
 /**
  * When a player character joins a guild, he or she gains the access to all
@@ -46,7 +44,7 @@ class AcademyService {
         }
     }
 
-    void joinGuild(PlayerCharacter pc, Guild guild){   
+    void joinGuild(PlayerCharacter pc, Guild guild){
 
         guild.guildAcademies.each {ga ->
             Academy academy = ga.academy
@@ -117,7 +115,7 @@ class AcademyService {
         def accessibleAcademiesHQL =
         "from Academy as ac where ac not in (select ga.academy from GuildAcademy as ga) or \
         ac in (select al.academy from AcademyLevel as al where al.pc=:pc)"
-        
+
         def academies = Academy.findAll( accessibleAcademiesHQL,
                 [pc:pc],[max:max, offset:offset])
         return academies
@@ -138,7 +136,7 @@ class AcademyService {
             pc.spentExperience = pc.spentExperience + ass.fetchXpPrice()
             return true
         }
-        else{            
+        else{
             return false
         }
     }
@@ -149,7 +147,7 @@ class AcademyService {
         AcademySkillSet ass = queueElement.academySkillSet
         pc.gold = pc.gold + (int) ass.fetchGoldPrice() * refundPercentage / 100
         pc.spentExperience = pc.spentExperience - (int) ass.fetchXpPrice() * refundPercentage / 100
-        pc.user.coins = pc.user.coins + (int) ass.fetchCoinPrice() * refundPercentage / 100        
+        pc.user.coins = pc.user.coins + (int) ass.fetchCoinPrice() * refundPercentage / 100
     }
 
     LearningQueueElement addSkillSetToLearningQueue(PlayerCharacter pc, AcademySkillSet ass){

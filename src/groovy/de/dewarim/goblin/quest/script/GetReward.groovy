@@ -1,16 +1,14 @@
 package de.dewarim.goblin.quest.script
 
+import org.apache.log4j.Logger
+import org.codehaus.groovy.grails.web.context.ServletContextHolder as SCH
+import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes as GA
+
 import de.dewarim.goblin.IEncounterScript
 import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.quest.Quest
-import de.dewarim.goblin.pc.PlayerMessage
-import de.dewarim.goblin.reputation.Reputation
 import de.dewarim.goblin.reputation.Faction
-import org.apache.log4j.Logger
-import de.dewarim.goblin.PlayerMessageService
-
-import org.codehaus.groovy.grails.web.context.ServletContextHolder as SCH
-import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes as GA
+import de.dewarim.goblin.reputation.Reputation
 
 /**
  *

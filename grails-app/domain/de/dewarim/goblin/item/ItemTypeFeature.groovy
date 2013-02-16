@@ -34,10 +34,10 @@ class ItemTypeFeature {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof ItemTypeFeature)) return false
 
-        ItemTypeFeature that = (ItemTypeFeature) o
+        ItemTypeFeature that = o
 
         if (config != that.config) return false
         if (feature != that.feature) return false

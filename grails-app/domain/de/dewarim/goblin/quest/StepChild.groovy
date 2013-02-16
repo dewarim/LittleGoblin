@@ -8,11 +8,11 @@ package de.dewarim.goblin.quest
 class StepChild {
 
     static belongsTo = [parent:QuestStep, child:QuestStep]
-    
+
     static mapping = {
         version: false
     }
-    
+
     StepChild(){}
 
     StepChild(QuestStep parent, QuestStep child){
@@ -29,10 +29,10 @@ class StepChild {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof StepChild)) return false
 
-        StepChild stepChild = (StepChild) o
+        StepChild stepChild = o
 
         if (child != stepChild.child) return false
         if (parent != stepChild.parent) return false

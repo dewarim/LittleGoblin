@@ -1,16 +1,13 @@
-package de.dewarim.goblin;
+package de.dewarim.goblin
 
-import de.dewarim.goblin.item.Item
-import de.dewarim.goblin.combat.CombatMessage
 import de.dewarim.goblin.combat.CombatAttributeType
+import de.dewarim.goblin.combat.CombatMessage
+import de.dewarim.goblin.item.Item
 import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.pc.skill.CreatureSkill
-import de.dewarim.goblin.pc.skill.CombatSkill
-import de.dewarim.goblin.pc.skill.Skill
-import de.dewarim.goblin.pc.skill.ProductionSkill
 
 class Creature {
-	
+
 	static hasMany = [
             slots:EquipmentSlot,
             combatAttributes:CreatureAttribute,
@@ -40,13 +37,13 @@ class Creature {
 
 	Integer maxHp = 10
 	Integer hp = 10
-	Dice strike 
+	Dice strike
 	Dice parry
-	Dice damage 
+	Dice damage
 	Dice initiative
 	Long gold = 0
     Boolean male = true
-	
+
 	CombatMessage attack(Creature opponent){
 		CombatMessage cm
 		if(computeStrike() > opponent.computeParry()){
@@ -86,7 +83,7 @@ class Creature {
 		else{
 			// TODO: message for block / AR
 			cm = new CombatMessage('fight.miss', [name, opponent.name])
-		}        
+		}
 		return cm
 	}
 
@@ -124,7 +121,7 @@ class Creature {
                  temp = temp + cs.skill."$prop".roll()
             }
         }
-        log.debug("combat value for $prop including skill: $temp")  
+        log.debug("combat value for $prop including skill: $temp")
         return temp
     }
 
@@ -195,7 +192,7 @@ class Creature {
 				else if(! dryRun){
 					freeSlot.item = item
 				}
-							
+
 			}
 			if(! success){
 				// do not continue once it's clear that we do not have enough free slots.
@@ -209,18 +206,18 @@ class Creature {
 		if(! dryRun && ! success){
 			// clean up if equipping failed for some reason.
             log.debug("unequip item: ${item?.dump()}")
-			unequipItem(item)			
+			unequipItem(item)
 		}
 		else if(success){
 			item.equipped = true
 		}
 		return success
 	}
-	
+
 	Boolean equipItem(Item item){
 		return equipItem(item, false)
 	}
-	
+
 	void unequipItem(Item item){
 		slots.each{slot ->
             log.debug("unequipItem, test slot ${slot.type.name}")
@@ -278,10 +275,10 @@ class Creature {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Creature)) return false
 
-        Creature creature = (Creature) o
+        Creature creature = o
 
         if (damage != creature.damage) return false
         if (description != creature.description) return false

@@ -1,8 +1,8 @@
 package de.dewarim.goblin.item
 
 import de.dewarim.goblin.Creature
-import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.ItemLocation
+import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.pc.crafting.ProductionResource
 
 class Item {
@@ -28,7 +28,7 @@ class Item {
 //		type.addToItems(this)
         initItem()
     }
-        
+
 	void initItem(){
         if(type.usable){
 			uses = type.uses
@@ -44,10 +44,10 @@ class Item {
 	}
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Item)) return false
 
-        Item item = (Item) o
+        Item item = o
 
         if (amount != item.amount) return false
         if (equipped != item.equipped) return false

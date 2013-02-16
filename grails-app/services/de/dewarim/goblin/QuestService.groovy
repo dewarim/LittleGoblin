@@ -1,9 +1,9 @@
 package de.dewarim.goblin
 
-import de.dewarim.goblin.quest.QuestStep
 import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.quest.Encounter
 import de.dewarim.goblin.quest.QuestGiver
+import de.dewarim.goblin.quest.QuestStep
 import de.dewarim.goblin.quest.QuestTemplate
 
 /**
@@ -20,18 +20,18 @@ class QuestService {
     void executeScript(Encounter encounter,PlayerCharacter pc){
         IEncounterScript encounterScript
 		try{
-			encounterScript = (IEncounterScript) encounter.script.clazz.newInstance();
+			encounterScript = encounter.script.clazz.newInstance()
 		}
         catch (ClassNotFoundException e){
             log.warn("Problem during executeScript: '${encounter.script.name}'",e)
             throw new RuntimeException(e)
         }
 		catch (IllegalArgumentException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException(e)
 		} catch (InstantiationException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException(e)
 		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException(e)
 		}
 
 		encounterScript.execute(pc, pc.currentQuest, encounter.config)

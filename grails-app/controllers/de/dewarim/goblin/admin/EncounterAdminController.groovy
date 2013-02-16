@@ -19,7 +19,8 @@ class EncounterAdminController extends BaseController {
     def edit() {
         def encounter = Encounter.get(params.id)
         if (!encounter) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         def mobList = encounter.mobs.collect {it.mob}
         render(template: 'edit', model: [encounter: encounter, mobList: mobList])
@@ -28,7 +29,8 @@ class EncounterAdminController extends BaseController {
     def cancelEdit() {
         def encounter = Encounter.get(params.id)
         if (!encounter) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         render(template: 'update', model: [encounter: encounter])
     }

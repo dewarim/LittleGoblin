@@ -19,7 +19,8 @@ class MobAdminController extends BaseController {
     def edit() {
         def mob = MobTemplate.get(params.id)
         if (!mob) {
-            return render(status: 503, text: message(code: 'error.unknown.mob'))
+            render(status: 503, text: message(code: 'error.unknown.mob'))
+            return
         }
         def imageList = mob.mobImages.collect {it.image}
         render(template: 'edit', model: [mob: mob, imageList:imageList])
@@ -28,7 +29,8 @@ class MobAdminController extends BaseController {
     def cancelEdit() {
         def mob = MobTemplate.get(params.id)
         if (!mob) {
-            return render(status: 503, text: message(code: 'error.unknown.mob'))
+            render(status: 503, text: message(code: 'error.unknown.mob'))
+            return
         }
         render(template: 'update', model: [mob: mob])
     }

@@ -21,7 +21,7 @@ On Ubuntu, use: sudo apt-get install tomcat7
 
 * Create a database "goblin" with user "goblin" and password "goblin" (for testing)
 
-* Download a database driver for MySQL if needed 
+* Download a database driver for MySQL if needed
   [http://dev.mysql.com/downloads/connector/j/5.1.html]
   Put the mysql driver .jar-file into Tomcat's "lib" directory
   (Postgres JDBC driver is included in the war file)
