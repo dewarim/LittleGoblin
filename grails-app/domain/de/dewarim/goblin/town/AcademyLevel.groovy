@@ -12,10 +12,10 @@ class AcademyLevel {
     Integer level = 1
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof AcademyLevel)) return false
 
-        AcademyLevel that = (AcademyLevel) o
+        AcademyLevel that = o
 
         if (academy != that.academy) return false
         if (level != that.level) return false

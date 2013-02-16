@@ -28,10 +28,10 @@ class MailBox {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof MailBox)) return false
 
-        MailBox mailBox = (MailBox) o
+        MailBox mailBox = o
 
         if (boxType != mailBox.boxType) return false
         if (owner != mailBox.owner) return false

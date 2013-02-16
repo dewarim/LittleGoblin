@@ -10,10 +10,10 @@ class MailBoxType {
     String name
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof MailBoxType)) return false
 
-        MailBoxType that = (MailBoxType) o
+        MailBoxType that = o
 
         if (name != that.name) return false
 

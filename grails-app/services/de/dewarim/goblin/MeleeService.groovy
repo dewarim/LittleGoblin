@@ -1,13 +1,12 @@
 package de.dewarim.goblin
 
-import de.dewarim.goblin.combat.Melee
-import de.dewarim.goblin.pc.PlayerCharacter
-import de.dewarim.goblin.combat.MeleeFighter
-import de.dewarim.goblin.combat.MeleeAction
 import de.dewarim.goblin.combat.CombatMessage
+import de.dewarim.goblin.combat.Melee
+import de.dewarim.goblin.combat.MeleeAction
+import de.dewarim.goblin.combat.MeleeFighter
 import de.dewarim.goblin.item.Item
 import de.dewarim.goblin.item.ItemType
-import de.dewarim.goblin.item.ItemTypeFeature
+import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.ticks.ITickListener
 
 class MeleeService implements ITickListener{
@@ -47,6 +46,7 @@ class MeleeService implements ITickListener{
     MeleeFighter joinMelee(PlayerCharacter pc, Melee melee) {
         MeleeFighter mf = new MeleeFighter(melee, pc)
         mf.save()
+        mf
     }
 
     void leaveMelee(PlayerCharacter pc, Melee melee) {
@@ -145,8 +145,8 @@ class MeleeService implements ITickListener{
 
     void executeAction(MeleeAction action) {
         switch (action.type) {
-            case (MeleeActionType.FIGHT): attack(action); break;
-            case (MeleeActionType.USE_ITEM): useItem(action); break;
+            case (MeleeActionType.FIGHT): attack(action); break
+            case (MeleeActionType.USE_ITEM): useItem(action); break
         }
     }
 
@@ -346,7 +346,7 @@ class MeleeService implements ITickListener{
         fetchMeleeFighter(pc).action = useItem
         return useItem
     }
-    
+
     void tock(){
         Melee melee = Melee.findByStatus(MeleeStatus.RUNNING)
         if (melee) {

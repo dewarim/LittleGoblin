@@ -6,10 +6,10 @@ import grails.plugins.springsecurity.Secured
 import de.dewarim.goblin.pc.crafting.SkillRequirement
 import de.dewarim.goblin.pc.skill.Skill
 
-@Secured(["ROLE_ADMIN"])
 /**
  * Manage the SkillRequirements of a specific product.
  */
+@Secured(["ROLE_ADMIN"])
 class SkillRequirementAdminController extends BaseController {
 
     def index() {
@@ -21,7 +21,8 @@ class SkillRequirementAdminController extends BaseController {
         }
         catch (Exception e) {
             flash.message = message(code: 'error.invalid.object')
-            return redirect(controller: 'productAdmin', action: 'index')
+            redirect(controller: 'productAdmin', action: 'index')
+            return
         }
     }
 

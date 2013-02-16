@@ -12,10 +12,10 @@ class Reputation {
     Integer level = 0
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Reputation)) return false
 
-        Reputation that = (Reputation) o
+        Reputation that = o
 
         if (faction != that.faction) return false
         if (level != that.level) return false

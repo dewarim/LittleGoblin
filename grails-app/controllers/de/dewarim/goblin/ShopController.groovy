@@ -1,17 +1,16 @@
-package de.dewarim.goblin;
-import grails.plugins.springsecurity.Secured
+package de.dewarim.goblin
 
+import grails.plugins.springsecurity.Secured
+import de.dewarim.goblin.item.Item
+import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.shop.Shop
 
-import de.dewarim.goblin.item.ItemType
-import de.dewarim.goblin.item.Item
-
+@Secured(['ROLE_USER'])
 class ShopController extends BaseController {
 
     def itemService
     def shopService
 
-    @Secured(['ROLE_USER'])
     def show() {
         def pc = fetchPc()
         session.filters = [] // start with showing all items.
@@ -21,11 +20,13 @@ class ShopController extends BaseController {
             *  It has to be a shop in the player characters town,
             *  or something is wrong.
             */
-            return redirect(controller: 'town', action: 'show', params: [pc: params.pc])
+            redirect(controller: 'town', action: 'show', params: [pc: params.pc])
+            return
         }
         if (!shop) {
             flash.message = message(code: 'error.shop.not_found')
-            return redirect(controller: 'town', action: 'show', params: [pc: params.pc])
+            redirect(controller: 'town', action: 'show', params: [pc: params.pc])
+            return
         }
         if (shop.itemTypes?.size() == 0) {
             fetchWares(shop)
@@ -40,7 +41,6 @@ class ShopController extends BaseController {
         ]
     }
 
-    @Secured(['ROLE_USER'])
     def addCategory() {
         def pc = fetchPc()
         try {
@@ -66,7 +66,6 @@ class ShopController extends BaseController {
         }
     }
 
-    @Secured(['ROLE_USER'])
     def removeCategory() {
         def pc = fetchPc()
         try {
@@ -93,7 +92,6 @@ class ShopController extends BaseController {
         }
     }
 
-    @Secured(['ROLE_USER'])
     def reloadCategories() {
         def pc = fetchPc()
         try {
@@ -108,7 +106,6 @@ class ShopController extends BaseController {
         }
     }
 
-    @Secured(['ROLE_USER'])
     def showAllCategories() {
         def pc = fetchPc()
         try {
@@ -130,7 +127,6 @@ class ShopController extends BaseController {
         shop.itemTypes = itemService.fetchItemTypes(shop)
     }
 
-    @Secured(['ROLE_USER'])
     def buy() {
         def pc = fetchPc()
         Shop shop = Shop.get(params.shop)
@@ -141,7 +137,8 @@ class ShopController extends BaseController {
             *  It has to be a shop in the player characters town,
             *  or something is wrong.
             */
-            return render(status: 503, text: message(code: 'error.wrong_shop'))
+            render(status: 503, text: message(code: 'error.wrong_shop'))
+            return
         }
         def itemType = ItemType.get(params.itemType)
         Integer amount = params.amount ? inputValidationService.checkAndEncodeInteger(params, 'amount', 'amount') : 1
@@ -162,19 +159,17 @@ class ShopController extends BaseController {
                     item.initItem(amount * itemType.packageSize)
                     item.save()
                 }
-                return render(template: '/shared/sideInventory', model: [pc: pc, shop: shop])
+                render(template: '/shared/sideInventory', model: [pc: pc, shop: shop])
             }
             else {
-                return render(status: 503, text: message(code: 'error.insufficient.gold'))
+                render(status: 503, text: message(code: 'error.insufficient.gold'))
             }
         }
         else {
-            return render(status: 503, text: message(code: 'error.item.not_found'))
+            render(status: 503, text: message(code: 'error.item.not_found'))
         }
-
     }
 
-    @Secured(['ROLE_USER'])
     def sell() {
         try {
             def pc = fetchPc()
@@ -201,15 +196,11 @@ class ShopController extends BaseController {
                 item.amount -= amount
             }
             item.delete()
-            return render(template: '/shared/sideInventory', model: [pc: pc, shop: shop])
+            render(template: '/shared/sideInventory', model: [pc: pc, shop: shop])
         }
         catch (Exception e) {
             log.debug("failed to sell item: ", e)
-            return render(status: 503, text: message(code: e.message))
+            render(status: 503, text: message(code: e.message))
         }
-
-
     }
-
-
 }

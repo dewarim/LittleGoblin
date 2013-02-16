@@ -1,10 +1,10 @@
-package de.dewarim.goblin.combat;
+package de.dewarim.goblin.combat
 
 import de.dewarim.goblin.mob.Mob
 import de.dewarim.goblin.pc.PlayerCharacter
 
 class Combat {
-	
+
 	static hasMany = [players:PlayerCharacter, mobs:Mob, messages:CombatMessage]
 	static belongsTo = [playerCharacter:PlayerCharacter]
 	static constraints = {
@@ -13,9 +13,9 @@ class Combat {
     static mapping = {
         version:false
     }
-	                    
+
     Date started = new Date()
-	Date finished	
+	Date finished
 
     Combat(){}
 
@@ -24,24 +24,21 @@ class Combat {
 		this.addToPlayers(pc)
 		this.addToMobs(mob)
 	}
-		
+
 	/**
 	 * Currently, a combat has only one mob. This is a temporary convenience method
 	 * to get this mob.
 	 * @return
 	 */
 	Mob fetchFirstMob(){
-		if(mobs.isEmpty()){
-			return null
-		}
-		return mobs.asList().get(0)
+		return mobs ? mobs.asList()[0] : null
 	}
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Combat)) return false
 
-        Combat combat = (Combat) o
+        Combat combat = o
 
         if (finished != combat.finished) return false
         if (playerCharacter != combat.playerCharacter) return false

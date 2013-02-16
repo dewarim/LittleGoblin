@@ -1,4 +1,4 @@
-package de.dewarim.goblin.exception;
+package de.dewarim.goblin.exception
 
 class MonsterDeadException extends RuntimeException {
 

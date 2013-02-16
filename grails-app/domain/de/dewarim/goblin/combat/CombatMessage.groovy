@@ -26,10 +26,10 @@ class CombatMessage {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof CombatMessage)) return false
 
-        CombatMessage that = (CombatMessage) o
+        CombatMessage that = o
 
         if (combat != that.combat) return false
         if (msg != that.msg) return false

@@ -2,17 +2,14 @@ package de.dewarim.goblin
 
 import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.pc.skill.CreatureSkill
-
+import de.dewarim.goblin.pc.skill.LearningQueueElement
 import de.dewarim.goblin.pc.skill.SkillSet
 import de.dewarim.goblin.ticks.ITickListener
-import de.dewarim.goblin.town.AcademyLevel
 import de.dewarim.goblin.town.Academy
+import de.dewarim.goblin.town.AcademyLevel
 import de.dewarim.goblin.town.AcademySkillSet
-import de.dewarim.goblin.pc.skill.LearningQueueElement
 
 class SkillService implements ITickListener {
-
-    static transactional = true
 
     void teach(PlayerCharacter pc, SkillSet skillSet){
 
@@ -35,14 +32,14 @@ class SkillService implements ITickListener {
             if(skill.script){
                 ISkillScript iss
                 try {
-                    iss = (ISkillScript) skill.script.newInstance();
+                    iss = (ISkillScript) skill.script.newInstance()
                 }
                 catch (IllegalArgumentException e) {
-                    throw new RuntimeException(e);
+                    throw new RuntimeException(e)
                 } catch (InstantiationException e) {
-                    throw new RuntimeException(e);
+                    throw new RuntimeException(e)
                 } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
+                    throw new RuntimeException(e)
                 }
 
                 iss.execute(pc, theSkill, skill.initParams)
@@ -61,7 +58,7 @@ class SkillService implements ITickListener {
         finishedSkills.each{element ->
 
             PlayerCharacter pc = element.pc
-            AcademySkillSet ass = element.academySkillSet           
+            AcademySkillSet ass = element.academySkillSet
             Academy academy = ass.academy
 
 
@@ -77,12 +74,12 @@ class SkillService implements ITickListener {
             ass.removeFromLearningQueueElements element
             element.delete()
 
-            log.debug("Player ${pc.name} learned ${ass.skillSet.name}");
+            log.debug("Player ${pc.name} learned ${ass.skillSet.name}")
         }
 
         return finishedSkills.size()
     }
-    
+
     void tock(){
         def amount = checkFinishedSkills()
         log.debug("processed: $amount skills.")

@@ -12,10 +12,10 @@ class GoblinScript {
     Class clazz
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof GoblinScript)) return false
 
-        GoblinScript that = (GoblinScript) o
+        GoblinScript that = o
 
         if (clazz != that.clazz) return false
         if (name != that.name) return false

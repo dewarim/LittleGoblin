@@ -1,26 +1,25 @@
-package de.dewarim.goblin.pc;
-import de.dewarim.goblin.town.Town
-import de.dewarim.goblin.item.Item;
-import de.dewarim.goblin.quest.Quest
-import de.dewarim.goblin.quest.QuestTemplate
-import de.dewarim.goblin.combat.Combat
+package de.dewarim.goblin.pc
+
 import de.dewarim.goblin.Creature
-import de.dewarim.goblin.UserAccount
 import de.dewarim.goblin.Dice
-import de.dewarim.goblin.EquipmentSlotType
 import de.dewarim.goblin.EquipmentSlot
+import de.dewarim.goblin.EquipmentSlotType
+import de.dewarim.goblin.UserAccount
+import de.dewarim.goblin.combat.Combat
+import de.dewarim.goblin.combat.Melee
+import de.dewarim.goblin.guild.GuildMember
+import de.dewarim.goblin.item.Item
+import de.dewarim.goblin.item.ItemType
+import de.dewarim.goblin.pc.crafting.Component
+import de.dewarim.goblin.pc.crafting.PlayerProduct
+import de.dewarim.goblin.pc.crafting.ProductionJob
+import de.dewarim.goblin.pc.skill.LearningQueueElement
+import de.dewarim.goblin.quest.Quest
 import de.dewarim.goblin.reputation.Reputation
 import de.dewarim.goblin.social.MailBox
-import de.dewarim.goblin.pc.crafting.ProductionJob
-
-import de.dewarim.goblin.town.AcademyLevel
-import de.dewarim.goblin.guild.GuildMember
-import de.dewarim.goblin.pc.skill.LearningQueueElement
-import de.dewarim.goblin.pc.crafting.PlayerProduct
-import de.dewarim.goblin.pc.crafting.Component
-import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.social.MailBoxType
-import de.dewarim.goblin.combat.Melee
+import de.dewarim.goblin.town.AcademyLevel
+import de.dewarim.goblin.town.Town
 
 class PlayerCharacter extends Creature {
 
@@ -122,7 +121,7 @@ class PlayerCharacter extends Creature {
 
     /**
      * A player character should have individual EquipmentSlots, as
-     * they may very well be removed... (eg, loose your right hand) 
+     * they may very well be removed... (eg, loose your right hand)
      */
     void initializeEquipmentSlots() {
         // TODO: change from hard coded to soft coded and make them applicable for generic creatures, too.
@@ -136,7 +135,7 @@ class PlayerCharacter extends Creature {
             EquipmentSlot slot = new EquipmentSlot(name: key, type: est, rank: rank++, creature: this)
             est.addToEquipmentSlots slot
 //            slot.save()
-            this.addToSlots(slot)
+            addToSlots(slot)
         }
     }
 
@@ -154,27 +153,27 @@ class PlayerCharacter extends Creature {
 
 
     boolean equals(o) {
-        if (this.is(o)) return true;
+        if (is(o)) return true
 
-        if (!(o instanceof PlayerCharacter)) return false;
+        if (!(o instanceof PlayerCharacter)) return false
 
-        PlayerCharacter that = (PlayerCharacter) o;
+        PlayerCharacter that = o
 
-        if (alive != that.alive) return false;
-        if (deaths != that.deaths) return false;
-        if (description != that.description) return false;
-        if (level != that.level) return false;
-        if (name != that.name) return false;
-        if (questLevel != that.questLevel) return false;
-        if (spentExperience != that.spentExperience) return false;
-        if (victories != that.victories) return false;
-        if (xp != that.xp) return false;
+        if (alive != that.alive) return false
+        if (deaths != that.deaths) return false
+        if (description != that.description) return false
+        if (level != that.level) return false
+        if (name != that.name) return false
+        if (questLevel != that.questLevel) return false
+        if (spentExperience != that.spentExperience) return false
+        if (victories != that.victories) return false
+        if (xp != that.xp) return false
 
-        return true;
+        return true
     }
 
     int hashCode() {
-        return (name != null ? name.hashCode() : 0);
+        return (name != null ? name.hashCode() : 0)
     }
 
     List<Quest> fetchOpenQuests() {

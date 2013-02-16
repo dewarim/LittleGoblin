@@ -22,7 +22,8 @@ class ItemAdminController extends BaseController {
     def edit() {
         def itemType = ItemType.get(params.id)
         if (!itemType) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         def itemCategoryIdList = ItemCategory.findAllByItemType(itemType).collect { it.category.id }
         render(template: 'edit', model: [itemType: itemType, itemCategoryIdList: itemCategoryIdList])
@@ -31,7 +32,8 @@ class ItemAdminController extends BaseController {
     def cancelEdit() {
         def itemType = ItemType.get(params.id)
         if (!itemType) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         render(template: 'update', model: [itemType: itemType])
     }
@@ -66,12 +68,12 @@ class ItemAdminController extends BaseController {
         if (params.combatDice){
             itemType.combatDice = inputValidationService.checkObject(Dice.class, params.combatDice, true)
         }
-               
+
         def categories = params.list('category').collect{inputValidationService.checkObject(Category.class, it)}
         itemType.itemCategories.collect{it}.each{ itemCategory ->
             if(! categories.contains(itemCategory.category)){
                 itemCategory.deleteFully()
-            }            
+            }
         }
         categories.each{Category category ->
             if (! itemType.itemCategories.find{it.category.equals(category)}){

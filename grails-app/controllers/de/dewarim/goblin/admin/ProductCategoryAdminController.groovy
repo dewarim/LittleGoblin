@@ -17,7 +17,8 @@ class ProductCategoryAdminController extends BaseController {
     def edit() {
         def category = ProductCategory.get(params.id)
         if (!category) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         render(template: 'edit', model: [category: category])
     }
@@ -25,7 +26,8 @@ class ProductCategoryAdminController extends BaseController {
     def cancelEdit() {
         def category = ProductCategory.get(params.id)
         if (!category) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         render(template: 'update', model: [category: category])
     }

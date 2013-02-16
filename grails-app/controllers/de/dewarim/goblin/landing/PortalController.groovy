@@ -1,12 +1,11 @@
-package de.dewarim.goblin.landing;
-
-import de.dewarim.goblin.HighScore
+package de.dewarim.goblin.landing
 
 import grails.plugins.springsecurity.Secured
 import de.dewarim.goblin.BaseController
+import de.dewarim.goblin.HighScore
+import de.dewarim.goblin.Role
 import de.dewarim.goblin.UserAccount
 import de.dewarim.goblin.UserRole
-import de.dewarim.goblin.Role
 
 class PortalController extends BaseController {
 
@@ -26,7 +25,8 @@ class PortalController extends BaseController {
     }
 
     def index() {
-        return redirect(action: landing)
+        redirect(action: 'landing')
+        return
     }
 
     def imprint() {
@@ -117,14 +117,16 @@ class PortalController extends BaseController {
             newAccount.confirmationMailSent
             // return::success
             flash.message = message(code: 'registration.mail.sent')
-            return redirect(controller: 'portal', action: 'landing')
+            redirect(controller: 'portal', action: 'landing')
+            return
         }
         catch (Exception e) {
             log.debug("registration.fail: ", e)
             session.name = params.name
             session.email = params.email
             flash.message = message(code: 'registration.fail', args: [message(code: e.message)])
-            return render(view: 'register', model: params)
+            render(view: 'register', model: params)
+            return
         }
     }
 
@@ -139,7 +141,8 @@ class PortalController extends BaseController {
                             args: [grailsApplication.config.registration?.appName,
                                     userAccount.username
                             ])
-                    return render(view: 'landing')
+                    render(view: 'landing')
+                    return
                 }
                 else {
                     throw new RuntimeException('error.missing.account')
@@ -151,7 +154,8 @@ class PortalController extends BaseController {
         }
         catch (Exception e) {
             flash.message = message(code: 'confirmation.fail', args: [message(code: e.message)])
-            return render(view: 'landing', model: params)
+            render(view: 'landing', model: params)
+            return
         }
     }
 

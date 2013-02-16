@@ -1,8 +1,5 @@
 package de.dewarim.goblin.town
 
-import de.dewarim.goblin.pc.skill.SkillSet
-import de.dewarim.goblin.guild.Guild
-
 /**
  *  An Academy is a place where PCs may learn new Skills / SkillSets.
  * Currently, there is a 1:n mapping of Academy to SkillSets. One expansion
@@ -12,7 +9,7 @@ import de.dewarim.goblin.guild.Guild
  *
  *
  * An Academy may be associated with a guild, and if that's the case, a PC may only
- * learn skills there if he is a member. 
+ * learn skills there if he is a member.
  */
 class Academy {
 
@@ -34,10 +31,10 @@ class Academy {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Academy)) return false
 
-        Academy academy = (Academy) o
+        Academy academy = o
 
         if (description != academy.description) return false
         if (name != academy.name) return false

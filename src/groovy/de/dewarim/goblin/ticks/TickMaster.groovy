@@ -50,7 +50,7 @@ class TickMaster extends DefaultActor {
             log.warn("startTicking failed.", e)
         }
     }
-    
+
     def sendTick(TickCommand cmd){
         if (running){
             TickCommand tc = new TickCommand(type: TickCommandType.DO_TICK, tickId: cmd.tickId)
@@ -62,7 +62,7 @@ class TickMaster extends DefaultActor {
 //                    log.debug("tick-tock.")
                     sendTick(tc)
                 }
-            } 
+            }
         }
     }
 

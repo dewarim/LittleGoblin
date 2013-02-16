@@ -1,11 +1,11 @@
-package de.dewarim.goblin.quest;
+package de.dewarim.goblin.quest
+
 import de.dewarim.goblin.pc.PlayerCharacter
 
 class Quest {
 
     static belongsTo = [template: QuestTemplate, playerCharacter: PlayerCharacter]
     static constraints = {
-        start nullable: false
         finishedDate nullable: true
         currentStep nullable: true
         lastExecutedStep nullable: true
@@ -65,10 +65,10 @@ class Quest {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Quest)) return false
 
-        Quest quest = (Quest) o
+        Quest quest = o
 
         if (currentStep != quest.currentStep) return false
         if (finished != quest.finished) return false

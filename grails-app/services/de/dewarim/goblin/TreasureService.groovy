@@ -1,19 +1,19 @@
-package de.dewarim.goblin;
+package de.dewarim.goblin
 
-import de.dewarim.goblin.item.Item;
-import de.dewarim.goblin.item.ItemType;
+import de.dewarim.goblin.item.Item
+import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.mob.Mob
-import de.dewarim.goblin.pc.PlayerCharacter;
+import de.dewarim.goblin.pc.PlayerCharacter
 
 /**
  * Purpose: based on a monster, create a list of items found on it.
- * Version 1: just return item #1 
- * 
+ * Version 1: just return item #1
+ *
  * @author ingo
  *
  */
 class TreasureService {
-	
+
 	List<Item> findTreasure(Mob mob, PlayerCharacter pc){
 //		def type = ItemType.findByName('Potion of Healing')
 //		def type = ItemType.findByName('Leather Cap')
@@ -23,5 +23,4 @@ class TreasureService {
         item.save()
 		return [item]
 	}
-	
 }

@@ -1,10 +1,10 @@
 package de.dewarim.goblin.admin
 
-import de.dewarim.goblin.BaseController
 import grails.plugins.springsecurity.Secured
-import de.dewarim.goblin.shop.ShopOwner
+import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.Dice
 import de.dewarim.goblin.shop.Shop
+import de.dewarim.goblin.shop.ShopOwner
 
 @Secured(["ROLE_ADMIN"])
 class ShopOwnerAdminController extends BaseController {
@@ -18,7 +18,8 @@ class ShopOwnerAdminController extends BaseController {
     def edit() {
         def shopOwner = ShopOwner.get(params.id)
         if (!shopOwner) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         render(template: '/shopOwnerAdmin/edit', model: [shopOwner: shopOwner])
     }
@@ -26,7 +27,8 @@ class ShopOwnerAdminController extends BaseController {
     def cancelEdit() {
         def shopOwner = ShopOwner.get(params.id)
         if (!shopOwner) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         render(template: '/shopOwnerAdmin/update', model: [shopOwner: shopOwner])
     }

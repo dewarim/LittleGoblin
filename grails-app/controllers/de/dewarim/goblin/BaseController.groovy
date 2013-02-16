@@ -38,7 +38,7 @@ class BaseController {
     }
 
     protected UserAccount fetchUser() {
-        return (UserAccount) springSecurityService.currentUser
+        return springSecurityService.currentUser
     }
 
     /**
@@ -54,7 +54,7 @@ class BaseController {
         if (!pc) {
             throw new RuntimeException('error.no.pc')
         }
-        def item = (Item) inputValidationService.checkObject(Item.class, params.item, true)
+        Item item = inputValidationService.checkObject(Item, params.item, true)
         if (!item) {
             throw new RuntimeException('error.item_not_found')
         }

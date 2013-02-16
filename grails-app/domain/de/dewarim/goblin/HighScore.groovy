@@ -1,18 +1,18 @@
 package de.dewarim.goblin
 
-import de.dewarim.goblin.pc.PlayerCharacter;
+import de.dewarim.goblin.pc.PlayerCharacter
 
 class HighScore {
-	
+
 	PlayerCharacter character
 	Long xp
 	Creature killer
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof HighScore)) return false
 
-        HighScore highScore = (HighScore) o
+        HighScore highScore = o
 
         if (character != highScore.character) return false
         if (killer != highScore.killer) return false

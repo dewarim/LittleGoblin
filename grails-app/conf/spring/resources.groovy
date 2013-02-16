@@ -35,7 +35,6 @@ beans = {
 //    }
 
 //    learningDelayer(de.dewarim.goblin.camel.LearningDelayer)
-    
+
     listenerTestBean(TickTestBean)
-    
 }

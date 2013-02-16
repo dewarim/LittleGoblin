@@ -2,8 +2,6 @@ package de.dewarim.goblin
 
 class GlobalConfigService {
 
-    static transactional = true
-
     String fetchValue(String name) {
         return GlobalConfigEntry.findByName(name)?.entryValue
     }
@@ -18,7 +16,7 @@ class GlobalConfigService {
             return Integer.parseInt(fetchValue(name))
         }
         catch (Exception ex){
-            return 0;
+            return 0
         }
     }
 
@@ -27,7 +25,7 @@ class GlobalConfigService {
             return Integer.parseInt(fetchValue(name))
         }
         catch (Exception ex){
-            return defaultValue;
+            return defaultValue
         }
     }
 }

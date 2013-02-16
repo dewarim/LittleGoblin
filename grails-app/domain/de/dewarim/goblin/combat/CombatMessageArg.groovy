@@ -15,10 +15,10 @@ class CombatMessageArg {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof CombatMessageArg)) return false
 
-        CombatMessageArg that = (CombatMessageArg) o
+        CombatMessageArg that = o
 
         if (cma != that.cma) return false
         if (combatMessage != that.combatMessage) return false

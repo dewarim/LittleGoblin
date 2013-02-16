@@ -1,6 +1,6 @@
 package de.dewarim.goblin
 
-import de.dewarim.goblin.item.ItemType;
+import de.dewarim.goblin.item.ItemType
 
 /**
  * Mapping class between ItemType and EquipmentSlotType.
@@ -39,10 +39,10 @@ class RequiredSlot {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof RequiredSlot)) return false
 
-        RequiredSlot that = (RequiredSlot) o
+        RequiredSlot that = o
 
         if (amount != that.amount) return false
         if (itemType != that.itemType) return false

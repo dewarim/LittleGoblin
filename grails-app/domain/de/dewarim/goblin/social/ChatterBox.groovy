@@ -8,7 +8,6 @@ class ChatterBox {
     static belongsTo = [goblinOrder:GoblinOrder]
 
     static constraints = {
-        name nullable:false
     }
 
     Long messages = 0
@@ -26,10 +25,10 @@ class ChatterBox {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof ChatterBox)) return false
 
-        ChatterBox that = (ChatterBox) o
+        ChatterBox that = o
 
         if (goblinOrder != that.goblinOrder) return false
         if (messages != that.messages) return false

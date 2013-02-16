@@ -9,12 +9,12 @@ class LearningQueueElement extends QueueElement{
     static mapping = {
         version:false
     }
-    
+
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof LearningQueueElement)) return false
 
-        LearningQueueElement that = (LearningQueueElement) o
+        LearningQueueElement that = o
 
         if (academySkillSet != that.academySkillSet) return false
         if (pc != that.pc) return false

@@ -1,7 +1,7 @@
 package de.dewarim.goblin.town
 
-import de.dewarim.goblin.pc.skill.SkillSet
 import de.dewarim.goblin.pc.skill.LearningQueueElement
+import de.dewarim.goblin.pc.skill.SkillSet
 
 /**
  * An Academy offers n SkillSets of a specific level. This class maps
@@ -32,24 +32,24 @@ class AcademySkillSet {
     }
 
     boolean equals(o) {
-        if (this.is(o)){
-            return true;
+        if (is(o)){
+            return true
         }
 
         if (!(o instanceof AcademySkillSet)){
-            return false;
+            return false
         }
 
-        AcademySkillSet that = (AcademySkillSet) o;
+        AcademySkillSet that = o
 
-        if (academy != that.academy || skillSet != that.skillSet || requiredLevel != that.requiredLevel){ 
-            return false;
+        if (academy != that.academy || skillSet != that.skillSet || requiredLevel != that.requiredLevel){
+            return false
         }
 
-        return true;
+        return true
     }
 
     int hashCode() {
-        return (academy.hashCode() ?: 0) + (skillSet.hashCode() ?: 0);
+        return (academy.hashCode() ?: 0) + (skillSet.hashCode() ?: 0)
     }
 }

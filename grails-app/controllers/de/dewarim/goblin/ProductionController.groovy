@@ -1,13 +1,14 @@
 package de.dewarim.goblin
 
 import grails.plugins.springsecurity.Secured
-import de.dewarim.goblin.pc.crafting.ProductCategory
 import de.dewarim.goblin.pc.crafting.Product
+import de.dewarim.goblin.pc.crafting.ProductCategory
 import de.dewarim.goblin.pc.crafting.ProductionJob
 
 /**
  * A product is something a player can create, given the necessary materials and skill requirements.
  */
+@Secured(['ROLE_USER'])
 class ProductionController extends BaseController{
 
     def productionService
@@ -15,29 +16,30 @@ class ProductionController extends BaseController{
     /**
      * Show the list of available product categories.
      */
-    @Secured(['ROLE_USER'])
     def workshop() {
         def pc = fetchPc()
         if(! pc){
-            return redirect(action:'start', controller:'portal')
+            redirect(action:'start', controller:'portal')
+            return
         }
         def categories = ProductCategory.list()
-        
+
         return [categories:categories,
                 pc:pc
         ]
     }
 
-    @Secured(['ROLE_USER'])
     def listProducts() {
         def pc = fetchPc()
         if(! pc){
-            return redirect(action:'start', controller:'portal')
+            redirect(action:'start', controller:'portal')
+            return
         }
         def category = ProductCategory.get(params.category)
         if(! category){
             flash.message = message(code:'error.missing.category')
-            return redirect(action:'show', controller:'town')
+            redirect(action:'show', controller:'town')
+            return
         }
 
         // return a list of all products which the user may create
@@ -53,11 +55,11 @@ class ProductionController extends BaseController{
         ]
     }
 
-    @Secured(['ROLE_USER'])
     def selectComponents() {
         def pc = fetchPc()
         if(! pc){
             redirect(action:'start', controller:'portal')
+            return
         }
         def product = Product.get(params.product)
         if(product &&
@@ -79,21 +81,20 @@ class ProductionController extends BaseController{
         }
         else{
             flash.message = message(code:'error.missing.product')
-            return redirect(action:'workshop', controller:'production')
+            redirect(action:'workshop', controller:'production')
+            return
         }
     }
 
-    @Secured(['ROLE_USER'])
     def listProductionJobs() {
         def pc = fetchPc()
         if(! pc){
-            return redirect(action:'start', controller:'portal')
+            redirect(action:'start', controller:'portal')
+            return
         }
         def productionJobs = pc.productionJobs.sort{it.finished.time}
 
-        return [pc:pc,
-                jobs:productionJobs
-        ]
+        [pc:pc, jobs:productionJobs]
     }
 
     // AJAX request:
@@ -102,14 +103,14 @@ class ProductionController extends BaseController{
      * of this product, this method will try to create a ProductionJob for the
      * chosen product.
      */
-    @Secured(['ROLE_USER'])
     def startProduction() {
         def pc = fetchPc()
         if(! pc){
-            return redirect(action:'start', controller:'portal')
+            redirect(action:'start', controller:'portal')
+            return
         }
         def product = Product.get(params.product)
-        
+
         // check if player may create this product
         if(product && pc.playerProducts.find{it.product.equals(product)}){
             // check if the player has selected enough resources.
@@ -121,25 +122,29 @@ class ProductionController extends BaseController{
                     def msg = message(code:'productionJob.created', args:[message(code:product.name)])
                     log.debug("message: $msg")
                     def jobCount = pc.productionJobs.size()
-                    return render(template:'/production/selectItems',
+                    render(template:'/production/selectItems',
                             model:[product:product,
                                     itemMap:itemMap,
                                     selectedItems:selectedItems,
                                     prodStarted:msg,
                                     jobCount:jobCount
                             ])
+                    return
                 }
                 catch(RuntimeException ex){
                     log.debug("failed to create a new ProductionJob", ex)
-                    return render(status:503, text:message(code:ex.getMessage()));
+                    render(status:503, text:message(code:ex.getMessage()))
+                    return
                 }
             }
             else{
-                return render(status:503, text:message(code:'error.insufficient.resources'))
+                render(status:503, text:message(code:'error.insufficient.resources'))
+                return
             }
         }
         else{
-            return render(status:503, text:message(code:'error.missing.product'))
+            render(status:503, text:message(code:'error.missing.product'))
+            return
         }
     }
 
@@ -148,11 +153,11 @@ class ProductionController extends BaseController{
      * Will redirect him to the workshop if no more jobs remain, otherwise
      * redirect back to the list of production jobs.
      */
-    @Secured(['ROLE_USER'])
     def cancelProductionJob() {
         def pc = fetchPc()
         if(! pc){
-            return redirect(action:'start', controller:'portal')
+            redirect(action:'start', controller:'portal')
+            return
         }
         def job = ProductionJob.get(params.job)
         if(job){
@@ -160,7 +165,8 @@ class ProductionController extends BaseController{
                 productionService.terminateJob job
                 flash.message = message(code:'production.job.canceled')
                 if(pc.productionJobs.size() > 0){
-                    return redirect(action:'listProductionJobs', controller:'production')
+                    redirect(action:'listProductionJobs', controller:'production')
+                    return
                 }
             }
             else{
@@ -170,8 +176,7 @@ class ProductionController extends BaseController{
         else{
             flash.message = message(code:'error.job.not_found')
         }
-        return redirect(action:'workshop', controller:'production')
+        redirect(action:'workshop', controller:'production')
+        return
     }
-
-
 }

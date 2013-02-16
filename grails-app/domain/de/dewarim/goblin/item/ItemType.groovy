@@ -1,8 +1,8 @@
 package de.dewarim.goblin.item
 
+import de.dewarim.goblin.Dice
 import de.dewarim.goblin.RequiredSlot
 import de.dewarim.goblin.combat.WeaponAttribute
-import de.dewarim.goblin.Dice
 
 class ItemType {
 
@@ -39,10 +39,10 @@ class ItemType {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof ItemType)) return false
 
-        ItemType itemType = (ItemType) o
+        ItemType itemType = o
 
         if (availability != itemType.availability) return false
         if (baseValue != itemType.baseValue) return false

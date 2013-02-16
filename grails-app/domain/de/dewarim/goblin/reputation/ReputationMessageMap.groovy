@@ -3,7 +3,7 @@ package de.dewarim.goblin.reputation
 /**
  * The reputation with a given faction is internally an integer value.
  * To the player, those should be presented with a entertaining and
- * descriptive message. 
+ * descriptive message.
  */
 class ReputationMessageMap {
 
@@ -24,10 +24,10 @@ class ReputationMessageMap {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof ReputationMessageMap)) return false
 
-        ReputationMessageMap that = (ReputationMessageMap) o
+        ReputationMessageMap that = o
 
         if (faction != that.faction) return false
         if (name != that.name) return false

@@ -49,7 +49,7 @@ class UserAccount {
 
     Integer coins = 0
     Boolean premiumMember = false
-    
+
 	static constraints = {
 		username(blank: false, unique: true)
 		userRealName(blank: false)
@@ -57,7 +57,6 @@ class UserAccount {
 		enabled()
 		email(nullable:true)
 		currentChar(nullable:true)
-        coins nullable:false
         lastPasswordReset(nullable: true)
 	}
 
@@ -84,10 +83,10 @@ class UserAccount {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof UserAccount)) return false
 
-        UserAccount that = (UserAccount) o
+        UserAccount that = o
 
         if (accountExpired != that.accountExpired) return false
         if (accountLocked != that.accountLocked) return false

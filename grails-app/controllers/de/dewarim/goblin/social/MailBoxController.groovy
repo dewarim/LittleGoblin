@@ -1,7 +1,7 @@
 package de.dewarim.goblin.social
 
-import de.dewarim.goblin.BaseController
 import grails.plugins.springsecurity.Secured
+import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.pc.PlayerCharacter
 
 /**
@@ -51,7 +51,7 @@ class MailBoxController extends BaseController{
         PlayerCharacter recipient = PlayerCharacter.findByName(params.recipientName)
         params.subject = params.subject?.encodeAsHTML()
         params.contet = params.content?.encodeAsHTML()
-        
+
         params.sender = pc
         params.recipient = recipient
         params.box = pc.fetchOutBox()
@@ -62,17 +62,17 @@ class MailBoxController extends BaseController{
         Mail forRecipient = new Mail(params)
 
         if(! mail.validate() || ! forRecipient.validate()){
-            return render(view:'writeMail', model:[pc:pc, mail:mail])
+            render(view:'writeMail', model:[pc:pc, mail:mail])
+            return
         }
         else{
             mail.save()
             forRecipient.save()
             flash.message = message(code:'mail.sent.success')
-            return redirect(action:'index', controller:'mailBox')
+            redirect(action:'index', controller:'mailBox')
+            return
         }
     }
-
-
 
     /**
      * Fetch the mailbox specified by params.box (or the inbox).
@@ -81,7 +81,7 @@ class MailBoxController extends BaseController{
      */
     MailBox fetchMailBox(PlayerCharacter pc){
         MailBox box = null
-        if(params.box){            
+        if(params.box){
             box = pc.mailBoxes.find{it.id.equals(params.box?.toLong())}
         }
         if(! box){
@@ -120,13 +120,15 @@ class MailBoxController extends BaseController{
 
         def box = fetchMailBox(pc)
         if(! box){
-            return render(status:503, text:message(code:'error.mailbx.not.found'))
+            render(status:503, text:message(code:'error.mailbx.not.found'))
+            return
         }
 
         def mails = fetchMails(pc, box)
         log.debug("mails:${mails}")
-        return render(template:'/mailBox/mailbox',
+        render(template:'/mailBox/mailbox',
                 model:[pc:pc, mailBox:box, mails:mails, max:params.max ?: 10, offset:params.offset ?: 0])
+        return
     }
 
     /**
@@ -137,11 +139,13 @@ class MailBoxController extends BaseController{
         def pc = fetchPc()
         def box = fetchMailBox(pc)
         if(! box){
-            return render(status:503, text:message(code:'error.mailbx.not.found'))
+            render(status:503, text:message(code:'error.mailbx.not.found'))
+            return
         }
-        
+
         def mails = fetchMails(pc, box)
-        return render(template:'/mailBox/list_mails', model:[mailBox:box, mails:mails])
+        render(template:'/mailBox/list_mails', model:[mailBox:box, mails:mails])
+        return
     }
 
     /**
@@ -154,10 +158,10 @@ class MailBoxController extends BaseController{
         Mail mail = Mail.get(params.mail)
         if(mail.recipient.equals(pc)){
             mail.shown = true
-            return render(template:'/mailBox/mail_message', model:[pc:pc, mail:mail])
+            render(template:'/mailBox/mail_message', model:[pc:pc, mail:mail])
         }
         else{
-            return render(status:503, text:message(code:'error.mail.foreign'))
+            render(status:503, text:message(code:'error.mail.foreign'))
         }
     }
 
@@ -169,12 +173,14 @@ class MailBoxController extends BaseController{
         def pc = fetchPc()
         def recipient = PlayerCharacter.get(params.recipient)
         if(! recipient){
-            return render(status:503, text:message(code:'error.mail.recipient.missing'))
+            render(status:503, text:message(code:'error.mail.recipient.missing'))
+            return
         }
 
         def content = params.replyContent?.encodeAsHTML()
         if(! content){
-            return render(status:503, text:message(code:'error.mail.no_content'))
+            render(status:503, text:message(code:'error.mail.no_content'))
+            return
         }
 
         Mail mail = new Mail(subject:params.replySubject?.encodeAsHTML(),
@@ -191,10 +197,10 @@ class MailBoxController extends BaseController{
         )
         if(mail.save()){
             sentMail.save()
-            return render(text:message(code:'mail.sent.success'))
+            render(text:message(code:'mail.sent.success'))
         }
         else{
-            return render(status:503, text:mail.errors)
+            render(status:503, text:mail.errors)
         }
     }
 
@@ -206,10 +212,10 @@ class MailBoxController extends BaseController{
         if(mail.recipient.equals(pc)){
             mail.box.removeFromMails mail
             mail.delete()
-            return render(text:message(code:'mail.was.deleted'))
+            render(text:message(code:'mail.was.deleted'))
         }
         else{
-            return render(status:503, text:message(code:'error.mail.foreign'))
+            render(status:503, text:message(code:'error.mail.foreign'))
         }
     }
 
@@ -221,14 +227,15 @@ class MailBoxController extends BaseController{
         if(mail.recipient.equals(pc)){
             MailBox archiveBox = pc.fetchArchiveBox()
             if(! archiveBox){
-                return render(status:503, text:message(code:'error.mail.box.missing'))
+                render(status:503, text:message(code:'error.mail.box.missing'))
+                return
             }
             mail.box = archiveBox
             archiveBox.addToMails(mail)
-            return render(text:message(code:'mail.archived'))
+            render(text:message(code:'mail.archived'))
         }
         else{
-            return render(status:503, text:message(code:'error.mail.foreign'))
+            render(status:503, text:message(code:'error.mail.foreign'))
         }
     }
 }

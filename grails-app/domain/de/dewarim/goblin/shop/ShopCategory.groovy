@@ -27,10 +27,10 @@ class ShopCategory {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof ShopCategory)) return false
 
-        ShopCategory that = (ShopCategory) o
+        ShopCategory that = o
 
         if (category != that.category) return false
         if (shop != that.shop) return false

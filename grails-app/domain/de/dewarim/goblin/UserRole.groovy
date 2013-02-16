@@ -1,6 +1,6 @@
 package de.dewarim.goblin
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder
 
 /**
  * Mapping class between User and Role.

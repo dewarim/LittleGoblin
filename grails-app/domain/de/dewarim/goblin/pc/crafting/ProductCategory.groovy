@@ -14,10 +14,10 @@ class ProductCategory {
     String name
     String description // optional: description
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof ProductCategory)) return false
 
-        ProductCategory that = (ProductCategory) o
+        ProductCategory that = o
 
         if (description != that.description) return false
         if (name != that.name) return false

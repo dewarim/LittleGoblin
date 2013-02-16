@@ -31,10 +31,10 @@ class PlayerProduct {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof PlayerProduct)) return false
 
-        PlayerProduct that = (PlayerProduct) o
+        PlayerProduct that = o
 
         if (pc != that.pc) return false
         if (product != that.product) return false

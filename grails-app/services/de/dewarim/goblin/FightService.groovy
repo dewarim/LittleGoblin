@@ -1,16 +1,14 @@
 package de.dewarim.goblin
 
+import de.dewarim.goblin.combat.Combat
+import de.dewarim.goblin.combat.CombatMessage
 import de.dewarim.goblin.exception.MonsterDeadException
 import de.dewarim.goblin.exception.PlayerDeadException
 import de.dewarim.goblin.exception.SimultaneousDeathException
 import de.dewarim.goblin.mob.Mob
-
-import de.dewarim.goblin.combat.Combat
-import de.dewarim.goblin.combat.CombatMessage
 import de.dewarim.goblin.pc.PlayerCharacter
 
 class FightService {
-    boolean transactional = true
 
     def fight(Combat combat, PlayerCharacter pc, Mob mob) {
 //        Combat.withTransaction {

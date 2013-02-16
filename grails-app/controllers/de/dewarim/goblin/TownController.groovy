@@ -1,17 +1,18 @@
-package de.dewarim.goblin;
-import grails.plugins.springsecurity.Secured
-import de.dewarim.goblin.quest.QuestTemplate
-import de.dewarim.goblin.social.MailBox;
+package de.dewarim.goblin
 
+import grails.plugins.springsecurity.Secured
+import de.dewarim.goblin.social.MailBox
+
+@Secured(['ROLE_USER'])
 class TownController extends BaseController {
 
     def questService
 
-    @Secured(['ROLE_USER'])
     def show() {
         def pc = fetchPc()
         if(! pc){
-            return redirect(controllerName: 'portal', actionName:'start')
+            redirect(controller: 'portal', action:'start')
+            return
         }
         if (!pc.alive) {
             pc.resurrect()
@@ -19,9 +20,10 @@ class TownController extends BaseController {
         }
 
         session['pc'] = pc.id
-        
+
         if (pc.currentQuest) {
-            return redirect(action: 'show', controller: 'quest', params: [pc: pc.id])
+            redirect(action: 'show', controller: 'quest', params: [pc: pc.id])
+            return
         }
 
         // possible optimization: cache the results or use just one query.
@@ -39,5 +41,4 @@ class TownController extends BaseController {
                 questService:questService
         ]
     }
-
 }

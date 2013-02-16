@@ -1,9 +1,9 @@
 package de.dewarim.goblin
 
-import de.dewarim.goblin.shop.Shop
-import de.dewarim.goblin.item.ItemType
-import de.dewarim.goblin.shop.ShopCategory
 import de.dewarim.goblin.item.ItemCategory
+import de.dewarim.goblin.item.ItemType
+import de.dewarim.goblin.shop.Shop
+import de.dewarim.goblin.shop.ShopCategory
 
 /**
  *

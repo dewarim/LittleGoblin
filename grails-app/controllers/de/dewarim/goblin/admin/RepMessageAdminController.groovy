@@ -1,10 +1,9 @@
 package de.dewarim.goblin.admin
 
-import de.dewarim.goblin.BaseController
-import de.dewarim.goblin.reputation.ReputationMessageMap
 import grails.plugins.springsecurity.Secured
-
+import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.reputation.ReputationMessage
+import de.dewarim.goblin.reputation.ReputationMessageMap
 
 @Secured(["ROLE_ADMIN"])
 class RepMessageAdminController extends BaseController {
@@ -20,7 +19,8 @@ class RepMessageAdminController extends BaseController {
         }
         catch (Exception e) {
             flash.message = message(code: 'error.invalid.object')
-            return redirect(controller: 'rmmAdmin', action: 'index')
+            redirect(controller: 'rmmAdmin', action: 'index')
+            return
         }
     }
 

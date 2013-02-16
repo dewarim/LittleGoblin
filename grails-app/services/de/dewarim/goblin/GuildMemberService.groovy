@@ -1,8 +1,8 @@
 package de.dewarim.goblin
 
-import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.guild.Guild
 import de.dewarim.goblin.guild.GuildMember
+import de.dewarim.goblin.pc.PlayerCharacter
 
 /**
  *

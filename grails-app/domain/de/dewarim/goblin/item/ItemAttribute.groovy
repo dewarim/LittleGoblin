@@ -3,15 +3,15 @@ package de.dewarim.goblin.item
 import de.dewarim.goblin.UserProperty
 
 class ItemAttribute {
-	
+
 	static hasMany = [conditions:ItemAttributeCondition]
 	UserProperty affectedProperty
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof ItemAttribute)) return false
 
-        ItemAttribute that = (ItemAttribute) o
+        ItemAttribute that = o
 
         if (affectedProperty != that.affectedProperty) return false
 

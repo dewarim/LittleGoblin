@@ -1,6 +1,6 @@
-package de.dewarim.goblin;
+package de.dewarim.goblin
 
-import de.dewarim.goblin.item.ItemTypeFeature;
+import de.dewarim.goblin.item.ItemTypeFeature
 
 /**
  * Features allow Items to have scripts associated with them which the user can execute by activating
@@ -14,20 +14,20 @@ import de.dewarim.goblin.item.ItemTypeFeature;
  * for example, a drain life spell should not work on an undead monster).
  */
 class Feature {
-	
+
 	static hasMany = [itemTypeFeatures:ItemTypeFeature]
 
 //    Class<? extends ICombatScript> script // script class to generate the effect
     Class script
-	String internalName 
+	String internalName
 	// internal name, for example to differentiate between "heal 1w6" and "heal 3w6"
-	
+
 	String name // screen name (message-Id), to label a heal_1w6-item as "Lesser potion of healing"
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Feature)) return false
 
-        Feature feature = (Feature) o
+        Feature feature = o
 
         if (internalName != feature.internalName) return false
         if (name != feature.name) return false

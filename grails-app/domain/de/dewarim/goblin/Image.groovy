@@ -1,6 +1,6 @@
 package de.dewarim.goblin
 
-import de.dewarim.goblin.mob.MobImage;
+import de.dewarim.goblin.mob.MobImage
 
 /**
  * The base Image class is used for the game's graphical assets like mob pictures,
@@ -20,7 +20,7 @@ class Image {
 		sourceUrl(nullable:true)
 		artist(nullable:true)
 	}
-	
+
 	Integer width = 0
 	Integer height = 0
 	String url
@@ -30,10 +30,10 @@ class Image {
     License license
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Image)) return false
 
-        Image image = (Image) o
+        Image image = o
 
         if (artist != image.artist) return false
         if (description != image.description) return false

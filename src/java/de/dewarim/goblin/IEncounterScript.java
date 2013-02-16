@@ -9,5 +9,4 @@ import de.dewarim.goblin.quest.Quest;
 public interface IEncounterScript {
 
     void execute(PlayerCharacter pc, Quest quest, String params);
-    
 }

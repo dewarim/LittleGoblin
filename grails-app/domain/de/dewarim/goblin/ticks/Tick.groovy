@@ -3,13 +3,13 @@ package de.dewarim.goblin.ticks
 import org.springframework.beans.factory.NoSuchBeanDefinitionException
 
 class Tick {
-    
-    transient def grailsApplication
-    
+
+    transient grailsApplication
+
     static constraints = {
         name unique: true, blank: false
         beanName blank: false, validator: {val, obj ->
-            try{ 
+            try{
                 def bean = obj.grailsApplication.mainContext.getBean(val)
                 if (bean instanceof ITickListener){
                     return true
@@ -23,23 +23,23 @@ class Tick {
             return val < 1000 ? 'too.small' : true
         }
     }
-    
+
     String name
-    
+
     /**
      * Time between two ticks in milliseconds
      */
     Long tickLength = 10000
-    
+
     String beanName
     Long currentTick = 0
     Boolean active = true
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Tick)) return false
 
-        Tick tick = (Tick) o
+        Tick tick = o
 
         if (active != tick.active) return false
         if (currentTick != tick.currentTick) return false
@@ -53,7 +53,7 @@ class Tick {
     int hashCode() {
         return (name != null ? name.hashCode() : 0)
     }
-    
+
     Object fetchListener(){
         return grailsApplication.mainContext.getBean(beanName)
     }

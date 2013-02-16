@@ -2,7 +2,7 @@ package de.dewarim.goblin.ticks
 
 class TickService {
 
-    static Map<String, TickMaster> tickMap = new HashMap<>()
+    static Map<String, TickMaster> tickMap = [:]
 
     def initialize() {
         def ticks = Tick.list()

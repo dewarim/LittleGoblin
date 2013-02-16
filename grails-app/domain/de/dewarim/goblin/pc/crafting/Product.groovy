@@ -13,33 +13,33 @@ class Product {
             requiredSkills:SkillRequirement, // skill needed and their level
             crafters:PlayerProduct // players who know how to make this product
     ]
-    
+
     static belongsTo = [category:ProductCategory]
     static constraints = {
         name unique:true
 //        productionScript nullable:true
     }
-    
+
     String name
     Long timeNeeded
     // productionScript is disabled at the moment - too much complexity.
 //    Class productionScript
 
     boolean equals(o) {
-        if (this.is(o)) return true;
+        if (is(o)) return true
 
         if (!(o instanceof Product)) return false
 
-        Product product = (Product) o
+        Product product = o
 
         if (name != product.name) return false
         if( timeNeeded != product.timeNeeded) return false
 
-        return true;
+        return true
     }
 
     int hashCode() {
-        return (name != null ? name.hashCode() : 0);
+        return (name != null ? name.hashCode() : 0)
     }
 
     Collection<Component> fetchInputItems(){
