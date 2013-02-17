@@ -1,6 +1,6 @@
 # Testing roadmap for Little Goblin
 
-Version: 2013-01-29 #1
+Version: 2013-02-17 #2
 
 ## Introduction
 
@@ -9,7 +9,7 @@ The goal is to have automated tests which cover at least all functional aspects 
 
 ## Current State
 
-There are no unit tests, the existing files are all the auto-generated empty files with dummy methods.
+There is only one unit and one integration test (for Ticks)
 
 There are some old webtests:
 
@@ -18,11 +18,7 @@ There are some old webtests:
 * EquipWebTests: buy a weapon, go on a quest, equip item.
 * FightWebTests: go on a quest, start a fight, run away.
 
-grails test functional: will not run because of misconfigured database:
-Cannot create JDBC driver of class 'org.h2.Driver' for connect URL 'jdbc:hsqldb:mem:testDb'
-java.sql.SQLException: No suitable driver
-
-The tests will probably not run, even if the database driver issue is fixed.
+grails test-app will now run.
 
 ## Planned State:
 
