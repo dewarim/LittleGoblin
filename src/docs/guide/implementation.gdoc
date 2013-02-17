@@ -1,0 +1,10 @@
+So, you want to create your own game. That's great. 
+To show you how you can do this with Little Goblin, this section will explain how the
+reference implementation (the demo game) works and giving you hints where and 
+how to start your own development.
+ 
+h2. Prerequisites
+
+You should know a little bit of Grails. "The Grails website":http://www.grails.org/learn is your friend.
+
+It will also help to have some general programming knowledge.

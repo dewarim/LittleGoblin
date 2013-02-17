@@ -1,0 +1,41 @@
+A browsergame starts with a landing page, where the visitor gets a first impression on what the site is all about.
+  
+The landing page is mostly static. It can be found in grails-app/views/portal/landing.gsp
+    
+It contains the following parts:
+    
+* The links to the login and registration pages    
+* The optional Facebook like button 
+* A language chooser (currently supported: French and English)
+* Some information about Little Goblin
+
+The layout is governed by a special file, the sitemesh layout definition in grails-app/views/layouts/main.gsp.
+
+If you want to change the general look and feel, making changes to main.gsp is the easiest way to get this done.
+This file also includes the CSS responsible for styling the HTML elements. That file can be found in
+web-app/css/main.css.
+
+So, to change the landing page, you can start with:
+
+* grails-app/views/portal/landing.gsp
+* grails-app/views/layouts/main.gsp
+* web-app/css/main.css
+
+To activate the Facebook like button, edit your application-config.groovy file (named after your application,
+ for example goblin-config.groovy) and add:
+
+{code}
+facebook {
+    // this enables Facebook-JavaScript snippets on your landing page:
+    enabled=true
+    // show the like button:
+    enableLikeButton = true 
+    
+    // if set to true, allow login via Facebook - not implemented yet.
+    enableFacebookLogin = false
+     
+     // your server's URL and Facebook appId
+    myUrl = 'http://schedim.de/'
+    appId = '217240194988212'
+}
+{code}
