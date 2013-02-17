@@ -1,14 +1,15 @@
-package de.dewarim.goblin;
+package de.dewarim.goblin
 
-import de.dewarim.goblin.quest.Quest;
-import de.dewarim.goblin.quest.QuestTemplate
-import de.dewarim.goblin.mob.MobTemplate
-import de.dewarim.goblin.mob.Mob
 import grails.plugins.springsecurity.Secured
-import de.dewarim.goblin.quest.QuestStep
 import de.dewarim.goblin.combat.Combat
+import de.dewarim.goblin.mob.Mob
+import de.dewarim.goblin.mob.MobTemplate
+import de.dewarim.goblin.quest.Quest
 import de.dewarim.goblin.quest.QuestGiver
+import de.dewarim.goblin.quest.QuestStep
+import de.dewarim.goblin.quest.QuestTemplate
 
+@Secured(['ROLE_USER'])
 class QuestController extends BaseController {
 
     def questService
@@ -16,15 +17,16 @@ class QuestController extends BaseController {
     /**
      * Show the current quest and quest step
      */
-    @Secured(['ROLE_USER'])
     def show() {
         def pc = fetchPc()
         if (! pc){
             flash.message = message(code:'error.player_not_found')
-            return redirect(controller: "portal", action: "start")
+            redirect(controller: "portal", action: "start")
+            return
         }
         if (!pc.currentQuest) {
-            return redirect(controller: 'town', action: 'show', params: [pc: pc.id])
+            redirect(controller: 'town', action: 'show', params: [pc: pc.id])
+            return
         }
 
         return [
@@ -36,16 +38,17 @@ class QuestController extends BaseController {
     /**
      * Describe a quest prior to the user starting it
      */
-    @Secured(['ROLE_USER'])
     def describeQuest() {
         def pc = fetchPc()
         if (! pc){
             flash.message = message(code:'error.player_not_found')
-            return redirect(controller: "portal", action: "start")
+            redirect(controller: "portal", action: "start")
+            return
         }
         if (pc.currentQuest) {
             // if the pc is already on a quest, show that:
-            return redirect(controller: 'quest', action: 'show', params: [pc: pc.id])
+            redirect(controller: 'quest', action: 'show', params: [pc: pc.id])
+            return
         }
 
         QuestTemplate qt = QuestTemplate.get(params.quest)
@@ -59,16 +62,17 @@ class QuestController extends BaseController {
     /**
      * Start a new Quest
      */
-    @Secured(['ROLE_USER'])
     def startQuest() {
         def pc = fetchPc()
         if (! pc){
             flash.message = message(code:'error.player_not_found')
-            return redirect(controller: "portal", action: "start")
+            redirect(controller: "portal", action: "start")
+            return
         }
         if (pc.currentQuest) {
             flash.message = message(code: 'error.already_questing')
-            return redirect(controller: 'town', action: 'show', params: [pc: pc.id])
+            redirect(controller: 'town', action: 'show', params: [pc: pc.id])
+            return
         }
         QuestTemplate qt = QuestTemplate.get(params.quest)
         // TODO: validate access to this quest for this pc.
@@ -91,23 +95,25 @@ class QuestController extends BaseController {
             pc.currentCombat = combat
             combat.save(failOnError: true)
             log.debug('redirecting to fight.index')
-            return redirect(controller: 'fight', action: 'index', params: [// encounter:quest.currentStep.encounter.id,
+            redirect(controller: 'fight', action: 'index', params: [// encounter:quest.currentStep.encounter.id,
                     combat: combat.id])
+            return
         }
         else {
-            return redirect(controller: 'quest', action: 'showStep', params: [pc: pc.id])
+            redirect(controller: 'quest', action: 'showStep', params: [pc: pc.id])
+            return
         }
     }
 
     /**
      * Start a new Quest
      */
-    @Secured(['ROLE_USER'])
     def continueQuest() {
         def pc = fetchPc()
         if (! pc){
             flash.message = message(code:'error.player_not_found')
-            return redirect(controller: "portal", action: "start")
+            redirect(controller: "portal", action: "start")
+            return
         }
         //	QuestTemplate qt = QuestTemplate.get(params.quest)
         // TODO: validate access to this quest for this pc.
@@ -127,27 +133,30 @@ class QuestController extends BaseController {
             pc.currentCombat = combat
             combat.save(failOnError: true)
             log.debug('redirecting to fight.index')
-            return redirect(controller: 'fight', action: 'index', params: [// encounter:quest.currentStep.encounter.id,
+            redirect(controller: 'fight', action: 'index', params: [// encounter:quest.currentStep.encounter.id,
                     combat: combat.id])
+            return
         }
         else {
             // this encounter is described in the quest step.
-            return redirect(controller: 'quest', action: 'showStep', params: [pc: pc.id])
+            redirect(controller: 'quest', action: 'showStep', params: [pc: pc.id])
 //			flash.message = message(code:'error.encounterType.not.implemented')
             //			log.debug(flash.message)
+            return
         }
     }
 
-    @Secured(['ROLE_USER'])
     def showStep() {
         def pc = fetchPc()
         if (!pc) {
             flash.message = message(code:'error.player_not_found')
-            return redirect(controller: "portal", action: "start")
+            redirect(controller: "portal", action: "start")
+            return
         }
         Quest quest = pc.currentQuest
         if (!quest) {
-            return redirect(controller: 'town', action: 'show', params: [pc: pc.id])
+            redirect(controller: 'town', action: 'show', params: [pc: pc.id])
+            return
         }
 
         QuestStep currentStep = quest.currentStep
@@ -163,12 +172,12 @@ class QuestController extends BaseController {
                 step: currentStep]
     }
 
-    @Secured(['ROLE_USER'])
     def finishQuest() {
         def pc = fetchPc()
         if (!pc) {
             flash.message = message(code:'error.player_not_found')
-            return redirect(controller: "portal", action: "start")
+            redirect(controller: "portal", action: "start")
+            return
         }
         Quest quest = pc.currentQuest
         if (quest) {
@@ -179,33 +188,36 @@ class QuestController extends BaseController {
             pc.questLevel = pc.questLevel + 1
             quest.successful = true
         }
-        return redirect(controller: 'town', action: 'show', params: [pc: pc.id])
+        redirect(controller: 'town', action: 'show', params: [pc: pc.id])
+        return
     }
 
-    @Secured(['ROLE_USER'])
     def nextStep() {
         def pc = fetchPc()
         if (!pc) {
             flash.message = message(code:'error.player_not_found')
-            return redirect(controller: "portal", action: "start")
+            redirect(controller: "portal", action: "start")
+            return
         }
         Quest quest = pc.currentQuest
         QuestStep nextStep = QuestStep.get(params.step)
         if (!nextStep ||
                 !pc.currentQuest.verifyNextStep(nextStep)) {
             flash.message = message(code: 'error.quest.step_not_found')
-            return redirect(controller: 'town', action: 'show', params: [pc: pc.id])
+            redirect(controller: 'town', action: 'show', params: [pc: pc.id])
+            return
         }
         quest.currentStep = nextStep
-        return redirect(controller: 'quest', action: 'showStep', params: [pc: pc.id])
+        redirect(controller: 'quest', action: 'showStep', params: [pc: pc.id])
+        return
     }
 
-    @Secured(['ROLE_USER'])
     def showQuestMaster() {
         def pc = fetchPc()
          if (!pc) {
             flash.message = message(code:'error.player_not_found')
-            return redirect(controller: "portal", action: "start")
+            redirect(controller: "portal", action: "start")
+            return
         }
         QuestGiver questMaster = (QuestGiver) inputValidationService.checkObject(QuestGiver.class, params.questMaster, true)
         if(! questMaster){

@@ -11,7 +11,6 @@ class GoblinOrder {
     static constraints = {
         name blank: false, unique: true
         description blank:true
-        leader nullable:false
     }
 
     Long score = 0
@@ -25,10 +24,10 @@ class GoblinOrder {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof GoblinOrder)) return false
 
-        GoblinOrder that = (GoblinOrder) o
+        GoblinOrder that = o
 
         if (coins != that.coins) return false
         if (description != that.description) return false

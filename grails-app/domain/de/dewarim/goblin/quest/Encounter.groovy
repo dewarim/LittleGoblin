@@ -1,14 +1,14 @@
-package de.dewarim.goblin.quest;
+package de.dewarim.goblin.quest
 
 import de.dewarim.goblin.GoblinScript
-import de.dewarim.goblin.mob.EncounterMob;
+import de.dewarim.goblin.mob.EncounterMob
 
 /**
  * An encounter may be reused in many quests.
  *
  */
 class Encounter {
-	
+
 	static hasMany = [steps:QuestStep, mobs:EncounterMob]
 	static constraints = {
 	    script nullable:true
@@ -21,10 +21,10 @@ class Encounter {
     String config
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Encounter)) return false
 
-        Encounter encounter = (Encounter) o
+        Encounter encounter = o
 
         if (config != encounter.config) return false
         if (includesCombat != encounter.includesCombat) return false

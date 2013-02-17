@@ -1,14 +1,14 @@
-package de.dewarim.goblin;
+package de.dewarim.goblin
 
 class UserProperty {
 	String name
 	String upValue
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof UserProperty)) return false
 
-        UserProperty that = (UserProperty) o
+        UserProperty that = o
 
         if (name != that.name) return false
         if (upValue != that.upValue) return false

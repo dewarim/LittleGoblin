@@ -1,13 +1,14 @@
-package de.dewarim.goblin.mob;
+package de.dewarim.goblin.mob
+
+import org.apache.commons.lang.builder.HashCodeBuilder
 
 import de.dewarim.goblin.Image
-import org.apache.commons.lang.builder.HashCodeBuilder
 
 /**
  * Mapping class between MobTemplate and Image.
  */
 class MobImage {
-	
+
 	static belongsTo = [mobTemplate:MobTemplate, image:Image]
 
     MobImage(){}
@@ -22,7 +23,7 @@ class MobImage {
     void deleteFully(){
         mobTemplate.removeFromMobImages this
         image.removeFromMobImages this
-        this.delete()
+        delete()
     }
 
     boolean equals(other) {
@@ -40,5 +41,4 @@ class MobImage {
 		if (image) builder.append(image.id)
 		builder.toHashCode()
 	}
-	
 }

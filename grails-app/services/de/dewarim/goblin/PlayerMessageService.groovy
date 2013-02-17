@@ -6,8 +6,6 @@ class PlayerMessageService {
 
     def messageSource
 
-    static transactional = true
-
     /**
      * Create a new PlayerMessage based upon the character's settings,
      * connect it with the specified player character, save it and return a reference.

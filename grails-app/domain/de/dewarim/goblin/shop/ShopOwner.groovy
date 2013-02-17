@@ -1,6 +1,6 @@
-package de.dewarim.goblin.shop;
+package de.dewarim.goblin.shop
 
-import de.dewarim.goblin.Dice;
+import de.dewarim.goblin.Dice
 
 /**
  * Owner of a shop. At the moment, shop owners are not strictly necessary (the fields
@@ -12,14 +12,12 @@ class ShopOwner {
     static hasMany = [shops:Shop]
 
 	static constraints = {
-		name blank:false, nullable:false
-		description blank:false, nullable:false
-		priceModifierDice nullable:false
-        priceModifier nullable:false
+		name blank:false
+		description blank:false
 	}
 
 	/**
-	 * This dice is the factor by how many % the price of items will be adjusted. 
+	 * This dice is the factor by how many % the price of items will be adjusted.
 	 */
 	Dice priceModifierDice
 
@@ -28,7 +26,7 @@ class ShopOwner {
      * it should be re-rolled every day or so to create price changes.
      */
     Integer priceModifier = 1
-	
+
 	String name
 	String description
 
@@ -61,10 +59,10 @@ class ShopOwner {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof ShopOwner)) return false
 
-        ShopOwner shopOwner = (ShopOwner) o
+        ShopOwner shopOwner = o
 
         if (description != shopOwner.description) return false
         if (name != shopOwner.name) return false

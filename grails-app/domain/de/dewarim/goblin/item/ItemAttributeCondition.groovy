@@ -3,11 +3,11 @@ package de.dewarim.goblin.item
 import de.dewarim.goblin.UserProperty
 
 class ItemAttributeCondition {
-	
+
     // Work in Progress
-    
+
 	UserProperty userProperty
-	
+
 	/**
 	 * ConditionScript is a groovy script which receives the Character and the currently checked
 	 * item as params.
@@ -15,10 +15,10 @@ class ItemAttributeCondition {
 	String conditionScriptFile
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof ItemAttributeCondition)) return false
 
-        ItemAttributeCondition that = (ItemAttributeCondition) o
+        ItemAttributeCondition that = o
 
         if (conditionScriptFile != that.conditionScriptFile) return false
         if (userProperty != that.userProperty) return false

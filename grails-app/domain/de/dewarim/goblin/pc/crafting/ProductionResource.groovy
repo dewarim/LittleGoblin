@@ -11,10 +11,10 @@ class ProductionResource {
     Integer amount = 1
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof ProductionResource)) return false
 
-        ProductionResource that = (ProductionResource) o
+        ProductionResource that = o
 
         if (amount != that.amount) return false
         if (item != that.item) return false

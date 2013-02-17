@@ -16,10 +16,10 @@ class CombatAttributeType {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof CombatAttributeType)) return false
 
-        CombatAttributeType that = (CombatAttributeType) o
+        CombatAttributeType that = o
 
         if (name != that.name) return false
 

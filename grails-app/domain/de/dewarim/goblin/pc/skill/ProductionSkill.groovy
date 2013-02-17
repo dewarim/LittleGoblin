@@ -1,8 +1,8 @@
 package de.dewarim.goblin.pc.skill
 
 import de.dewarim.goblin.pc.PlayerCharacter
-import de.dewarim.goblin.pc.crafting.Product
 import de.dewarim.goblin.pc.crafting.PlayerProduct
+import de.dewarim.goblin.pc.crafting.Product
 
 /**
  *
@@ -11,7 +11,7 @@ class ProductionSkill extends Skill{
 
     /*
      * Currently, ProductionSkill has no own fields. This class is simply used to differentiate
-     * between CombatSkills and ProductionSkills. 
+     * between CombatSkills and ProductionSkills.
      */
 
 
@@ -45,5 +45,4 @@ class ProductionSkill extends Skill{
         }
 
     }
-    
 }

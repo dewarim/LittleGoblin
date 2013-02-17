@@ -8,11 +8,11 @@ package de.dewarim.goblin
 class GlobalConfigEntry {
 
     static constraints = {
-        name unique:true, nullable:false
+        name unique:true
         entryValue nullable:true, size: 1..1024
         description nullable:true, size: 1..1024
     }
-    
+
     String name
     String entryValue
     String description
@@ -24,10 +24,10 @@ class GlobalConfigEntry {
 
      */
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof GlobalConfigEntry)) return false
 
-        GlobalConfigEntry that = (GlobalConfigEntry) o
+        GlobalConfigEntry that = o
 
         if (description != that.description) return false
         if (entryValue != that.entryValue) return false

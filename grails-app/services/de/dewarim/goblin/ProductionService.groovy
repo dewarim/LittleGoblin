@@ -1,19 +1,17 @@
 package de.dewarim.goblin
 
-import de.dewarim.goblin.pc.crafting.Product
-import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.item.Item
 import de.dewarim.goblin.item.ItemType
+import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.pc.crafting.Component
+import de.dewarim.goblin.pc.crafting.Product
 import de.dewarim.goblin.pc.crafting.ProductionJob
 import de.dewarim.goblin.pc.crafting.ProductionResource
 import de.dewarim.goblin.ticks.ITickListener
 
 class ProductionService implements ITickListener{
-    
+
     def itemService
-    
-    static transactional = true
 
     /**
      * Compute how many items of this product the PC can produce.
@@ -43,7 +41,7 @@ class ProductionService implements ITickListener{
      * @return a map of items that this PC owns which may be used to create the product
      */
     Map fetchItemMap(Product product, PlayerCharacter pc){
-        Map<Component, List<Item>> itemMap = new HashMap<Component,List<Item>>()
+        Map<Component, List<Item>> itemMap = [:]
         log.debug("inputItems: ${product.fetchInputItems()?.size()}")
         product.fetchInputItems().each{component->
             def myItems = Item.findAll("from Item i where i.owner=:owner and i.type=:type", [owner:pc, type:component.itemType])
@@ -53,9 +51,7 @@ class ProductionService implements ITickListener{
                     itemMap.get(component).add(item)
                 }
                 else{
-                    List<Item> items = new ArrayList<Item>()
-                    items.add(item)
-                    itemMap.put(component,items)                    
+                    itemMap.put(component, [item])
                 }
             }
         }
@@ -73,13 +69,13 @@ class ProductionService implements ITickListener{
      * @param params the http request params
      * @return true if enough resources have been selected, false otherwise
      */
-    Boolean enoughResourcesSelected(Product product, PlayerCharacter pc, params){
+    boolean enoughResourcesSelected(Product product, PlayerCharacter pc, params){
         log.debug("received params: ${params}")
 
          // itemTypeMap is a map [itemType : itemCount]
         Map itemTypeMap = fetchItemCountMapFromParams(params)
         log.debug("itemMap: ${itemTypeMap.dump()}")
-        Boolean enough = true
+        boolean enough = true
         product.fetchInputItems().each{component ->
             ItemType iType = component.itemType
             if(itemTypeMap.containsKey(iType)){
@@ -202,9 +198,8 @@ class ProductionService implements ITickListener{
      * @return the number of processed production jobs.
      */
     Integer makeProducts(){
-        def productCount = 0
-        ProductionJob.withTransaction {
-            def jobs =  ProductionJob.findAll("from ProductionJob as pj where pj.finished < now()")
+        int productCount = 0
+        def jobs =  ProductionJob.findAll("from ProductionJob as pj where pj.finished < now()")
         log.debug("found ${jobs.size()} production jobs")
         jobs.each{job ->
             // check if sufficient resources are available
@@ -227,7 +222,6 @@ class ProductionService implements ITickListener{
             }
             productCount++
         }
-        }
         return productCount
     }
 
@@ -241,18 +235,15 @@ class ProductionService implements ITickListener{
      * @param job
      * @return
      */
-    Boolean checkResources(ProductionJob job){
-        def resources = job.resources
-        def enough = true
-        for(resource in resources){
+    boolean checkResources(ProductionJob job){
+        for(resource in job.resources){
 //            log.debug("items: ${resource.item.type.name} ${resource.item.amount} (needed: ${resource.amount})")
             if( (resource.item.owner != job.pc) || // item has to be still in the player's possession
                     (resource.amount > resource.item.amount) ){
-                enough = false
-                break
+                return false
             }
         }
-        return enough
+        return true
     }
 
     /**
@@ -322,7 +313,7 @@ class ProductionService implements ITickListener{
         job.pc.removeFromProductionJobs job
         job.delete()
     }
-    
+
     void tock(){
         Integer amount = makeProducts()
         itemService.cleanupItems()

@@ -3,11 +3,11 @@ package de.dewarim.goblin
 import grails.plugins.springsecurity.Secured
 import de.dewarim.goblin.combat.Melee
 import de.dewarim.goblin.combat.MeleeFighter
-import de.dewarim.goblin.combat.MeleeAction
-import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.item.Item
 import de.dewarim.goblin.item.ItemTypeFeature
+import de.dewarim.goblin.pc.PlayerCharacter
 
+@Secured(['ROLE_USER'])
 class MeleeController extends BaseController {
 
     def meleeService
@@ -17,11 +17,11 @@ class MeleeController extends BaseController {
      * Show list of current melee fighters and allow player to join in.
      * If now melee is running, the player may register for the next round.
      */
-    @Secured(['ROLE_USER'])
     def index() {
         def pc = fetchPc()
         if (!pc) {
-            return redirect(controller: 'portal', action: 'start')
+            redirect(controller: 'portal', action: 'start')
+            return
         }
         return fetchViewParameters(pc)
     }
@@ -30,17 +30,18 @@ class MeleeController extends BaseController {
      * Join a melee round. There should always be one melee in status RUNNING or WAITING, which the
      * player may join.
      */
-    @Secured(['ROLE_USER'])
     def join() {
         def pc = fetchPc()
         if (!pc) {
             flash.message = message(code: 'melee.join.failed')
-            return redirect(controller: 'melee', action: 'index')
+            redirect(controller: 'melee', action: 'index')
+            return
         }
 
         if (pc.currentMelee) {
             flash.message = message(code: 'melee.join.already')
-            return redirect(controller: 'melee', action: index)
+            redirect(controller: 'melee', action: index)
+            return
         }
 
         def melee = meleeService.findOrCreateMelee()
@@ -50,22 +51,24 @@ class MeleeController extends BaseController {
         }
         else {
             flash.message = message(code: 'melee.join.not.again')
-            return redirect(controller: 'melee', action: index)
+            redirect(controller: 'melee', action: index)
+            return
         }
 
         if (melee.status == MeleeStatus.WAITING) {
-            return redirect(controller: 'melee', action: 'index')
+            redirect(controller: 'melee', action: 'index')
+            return
         }
         else {
-            return redirect(controller: 'melee', action: 'show',
+            redirect(controller: 'melee', action: 'show',
                     params: [pc: pc, melee: melee, fighters: meleeService.listFighters(melee)])
+            return
         }
     }
 
     /**
      * Leave a melee round. A player may leave at any time.
      */
-    @Secured(['ROLE_USER'])
     def leave() {
         def pc = fetchPc()
         if (!pc || pc.currentMelee == null) {
@@ -75,10 +78,10 @@ class MeleeController extends BaseController {
             meleeService.leaveMelee(pc, pc.currentMelee)
             flash.message = message(code: 'melee.left.melee')
         }
-        return redirect(controller: 'melee', action: 'index')
+        redirect(controller: 'melee', action: 'index')
+        return
     }
 
-    @Secured(['ROLE_USER'])
     def useItem() {
         def pc = fetchPc()
         try {
@@ -91,7 +94,7 @@ class MeleeController extends BaseController {
             if (!itemFeature) {
                 throw new RuntimeException('melee.action.fail')
             }
-            def ids = itemFeature.split('__');
+            def ids = itemFeature.split('__')
             if (ids.size() != 2) {
                 throw new RuntimeException('melee.action.fail')
             }
@@ -110,40 +113,39 @@ class MeleeController extends BaseController {
 
             // ok, useItem request seems valid:
             meleeService.addUseItemAction(pc, adversary, item, itemTypeFeature)
-            return render(template: 'chooseAction', model: fetchViewParameters(pc))
+            render(template: 'chooseAction', model: fetchViewParameters(pc))
         }
         catch (Exception e) {
             if (pc) {
                 def p = fetchViewParameters(pc)
                 p.put('meleeMessage', message(code: e.getMessage()))
-                return render(template: 'chooseAction', model: p)
+                render(template: 'chooseAction', model: p)
             }
             else {
-                return render(status: 503, text: message(code: e.getMessage()))
+                render(status: 503, text: message(code: e.getMessage()))
             }
         }
     }
 
-    @Secured(['ROLE_USER'])
     def updateActions() {
         def pc = fetchPc()
         if (!pc) {
-            return render(status: 503, text: message(code: 'melee.error'))
+            render(status: 503, text: message(code: 'melee.error'))
+            return
         }
-        return render(template: 'chooseAction', model: fetchViewParameters(pc))
+        render(template: 'chooseAction', model: fetchViewParameters(pc))
     }
 
-    @Secured(['ROLE_USER'])
     def updateFighterList() {
         def pc = fetchPc()
         if (!pc) {
-            return render(status: 503, text: message(code: 'melee.error'))
+            render(status: 503, text: message(code: 'melee.error'))
+            return
         }
         Melee melee = meleeService.findOrCreateMelee()
-        return render(template: 'fighters', model: [pc: pc, fighters: meleeService.listFighters(melee)])
+        render(template: 'fighters', model: [pc: pc, fighters: meleeService.listFighters(melee)])
     }
 
-    @Secured(['ROLE_USER'])
     def attack() {
         try {
             def pc = fetchPc()
@@ -172,12 +174,10 @@ class MeleeController extends BaseController {
                 p = fetchViewParameters(pc)
                 p.put('meleeMessage', 'melee.adversary.missing')
             }
-            return render(template: 'chooseAction', model: p)
-
-
+            render(template: 'chooseAction', model: p)
         }
         catch (Exception e) {
-            return render(status: 503, text: message(code: e.getMessage()))
+            render(status: 503, text: message(code: e.getMessage()))
         }
     }
 

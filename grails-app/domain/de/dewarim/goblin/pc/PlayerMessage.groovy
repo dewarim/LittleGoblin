@@ -12,10 +12,10 @@ class PlayerMessage {
     Date datum = new Date()
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof PlayerMessage)) return false
 
-        PlayerMessage that = (PlayerMessage) o
+        PlayerMessage that = o
 
         if (datum != that.datum) return false
         if (displayed != that.displayed) return false

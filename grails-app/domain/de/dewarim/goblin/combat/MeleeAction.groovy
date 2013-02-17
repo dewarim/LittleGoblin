@@ -1,9 +1,9 @@
 package de.dewarim.goblin.combat
 
-import de.dewarim.goblin.pc.PlayerCharacter
-import de.dewarim.goblin.item.Item
-import de.dewarim.goblin.MeleeActionType
 import de.dewarim.goblin.Feature
+import de.dewarim.goblin.MeleeActionType
+import de.dewarim.goblin.item.Item
+import de.dewarim.goblin.pc.PlayerCharacter
 
 /**
  * A MeleeAction is an action by a player during a Grand Melee fight.
@@ -41,10 +41,10 @@ class MeleeAction {
     Integer initiative = 0
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof MeleeAction)) return false
 
-        MeleeAction that = (MeleeAction) o
+        MeleeAction that = o
 
         if (actor != that.actor) return false
         if (feature != that.feature) return false

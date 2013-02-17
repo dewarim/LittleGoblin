@@ -1,7 +1,7 @@
 package de.dewarim.goblin.pc.crafting
 
-import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.ComponentType
+import de.dewarim.goblin.item.ItemType
 
 /**
  *
@@ -16,10 +16,10 @@ class Component {
     ComponentType type
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Component)) return false
 
-        Component component = (Component) o
+        Component component = o
 
         if (amount != component.amount) return false
         if (itemType != component.itemType) return false

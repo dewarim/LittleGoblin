@@ -8,15 +8,15 @@ game environment as seen on the test server on http://schedim.de
 ## Getting started
 
 For instructions to install the binary version, see: [INSTALL.md](INSTALL.md)
- 
+
 * Checkout the source code from Github:
- 
+
     git clone git@github.com:dewarim/LittleGoblin.git
- 
+
 * Edit goblin-config.example.groovy according to your database settings and serverURL
- 
-* Start the application with 
-    
+
+* Start the application with
+
     grails run-app
 
 * Visit http://localhost:8080/goblin after the startup phase has completed.

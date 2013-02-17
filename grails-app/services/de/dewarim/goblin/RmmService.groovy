@@ -1,8 +1,8 @@
 package de.dewarim.goblin
 
-import de.dewarim.goblin.reputation.ReputationMessageMap
 import de.dewarim.goblin.reputation.Faction
 import de.dewarim.goblin.reputation.ReputationMessage
+import de.dewarim.goblin.reputation.ReputationMessageMap
 
 /**
  *

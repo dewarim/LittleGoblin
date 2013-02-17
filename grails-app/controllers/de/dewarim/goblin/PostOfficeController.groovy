@@ -1,10 +1,10 @@
 package de.dewarim.goblin
 
 import grails.plugins.springsecurity.Secured
-
 import de.dewarim.goblin.item.Item
 import de.dewarim.goblin.pc.PlayerCharacter
 
+@Secured(['ROLE_USER'])
 class PostOfficeController extends BaseController {
 
     def postOfficeService
@@ -12,11 +12,11 @@ class PostOfficeController extends BaseController {
     /**
      * Main overview of post office
      */
-    @Secured(['ROLE_USER'])
     def index() {
         def pc = fetchPc()
         if(! pc){
-            return redirect(controller: 'portal', action: 'start')
+            redirect(controller: 'portal', action: 'start')
+            return
         }
         def itemList = pc.items.sort {message(code:it.type.name)}
         return [pc: pc,
@@ -24,7 +24,6 @@ class PostOfficeController extends BaseController {
         ]
     }
 
-    @Secured(['ROLE_USER'])
     def sendItem() {
         def pc = fetchPc()
         try {
@@ -65,7 +64,6 @@ class PostOfficeController extends BaseController {
         }
     }
 
-    @Secured(['ROLE_USER'])
     def loadInventory() {
         def pc = fetchPc()
         if(! pc){

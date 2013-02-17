@@ -16,7 +16,8 @@ class ConfigAdminController extends BaseController {
     def edit() {
         def configEntry = GlobalConfigEntry.get(params.id)
         if (!configEntry) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         render(template: '/configAdmin/edit', model: [configEntry: configEntry])
     }
@@ -24,7 +25,8 @@ class ConfigAdminController extends BaseController {
     def cancelEdit() {
         def configEntry = GlobalConfigEntry.get(params.id)
         if (!configEntry) {
-            return render(status: 503, text: message(code: 'error.object.not.found'))
+            render(status: 503, text: message(code: 'error.object.not.found'))
+            return
         }
         render(template: '/configAdmin/update', model: [configEntry: configEntry])
     }

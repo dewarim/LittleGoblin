@@ -1,8 +1,8 @@
 package de.dewarim.goblin.admin
 
-import de.dewarim.goblin.combat.CombatAttributeType
 import grails.plugins.springsecurity.Secured
 import de.dewarim.goblin.BaseController
+import de.dewarim.goblin.combat.CombatAttributeType
 
 @Secured(["ROLE_ADMIN"])
 class CombatAttributeAdminController extends BaseController{
@@ -21,9 +21,10 @@ class CombatAttributeAdminController extends BaseController{
     def edit() {
         def combatAttribute = CombatAttributeType.get(params.attributeId)
         if(! combatAttribute){
-            return render(status:503, text:message(code:'error.unknown.combatAttributeType'))
+            render(status:503, text:message(code:'error.unknown.combatAttributeType'))
+            return
         }
-        return render(template:'/combatAttributeAdmin/edit', model:[combatAttribute:combatAttribute])
+        render(template:'/combatAttributeAdmin/edit', model:[combatAttribute:combatAttribute])
     }
 
     def update() {
@@ -79,5 +80,4 @@ class CombatAttributeAdminController extends BaseController{
             renderException e
         }
     }
-        
 }

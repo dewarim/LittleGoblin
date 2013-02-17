@@ -1,10 +1,10 @@
 package de.dewarim.goblin
 
 import grails.plugins.springsecurity.Secured
-import de.dewarim.goblin.town.Academy
-import de.dewarim.goblin.town.AcademySkillSet
 import groovy.xml.MarkupBuilder
 import de.dewarim.goblin.pc.skill.LearningQueueElement
+import de.dewarim.goblin.town.Academy
+import de.dewarim.goblin.town.AcademySkillSet
 
 class AcademyController extends BaseController {
     transient jmsTemplate
@@ -42,11 +42,12 @@ class AcademyController extends BaseController {
         def academy = Academy.get(params.academy)
         if(! academy){
             flash.message = message(code: 'error.academy.not_found')
-              return redirect(controller: 'town', action: 'show')
+              redirect(controller: 'town', action: 'show')
+              return
         }
 
         if (academyService.checkPlayerAccess(pc, academy)) {
-            Map<AcademySkillSet, LearningQueueElement> queue = new HashMap<AcademySkillSet, LearningQueueElement>()
+            Map<AcademySkillSet, LearningQueueElement> queue = [:]
             pc.learningQueueElements.each{
                 queue.put(it.academySkillSet, it)
             }
@@ -54,15 +55,15 @@ class AcademyController extends BaseController {
             return [
                     pc: pc,
                     queue:queue,
-                    academy: academy,                    
+                    academy: academy,
                     academySkillSets:academyService.filterSkillSets(pc, academy)
             ]
         }
         else {
             flash.message = message(code: 'error.academy.no.member')
-            return redirect(controller: 'town', action: 'show')
+            redirect(controller: 'town', action: 'show')
+            return
         }
-
     }
 
     /**
@@ -72,9 +73,10 @@ class AcademyController extends BaseController {
     def describe() {
         Academy academy = Academy.get(params.academy)
         if(! academy){
-            return render(status:503, text:message(code:'error.academy.not_found'))
+            render(status:503, text:message(code:'error.academy.not_found'))
+            return
         }
-        return render(template:"/academy/academy_description", model:[academy:academy])
+        render(template:"/academy/academy_description", model:[academy:academy])
     }
 
     /**
@@ -103,23 +105,27 @@ class AcademyController extends BaseController {
         def academy = Academy.get(params.academy)
         if(! academy){
             flash.message = message(code: 'error.academy.not_found')
-            return redirect(controller: 'town', action: 'show')
+            redirect(controller: 'town', action: 'show')
+            return
         }
         if (academyService.checkPlayerAccess(pc, academy)) {
             AcademySkillSet ass = AcademySkillSet.get(params.ass)
             if(! ass ){
                 flash.message = message(code: 'error.skillset.not.found')
-                return redirect(controller:'town', action:'show')
+                redirect(controller:'town', action:'show')
+                return
             }
             def academySkillSets = academyService.filterSkillSets(pc, academy)
             if(! academySkillSets.find{it.equals(ass)}){
                 flash.message = message(code: 'error.skillset.foreign')
-                return redirect(controller:'town', action:'show')
+                redirect(controller:'town', action:'show')
+                return
             }
             def alreadyLearning = pc.learningQueueElements.find{it.academySkillSet.equals(ass)}
             if(alreadyLearning){
                 flash.message = message(code: 'error.already.learning')
-                return redirect(controller:'academy', action:'show', params:[academy:params.academy])
+                redirect(controller:'academy', action:'show', params:[academy:params.academy])
+                return
             }
 
             // time to pay for this ass:
@@ -132,11 +138,13 @@ class AcademyController extends BaseController {
                 flash.message = message(code:'error.insufficient.funds')
             }
 
-            return redirect(action:'show', controller:'academy', params:[academy:academy.id])
+            redirect(action:'show', controller:'academy', params:[academy:academy.id])
+            return
         }
         else {
             flash.message = message(code: 'error.academy.no.member')
-            return redirect(controller: 'town', action: 'show')
+            redirect(controller: 'town', action: 'show')
+            return
         }
     }
 
@@ -147,21 +155,23 @@ class AcademyController extends BaseController {
         LearningQueueElement queueElement = LearningQueueElement.get(params.queueElement)
         if(! queueElement){
             flash.message = message(code:'error.queueElement.not_found')
-            return redirect(controller:'town', action:'show')
+            redirect(controller:'town', action:'show')
+            return
         }
         if(pc.learningQueueElements.contains(queueElement)){
             def ass = queueElement.academySkillSet
             academyService.refundLearningCost queueElement
             pc.removeFromLearningQueueElements queueElement
             ass.removeFromLearningQueueElements queueElement
-            queueElement.delete()                       
-            return redirect(controller:'academy', action:'show', params:[academy:ass.academy.id])
+            queueElement.delete()
+            redirect(controller:'academy', action:'show', params:[academy:ass.academy.id])
+            return
         }
         else{
             flash.message = message(code:'error.object.foreign')
-            return redirect(controller:'town', action:'show')
+            redirect(controller:'town', action:'show')
+            return
         }
-
     }
 
     protected String createLearningMessage(LearningQueueElement queueElement){

@@ -1,4 +1,4 @@
-package de.dewarim.goblin.routes;
+package de.dewarim.goblin.routes
 
 //import org.apache.camel.builder.RouteBuilder
 //import org.apache.camel.model.RoutesDefinition
@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory
  * [2010-08-08]
  * Camel itself works, but when I enable Quartz, it crashes on startup. If you find a use for
  * non-delayed messages, you may use this here as an example (and the out-commented code in resources.groovy
- * and BootStrap. 
+ * and BootStrap.
  * ).
  */
 @Component
@@ -20,7 +20,7 @@ class GoblinRouteBuilder{ // extends RouteBuilder{
 
    Logger log = LoggerFactory.getLogger(this.class.name)
 
-   def learningDelayer 
+   def learningDelayer
 
    void configure() throws Exception{
        log.debug("GoblinRouteBuilder called.")

@@ -1,32 +1,30 @@
-package de.dewarim.goblin;
-
-import de.dewarim.goblin.mob.Mob
-import de.dewarim.goblin.mob.MobTemplate
-import de.dewarim.goblin.quest.Quest
-import de.dewarim.goblin.item.Item
+package de.dewarim.goblin
 
 import grails.plugins.springsecurity.Secured
-
 import de.dewarim.goblin.combat.Combat
+import de.dewarim.goblin.item.Item
+import de.dewarim.goblin.mob.Mob
+import de.dewarim.goblin.mob.MobTemplate
 import de.dewarim.goblin.pc.PlayerCharacter
+import de.dewarim.goblin.quest.Quest
 
-
+@Secured(['ROLE_USER'])
 class FightController extends BaseController {
-    
+
     def treasureService
     def fightService
 
     /*
       * Show opponent, option fight or flee.
       */
-    @Secured(['ROLE_USER'])
     def index() {
         def user = fetchUser()
 
         Combat combat = Combat.get(params.combat)
         if (!combat) {
             flash.message = message(code: 'error.combat.not_found')
-            return redirect(action: 'start', controller: 'portal')
+            redirect(action: 'start', controller: 'portal')
+            return
         }
         log.debug("pc.id: " + combat.playerCharacter.id)
         def pc = combat.playerCharacter
@@ -45,31 +43,33 @@ class FightController extends BaseController {
         ]
     }
 
-    MobTemplate selectRandomMobType() {
+    private MobTemplate selectRandomMobType() {
         List<MobTemplate> mtList = MobTemplate.list()
         return mtList.get((Integer) (Math.random() * mtList.size()))
     }
 
-    @Secured(['ROLE_USER'])
     def flee() {
         def user = fetchUser()
 
         Combat combat = Combat.get(params.combat)
         if (!combat) {
             flash.message = message(code: 'error.combat.not_found')
-            return redirect(action: 'start', controller: 'portal')
+            redirect(action: 'start', controller: 'portal')
+            return
         }
 
         def pc = combat.playerCharacter
         if (!pc.user.equals(user)) {
             // prevent cheating / using other player's combat.
             flash.message = message(code: 'error.foreign.object')
-            return redirect(action: 'start', controller: 'portal')
+            redirect(action: 'start', controller: 'portal')
+            return
         }
 
         if (!pc.currentQuest) {
             // pc has no current quest - probably reloaded this page.
-            return redirect(action: 'show', controller: 'town', params: [pc: pc.id])
+            redirect(action: 'show', controller: 'town', params: [pc: pc.id])
+            return
         }
 
         combat.finished = new Date()
@@ -88,7 +88,6 @@ class FightController extends BaseController {
     /*
       * Show fight result
       */
-    @Secured(['ROLE_USER'])
     def fight() {
         def user = fetchUser()
 
@@ -100,13 +99,15 @@ class FightController extends BaseController {
         Combat.withTransaction {
             combat = Combat.lock(params.combat)
             if (!combat) {
-                return redirect(controller: 'portal', action: 'start')
+                redirect(controller: 'portal', action: 'start')
+                return
             }
             pc = combat.playerCharacter
 
             if (!pc.user.equals(user)) {// make sure it is this user's combat
                 flash.message = message(code: 'error.foreign.object')
-                return redirect(action: 'start', controller: 'portal')
+                redirect(action: 'start', controller: 'portal')
+                return
             }
             mob = combat.fetchFirstMob()
             String action
@@ -119,7 +120,8 @@ class FightController extends BaseController {
             }
 
             if (action) {
-                return redirect(action: action, params: [pc: pc.id, mob: mob.id, combat: combat.id])
+                redirect(action: action, params: [pc: pc.id, mob: mob.id, combat: combat.id])
+                return
             }
         }
         return [pc: pc,
@@ -128,7 +130,6 @@ class FightController extends BaseController {
         ]
     }
 
-    @Secured(['ROLE_USER'])
     def victory() {
         // TODO: set mob to dead.
         // TODO: add mob to pc.history
@@ -138,12 +139,12 @@ class FightController extends BaseController {
         def mob = Mob.get(params.mob)
 
         if (!pc.currentCombat) {
-            return redirect(controller: 'town', action: 'show', param: [pc: pc.id])
+            redirect(controller: 'town', action: 'show', param: [pc: pc.id])
+            return
         }
 
         pc.currentCombat.finished = new Date()
         pc.currentCombat = null
-
 
         pc.xp = pc.xp + mob.xpValue
         pc.victories = pc.victories + 1
@@ -174,7 +175,6 @@ class FightController extends BaseController {
     /*
       * Charakter is dead, show death message and high score.
       */
-    @Secured(['ROLE_USER'])
     def death() {
         def user = fetchUser()
 

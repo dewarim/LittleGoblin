@@ -10,10 +10,10 @@ class OrderApplication {
     String applicationMessage
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof OrderApplication)) return false
 
-        OrderApplication that = (OrderApplication) o
+        OrderApplication that = o
 
         if (applicant != that.applicant) return false
         if (applicationMessage != that.applicationMessage) return false

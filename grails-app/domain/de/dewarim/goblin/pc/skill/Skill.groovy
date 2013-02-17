@@ -1,7 +1,7 @@
 package de.dewarim.goblin.pc.skill
 
-import de.dewarim.goblin.pc.crafting.SkillRequirement
 import de.dewarim.goblin.pc.PlayerCharacter
+import de.dewarim.goblin.pc.crafting.SkillRequirement
 
 /**
  *
@@ -25,10 +25,10 @@ class Skill {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Skill)) return false
 
-        Skill skill = (Skill) o
+        Skill skill = o
 
         if (initParams != skill.initParams) return false
         if (name != skill.name) return false

@@ -1,8 +1,8 @@
 package de.dewarim.goblin.admin
 
-import de.dewarim.goblin.EquipmentSlotType
 import grails.plugins.springsecurity.Secured
 import de.dewarim.goblin.BaseController
+import de.dewarim.goblin.EquipmentSlotType
 
 @Secured(["ROLE_ADMIN"])
 class EquipmentSlotTypeAdminController extends BaseController {
@@ -16,9 +16,10 @@ class EquipmentSlotTypeAdminController extends BaseController {
     def edit() {
         def equipmentSlot = EquipmentSlotType.get(params.slotId)
         if(! equipmentSlot){
-            return render(status:503, text:message(code:'error.unknown.equipmentSlotType'))
+            render(status:503, text:message(code:'error.unknown.equipmentSlotType'))
+            return
         }
-        return render(template:'/equipmentSlotTypeAdmin/edit', model:[equipmentSlotType:equipmentSlot])
+        render(template:'/equipmentSlotTypeAdmin/edit', model:[equipmentSlotType:equipmentSlot])
     }
 
     def update() {
@@ -69,5 +70,4 @@ class EquipmentSlotTypeAdminController extends BaseController {
             renderException e
         }
     }
-        
 }

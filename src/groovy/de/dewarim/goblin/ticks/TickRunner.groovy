@@ -1,7 +1,7 @@
 package de.dewarim.goblin.ticks
 
-import groovyx.gpars.actor.DefaultActor
 import groovyx.gpars.actor.DynamicDispatchActor
+
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 

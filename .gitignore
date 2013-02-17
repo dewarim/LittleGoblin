@@ -1,0 +1,5 @@
+*.log
+/target
+/grails-goblin-*.zip
+/plugin.xml
+.settings

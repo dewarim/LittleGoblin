@@ -2,7 +2,6 @@ package de.dewarim.goblin.pc.crafting
 
 import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.pc.skill.QueueElement
-import de.dewarim.goblin.item.Item
 
 /**
  *
@@ -18,7 +17,7 @@ class ProductionJob extends QueueElement {
      * Time to live - the PJ is examined several times until all components are
      * available or until the ttl is down to 0. With each check, the ttl is reduced
      * by 1 and the PJ is postponed by an hour (that is, the value for QueueElement.finished is
-     * increased by 1 hour). 
+     * increased by 1 hour).
      */
     Integer ttl = 3
 
@@ -45,17 +44,17 @@ class ProductionJob extends QueueElement {
 
 
     /**
-     * If a job contains the order to create multiple products  
+     * If a job contains the order to create multiple products
      */
     void continueJob(){
         finished = new Date(finished.time + product.timeNeeded)
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof ProductionJob)) return false
 
-        ProductionJob that = (ProductionJob) o
+        ProductionJob that = o
 
         if (amount != that.amount) return false
         if (pc != that.pc) return false

@@ -1,4 +1,4 @@
-package de.dewarim.goblin;
+package de.dewarim.goblin
 
 /**
  * The Artist class is used to keep track of who contributed graphical assets to the game.
@@ -11,7 +11,7 @@ class Artist {
     static hasMany = [images:Image]
 
     static constraints = {
-		name(nullable:false, blank:false)
+		name(blank:false)
 		website(nullable:true)
 	}
 
@@ -19,10 +19,10 @@ class Artist {
 	String website
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Artist)) return false
 
-        Artist artist = (Artist) o
+        Artist artist = o
 
         if (name != artist.name) return false
         if (website != artist.website) return false

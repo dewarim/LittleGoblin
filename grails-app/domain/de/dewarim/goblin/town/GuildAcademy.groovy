@@ -31,14 +31,14 @@ class GuildAcademy {
     void deleteComplete(){
         guild.guildAcademies.remove this
         academy.guildAcademies.remove this
-        this.delete()
+        delete()
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof GuildAcademy)) return false
 
-        GuildAcademy that = (GuildAcademy) o
+        GuildAcademy that = o
 
         if (academy != that.academy) return false
         if (guild != that.guild) return false

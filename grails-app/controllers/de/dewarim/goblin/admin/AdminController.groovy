@@ -6,5 +6,4 @@ import grails.plugins.springsecurity.Secured
 class AdminController {
 
     def index () { }
-    
 }

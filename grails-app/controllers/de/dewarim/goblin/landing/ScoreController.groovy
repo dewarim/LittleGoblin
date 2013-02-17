@@ -1,9 +1,8 @@
-package de.dewarim.goblin.landing;
+package de.dewarim.goblin.landing
 
-
+import grails.plugins.springsecurity.Secured
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.HighScore
-import grails.plugins.springsecurity.Secured
 
 class ScoreController extends BaseController {
 
@@ -17,5 +16,4 @@ class ScoreController extends BaseController {
 		        highscore:HighScore.list(max:5, sort:'xp', order:'desc')
 		]
 	}
-	
 }

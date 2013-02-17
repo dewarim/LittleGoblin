@@ -5,26 +5,24 @@ package de.dewarim.goblin
  * Alternatives would include:
  *  load help from database
  *  load help from external (template) file
- * Currently, using templates is easier and very flexible. 
+ * Currently, using templates is easier and very flexible.
  */
 class HelpController {
 
-    def summonHelp() {
-        String messageId = params.messageId
+    def summonHelp(String messageId) {
         Help help = Help.findByMessageId(messageId)
         if(help){
-            return render(text:message(code:messageId))
+            render(text:message(code:messageId))
+            return
         }
-        else{
-            log.debug("Unidentified template: ${messageId?.encodeAsHTML()}")
-            def tryTranslation = message(code:messageId.decodeURL())
-            if(tryTranslation.equals(messageId)){
-                return render(text:message(code:'help.not.found'))
-            }
-            else{
-                return render(text:tryTranslation)
-            }
-        }
-    }
 
+        log.debug("Unidentified template: ${messageId?.encodeAsHTML()}")
+        def tryTranslation = message(code:messageId.decodeURL())
+        if(tryTranslation.equals(messageId)){
+            render(text:message(code:'help.not.found'))
+            return
+        }
+
+        render(text:tryTranslation)
+    }
 }

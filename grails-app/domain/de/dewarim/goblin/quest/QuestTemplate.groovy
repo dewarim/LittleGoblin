@@ -1,12 +1,11 @@
-package de.dewarim.goblin.quest;
+package de.dewarim.goblin.quest
 
 class QuestTemplate {
-	
+
 	static hasMany = [requirements:QuestRequirement, steps:QuestStep]
     static belongsTo = [giver:QuestGiver]
 	static constraints = {
-		level nullable:false
-		name nullable:false, blank:false
+		name blank:false
 		description size:1..2000
 	}
 
@@ -25,10 +24,10 @@ class QuestTemplate {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof QuestTemplate)) return false
 
-        QuestTemplate that = (QuestTemplate) o
+        QuestTemplate that = o
 
         if (active != that.active) return false
         if (description != that.description) return false

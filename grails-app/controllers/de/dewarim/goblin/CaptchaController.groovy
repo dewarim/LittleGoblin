@@ -20,7 +20,7 @@ class CaptchaController {
 		int l = SOURCECHARS.length()
 		StringBuilder b = new StringBuilder()
 		6.times {
-		    int r = (int)(Math.random() * l)
+		    int r = Math.random() * l
 		    b.append(SOURCECHARS.charAt(r))
 		}
 

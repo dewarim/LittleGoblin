@@ -23,10 +23,10 @@ class CreatureAttribute implements ICombatAttribute{
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof CreatureAttribute)) return false
 
-        CreatureAttribute that = (CreatureAttribute) o
+        CreatureAttribute that = o
 
         if (combatAttributeType != that.combatAttributeType) return false
         if (creature != that.creature) return false

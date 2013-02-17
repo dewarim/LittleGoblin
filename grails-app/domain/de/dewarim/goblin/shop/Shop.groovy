@@ -1,14 +1,14 @@
-package de.dewarim.goblin.shop;
+package de.dewarim.goblin.shop
 
-import de.dewarim.goblin.town.Town
 import de.dewarim.goblin.item.ItemType
+import de.dewarim.goblin.town.Town
 
 class Shop {
-	
+
 	static hasMany = [itemTypes:ItemType, shopCategories:ShopCategory]
 	static belongsTo = [owner:ShopOwner, town:Town]
 	static constraints = {
-		name blank:false, nullable:false
+		name blank:false
 		description nullable:true
 	}
 
@@ -19,10 +19,10 @@ class Shop {
 	String description
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Shop)) return false
 
-        Shop shop = (Shop) o
+        Shop shop = o
 
         if (description != shop.description) return false
         if (name != shop.name) return false

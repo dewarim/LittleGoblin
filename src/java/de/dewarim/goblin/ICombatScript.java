@@ -1,9 +1,9 @@
 package de.dewarim.goblin;
 
+import java.util.Collection;
+
 import de.dewarim.goblin.item.Item;
 import de.dewarim.goblin.pc.PlayerCharacter;
-
-import java.util.Collection;
 
 public interface ICombatScript {
 

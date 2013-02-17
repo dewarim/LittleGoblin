@@ -1,6 +1,6 @@
 package de.dewarim.goblin.quest
 
-public class QuestStep {
+class QuestStep {
 
     static belongsTo = [encounter:Encounter
             ,questTemplate:QuestTemplate
@@ -8,9 +8,8 @@ public class QuestStep {
     static hasMany = [nextSteps:StepChild,parentSteps:StepChild]
     static mappedBy = [parentSteps:'child', nextSteps:'parent']
     static constraints = {
-        title blank:false, nullable:false
-        description blank:false, nullable:false
-        endOfQuest nullable:false
+        title blank:false
+        description blank:false
         intro nullable:true
         name unique:true
     }
@@ -38,23 +37,23 @@ public class QuestStep {
     String intro
 
     boolean equals(o) {
-        if (this.is(o)) return true;
-        if (!(o instanceof QuestStep)) return false;
+        if (is(o)) return true
+        if (!(o instanceof QuestStep)) return false
 
-        QuestStep questStep = (QuestStep) o;
+        QuestStep questStep = o
 
-        if (automaticTransition != questStep.automaticTransition) return false;
-        if (chance != questStep.chance) return false;
-        if (description != questStep.description) return false;
-        if (endOfQuest != questStep.endOfQuest) return false;
-        if (firstStep != questStep.firstStep) return false;
-        if (intro != questStep.intro) return false;
-        if (title != questStep.title) return false;
+        if (automaticTransition != questStep.automaticTransition) return false
+        if (chance != questStep.chance) return false
+        if (description != questStep.description) return false
+        if (endOfQuest != questStep.endOfQuest) return false
+        if (firstStep != questStep.firstStep) return false
+        if (intro != questStep.intro) return false
+        if (title != questStep.title) return false
 
-        return true;
+        return true
     }
 
     int hashCode() {
-        return (title != null ? title.hashCode() : 0);
+        return (title != null ? title.hashCode() : 0)
     }
 }

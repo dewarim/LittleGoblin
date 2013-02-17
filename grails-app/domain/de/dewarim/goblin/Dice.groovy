@@ -1,9 +1,9 @@
-package de.dewarim.goblin;
+package de.dewarim.goblin
 
 class Dice {
 
     static constraints = {
-        name nullable:false, unique:true
+        name unique:true
     }
 
     String name = UUID.randomUUID().toString()
@@ -14,13 +14,13 @@ class Dice {
 	Integer roll(){
 		Integer result = bonus
 		for(int x = 0; x<amount; x++){
-			result = result + singleDie()		
+			result = result + singleDie()
 		}
 		return result
 	}
-	
+
 	Integer singleDie(){
-		return (Integer) ( (Math.random() * sides) +1)
+		return (Math.random() * sides) + 1
 	}
 
     String toString(){
@@ -31,10 +31,10 @@ class Dice {
     }
 
     boolean equals(o) {
-        if (this.is(o)) return true
+        if (is(o)) return true
         if (!(o instanceof Dice)) return false
 
-        Dice dice = (Dice) o
+        Dice dice = o
 
         if (amount != dice.amount) return false
         if (bonus != dice.bonus) return false
