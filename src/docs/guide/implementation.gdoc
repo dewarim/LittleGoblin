@@ -1,10 +1,9 @@
 So, you want to create your own game. That's great. 
-To show you how you can do this with Little Goblin, this section will explain how the
-reference implementation (the demo game) works and giving you hints where and 
-how to start your own development.
- 
-h2. Prerequisites
 
-You should know a little bit of Grails. "The Grails website":http://www.grails.org/learn is your friend.
-
-It will also help to have some general programming knowledge.
+This chapter describes how to create a new game by using the Little Goblin plugin.
+As an example I will use the reference implementation, which is currently (as of version 0.3.2)
+a part of the main plugin, but should really be put into a separate application to
+keep framework and individual game mechanics apart.
+  
+So follow along for a tour ... you can find the source code at GitHub:
+"Schedim source code":https://github.com/dewarim/schedim

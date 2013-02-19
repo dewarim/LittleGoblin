@@ -1,0 +1,85 @@
+h3. A new app
+
+Create a new grails application. On the command line type:
+
+{code}
+grails create-app schedim
+{code}
+
+Of course, it would be nice if you were to come up with your own name instead of Schedim ;)
+Schedim are a kind of mythological creatures from the Kabbalah (elemental spirits). 
+
+Grails creates a new application in a folder by the given name (schedim). Open the application
+in your favorite IDE, for example Eclipse STS or IntelliJ IDEA. It is also a good idea to
+create a repository for the software in a source code management system like git or subversion.
+If you got your game in a SCM (and keep backups...), you do not have to fear losing your code
+or breaking it beyond repair by making changes to it.
+
+Your new grails application should start out looking like this:
+
+!new_grails_app.png!
+
+In the new application, open grails-app/conf/BuildConfig.groovy and add the line
+
+{code}
+    compile ":goblin:3.0.2"
+{code}
+
+to the dependencies closure.
+
+If you now type
+
+{code}
+    grails
+    // waiting some time
+    grails run-app
+    // waiting some more
+{code}
+
+You will see a message like "Server running. Browse to http://localhost:8080/schedim"
+If you visit this URL, you will see something like the following:
+
+!game/raw_game.png!
+
+The many controllers are provided by Little Goblin. But since the database is still empty
+and no start page has been defined, we still have some work to do.
+
+h3. Landing page configuration
+
+As you can see, the default page of the new game leaves something to be desired. But we can
+redirect visitors from the base URL to a page of our own choosing.
+ 
+In the file grails-app/conf/UrlMappings.groovy, modify the static mappings definition:
+ 
+{code}
+class UrlMappings {
+    static mappings = {
+      "/$controller/$action?/$id?"{
+	      constraints {
+              
+		  }
+	  }
+      "/"(view:"/portal/landing")
+	  "500"(view:'/error')
+	}
+}
+{code}
+
+Now, if you visit http://localhost:8080/schedim, you should be redirected to the Little Goblin's
+default [landing page|guide:landing]:
+
+!game/first_landing_page.png!
+
+This still does not look like the test server's page, but it's a start.
+
+h3. Security configuration
+
+// TODO
+
+h3. Database configuration
+
+// TODO
+
+h3. Adding data
+
+// TODO

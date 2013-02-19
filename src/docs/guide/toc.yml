@@ -17,3 +17,7 @@ features:
   crafting: Crafting
   orders: Orders
   quests: Quests
+implementation:
+  title: Plugin Usage
+  create: How to create a new game
+  landing: The landing page
