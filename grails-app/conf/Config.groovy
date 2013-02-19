@@ -134,3 +134,5 @@ grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/portal/start'
 grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 
 grails.views.gsp.keepgenerateddir = '/tmp/gsp'
+
+grails.doc.images=new File('src/docs/images')
