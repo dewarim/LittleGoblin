@@ -19,7 +19,7 @@ h3. Use as a plugin
 Add the following line to your Grails application's BuildConfig.groovy (in the plugins section):
 
 {code}
-    compile: ':little-goblin:0.3.1'
+    compile ':little-goblin:0.3.2'
 {code}
 
 As a starting point, look at the BootStrap.groovy code in the plugin's source on how to populate the database

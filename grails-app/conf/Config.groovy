@@ -127,7 +127,6 @@ grails.views.javascript.library = "jquery"
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'de.dewarim.goblin.UserAccount'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'de.dewarim.goblin.UserRole'
 grails.plugins.springsecurity.authority.className = 'de.dewarim.goblin.Role'
-// grails.plugins.springsecurity.userLookup.authoritiesPropertyName='userRoles'
 grails.plugins.springsecurity.userLookup.passwordPropertyName = 'passwd'
 grails.plugins.springsecurity.authority.nameField = 'name'
 grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/portal/start'

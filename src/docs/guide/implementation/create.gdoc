@@ -22,7 +22,7 @@ Your new grails application should start out looking like this:
 In the new application, open grails-app/conf/BuildConfig.groovy and add the line
 
 {code}
-    compile \":goblin:3.0.2\"
+    compile ':goblin:0.3.2'
 {code}
 
 to the dependencies closure.
