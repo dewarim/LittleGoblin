@@ -24,9 +24,11 @@ For instructions to install the binary version, see: [INSTALL.md](INSTALL.md)
 ## Further steps
 
 You can include Little Goblin as a plugin in your own Grails application.
-In BuildConfig, just add ":goblin:0.3.2" to the plugin section.*
+In BuildConfig, just add 
 
-    * note: this will work once the plugin is released.
+    ":goblin:0.3.2" 
+
+to the plugin section. 
 
 Then you can adjust the CSS, layout and overall design as well as the
 inner game mechanics. If you have any questions or want to contribute,
