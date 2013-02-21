@@ -17,12 +17,12 @@ or breaking it beyond repair by making changes to it.
 
 Your new grails application should start out looking like this:
 
-!new_grails_app.png!
+!game/new_grails_app.png!
 
 In the new application, open grails-app/conf/BuildConfig.groovy and add the line
 
 {code}
-    compile ":goblin:3.0.2"
+    compile \":goblin:3.0.2\"
 {code}
 
 to the dependencies closure.
@@ -30,10 +30,12 @@ to the dependencies closure.
 If you now type
 
 {code}
+
     grails
     // waiting some time
     grails run-app
     // waiting some more
+
 {code}
 
 You will see a message like "Server running. Browse to http://localhost:8080/schedim"
@@ -114,6 +116,8 @@ There are three distinct environments under which your game will be running -
 * test, during testing the game will be running with the in-memory H2 database (leave settings as-are).
 * production, which is activated when the schedim.war is deployed into a Tomcat (or other) server. 
 
+Add the following settings to your DataSource.groovy:
+
 {code}
 environments{
     development {
@@ -165,7 +169,14 @@ If you are using MySQL, use the following lines:
 		dialect = 'org.hibernate.dialect.MySQL5InnoDBDialect'
 		url = "jdbc:mysql://localhost:3306/schedim"
 
-{code]
+{code}
+
+Note the setting for dbCreate: currently they are all set to update,
+so that Grails tries to add anything new you create. It should not delete
+any database tables or otherwise break something, just add new stuff.
+
+Once you have a production-ready game, you should set dbCreate to 'none'
+in the production environment settings.
 
 h3. Security configuration
 
@@ -193,7 +204,8 @@ If you now visit the login page and try to login with the default test user,
 you will see an error message - which is perfectly ok at this moment, since there are no users
 in the database. 
 
-!First failed login: your game is secure...|first_failed_login.png!
+!game/first_failed_login.png!
+First failed login: your game is secure...
 
 h3. Adding data
 
