@@ -72,11 +72,102 @@ default [landing page|guide:landing]:
 
 This still does not look like the test server's page, but it's a start.
 
-h3. Security configuration
+h3. Database installation
 
-// TODO
+You may run your game entirely from RAM without any persistent database installed.
+But while this is great for testing (you get a new database with every start), for a
+production setting it will probably be less than ideal, because you loose your entire game state
+once the server shuts down.
 
+If you want to go beyond an in-memory setup, you should install a proper database like 
+"Postgresql":http://www.postgresql.org - this is easy to setup. On Windows, you can use PgAdmin 
+which comes with the database executable to setup a first database called schedim, with 
+ a user goblin and password goblin.
+ 
+If you decide to go with Postgresql (you could also use MySQL or MS-SQLserver etc),
+please add the following postgresql driver to you dependencies closure in BuildConfig.groovy:
+
+{code}
+    dependencies{    
+        // automatically download and install the Postgresql driver:
+        runtime 'postgresql:postgresql:9.1-901.jdbc4'
+        // or use the MySQL one:
+        // runtime 'mysql:mysql-connector-java:5.1.20'
+    }
+{code}
+
+Please note that depending on the Postgresql or Mysql configuration, you may need to allow
+connections from localhost:
+ 
+{code} 
+ --- in pg_hba.conf: add a separate line:
+ host	schedim	     all	127.0.0.1/32	      trust
+{code} 
+ 
 h3. Database configuration
+
+Next you will need to configure the connection to the database. This is stored in /grails-app/conf/DataSource.groovy
+
+There are three distinct environments under which your game will be running - 
+
+* development, which means you run it via run-app from the Grails console.
+* test, during testing the game will be running with the in-memory H2 database (leave settings as-are).
+* production, which is activated when the schedim.war is deployed into a Tomcat (or other) server. 
+
+{code}
+environments{
+    development {
+		dataSource {
+			dbCreate = "update"
+			pooling = true
+			logSql = false
+			driverClassName = "org.postgresql.Driver"
+            dialect = "org.hibernate.dialect.PostgreSQLDialect"
+            url = "jdbc:postgresql://127.0.0.1:5432/schedim"			
+			username = 'goblin'
+			password = 'goblin'
+		}
+		
+	}
+
+	production {
+		dataSource {
+			dbCreate = "update"
+			pooling = true
+            logSql = false
+           
+            driverClassName = "org.postgresql.Driver"
+            dialect = "org.hibernate.dialect.PostgreSQLDialect"
+            url = "jdbc:postgresql://127.0.0.1:5432/schedim"
+			username = 'goblin'
+			password = 'goblin'
+            autoReconnect = true
+            properties {
+                maxActive = -1
+                minEvictableIdleTimeMillis=1800000
+                timeBetweenEvictionRunsMillis=1800000
+                numTestsPerEvictionRun=3
+                testOnBorrow=true
+                testWhileIdle=true
+                testOnReturn=true
+                validationQuery="SELECT 1"
+            }
+		}
+	}
+}
+{code}
+
+If you are using MySQL, use the following lines: 
+
+{code}
+
+		driverClassName = "com.mysql.jdbc.Driver"
+		dialect = 'org.hibernate.dialect.MySQL5InnoDBDialect'
+		url = "jdbc:mysql://localhost:3306/schedim"
+
+{code]
+
+h3. Security configuration
 
 // TODO
 
