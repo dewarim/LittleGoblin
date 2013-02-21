@@ -169,8 +169,35 @@ If you are using MySQL, use the following lines:
 
 h3. Security configuration
 
-// TODO
+Little Goblin uses the Grails Spring Security Plugin to enable authentication and authorization of
+ users. You may of course decide to use another security mechanism (or write a game that does not
+ require a login...) but I recommend you just use the following settings in your Config.groovy - 
+ after all, Little Goblin is about reducing the time for setup.
+ 
+{code}
+
+ grails.plugins.springsecurity.userLookup.userDomainClassName = 'de.dewarim.goblin.UserAccount'
+ grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'de.dewarim.goblin.UserRole'
+ grails.plugins.springsecurity.authority.className = 'de.dewarim.goblin.Role'
+ grails.plugins.springsecurity.userLookup.passwordPropertyName = 'passwd'
+ grails.plugins.springsecurity.authority.nameField = 'name'
+ grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/portal/start'
+ grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
+
+{code}
+
+You may have noticed the defaultTargetUrl: by changing this you can determine to which page a user
+ will be redirected after login by default. In this case it's the start action of the portal controller.  
+
+If you now visit the login page and try to login with the default test user,
+you will see an error message - which is perfectly ok at this moment, since there are no users
+in the database. 
+
+!First failed login: your game is secure...|first_failed_login.png!
 
 h3. Adding data
+
+At the moment, your database is completely empty - it should contain just the tables for the 
+Little Goblin domain classes, but not a single row of data. That is about to change...
 
 // TODO
