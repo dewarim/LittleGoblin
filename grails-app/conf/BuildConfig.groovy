@@ -5,7 +5,7 @@ grails.project.source.level = 1.7
 grails.project.war.file = "target/${appName}.war"
 grails.project.dependency.resolution = {
 
-    inherits( "global" ) {
+    inherits("global") {
         excludes "xercesImpl", "xmlParserAPIs", "xml-apis", 'groovy'
     }
     log "warn"
@@ -14,6 +14,7 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenLocal()
         mavenCentral()
+        mavenRepo "http://download.java.net/maven/2/"
     }
 
     dependencies {
@@ -22,7 +23,7 @@ grails.project.dependency.resolution = {
         }
         compile 'javax.mail:mail:1.4.5'
         compile 'javax.activation:activation:1.1.1'
-        compile("org.codehaus.groovy.modules.http-builder:http-builder:0.5.2"){
+        compile("org.codehaus.groovy.modules.http-builder:http-builder:0.5.2") {
             excludes "groovy"
         }
         compile 'org.codehaus.gpars:gpars:1.0.0'
@@ -31,7 +32,7 @@ grails.project.dependency.resolution = {
         }
     }
 
-    plugins{
+    plugins {
 //        compile ":mail:1.0"
         runtime ":hibernate:$grailsVersion", {
             export = false
@@ -50,5 +51,6 @@ grails.project.dependency.resolution = {
             exclude "spock-grails-support"
             export = false
         }
+        compile ":fixtures:1.2"
     }
 }

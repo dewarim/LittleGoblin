@@ -66,12 +66,15 @@ import de.dewarim.goblin.GoblinScript
 import de.dewarim.goblin.mob.EncounterMob
 import de.dewarim.goblin.quest.StepChild
 
+import grails.plugin.fixtures.*
+
 class BootStrap {
     def springSecurityService
     def guildMemberService
     def academyService
     def grailsApplication
     def tickService
+    def fixtureLoader
 
 //    def camelContext
 //    def brokerService
@@ -92,42 +95,47 @@ class BootStrap {
         log.debug("LITTLE_GOBLIN_HOME: ${System.env.LITTLE_GOBLIN_HOME}")
         log.debug("Facebook.config: ${grailsApplication.config.facebook}")
 
-        log.debug("create security roles")
-        // create Security roles:
-        Role adminRole = new Role(description: 'Administrator', name: 'ROLE_ADMIN')
-        adminRole.save(flush: true, failOnError: true)
-        Role userRole = new Role(description: "User", name: 'ROLE_USER')
-        userRole.save(flush: true, failOnError: true)
-
-        log.debug("create admin user")
-        UserAccount admin = new UserAccount(username: 'admin', userRealName: 'Admin', enabled: true)
-        admin.passwd = 'admin' // for local testing
-        admin.save(flush: true, failOnError: true)
-        UserRole adminAdminRole = new UserRole(user: admin, role: adminRole)
-        adminAdminRole.save()
-        UserRole adminUserRole = new UserRole(user: admin, role: userRole)
-        adminUserRole.save()
-
-        log.debug("create test UserAccount 'anon'")
-        UserAccount user = new UserAccount(username: 'anon', userRealName: 'Anonymous', enabled: true)
-        user.passwd = 'anon'
-        user.coins = 100
-        user.save(flush: true, failOnError: true)
-        UserRole userUserRole = new UserRole(user: user, role: userRole)
-        userUserRole.save()
-
+//        log.debug("create security roles")
+//        // create Security roles:
+//        Role adminRole = new Role(description: 'Administrator', name: 'ROLE_ADMIN')
+//        adminRole.save(flush: true, failOnError: true)
+//        Role userRole = new Role(description: "User", name: 'ROLE_USER')
+//        userRole.save(flush: true, failOnError: true)
+//
+//        log.debug("create admin user")
+//        UserAccount admin = new UserAccount(username: 'admin', userRealName: 'Admin', enabled: true)
+//        admin.passwd = 'admin' // for local testing
+//        admin.save(flush: true, failOnError: true)
+//        UserRole adminAdminRole = new UserRole(user: admin, role: adminRole)
+//        adminAdminRole.save()
+//        UserRole adminUserRole = new UserRole(user: admin, role: userRole)
+//        adminUserRole.save()
+//
+//        log.debug("create test UserAccount 'anon'")
+//        UserAccount user = new UserAccount(username: 'anon', userRealName: 'Anonymous', enabled: true)
+//        user.passwd = 'anon'
+//        user.coins = 100
+//        user.save(flush: true, failOnError: true)
+//        UserRole userUserRole = new UserRole(user: user, role: userRole)
+//        userUserRole.save()
+        
+        fixtureLoader.load('system/rolesAndUsers')
+        
         Dice d20 = new Dice(name: 'd20', sides: 20)
         d20.save()
         def d6 = new Dice(name: 'd6', sides: 6)
         d6.save()
 
         initScripts()
-        initLicenses()
+//        initLicenses()
+       
+        fixtureLoader.load('system/license')
+        
         initEquipmentSlotTypes()
         Town town = initTown()
 
         initMailBoxTypes()
-        PlayerCharacter gob = initPlayer(user)
+        PlayerCharacter gob = initPlayer(UserAccount.findByUsername('anon'))
 
         initCombatModifiers()
         if (MobTemplate.list().size() == 0) {
