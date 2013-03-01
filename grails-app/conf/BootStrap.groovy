@@ -120,6 +120,7 @@ class BootStrap {
 //        userUserRole.save()
         
         fixtureLoader.load('system/rolesAndUsers')
+        fixtureLoader.load('system/mailBox')
         
         Dice d20 = new Dice(name: 'd20', sides: 20)
         d20.save()
@@ -134,7 +135,6 @@ class BootStrap {
         initEquipmentSlotTypes()
         Town town = initTown()
 
-        initMailBoxTypes()
         PlayerCharacter gob = initPlayer(UserAccount.findByUsername('anon'))
 
         initCombatModifiers()
@@ -151,7 +151,8 @@ class BootStrap {
         initShop()
         initFactions()
         initOrders(gob)
-        initGlobalSettings()
+        fixtureLoader.load('system/configEntries')
+        fixtureLoader.load('game/configEntries')
         initGuilds()
         initAcademy(town)
         initHelp()
@@ -1059,37 +1060,6 @@ class BootStrap {
             ChatterBox box = new ChatterBox(goblinOrder: order, name: 'chatterbox.default.name')
             order.addToChatterBoxes(box)
             box.save()
-        }
-    }
-
-    void initGlobalSettings() {
-        log.debug("initialize global settings")
-
-        def settings = ['coins.price.create_order': '10',
-                'order.chatterboxes': '3',
-                'order.chatterbox.max.messages': '10', // for testing; later: 100 or such.
-                'coins.price.chatterbox': '10',
-                'academy.refund.percentage': '100', // the % a pc will get back when canceling a course in an academy.
-                'username.min.length':3,
-                'password.min.length':6,
-                'server_url':
-                // TODO: should use grailsApplication.config.serverUrl
-                Environment.current.equals(Environment.DEVELOPMENT) ? 'http://127.0.0.1:8080' : 'http://schedim.de'
-        ]
-
-        settings.each {k, v ->
-            GlobalConfigEntry entry = new GlobalConfigEntry(name: k, entryValue: v)
-            entry.save()
-        }
-    }
-
-    void initMailBoxTypes() {
-        log.debug("initialize mail box types")
-
-        def boxTypes = ['mail.inbox', 'mail.outbox', 'mail.archive']
-        boxTypes.each {name ->
-            MailBoxType type = new MailBoxType(name: name)
-            type.save()
         }
     }
 
