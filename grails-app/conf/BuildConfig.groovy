@@ -21,7 +21,7 @@ grails.project.dependency.resolution = {
         runtime 'postgresql:postgresql:9.1-901.jdbc4', {
             export = false
         }
-        compile 'javax.mail:mail:1.4.5'
+        compile 'javax.mail:mail:1.4.6'
         compile 'javax.activation:activation:1.1.1'
         compile("org.codehaus.groovy.modules.http-builder:http-builder:0.5.2") {
             excludes "groovy"
@@ -33,7 +33,6 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-//        compile ":mail:1.0"
         runtime ":hibernate:$grailsVersion", {
             export = false
         }
