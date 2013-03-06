@@ -9,7 +9,7 @@ package de.dewarim.goblin
 class GoblinScript {
 
     String name
-    Class clazz
+    Class script
 
     boolean equals(o) {
         if (is(o)) return true
@@ -17,7 +17,7 @@ class GoblinScript {
 
         GoblinScript that = o
 
-        if (clazz != that.clazz) return false
+        if (script != that.script) return false
         if (name != that.name) return false
 
         return true
@@ -26,7 +26,7 @@ class GoblinScript {
     int hashCode() {
         int result
         result = (name != null ? name.hashCode() : 0)
-        result = 31 * result + (clazz != null ? clazz.hashCode() : 0)
+        result = 31 * result + (script != null ? script.hashCode() : 0)
         return result
     }
 }
