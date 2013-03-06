@@ -8,8 +8,8 @@ import de.dewarim.goblin.ComponentType
 class Product {
 
     static final Integer MAX_ITEMS_PER_RUN = 10000
-
-    static hasMany = [components:Component, // components that are consumed during production (and how much)
+    
+    static hasMany = [
             requiredSkills:SkillRequirement, // skill needed and their level
             crafters:PlayerProduct // players who know how to make this product
     ]

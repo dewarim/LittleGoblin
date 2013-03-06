@@ -9,12 +9,11 @@ import de.dewarim.goblin.item.ItemType
 class Component {
     // basically, this is a Product-ItemType- 1..n join-class.
 
-    static belongsTo = [product:Product]
-
     ItemType itemType
     Integer amount = 1
     ComponentType type
-
+    Component product
+    
     boolean equals(o) {
         if (is(o)) return true
         if (!(o instanceof Component)) return false
