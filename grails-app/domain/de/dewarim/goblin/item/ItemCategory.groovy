@@ -7,7 +7,7 @@ import de.dewarim.goblin.Category
  */
 class ItemCategory {
 
-    static belongsTo = [itemType:ItemType, category:Category]
+    static belongsTo = [itemType: ItemType, category: Category]
 
     ItemCategory() {
     }
@@ -19,11 +19,7 @@ class ItemCategory {
         category.addToItemCategories this
     }
 
-    ItemCategory(ItemType type, String categoryName){
-        this(type, Category.findByName(categoryName))
-    }
-
-    void deleteFully(){
+    void deleteFully() {
         itemType.removeFromItemCategories this
         category.removeFromItemCategories this
         delete()
