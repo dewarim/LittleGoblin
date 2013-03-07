@@ -12,7 +12,7 @@ class Component {
     ItemType itemType
     Integer amount = 1
     ComponentType type
-    Component product
+    Product product
     
     boolean equals(o) {
         if (is(o)) return true
