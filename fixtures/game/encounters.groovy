@@ -57,4 +57,21 @@ fixture {
             config: '<params><xp>10</xp></params>',
             name: 'encounter.get.xp.10'
     )
+    
+    maidEncounter(Encounter, includesCombat: false, name: 'encounter.elf.distress')
+    niceElfEncounter(Encounter, includesCombat: false,
+            script: GoblinScript.findByName('script.getReward'),
+            config: '''<params><gold>30</gold><reputation><faction><name>faction.elves</name><level>10</level></faction>
+            <faction><name>faction.dwarves</name><level>-1</level></faction></reputation>
+</params>''',
+            name: 'encounter.elf.reward'
+    )
+    meanElfEncounter(Encounter, includesCombat: false,
+            script: GoblinScript.findByName('script.getReward'),
+            config: '''<params><gold>75</gold><reputation><faction><name>faction.dwarves</name><level>9</level></faction>
+                            <faction><name>faction.elves</name><level>-20</level></faction></reputation>
+                            </params>
+                            ''',
+            name: 'encounter.dwarf.reward'
+    )
 }

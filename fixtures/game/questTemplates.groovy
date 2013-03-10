@@ -104,4 +104,32 @@ fixture {
     )
     croneSc4success(StepChild, parent:croneQs4, child:croneQs5)
     croneSc4fail(StepChild, parent:croneQs4, child:croneQs6)
+    
+    elfQuest(QuestTemplate, name: 'quest.test.elf',
+            level: 125,
+            description: 'quest.test.elf.description',
+            giver:mayor
+    )
+    elfQs1(QuestStep, title: 'quest.elf.distress.title',
+            description: 'quest.elf.distress',
+            encounter: maidEncounter, questTemplate: elfQuest,
+            firstStep: true,
+            name:'step.elf.1',)    
+    elfQs2(QuestStep, title: 'quest.elf.nice.title',
+            description: 'quest.elf.nice',
+            encounter: niceElfEncounter, questTemplate: elfQuest,
+            endOfQuest: true,
+            intro: 'quest.elf.help',
+            name:'step.elf.nice')
+    elfQs1Sc1(StepChild, parent: elfQs1, child:elfQs2)
+    
+    elfQs3(QuestStep, title:'quest.elf.mean.title',
+            description: 'quest.elf.mean',
+            encounter: meanElfEncounter, questTemplate: elfQuest,
+            endOfQuest: true,
+            intro: 'quest.elf.go_home',
+            name:'step.elf.mean'
+    )
+    elfQs1Sc2(StepChild, parent:elfQs1, child:elfQs3)
+    
 }
