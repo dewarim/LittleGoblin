@@ -2,7 +2,7 @@ import de.dewarim.goblin.quest.QuestGiver
 
 fixture{
     
-    mayor(QuestGiver, name: 'giver.mayour', description:'giver.mayour.desc')
+    mayor(QuestGiver, name: 'giver.mayor', description:'giver.mayor.desc')
     king(QuestGiver, name:'giver.king', description: 'giver.king.desc')
     urchin(QuestGiver, name:'giver.urchin', description: 'giver.urchin.desc')
     smith(QuestGiver, name:'giver.smith', description: 'giver.smith.desc')
