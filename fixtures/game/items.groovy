@@ -1,9 +1,15 @@
+import de.dewarim.goblin.EquipmentSlotType
+import de.dewarim.goblin.RequiredSlot
 import de.dewarim.goblin.item.ItemCategory
 import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.item.ItemTypeFeature
 
 include('game/categories')
 include('game/features')
+
+def findSlotType(String name){
+    return EquipmentSlotType.findByName(name)
+}
 
 fixture {
     healingPotion(ItemType, name: 'item.healing_potion',
@@ -27,5 +33,13 @@ fixture {
     swordIc(ItemCategory, itemType: sword, category: weapon)
     shield(ItemType, name: 'item.armor.shield', availability: 140, baseValue: 20)
     shieldIc(ItemCategory, itemType: shield, category: armor)
-
+    shieldSlot(RequiredSlot, itemType: shield, slotType: findSlotType('slot.hand'))
+    
+    clothArmor(ItemType, name:'armor.cloth', baseValue: 4)
+    clothSlot(RequiredSlot, itemType:clothArmor, slotType: findSlotType('slot.body'))
+    
+    leatherCap(ItemType, name: 'armor.leather_cap', baseValue: 4)
+    capSlot(RequiredSlot, itemType: leatherCap, slotType:findSlotType('slot.head'))
+    
+    
 }
