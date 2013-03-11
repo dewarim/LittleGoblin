@@ -12,10 +12,10 @@ import de.dewarim.goblin.item.ItemType
  */
 class WeaponAttribute implements ICombatAttribute{
 
-    static belongsTo = [itemType:ItemType, combatAttributeType:CombatAttributeType]
-
     Double damageModifier = 1.0
-
+    ItemType itemType
+    CombatAttributeType combatAttributeType
+    
     CombatAttributeType fetchCombatAttributeType(){
         return combatAttributeType
     }
