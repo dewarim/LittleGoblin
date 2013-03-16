@@ -1,4 +1,4 @@
-# Installation instructions for the binary package of LittleGoblin (0.3.2)
+# Installation instructions for the binary package of LittleGoblin
 
 Download the WAR file from: [http://download.littlegoblin.de/files/current/goblin.war]
 
