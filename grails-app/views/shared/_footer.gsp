@@ -1,5 +1,5 @@
 <footer class="footer">
-    <strong><a href="http://dewarim.com/little-goblin/status"><g:message code="version.info"/></a></strong>
+    <strong><a href="http://dewarim.com/little-goblin/status">${grailsApplication.metadata.getApplicationVersion()}</a></strong>
     <br/><br/>
 
     <div class="imprint">
