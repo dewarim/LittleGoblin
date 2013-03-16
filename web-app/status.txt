@@ -426,3 +426,4 @@ Version 0.3.3 "Showman" / 2013-02-
 * Refactored GSPs.
 * New: Redirect admins directly to administration page after login.
 * Fixed #17: Check for missing message.properties entries
+* Fixed: when creating a new order, initialize its main chat.

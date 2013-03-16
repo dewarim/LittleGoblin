@@ -97,22 +97,19 @@
 
         <div class="version_info">
             <pre>
+                *Version 0.3.3 "Fixtures"* / 2013-03-16
+
+                * Improved documentation
+                * Upgrade to Grails 2.2.1
+                * Migrated game and system data of the reference implementation to fixtures,
+                which allows you to edit them more easily.
+                * Fixed: when creating a new order, initialize its main chat.
+                
                 Version 0.3.2 "Tick-Tock" / 2013-02-12
 
                 * Fixed #3: add gameName config parameter as default title to pages.
                 * Changed: Run game ticks in a background thread (no more need for a cron job to run ticks).
-                * Fixed #14: Version link in footer was broken.
-                
-                
-                Version 0.3.1 "Resume" / 2013-01-27
-
-                * Fixed: admin can edit ItemTypes again.
-                * New: admin can assign categories to item types.
-                * Fixed: inputValidationService no longer croaks on 'null'-String.
-                * Cleanup code.
-                * Added more documentation (items, guilds)
-                * Project is now language level Java 7
-                * Grails 2.2.0
+                * Fixed #14: Version link in footer was broken.                                           
 
             </pre>
             
