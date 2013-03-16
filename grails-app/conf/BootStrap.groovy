@@ -61,12 +61,13 @@ class BootStrap {
         PlayerCharacter gob = initPlayer(UserAccount.findByUsername('anon'))
 
         fixtureLoader.load('game/combatAttributeTypes')
-       
-        initFactions()
+        fixtureLoader.load('game/reputationMessages')
+        fixtureLoader.load('game/factions')
+               
         initOrders(gob)
 
         fixtureLoader.load('game/configEntries')
-        // initializes: towns, guilds, dice, skilklSets 
+        // initializes: towns, guilds, dice, skillSets 
         fixtureLoader.load('game/academies')
         initHelp()
 
@@ -114,49 +115,13 @@ class BootStrap {
 
 
     void initItems(PlayerCharacter littleGoblin) {
-        def ore = ItemType.findByName('ore')
-        def iron = ItemType.findByName('iron')
+        def ore = ItemType.findByName('item.iron.ore')
+        def iron = ItemType.findByName('item.iron.bar')
         def someOre = new Item(type: ore, amount: 10, owner: littleGoblin)
         def someBars = new Item(type: iron, amount: 10, owner: littleGoblin)
         someOre.save()
         someBars.save()
 
-    }
-
-    void initFactions() {
-        log.debug("initialize Factions")
-
-        def repMessages = ['unknown': [0], 'good': [1], 'very.good': [11],
-                'very.very.good': [21],
-                'best': [41],
-                'bad': [-1], 'very.bad': [-11],
-                'extremely.bad': [-21],
-                'worst': [-41]]
-
-        ReputationMessageMap rmmDwarfs = new ReputationMessageMap(name: 'rmm.dwarves')
-        ReputationMessageMap rmmElves = new ReputationMessageMap(name: 'rmm.elves')
-        rmmElves.save()
-        rmmDwarfs.save()
-
-
-        repMessages.each {messageId, repRange ->
-            ReputationMessage rmd = new ReputationMessage(messageId: "reputation.$messageId", reputation: repRange[0],
-                    repMessageMap: rmmDwarfs)
-            rmmDwarfs.addToRepMessages(rmd)
-            rmd.save()
-            ReputationMessage rme = new ReputationMessage(messageId: "reputation.$messageId", reputation: repRange[0],
-                    repMessageMap: rmmElves)
-            rmmElves.addToRepMessages(rme)
-            rme.save()
-        }
-
-        Faction elves = new Faction(name: 'faction.elves', description: 'faction.elves.description', repMessageMap: rmmElves)
-        elves.save()
-        rmmElves.faction = elves
-
-        Faction dwarfs = new Faction(name: 'faction.dwarves', description: 'faction.dwarves.description', repMessageMap: rmmDwarfs)
-        dwarfs.save()
-        rmmDwarfs.faction = dwarfs
     }
 
     void initOrders(PlayerCharacter pc) {
