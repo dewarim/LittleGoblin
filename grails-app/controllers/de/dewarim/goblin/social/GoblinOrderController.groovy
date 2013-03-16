@@ -57,8 +57,12 @@ class GoblinOrderController extends BaseController{
                 description: params.order_description,
                 leader: pc
         )
+        
         if (! (order.validate() && order.save())) {
-
+            ChatterBox chatterBox = new ChatterBox(name: 'chatterbox.default.name', goblinOrder: order)            
+            order.addToChatterBoxes(chatterBox)
+            chatterBox.save()
+            
             redirect(action: 'index',
                     controller: 'goblinOrder',
                     params: [pc: pc.id, order: order.id, saveFailed: true])
