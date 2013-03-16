@@ -1,9 +1,16 @@
+*Version 0.3.3 "Fixtures"*
+
+* Improved documentation
+* Upgrade to Grails 2.2.1
+* Migrated game and system data of the reference implementation to fixtures,
+  which allows you to edit them more easily.
+* Fixed: when creating a new order, initialize its main chat.
+
 *Version 0.3.2 "Tick-Tock"*
 
 * Fixed #3: add gameName config parameter as default title to pages.
 * Changed: Run game ticks in a background thread (no more need for a cron job to run ticks).
 * Fixed #14: Version link in footer was broken.
-
 
 *Version 0.3.1 "Resume"*
 
