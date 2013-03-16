@@ -9,11 +9,10 @@ class ReputationMessageMap {
 
     static hasMany = [repMessages: ReputationMessage]
     static constraints = {
-        faction nullable: true // so you can create a RMM without immediately assigning a faction.
+        
     }
 
     String name // a messageMap should have a name for better management.
-    Faction faction
 
     ReputationMessage fetchReputationMessage(Integer level) {
         ReputationMessage rm =
@@ -29,7 +28,6 @@ class ReputationMessageMap {
 
         ReputationMessageMap that = o
 
-        if (faction != that.faction) return false
         if (name != that.name) return false
 
         return true
