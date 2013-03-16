@@ -53,31 +53,31 @@ class BootStrap {
         fixtureLoader.load('system/configEntries')
         fixtureLoader.load('system/licenses')
         
+        // Note: the order of fixture files is in some cases relevant
+        // as for example 'game/items' will generate objects used by 'game/playerCharacters' 
         fixtureLoader.load('game/equipmentSlotTypes')
         fixtureLoader.load('game/scripts')
         fixtureLoader.load('game/towns')
         fixtureLoader.load('game/images')
-        
-        PlayerCharacter gob = initPlayer(UserAccount.findByUsername('anon'))
-
         fixtureLoader.load('game/combatAttributeTypes')
         fixtureLoader.load('game/reputationMessages')
         fixtureLoader.load('game/factions')
-               
-        initOrders(gob)
-
         fixtureLoader.load('game/configEntries')
         // initializes: towns, guilds, dice, skillSets 
         fixtureLoader.load('game/academies')
-        initHelp()
-
         fixtureLoader.load('game/shops')
         fixtureLoader.load('game/items')
         fixtureLoader.load('game/productComponents')
         fixtureLoader.load('game/mobs')
         fixtureLoader.load('game/questTemplates')
+        fixtureLoader.load('game/playerCharacters')
+        fixtureLoader.load('game/orders')
         
-        initItems(gob)
+        PlayerCharacter.list().each{pc ->
+            pc.initializePlayerCharacter()
+        }
+        
+        initHelp()
         initTicks()
     }
 
@@ -96,42 +96,6 @@ class BootStrap {
             tick.save()
         }
         tickService.initialize()
-    }
-
-    PlayerCharacter initPlayer(user) {
-        log.debug("initialize player character")
-        PlayerCharacter gob = new PlayerCharacter(name: 'Gobli', user: user, gold: 100, xp: 10)
-        gob.save()
-        gob.initializePlayerCharacter()
-
-        def boxes = MailBoxType.list()
-        boxes.each {boxType ->
-            MailBox mailBox = new MailBox(owner: gob, boxType: boxType)
-            mailBox.save()
-        }
-
-        return gob
-    }
-
-
-    void initItems(PlayerCharacter littleGoblin) {
-        def ore = ItemType.findByName('item.iron.ore')
-        def iron = ItemType.findByName('item.iron.bar')
-        def someOre = new Item(type: ore, amount: 10, owner: littleGoblin)
-        def someBars = new Item(type: iron, amount: 10, owner: littleGoblin)
-        someOre.save()
-        someBars.save()
-
-    }
-
-    void initOrders(PlayerCharacter pc) {
-        log.debug("initialize Orders")
-
-        GoblinOrder order = new GoblinOrder(name: 'Order of the Ebon Hand', leader: pc, description: 'The legendary Order of the Ebon Hand')
-        order.addToMembers(pc)
-        order.save()
-        pc.goblinOrder = order
-
     }
 
     void initHelp() {
