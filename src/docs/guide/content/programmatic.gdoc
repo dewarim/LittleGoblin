@@ -1,0 +1,59 @@
+You can add data programmatically on startup by calling the respective code from the BootStrap class.
+
+{code}
+    void initCategories() {
+        def categories = ['weapon', 'armor', 'metal', 'potion', 'mushroom', 'magic']
+        categories.each {
+            Category cat = new Category(name: it)
+            cat.save()
+        }
+    }
+{code}
+
+The above code takes a list of categories which are used to group item types, for example
+to allow the user to filter a shopkeeper's item list (or to fetch a random quest reward of a 
+specific item class).
+
+If you plan your game ahead, you can easily create all the required categories on the first run
+of the game server. The disadvantage is that you cannot add "just another" category to this list
+on an existing database without modifying the code some more:
+ 
+{code}
+    def categories = ['gem', 'weapon', 'armor', 'metal', 'potion', 'mushroom', 'magic']
+{code}
+ 
+This would cause a constraint violation - each category must have a unique name, and if you just
+run the code again, it will croak on encountering the 'weapon' entry already existing in the
+database. So the next step would be:
+
+{code}
+    void initCategories() {
+        def categories = ['gem', 'weapon', 'armor', 'metal', 'potion', 'mushroom', 'magic']
+        categories.each {
+            Category.findOrSaveWhere(name: it)
+        }
+    }
+{code}
+
+Note: removing categories by script is harder, as there may already be objects or code depending
+on the existence of a given category (for example, removing the "potion" category may break the
+shop of a potion vendor).
+
+Advantages:
+
+* You can create exactly the kind of items you want and have full control over them.
+* Procedurally generated content is the fastest way of creating huge amounts of content.
+  For example, by combining a couple of attributes, you can easily make hundreds of different monsters
+  - like they do in MMORPGs, from a small red demonic poison beetle to 
+  an ancient blue angelic dung beetle of ethereal complexion.
+  
+Disadvantages:
+
+* You must know what you are doing. It's easy to break your game by creating quests without
+  proper endings or accidentally assigning whole classes of items to the wrong category - and then
+  good luck in both fixing half the item database with the mistaken "weapon" attribute or taking
+  those misfeatures away from players who have come to like their indestructible witch brooms with
+  pink stitching of resist magic.
+* If you let someone else do the coding, you have to trust them completely - you cannot just allow
+  random players to run arbitrary code on your server.
+

@@ -4,3 +4,10 @@ need to code. Ideally, you will customize the application, create content and co
 but you are not required to - just start with the base system and design new things.
 
 This section describes how to create content.
+
+There are currently three ways to create content for Little Goblin (unless you count
+adding objects directly via SQL to the database). You can add content
+
+* programmatically by coding the objects by hand
+* via data fixture files
+* by using the GUI

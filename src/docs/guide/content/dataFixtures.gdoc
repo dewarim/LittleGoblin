@@ -1,0 +1,65 @@
+Data fixtures are code blocks that exist outside of the main code base and are run on startup to
+create all the "fixed" objects that are required for both the system and the game environment.
+The data fixtures plugin provides an easier way of defining objects than doing this "by hand".
+
+{code}
+include('game/questGivers')
+include('game/encounters')
+
+fixture {
+
+    orcQuest(QuestTemplate, name: 'quest.generic.name',
+            level: 100, description: 'quest.orc.desc', giver: mayor)
+    orcQs(QuestStep, title:'quest.generic.fight',
+            description: 'quest.generic.description',
+            endOfQuest: true, firstStep: true,
+            questTemplate: orcQuest, encounter: orcEncounter,
+            name:'step.fight.orc'    
+    )
+}
+{code}
+
+As you can see, you now have the choice to add items by explicitly creating them - and 
+referencing them in subsequent item definitions. The QuestStep in the above example uses
+the quest template "orcQuest" which was defined in the same file and the orcEncounter which
+was defined in the included encounters fixture file. 
+
+Or, the slightly simpler category example: 
+
+{code}
+def catNames = ['weapon', 'armor', 'metal', 'potion', 'mushroom', 'magic']
+
+fixture{
+    catNames.each{name ->
+        "$name"(Category, name:name)
+    }
+}
+{code}
+
+It's also possible to create each item individually without looping:
+{code}
+fixture{
+    'gem'(Category, name:'gem')
+    'foodCat'(Category, name:'food')
+}
+{code}
+
+So, data fixtures are an easier way of creating objects programmatically. 
+
+Advantages:
+
+* Easier than direct programmatic object generation. And shorter code, too.
+* You can still use Groovy language constructs.
+* You can include other fixtures files and do not need to keep everything in one place.
+* It's possible to exchange fixtures files with other people, so a clever person
+  can create a wholly new quest along with items, monsters and so on for your game.
+
+Disadvantages: 
+
+* It still requires advanced knowledge of the object classes (although you get a lot of 
+ examples in the fixtures directory).
+* Currently, the fixtures plugin does not offer a way to skip objects already in the
+ database. So if you run another coder's fixtures file against your game, you have to make
+ sure they do not try to generate already existing objects. (Adding namespaces to names
+ will prevent this, for example using (Category, name:'my.plugin.poison')
+* IDE support for fixtures is somewhat limited.

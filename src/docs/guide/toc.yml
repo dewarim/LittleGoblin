@@ -21,3 +21,8 @@ implementation:
   title: Plugin Usage
   create: How to create a new game
   landing: The landing page
+content:
+  title: Adding content
+  programmatic: Adding content programmatically
+  dataFixtures: Adding content using data fixtures
+  contentGui: Adding content via the GUI
