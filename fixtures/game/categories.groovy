@@ -1,10 +1,11 @@
 import de.dewarim.goblin.Category
 
+def catNames = ['weapon', 'armor', 'metal', 'potion', 'mushroom', 'magic']
+
 fixture{
-    weapon(Category, name: 'weapon')
-    armor(Category, name: 'armor')
-    metal(Category, name: 'metal')
-    potion(Category, name: 'potion')
-    mushroom(Category, name: 'mushroom')
-    magic(Category, name: 'magic')
+    
+    catNames.each{name ->
+        "$name"(Category, name:name)
+    }
+    
 }
