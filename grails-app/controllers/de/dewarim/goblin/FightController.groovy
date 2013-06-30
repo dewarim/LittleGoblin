@@ -7,6 +7,7 @@ import de.dewarim.goblin.mob.Mob
 import de.dewarim.goblin.mob.MobTemplate
 import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.quest.Quest
+import org.springframework.dao.OptimisticLockingFailureException
 
 @Secured(['ROLE_USER'])
 class FightController extends BaseController {
@@ -93,13 +94,13 @@ class FightController extends BaseController {
 
         flash.message = ""
         log.debug("request: " + params)
-        PlayerCharacter pc
-        Mob mob
-        Combat combat
+        PlayerCharacter pc = null
+        Mob mob = null
+        Combat combat = null
         Combat.withTransaction {
             combat = Combat.lock(params.combat)
             if (!combat) {
-                redirect(controller: 'portal', action: 'start')
+                redirect(controller: 'portal', action: 'start')                
                 return
             }
             pc = combat.playerCharacter
@@ -114,20 +115,21 @@ class FightController extends BaseController {
             try {
                 action = fightService.fight(combat, pc, mob)
             }
-            catch (org.springframework.dao.OptimisticLockingFailureException foo) {
+            catch (OptimisticLockingFailureException foo) {
                 // try once more: (a rather primitive approach...)
                 action = fightService.fight(combat, pc, mob)
             }
 
             if (action) {
                 redirect(action: action, params: [pc: pc.id, mob: mob.id, combat: combat.id])
-                return
             }
         }
-        return [pc: pc,
-                mob: mob,
-                combat: combat,
-        ]
+        if (!request.isRedirected()) {
+            return [pc: pc,
+                    mob: mob,
+                    combat: combat,
+            ]
+        }
     }
 
     def victory() {
