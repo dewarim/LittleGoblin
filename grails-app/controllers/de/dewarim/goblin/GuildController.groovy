@@ -136,7 +136,7 @@ class GuildController extends BaseController{
                 pc:pc,
                 max:max,
                 offset:offset,
-                orders:Guild.listGuildByName(max:max, offset:offset),
+                orders:Guild.listOrderByName(max:max, offset:offset),
                 ]
                 )
     }
