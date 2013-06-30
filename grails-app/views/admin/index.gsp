@@ -152,6 +152,11 @@
 					<g:link controller="itemFeatureAdmin" action="index">
 						<g:message code="link.to.itemFeatureAdmin"/>
 					</g:link>
+				</li>   
+                <li>
+					<g:link controller="user" action="list">
+						<g:message code="link.to.userController"/>
+					</g:link>
 				</li>
 			</ul>
 		</div>
