@@ -97,11 +97,9 @@ class QuestController extends BaseController {
             log.debug('redirecting to fight.index')
             redirect(controller: 'fight', action: 'index', params: [// encounter:quest.currentStep.encounter.id,
                     combat: combat.id])
-            return
         }
         else {
             redirect(controller: 'quest', action: 'showStep', params: [pc: pc.id])
-            return
         }
     }
 
@@ -135,14 +133,10 @@ class QuestController extends BaseController {
             log.debug('redirecting to fight.index')
             redirect(controller: 'fight', action: 'index', params: [// encounter:quest.currentStep.encounter.id,
                     combat: combat.id])
-            return
         }
         else {
             // this encounter is described in the quest step.
             redirect(controller: 'quest', action: 'showStep', params: [pc: pc.id])
-//			flash.message = message(code:'error.encounterType.not.implemented')
-            //			log.debug(flash.message)
-            return
         }
     }
 
@@ -189,7 +183,6 @@ class QuestController extends BaseController {
             quest.successful = true
         }
         redirect(controller: 'town', action: 'show', params: [pc: pc.id])
-        return
     }
 
     def nextStep() {
@@ -209,7 +202,6 @@ class QuestController extends BaseController {
         }
         quest.currentStep = nextStep
         redirect(controller: 'quest', action: 'showStep', params: [pc: pc.id])
-        return
     }
 
     def showQuestMaster() {

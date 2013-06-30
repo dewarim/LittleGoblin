@@ -63,14 +63,12 @@ class MailBoxController extends BaseController{
 
         if(! mail.validate() || ! forRecipient.validate()){
             render(view:'writeMail', model:[pc:pc, mail:mail])
-            return
         }
         else{
             mail.save()
             forRecipient.save()
             flash.message = message(code:'mail.sent.success')
             redirect(action:'index', controller:'mailBox')
-            return
         }
     }
 
@@ -128,7 +126,6 @@ class MailBoxController extends BaseController{
         log.debug("mails:${mails}")
         render(template:'/mailBox/mailbox',
                 model:[pc:pc, mailBox:box, mails:mails, max:params.max ?: 10, offset:params.offset ?: 0])
-        return
     }
 
     /**
@@ -145,7 +142,6 @@ class MailBoxController extends BaseController{
 
         def mails = fetchMails(pc, box)
         render(template:'/mailBox/list_mails', model:[mailBox:box, mails:mails])
-        return
     }
 
     /**

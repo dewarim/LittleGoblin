@@ -40,7 +40,7 @@ class MeleeController extends BaseController {
 
         if (pc.currentMelee) {
             flash.message = message(code: 'melee.join.already')
-            redirect(controller: 'melee', action: index)
+            redirect(controller: 'melee', action: 'index')
             return
         }
 
@@ -51,18 +51,16 @@ class MeleeController extends BaseController {
         }
         else {
             flash.message = message(code: 'melee.join.not.again')
-            redirect(controller: 'melee', action: index)
+            redirect(controller: 'melee', action: 'index')
             return
         }
 
         if (melee.status == MeleeStatus.WAITING) {
             redirect(controller: 'melee', action: 'index')
-            return
         }
         else {
             redirect(controller: 'melee', action: 'show',
                     params: [pc: pc, melee: melee, fighters: meleeService.listFighters(melee)])
-            return
         }
     }
 
@@ -79,7 +77,6 @@ class MeleeController extends BaseController {
             flash.message = message(code: 'melee.left.melee')
         }
         redirect(controller: 'melee', action: 'index')
-        return
     }
 
     def useItem() {

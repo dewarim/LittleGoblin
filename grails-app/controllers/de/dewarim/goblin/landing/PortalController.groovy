@@ -26,7 +26,6 @@ class PortalController extends BaseController {
 
     def index() {
         redirect(action: 'landing')
-        return
     }
 
     def imprint() {
@@ -118,7 +117,6 @@ class PortalController extends BaseController {
             // return::success
             flash.message = message(code: 'registration.mail.sent')
             redirect(controller: 'portal', action: 'landing')
-            return
         }
         catch (Exception e) {
             log.debug("registration.fail: ", e)
@@ -126,7 +124,6 @@ class PortalController extends BaseController {
             session.email = params.email
             flash.message = message(code: 'registration.fail', args: [message(code: e.message)])
             render(view: 'register', model: params)
-            return
         }
     }
 
@@ -155,7 +152,6 @@ class PortalController extends BaseController {
         catch (Exception e) {
             flash.message = message(code: 'confirmation.fail', args: [message(code: e.message)])
             render(view: 'landing', model: params)
-            return
         }
     }
 

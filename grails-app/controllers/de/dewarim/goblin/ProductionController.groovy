@@ -82,7 +82,6 @@ class ProductionController extends BaseController{
         else{
             flash.message = message(code:'error.missing.product')
             redirect(action:'workshop', controller:'production')
-            return
         }
     }
 
@@ -139,12 +138,10 @@ class ProductionController extends BaseController{
             }
             else{
                 render(status:503, text:message(code:'error.insufficient.resources'))
-                return
             }
         }
         else{
             render(status:503, text:message(code:'error.missing.product'))
-            return
         }
     }
 
@@ -177,6 +174,5 @@ class ProductionController extends BaseController{
             flash.message = message(code:'error.job.not_found')
         }
         redirect(action:'workshop', controller:'production')
-        return
     }
 }

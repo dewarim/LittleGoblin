@@ -46,11 +46,9 @@ class PlayerCharacterController extends BaseController{
             pc.initializePlayerCharacter()
             flash.message = message(code:"pc.create.success", args:[pc.name])
             redirect(controller:'town', action:'show',params:[pc:pc.id] )
-            return
         }
         else{
             redirect(controller:'portal', action:'start')
-            return
         }
     }
 

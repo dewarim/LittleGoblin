@@ -23,7 +23,6 @@ class ComponentAdminController extends BaseController {
         catch (Exception e) {
             flash.message = message(code: 'error.invalid.object')
             redirect(controller: 'productAdmin', action: 'index')
-            return
         }
     }
 

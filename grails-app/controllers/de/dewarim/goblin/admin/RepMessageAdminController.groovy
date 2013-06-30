@@ -20,7 +20,6 @@ class RepMessageAdminController extends BaseController {
         catch (Exception e) {
             flash.message = message(code: 'error.invalid.object')
             redirect(controller: 'rmmAdmin', action: 'index')
-            return
         }
     }
 

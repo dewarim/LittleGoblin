@@ -92,7 +92,6 @@ class GuildController extends BaseController{
 
         flash.message = message(code:'guild.join.success', args:[message(code:guild.name)])
         redirect(action:'show', controller:'guild',params:[pc:pc.id, guild:guild.id])
-        return
     }
 
     /**

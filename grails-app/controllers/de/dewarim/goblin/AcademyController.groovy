@@ -62,7 +62,6 @@ class AcademyController extends BaseController {
         else {
             flash.message = message(code: 'error.academy.no.member')
             redirect(controller: 'town', action: 'show')
-            return
         }
     }
 
@@ -139,12 +138,10 @@ class AcademyController extends BaseController {
             }
 
             redirect(action:'show', controller:'academy', params:[academy:academy.id])
-            return
         }
         else {
             flash.message = message(code: 'error.academy.no.member')
             redirect(controller: 'town', action: 'show')
-            return
         }
     }
 
@@ -165,12 +162,10 @@ class AcademyController extends BaseController {
             ass.removeFromLearningQueueElements queueElement
             queueElement.delete()
             redirect(controller:'academy', action:'show', params:[academy:ass.academy.id])
-            return
         }
         else{
             flash.message = message(code:'error.object.foreign')
             redirect(controller:'town', action:'show')
-            return
         }
     }
 

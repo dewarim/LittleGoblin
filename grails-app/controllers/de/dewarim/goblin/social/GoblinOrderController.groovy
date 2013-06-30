@@ -66,14 +66,12 @@ class GoblinOrderController extends BaseController{
             redirect(action: 'index',
                     controller: 'goblinOrder',
                     params: [pc: pc.id, order: order.id, saveFailed: true])
-            return
         }
         else{
             order.addToMembers(pc)
             pc.goblinOrder = order
             pc.user.coins = pc.user.coins - price
             redirect(action:'showMyOrder', controller:'goblinOrder', params:[pc:pc.id, order:order.id])
-            return
         }
     }
 
@@ -167,7 +165,6 @@ class GoblinOrderController extends BaseController{
         order.addToApplications(application)
         flash.message = message(code:'order.application.sent', args:[order.name])
         redirect(action:'show', controller:'town')
-        return
     }
 
     def showMyOrder() {
@@ -211,7 +208,6 @@ class GoblinOrderController extends BaseController{
 
         flash.message = message(code:'order.left', args:[order.name])
         redirect(controller:'town', action:'show')
-        return
     }
 
     def showMembers() {
@@ -277,7 +273,6 @@ class GoblinOrderController extends BaseController{
         pc.goblinOrder.removeFromApplications app
         app.delete()
         render(text:message(code:'order.application.accepted'))
-        return
     }
 
     def denyApplication() {

@@ -68,7 +68,6 @@ class ItemController extends BaseController {
 //          return
         }
         redirect(action: 'fight', controller: 'fight', params: [combat: combat.id])
-        return
     }
 
     def equipItem() {
