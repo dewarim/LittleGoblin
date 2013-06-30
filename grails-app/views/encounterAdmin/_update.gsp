@@ -13,7 +13,7 @@
 	</g:else>
 </td>
 <td>
-	${encounter.config?.encodeAsHTML()}
+	${encounter.config}
 </td>
 <td class="mob_list">
 	<ul>
@@ -43,6 +43,6 @@
 			update="[success:'message', failure:'message']"
 			params="[id:encounter.id]"
 			onSuccess="\$('#edit_${encounter.id}').hide();">
-		[<g:message code="delete"/>]
+		[<g:message code="default.button.delete.label"/>]
 	</g:remoteLink>
 </td>

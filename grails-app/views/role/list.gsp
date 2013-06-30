@@ -1,3 +1,4 @@
+<%@ page import="de.dewarim.goblin.Role" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -30,8 +31,8 @@
 			<g:each in="${authorityList}" status="i" var="authority">
 				<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 					<td>${authority.id}</td>
-					<td>${authority.authority?.encodeAsHTML()}</td>
-					<td>${authority.description?.encodeAsHTML()}</td>
+					<td>${authority.name}</td>
+					<td>${authority.description}</td>
 					<td class="actionButtons">
 						<span class="actionButton">
 							<g:link action="show" id="${authority.id}">Show</g:link>
@@ -44,7 +45,7 @@
 		</div>
 
 		<div class="paginateButtons">
-			<g:paginate total="${de.dewarim.goblin.Role.count()}" />
+			<g:paginate total="${Role.count()}" />
 		</div>
 	</div>
 </body>

@@ -35,14 +35,14 @@
 				<tr class="prop">
 					<td valign="top" class="name"><label for="authority">Role Name:</label></td>
 					<td valign="top" class="value ${hasErrors(bean:authority,field:'authority','errors')}">
-						<input type="text" id="authority" name="authority" value="${authority.authority?.encodeAsHTML()}"/>
+						<input type="text" id="authority" name="name" value="${authority.name}"/>
 					</td>
 				</tr>
 
 				<tr class="prop">
 					<td valign="top" class="name"><label for="description">Description:</label></td>
 					<td valign="top" class="value ${hasErrors(bean:authority,field:'description','errors')}">
-						<input type="text" id="description" name="description" value="${authority.description?.encodeAsHTML()}"/>
+						<input type="text" id="description" name="description" value="${authority.description}"/>
 					</td>
 				</tr>
 
@@ -50,8 +50,8 @@
 					<td valign="top" class="name"><label for="people">People:</label></td>
 					<td valign="top" class="value ${hasErrors(bean:authority,field:'people','errors')}">
 						<ul>
-						<g:each var="p" in="${authority.people}">
-							<li>${p}</li>
+						<g:each var="p" in="${authority.userRoles.collect{it.user}}">
+							<li>${p.username}</li>
 						</g:each>
 						</ul>
 					</td>
