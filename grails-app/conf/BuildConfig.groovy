@@ -45,7 +45,7 @@ grails.project.dependency.resolution = {
             export = false
         }
         runtime ":jquery:1.8.3"
-        runtime ":resources:1.1.6"
+        runtime ":resources:1.2"
         compile ':spring-security-core:1.2.7.3'
         compile ":webxml:1.4.1"
         test(":spock:0.7") {
