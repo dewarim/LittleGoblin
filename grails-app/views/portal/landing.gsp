@@ -97,19 +97,19 @@
 
         <div class="version_info">
             <pre>
-                *Version 0.3.3 "Fixtures"* / 2013-03-16
+                Version 0.3.4 "Users" / 2013-06-30
+                * #4: Added / fixed UserController. Still a little rough, but works.
+                * Upgraded to Grails 2.2.3
+                * Code cleaning
+                * Upgrade resources plugin to 1.2
+                
+                Version 0.3.3 "Fixtures"* / 2013-03-16
 
                 * Improved documentation
                 * Upgrade to Grails 2.2.1
                 * Migrated game and system data of the reference implementation to fixtures,
                 which allows you to edit them more easily.
                 * Fixed: when creating a new order, initialize its main chat.
-                
-                Version 0.3.2 "Tick-Tock" / 2013-02-12
-
-                * Fixed #3: add gameName config parameter as default title to pages.
-                * Changed: Run game ticks in a background thread (no more need for a cron job to run ticks).
-                * Fixed #14: Version link in footer was broken.                                           
 
             </pre>
             
