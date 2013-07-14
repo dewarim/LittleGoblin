@@ -2,8 +2,6 @@ package de.dewarim.goblin.admin
 
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.guild.Guild
-import de.dewarim.goblin.town.Academy
-import de.dewarim.goblin.town.Town
 import grails.plugins.springsecurity.Secured
 import de.dewarim.goblin.town.Academy
 import de.dewarim.goblin.town.GuildAcademy
@@ -17,8 +15,8 @@ class GuildAdminController extends BaseController {
         ]
     }
 
-    def edit() {
-        def guild = Guild.get(params.id)
+    def edit(Long id) {
+        def guild = Guild.get(id)
         if (!guild) {
             render(status: 503, text: message(code: 'error.object.not.found'))
             return
@@ -26,8 +24,8 @@ class GuildAdminController extends BaseController {
         render(template: '/guildAdmin/edit', model: [guild: guild])
     }
 
-    def cancelEdit() {
-        def guild = Guild.get(params.id)
+    def cancelEdit(Long id) {
+        def guild = Guild.get(id)
         if (!guild) {
             render(status: 503, text: message(code: 'error.object.not.found'))
             return
@@ -35,9 +33,9 @@ class GuildAdminController extends BaseController {
         render(template: '/guildAdmin/update', model: [guild: guild])
     }
 
-    def update() {
+    def update(Long id) {
         try {
-            def guild = Guild.get(params.id)
+            def guild = Guild.get(id)
             if (!guild) {
                 throw new RuntimeException('error.object.not.found')
             }
@@ -99,13 +97,12 @@ class GuildAdminController extends BaseController {
         }
     }
 
-    def delete() {
-        Guild guild = Guild.get(params.id)
+    def delete(Long id) {
+        Guild guild = Guild.get(id)
         try {
             if (!guild) {
                 throw new RuntimeException("error.object.not.found")
             }
-            // TODO: check if this works with dependent objects.
             guild.delete()
             render(text: message(code: 'guild.deleted'))
         }
