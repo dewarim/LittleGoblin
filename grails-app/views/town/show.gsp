@@ -83,7 +83,7 @@
             <div id="order_link">
                 <ul class="no_bullets">
                     <li>
-                        <g:link action="index" controller="goblinOrder">
+                        <g:link action="index" controller="goblinOrderAdmin">
                             <g:message code="town.order.link"/>
                         </g:link>
                     </li>

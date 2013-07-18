@@ -41,7 +41,6 @@ class PlayerCharacter extends Creature {
             town: Town,
             currentCombat: Combat,
             currentQuest: Quest,
-            goblinOrder: GoblinOrder,
     ]
 
     static constraints = {
@@ -60,6 +59,7 @@ class PlayerCharacter extends Creature {
     Long questLevel = 0
     Long level = 1
 
+    GoblinOrder goblinOrder
     Melee currentMelee
 
     void resurrect() {

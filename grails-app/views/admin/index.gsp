@@ -157,6 +157,11 @@
 					<g:link controller="user" action="list">
 						<g:message code="link.to.userController"/>
 					</g:link>
+				</li>  
+                <li>
+					<g:link controller="goblinOrderAdmin" action="index">
+						<g:message code="link.to.goblinOrderAdmin"/>
+					</g:link>
 				</li>
 			</ul>
 		</div>

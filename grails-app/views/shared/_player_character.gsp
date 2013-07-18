@@ -20,7 +20,7 @@
         <tr>
             <td><g:message code="pc.order"/></td>
             <td><g:if test="${pc.goblinOrder}">
-                <g:link action="showMyOrder" controller="goblinOrder" params="[pc:pc.id, order:pc.goblinOrder.id]">
+                <g:link action="showMyOrder" controller="goblinOrderAdmin" params="[pc:pc.id, order:pc.goblinOrder.id]">
                    <g:message code="${pc.goblinOrder.name}"/>
                 </g:link>
             </g:if>

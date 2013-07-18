@@ -10,6 +10,7 @@ class Creature {
 
 	static hasMany = [
             slots:EquipmentSlot,
+            // TODO: combatAttribute and resistanceAttribute need to be separated.
             combatAttributes:CreatureAttribute,
             resistanceAttributes:CreatureAttribute,
             creatureSkills:CreatureSkill,

@@ -7,10 +7,11 @@ import de.dewarim.goblin.social.ChatterBox
  */
 class GoblinOrder {
 
-    static hasMany = [members:PlayerCharacter, applications:OrderApplication, chatterBoxes:ChatterBox]
+    static hasMany = [applications: OrderApplication, chatterBoxes: ChatterBox]
     static constraints = {
         name blank: false, unique: true
-        description blank:true
+        description blank: true
+        leader unique: true, nullable: true
     }
 
     Long score = 0
@@ -19,8 +20,8 @@ class GoblinOrder {
     PlayerCharacter leader
     Long coins = 0
 
-    ChatterBox fetchDefaultChatterBox(){
-        return chatterBoxes.find{true} // return the first element.
+    ChatterBox fetchDefaultChatterBox() {
+        return chatterBoxes.find { true } // return the first element.
     }
 
     boolean equals(o) {
@@ -39,12 +40,30 @@ class GoblinOrder {
     }
 
     int hashCode() {
-        int result
-        result = (score != null ? score.hashCode() : 0)
-        result = 31 * result + (name != null ? name.hashCode() : 0)
-        result = 31 * result + (description != null ? description.hashCode() : 0)
-        result = 31 * result + (leader != null ? leader.hashCode() : 0)
-        result = 31 * result + (coins != null ? coins.hashCode() : 0)
-        return result
+        return (name != null ? name.hashCode() : 0)
+    }
+
+    List getMembers() {
+        return PlayerCharacter.findAll("from PlayerCharacter pc where pc.goblinOrder=:gob", [gob: this])
+    }
+
+    void deleteComplete() {
+        PlayerCharacter.executeUpdate(
+                "update PlayerCharacter pc set pc.goblinOrder=null where pc.goblinOrder=:goblinOrder",
+                [goblinOrder: this]
+        )
+        applications.each {
+            // TODO: inform player about demise of the order.
+            it.delete()
+        }
+        chatterBoxes.each { chatterbox ->
+            this.removeFromChatterBoxes(chatterbox)
+            chatterbox.chatMessages.each {
+                chatterbox.removeFromChatMessages(it)
+                it.delete()
+            }
+            chatterbox.delete()
+        }
+        this.delete()
     }
 }

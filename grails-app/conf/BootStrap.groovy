@@ -72,6 +72,8 @@ class BootStrap {
         fixtureLoader.load('game/questTemplates')
         fixtureLoader.load('game/playerCharacters')
         fixtureLoader.load('game/orders')
+        def goblinOrder = GoblinOrder.findByName('order.ebon').leader=PlayerCharacter.findByName('Gobli')
+        goblinOrder.save()
         
         PlayerCharacter.list().each{pc ->
             pc.initializePlayerCharacter()
