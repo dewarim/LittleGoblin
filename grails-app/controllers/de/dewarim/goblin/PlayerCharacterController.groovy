@@ -93,4 +93,21 @@ class PlayerCharacterController extends BaseController{
             render(status:500, text:'error.player.not.found')
         }
     }
+
+    /**
+     * Fetch a list of player characters whose names start with $name and render them as a HTML select field,
+     * whose name is set to $id.
+     * @param name the name of the player characters.
+     * @param id name of the select field. Uses id as parameter name so we can use the remoteField
+     * tag from the standard Grails lib.
+     * @return a select field containing a maximum number of 20 player characters.
+     */
+    def listRemote(String name, String id){
+        def fieldName = id
+        def playerName = name+'%'
+        render(template:'listRemote',
+                model:[players:PlayerCharacter.findAll("from PlayerCharacter pc where pc.name like :name",
+                [name:playerName],[max:20]), fieldName:fieldName])
+    }
+
 }
