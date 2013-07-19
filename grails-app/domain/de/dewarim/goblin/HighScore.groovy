@@ -22,10 +22,6 @@ class HighScore {
     }
 
     int hashCode() {
-        int result
-        result = (character != null ? character.hashCode() : 0)
-        result = 31 * result + (xp != null ? xp.hashCode() : 0)
-        result = 31 * result + (killer != null ? killer.hashCode() : 0)
-        return result
+        return character != null ? character.hashCode() : 0
     }
 }

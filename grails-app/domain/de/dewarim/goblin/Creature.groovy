@@ -301,12 +301,7 @@ class Creature {
         result = 31 * result + (name != null ? name.hashCode() : 0)
         result = 31 * result + (maxHp != null ? maxHp.hashCode() : 0)
         result = 31 * result + (hp != null ? hp.hashCode() : 0)
-        result = 31 * result + (strike != null ? strike.hashCode() : 0)
-        result = 31 * result + (parry != null ? parry.hashCode() : 0)
-        result = 31 * result + (damage != null ? damage.hashCode() : 0)
-        result = 31 * result + (initiative != null ? initiative.hashCode() : 0)
         result = 31 * result + (gold != null ? gold.hashCode() : 0)
-        result = 31 * result + (male != null ? male.hashCode() : 0)
         return result
     }
 }

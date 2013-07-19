@@ -16,13 +16,14 @@ import de.dewarim.goblin.item.ItemTypeFeature
 class Feature {
 
 	static hasMany = [itemTypeFeatures:ItemTypeFeature]
-
+    
 //    Class<? extends ICombatScript> script // script class to generate the effect
     Class script
 	String internalName
 	// internal name, for example to differentiate between "heal 1w6" and "heal 3w6"
 
 	String name // screen name (message-Id), to label a heal_1w6-item as "Lesser potion of healing"
+    
     boolean equals(o) {
         if (is(o)) return true
         if (!(o instanceof Feature)) return false
@@ -37,9 +38,7 @@ class Feature {
     }
 
     int hashCode() {
-        int result
-        result = (script != null ? script.hashCode() : 0)
-        result = 31 * result + (internalName != null ? internalName.hashCode() : 0)
+        int result = (internalName != null ? internalName.hashCode() : 0)
         result = 31 * result + (name != null ? name.hashCode() : 0)
         return result
     }

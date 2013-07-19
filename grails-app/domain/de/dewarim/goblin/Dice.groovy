@@ -45,11 +45,6 @@ class Dice {
     }
 
     int hashCode() {
-        int result
-        result = (name != null ? name.hashCode() : 0)
-        result = 31 * result + (sides != null ? sides.hashCode() : 0)
-        result = 31 * result + (amount != null ? amount.hashCode() : 0)
-        result = 31 * result + (bonus != null ? bonus.hashCode() : 0)
-        return result
+        return name != null ? name.hashCode() : 0
     }
 }

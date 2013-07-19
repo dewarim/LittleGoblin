@@ -48,14 +48,9 @@ class Image {
     }
 
     int hashCode() {
-        int result
-        result = (width != null ? width.hashCode() : 0)
-        result = 31 * result + (height != null ? height.hashCode() : 0)
-        result = 31 * result + (url != null ? url.hashCode() : 0)
+        int result = url != null ? url.hashCode() : 0
         result = 31 * result + (name != null ? name.hashCode() : 0)
         result = 31 * result + (sourceUrl != null ? sourceUrl.hashCode() : 0)
-        result = 31 * result + (description != null ? description.hashCode() : 0)
-        result = 31 * result + (license != null ? license.hashCode() : 0)
         result = 31 * result + (artist != null ? artist.hashCode() : 0)
         return result
     }

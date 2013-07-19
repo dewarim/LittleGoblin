@@ -113,27 +113,8 @@ class UserAccount {
     }
 
     int hashCode() {
-        int result
-        result = (currentChar != null ? currentChar.hashCode() : 0)
-        result = 31 * result + (salt != null ? salt.hashCode() : 0)
-        result = 31 * result + (username != null ? username.hashCode() : 0)
-        result = 31 * result + (userRealName != null ? userRealName.hashCode() : 0)
-        result = 31 * result + (passwd != null ? passwd.hashCode() : 0)
-        result = 31 * result + (enabled != null ? enabled.hashCode() : 0)
-        result = 31 * result + (mailConfirmationToken != null ? mailConfirmationToken.hashCode() : 0)
-        result = 31 * result + (confirmationMailSent != null ? confirmationMailSent.hashCode() : 0)
-        result = 31 * result + (wantsResetPassword != null ? wantsResetPassword.hashCode() : 0)
-        result = 31 * result + (lastPasswordReset != null ? lastPasswordReset.hashCode() : 0)
-        result = 31 * result + (accountExpired != null ? accountExpired.hashCode() : 0)
-        result = 31 * result + (accountLocked != null ? accountLocked.hashCode() : 0)
-        result = 31 * result + (passwordExpired != null ? passwordExpired.hashCode() : 0)
-        result = 31 * result + (email != null ? email.hashCode() : 0)
-        result = 31 * result + (locale != null ? locale.hashCode() : 0)
-        result = 31 * result + (emailShow != null ? emailShow.hashCode() : 0)
-        result = 31 * result + (description != null ? description.hashCode() : 0)
-        result = 31 * result + (pass != null ? pass.hashCode() : 0)
-        result = 31 * result + (coins != null ? coins.hashCode() : 0)
-        result = 31 * result + (premiumMember != null ? premiumMember.hashCode() : 0)
+        int result = salt != null ? salt.hashCode() : 0
+        result = 31 * result + (username != null ? username.hashCode() : 0)     
         return result
     }
 }

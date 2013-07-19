@@ -7,7 +7,11 @@ package de.dewarim.goblin
  * GoblinScripts should probably only be created by the programmers.
  */
 class GoblinScript {
-
+    
+    static constraints = {
+        name unique: true
+    }
+    
     String name
     Class script
 
@@ -24,9 +28,6 @@ class GoblinScript {
     }
 
     int hashCode() {
-        int result
-        result = (name != null ? name.hashCode() : 0)
-        result = 31 * result + (script != null ? script.hashCode() : 0)
-        return result
+        return name != null ? name.hashCode() : 0
     }
 }

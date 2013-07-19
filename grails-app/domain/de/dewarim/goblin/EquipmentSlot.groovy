@@ -37,8 +37,6 @@ class EquipmentSlot {
     int hashCode() {
         int result
         result = (name != null ? name.hashCode() : 0)
-        result = 31 * result + (item != null ? item.hashCode() : 0)
-        result = 31 * result + (rank != null ? rank.hashCode() : 0)
         result = 31 * result + (creature != null ? creature.hashCode() : 0)
         result = 31 * result + (type != null ? type.hashCode() : 0)
         return result

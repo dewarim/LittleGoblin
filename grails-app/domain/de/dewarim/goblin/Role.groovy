@@ -29,9 +29,6 @@ class Role {
     }
 
     int hashCode() {
-        int result
-        result = (description != null ? description.hashCode() : 0)
-        result = 31 * result + (name != null ? name.hashCode() : 0)
-        return result
+        return name != null ? name.hashCode() : 0
     }
 }
