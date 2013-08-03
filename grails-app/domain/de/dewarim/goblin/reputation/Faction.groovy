@@ -9,7 +9,7 @@ class Faction {
 
     static constraints = {
         repMessageMap nullable:true // so you can create a Faction without having an rmm.
-        name blank:false
+        name blank:false, unique:true
         description blank:false
     }
 
@@ -37,11 +37,6 @@ class Faction {
     }
 
     int hashCode() {
-        int result
-        result = (name != null ? name.hashCode() : 0)
-        result = 31 * result + (description != null ? description.hashCode() : 0)
-        result = 31 * result + (startLevel != null ? startLevel.hashCode() : 0)
-        result = 31 * result + (repMessageMap != null ? repMessageMap.hashCode() : 0)
-        return result
+        return name != null ? name.hashCode() : 0
     }
 }
