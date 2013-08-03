@@ -12,6 +12,7 @@ class Skill {
     static constraints = {
         script nullable:true
         initParams size:1..4096
+        name unique: true
     }
 
     Class script
@@ -39,11 +40,6 @@ class Skill {
     }
 
     int hashCode() {
-        int result
-        result = (script != null ? script.hashCode() : 0)
-        result = 31 * result + (name != null ? name.hashCode() : 0)
-        result = 31 * result + (startLevel != null ? startLevel.hashCode() : 0)
-        result = 31 * result + (initParams != null ? initParams.hashCode() : 0)
-        return result
+        return name != null ? name.hashCode() : 0
     }
 }
