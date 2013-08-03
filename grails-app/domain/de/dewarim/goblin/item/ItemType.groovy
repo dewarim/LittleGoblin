@@ -12,10 +12,11 @@ class ItemType {
             combatAttributes: WeaponAttribute,
             resistanceAttributes: WeaponAttribute,
             itemTypeFeatures: ItemTypeFeature,
-            itemCategories: ItemCategory
+            itemCategories: ItemCategory           
     ]
 
     static constraints = {
+        name unique: true
         combatDice nullable: true
     }
 
@@ -29,6 +30,7 @@ class ItemType {
     Dice combatDice
     Boolean stackable = false
     Integer packageSize = 1 // If you buy an item of this type, how many pieces do you get?
+    Boolean active = true
 
     // option: maxStackSize
     // option: weight / encumbrance
@@ -54,22 +56,11 @@ class ItemType {
         if (stackable != itemType.stackable) return false
         if (usable != itemType.usable) return false
         if (uses != itemType.uses) return false
-
+        if (active != itemType.active) return false
         return true
     }
 
     int hashCode() {
-        int result
-        result = (name != null ? name.hashCode() : 0)
-        result = 31 * result + (description != null ? description.hashCode() : 0)
-        result = 31 * result + (usable != null ? usable.hashCode() : 0)
-        result = 31 * result + (rechargeable != null ? rechargeable.hashCode() : 0)
-        result = 31 * result + (uses != null ? uses.hashCode() : 0)
-        result = 31 * result + (baseValue != null ? baseValue.hashCode() : 0)
-        result = 31 * result + (availability != null ? availability.hashCode() : 0)
-        result = 31 * result + (combatDice != null ? combatDice.hashCode() : 0)
-        result = 31 * result + (stackable != null ? stackable.hashCode() : 0)
-        result = 31 * result + (packageSize != null ? packageSize.hashCode() : 0)
-        return result
+        return name.hashCode()
     }
 }
