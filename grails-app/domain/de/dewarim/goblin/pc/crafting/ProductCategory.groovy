@@ -9,10 +9,12 @@ class ProductCategory {
 
     static constraints = {
         description nullable:true
+        name unique: true
     }
 
     String name
     String description // optional: description
+    
     boolean equals(o) {
         if (is(o)) return true
         if (!(o instanceof ProductCategory)) return false
@@ -26,9 +28,6 @@ class ProductCategory {
     }
 
     int hashCode() {
-        int result
-        result = (name != null ? name.hashCode() : 0)
-        result = 31 * result + (description != null ? description.hashCode() : 0)
-        return result
+        return name != null ? name.hashCode() : 0
     }
 }
