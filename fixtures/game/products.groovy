@@ -1,8 +1,12 @@
 import de.dewarim.goblin.pc.crafting.Product
 import de.dewarim.goblin.pc.crafting.SkillRequirement
+import de.dewarim.goblin.pc.skill.ProductionSkill
 
 include('game/productCategories')
-include('game/productionSkills')
+
+def psSword = ProductionSkill.findByName('skill.crafting.sword')
+def psShield = ProductionSkill.findByName('skill.crafting.shield')
+def psIron = ProductionSkill.findByName('skill.crafting.iron')
 
 fixture{
     
