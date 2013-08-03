@@ -65,7 +65,7 @@ fixture {
     swordAttr(WeaponAttribute, itemType: shortSword,damageModifier: 1.0, combatAttributeType: normalDam)
     swordSlot(RequiredSlot, itemType: shortSword, slotType: hand) 
     
-    longSword(ItemType, name: 'weapon.short_sword', availability: 750,
+    longSword(ItemType, name: 'weapon.long_sword', availability: 750,
             baseValue: 30, combatDice: findDie('2d6'))
     longSwordAttr(WeaponAttribute, itemType:longSword, damageModifier: 1.0, combatAttributeType: normalDam)
     longSwordSlot1(RequiredSlot, itemType: longSword, slotType: hand) // Long sword requires 2 slots. 
