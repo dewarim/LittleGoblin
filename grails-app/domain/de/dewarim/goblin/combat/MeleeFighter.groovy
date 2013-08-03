@@ -49,11 +49,7 @@ class MeleeFighter {
 
     int hashCode() {
         int result
-        result = (action != null ? action.hashCode() : 0)
-        result = 31 * result + (place != null ? place.hashCode() : 0)
-        result = 31 * result + (round != null ? round.hashCode() : 0)
-        result = 31 * result + (state != null ? state.hashCode() : 0)
-        result = 31 * result + (pc != null ? pc.hashCode() : 0)
+        result = pc != null ? pc.hashCode() : 0
         result = 31 * result + (melee != null ? melee.hashCode() : 0)
         return result
     }

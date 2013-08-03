@@ -64,10 +64,6 @@ class MeleeAction {
         result = 31 * result + (melee != null ? melee.hashCode() : 0)
         result = 31 * result + (actor != null ? actor.hashCode() : 0)
         result = 31 * result + (target != null ? target.hashCode() : 0)
-        result = 31 * result + (item != null ? item.hashCode() : 0)
-        result = 31 * result + (feature != null ? feature.hashCode() : 0)
-        result = 31 * result + (featureConfig != null ? featureConfig.hashCode() : 0)
-        result = 31 * result + (initiative != null ? initiative.hashCode() : 0)
         return result
     }
 }

@@ -27,7 +27,7 @@ class Academy {
      * @param guildList
      */
     void purgeGuildAcademies(guildList){
-
+        // TODO: implement purgeGuildAcademies
     }
 
     boolean equals(o) {

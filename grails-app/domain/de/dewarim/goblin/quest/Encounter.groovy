@@ -37,7 +37,6 @@ class Encounter {
     int hashCode() {
         int result
         result = (name != null ? name.hashCode() : 0)
-        result = 31 * result + (includesCombat != null ? includesCombat.hashCode() : 0)
         result = 31 * result + (script != null ? script.hashCode() : 0)
         result = 31 * result + (config != null ? config.hashCode() : 0)
         return result

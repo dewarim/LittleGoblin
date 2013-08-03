@@ -85,12 +85,6 @@ class Quest {
     int hashCode() {
         int result
         result = (start != null ? start.hashCode() : 0)
-        result = 31 * result + (finishedDate != null ? finishedDate.hashCode() : 0)
-        result = 31 * result + (currentStep != null ? currentStep.hashCode() : 0)
-        result = 31 * result + (lastExecutedStep != null ? lastExecutedStep.hashCode() : 0)
-        result = 31 * result + (successful != null ? successful.hashCode() : 0)
-        result = 31 * result + (finished != null ? finished.hashCode() : 0)
-        result = 31 * result + (template != null ? template.hashCode() : 0)
         result = 31 * result + (playerCharacter != null ? playerCharacter.hashCode() : 0)
         return result
     }

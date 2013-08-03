@@ -40,14 +40,9 @@ class Mail {
     }
 
     int hashCode() {
-        int result
-        result = (sender != null ? sender.hashCode() : 0)
-        result = 31 * result + (recipient != null ? recipient.hashCode() : 0)
-        result = 31 * result + (subject != null ? subject.hashCode() : 0)
-        result = 31 * result + (content != null ? content.hashCode() : 0)
-        result = 31 * result + (shown != null ? shown.hashCode() : 0)
+        int result        
+        result = (subject != null ? subject.hashCode() : 0)
         result = 31 * result + (sent != null ? sent.hashCode() : 0)
-        result = 31 * result + (box != null ? box.hashCode() : 0)
         return result
     }
 }

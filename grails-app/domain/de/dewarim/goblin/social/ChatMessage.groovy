@@ -32,11 +32,6 @@ class ChatMessage {
     }
 
     int hashCode() {
-        int result
-        result = (sender != null ? sender.hashCode() : 0)
-        result = 31 * result + (content != null ? content.hashCode() : 0)
-        result = 31 * result + (sent != null ? sent.hashCode() : 0)
-        result = 31 * result + (chatterBox != null ? chatterBox.hashCode() : 0)
-        return result
+        return sent.hashCode()
     }
 }

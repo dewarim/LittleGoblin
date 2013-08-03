@@ -29,8 +29,7 @@ class CreatureSkill {
 
     int hashCode() {
         int result
-        result = (level != null ? level.hashCode() : 0)
-        result = 31 * result + (skill != null ? skill.hashCode() : 0)
+        result =  skill != null ? skill.hashCode() : 0
         result = 31 * result + (owner != null ? owner.hashCode() : 0)
         return result
     }
