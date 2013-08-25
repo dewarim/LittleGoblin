@@ -350,11 +350,13 @@ class MeleeService implements ITickListener{
     void tock(){
         Melee melee = Melee.findByStatus(MeleeStatus.RUNNING)
         if (melee) {
+            melee.refresh()
             fightMelee(melee)
         }
         else{
             melee = findOrCreateMelee()
             if (meleeIsReady(melee)) {
+                melee.refresh()
                 startMelee(melee)
             }
         }
