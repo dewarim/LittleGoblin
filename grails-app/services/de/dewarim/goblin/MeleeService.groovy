@@ -9,7 +9,7 @@ import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.ticks.ITickListener
 
-class MeleeService implements ITickListener{
+class MeleeService implements ITickListener {
 
     def globalConfigService
     def playerMessageService
@@ -27,7 +27,7 @@ class MeleeService implements ITickListener{
     List<PlayerCharacter> listFighters(Melee melee) {
         return melee.fighters.findAll { meleeFighter ->
             !(meleeFighter.state.equals(FighterState.QUITTER) || meleeFighter.state.equals(FighterState.DEAD))
-        }.collect {it.pc}.sort {it.xp}
+        }.collect { it.pc }.sort { it.xp }
     }
 
     Melee findOrCreateMelee() {
@@ -65,7 +65,7 @@ class MeleeService implements ITickListener{
 
     void fightMelee(Melee melee) {
         Map<PlayerCharacter, MeleeFighter> pcFighters = [:]
-        melee.fighters.findAll {it.state.equals(FighterState.ACTIVE)}.each {
+        melee.fighters.findAll { it.state.equals(FighterState.ACTIVE) }.each {
             pcFighters.put(it.pc, it)
         }
 
@@ -73,7 +73,7 @@ class MeleeService implements ITickListener{
         List<MeleeAction> actions = rollInitiative(pcFighters)
 
         // 2. execute actions
-        actions.each {action ->
+        actions.each { action ->
             MeleeFighter mf = pcFighters.get(action.actor)
             if (mf.state.equals(FighterState.ACTIVE)) {
                 // only active fighters' actions are executed
@@ -98,7 +98,7 @@ class MeleeService implements ITickListener{
     }
 
     void updateFighters(Melee melee) {
-        melee.fighters.each {meleeFighter ->
+        melee.fighters.each { meleeFighter ->
             if (meleeFighter.state == FighterState.ACTIVE) {
                 meleeFighter.action = null // reset melee action
                 meleeFighter.round++
@@ -107,12 +107,12 @@ class MeleeService implements ITickListener{
     }
 
     void notifyWinner(Melee melee) {
-        MeleeFighter mf = melee.fighters.find {it.state == FighterState.ACTIVE}
+        MeleeFighter mf = melee.fighters.find { it.state == FighterState.ACTIVE }
         mf.state = FighterState.WINNER
         melee.winner = mf.pc
         mf.pc.currentMelee = null
         playerMessageService.createMessage(mf.pc, 'melee.you.won', null)
-        melee.fighters.each {meleeFighter ->
+        melee.fighters.each { meleeFighter ->
             if (meleeFighter.state == FighterState.DEAD && meleeFighter.state != FighterState.WINNER) {
                 // do not spam people who quit.
                 playerMessageService.createMessage(meleeFighter.pc, 'melee.winner.is', [mf.pc.name])
@@ -122,7 +122,7 @@ class MeleeService implements ITickListener{
     }
 
     Boolean fightIsOver(Melee melee) {
-        def remainingFighters = melee.fighters.findAll {it.state == FighterState.ACTIVE}
+        def remainingFighters = melee.fighters.findAll { it.state == FighterState.ACTIVE }
         return remainingFighters.size() < 2
     }
 
@@ -137,10 +137,10 @@ class MeleeService implements ITickListener{
             }
             mf.action
         }
-        actions.each {action ->
+        actions.each { action ->
             action.initiative = action.actor.initiative.roll()
         }
-        return actions.sort {it.initiative}.reverse()
+        return actions.sort { it.initiative }.reverse()
     }
 
     void executeAction(MeleeAction action) {
@@ -183,7 +183,7 @@ class MeleeService implements ITickListener{
             playerMessageService.createMessage(pc, "melee.item.missing", [pc.name])
             return
         }
-        if (!itemType.itemTypeFeatures?.find {it.feature.id == itemFeature.id}) {
+        if (!itemType.itemTypeFeatures?.find { it.feature.id == itemFeature.id }) {
             playerMessageService.createMessage(pc, "melee.item.missing.feature", [pc.name])
             return
         }
@@ -308,10 +308,10 @@ class MeleeService implements ITickListener{
      */
     MeleeAction fetchAction(pc) {
         def meleeFighter = fetchMeleeFighter(pc)
-        if(meleeFighter && meleeFighter.action != null){
+        if (meleeFighter && meleeFighter.action != null) {
             return meleeFighter.action
         }
-        else{
+        else {
             return null
         }
     }
@@ -347,13 +347,13 @@ class MeleeService implements ITickListener{
         return useItem
     }
 
-    void tock(){
+    void tock() {
         Melee melee = Melee.findByStatus(MeleeStatus.RUNNING)
         if (melee) {
             melee.refresh()
             fightMelee(melee)
         }
-        else{
+        else {
             melee = findOrCreateMelee()
             if (meleeIsReady(melee)) {
                 melee.refresh()
