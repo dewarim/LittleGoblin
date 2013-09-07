@@ -16,8 +16,6 @@ class MeleeService implements ITickListener {
     def itemService
     def featureService
 
-    def tr
-
     Melee createMelee() {
         Melee m = new Melee()
         m.save()
