@@ -14,6 +14,6 @@ fixture{
     initiative(Dice, name:'initiative', sides:20)
     d5x6p5(Dice, name:'6d6+5', amount: 5, sides: 6, bonus: 5)
     d4x4(Dice, name:'4d4', amount: 4, sides: 4)
-    d6x4p4(Dice, name:'6d4', amount: 6, sides: 4)
+    d6x4p4(Dice, name:'6d4+4', amount: 6, sides: 4, bonus: 4)
     
 }

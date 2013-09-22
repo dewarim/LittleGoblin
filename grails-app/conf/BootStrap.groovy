@@ -76,6 +76,7 @@ class BootStrap {
         goblinOrder.save()
         
         PlayerCharacter.list().each{pc ->
+            log.debug("initialize player ${pc.name}")
             pc.initializePlayerCharacter()
         }
         

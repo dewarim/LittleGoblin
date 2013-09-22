@@ -175,7 +175,7 @@ class FightController extends BaseController {
     }
 
     /*
-      * Charakter is dead, show death message and high score.
+      * Character is dead, show death message and high score.
       */
     def death() {
         def user = fetchUser()

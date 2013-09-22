@@ -6,14 +6,18 @@ import de.dewarim.goblin.mob.MobImage
 import de.dewarim.goblin.mob.MobTemplate
 
 Dice dice(String name) {
-    return Dice.findByName(name)
+    def d = Dice.findByName(name)
+    if (d == null) {
+        throw new RuntimeException("Failed to load dice $name!")
+    }
+    return d
 }
 
-def d1 = dice('d0x1p1')
+def d1 = dice('1d1')
 def d20 = dice('d20')
 def d6 = dice('d6')
 def iniDice = dice('initiative')
-def d2x6 = dice('d2x6')
+def d2x6 = dice('2d6')
 
 CombatAttributeType fireCat = CombatAttributeType.findByName('attribute.fire')
 
@@ -31,12 +35,12 @@ fixture {
     )
 
     redDragon(MobTemplate, name: 'mob.red.dragon',
-            strike: d20, parry: d20, initiative: iniDice, damage: dice('d5x6p5'),
+            strike: d20, parry: d20, initiative: iniDice, damage: dice('6d6+5'),
             hp: 100, xpValue: 2000
     )
 
-    hornet(MobTemplate, name: 'mob.angry.hornet', strike: dice('d6x4p4'),
-            parry: dice('d6x4p4'), initiative: iniDice, damage: d1,
+    hornet(MobTemplate, name: 'mob.angry.hornet', strike: dice('6d4+4'),
+            parry: dice('6d4+4'), initiative: iniDice, damage: d1,
             hp: 1, xpValue: 1
     )
 
@@ -52,11 +56,11 @@ fixture {
 
     puppet(MobTemplate, name: 'mob.training_puppet', strike: d1, parry: d1,
             initiative: d1, damage: d1, hp: 500, xpValue: 5)
-    
-    strawMan(MobTemplate, name:'mob.straw_man', strike: d20, parry: d1,
+
+    strawMan(MobTemplate, name: 'mob.straw_man', strike: d20, parry: d1,
             initiative: d1, damage: d6, hp: 100, xpValue: 30)
     // The straw man is vulnerable to fire:
     // Note: this does not work yet.
-    fireAttr(CreatureAttribute, combatAttributeType: fireCat, damageModifier: 2.0, creature:strawMan)
-    
+    fireAttr(CreatureAttribute, combatAttributeType: fireCat, damageModifier: 2.0, creature: strawMan)
+
 }

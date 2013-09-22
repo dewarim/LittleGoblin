@@ -46,6 +46,7 @@ class FightService {
     }
 
     Boolean roll_initiative(pc, mob){
+        log.debug("roll initiative for ${pc.name} and ${mob.name}")
 		return pc.initiative.roll() > mob.initiative.roll()
 	}
 
