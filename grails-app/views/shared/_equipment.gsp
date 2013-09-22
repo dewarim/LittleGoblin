@@ -15,7 +15,7 @@
 						<g:remoteLink action="unequipItem" controller="item"
                                       update="[success:'inventory', failure:'message']"
                                       onComplete="${resetText}"
-                                      params="[item:slot.item.id, pc:pc.id, shop:shop?.id, sideInventory:true]">
+                                      params="[item:slot.item.id, pc:pc.id, shopId:shop?.id, sideInventory:true]">
 							[<g:message code="equip.remove"/>]
 						</g:remoteLink>
 				</span>

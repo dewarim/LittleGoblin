@@ -70,7 +70,7 @@ class ItemController extends BaseController {
         redirect(action: 'fight', controller: 'fight', params: [combat: combat.id])
     }
 
-    def equipItem() {
+    def equipItem(Integer shopId) {
         def pc = fetchPc()
         try {
             if (!pc) {
@@ -100,21 +100,28 @@ class ItemController extends BaseController {
                 render(status: 503, text: message(code: 'error.slots.full'))
                 return
             }
-            if (params.shop) {
-                log.debug("found shop: ${params.shop}")
-                def shop = inputValidationService.checkObject(Shop.class, params.shop)
-                render(template: '/shared/equipment', model:[pc:pc, shop:shop])
+          
+            if (shopId) {
+                log.debug("found shop: ${shopId}")
+                def shop = inputValidationService.checkObject(Shop.class, params.shopId)
+                render(template: '/shared/equipment', model:[pc:pc, shop: shop])
                 return
             }
-            render(template: 'inventory', model: [pc: pc])
+            if(params.sideInventory){
+                // render left side inventory instead of main inventory
+                render(template: '/shared/equipment', model: [pc: pc])
+            }
+            else{
+                render(template: 'inventory', model: [pc: pc])
+            }
         }
         catch (Exception e) {
-            render(status: 500, text:message(code:'error.equip.fail', args:[message(code:e.message)]))
+            renderException(e, 'error.equip.fail')
         }
 
     }
 
-    def unequipItem() {
+    def unequipItem(Integer shopId) {
         try {
             def pc = fetchPc()
             Item item = (Item) inputValidationService.checkObject(Item.class, params.item)
@@ -127,8 +134,8 @@ class ItemController extends BaseController {
             pc.unequipItem(item)
             log.debug("params.shop:" + params.shop)
             Shop shop = null
-            if (params.shop) {
-                shop = (Shop) inputValidationService.checkObject(Shop.class, params.shop)
+            if (shopId) {
+                shop = (Shop) inputValidationService.checkObject(Shop.class, params.shopId)
             }
             if(params.sideInventory){
                 // render left side inventory instead of main inventory

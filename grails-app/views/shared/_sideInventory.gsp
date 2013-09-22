@@ -17,7 +17,7 @@
                         <g:if test="${(item.type.requiredSlots?.size() > 0) && ! item.equipped}">
                             <g:remoteLink action="equipItem" controller="item"
                                           update="[success:'equipment', failure:'message']" onLoaded="${hideRow}"
-                                          params="[item:item.id, pc:pc.id, shop:shop?.id ?:0]">
+                                          params="[item:item.id, pc:pc.id, shopId:shop?.id ?:0, sideInventory:true]">
                                 <g:message code="equip.item"/>
                             </g:remoteLink>
                         </g:if>

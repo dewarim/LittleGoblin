@@ -49,6 +49,18 @@ class BaseController {
     protected void renderException(Exception e) {
         render(status: 503, text: message(code: e.getLocalizedMessage()))
     }
+    
+    /**
+     * Render an exception by returning a 503 HTTP status code and the localized exception message
+     * as text content.
+     * @param e the exception you want to render.
+     * @param _message the messageId to render (messageId needs a field for the exception, for example
+     *  generic.error=An error occurred. Original message was: {0}
+     */
+    protected void renderException(Exception e, String _message) {
+        log.debug(_message, e)
+        render(status: 503, text: message(text: _message, args: message(code: e.getLocalizedMessage())))
+    }
 
     protected Item fetchItem(PlayerCharacter pc) {
         if (!pc) {
