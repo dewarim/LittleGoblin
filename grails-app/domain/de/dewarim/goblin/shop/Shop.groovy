@@ -4,7 +4,8 @@ import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.town.Town
 
 class Shop {
-
+    
+    // TODO: hasMany:itemTypes looks wrong, needs mapping class shop::itemType
 	static hasMany = [itemTypes:ItemType, shopCategories:ShopCategory]
 	static belongsTo = [owner:ShopOwner, town:Town]
 	static constraints = {

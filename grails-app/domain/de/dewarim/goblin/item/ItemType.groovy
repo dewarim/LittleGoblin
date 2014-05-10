@@ -1,10 +1,11 @@
 package de.dewarim.goblin.item
 
 import de.dewarim.goblin.Dice
+import de.dewarim.goblin.asset.IAsset
 import de.dewarim.goblin.RequiredSlot
 import de.dewarim.goblin.combat.WeaponAttribute
 
-class ItemType {
+class ItemType implements IAsset {
 
     static hasMany = [
             requiredSlots: RequiredSlot,
@@ -16,6 +17,7 @@ class ItemType {
     ]
 
     static constraints = {
+//        name unique: 'assetVersion'
         name unique: true
         combatDice nullable: true
     }
@@ -30,6 +32,14 @@ class ItemType {
     Dice combatDice
     Boolean stackable = false
     Integer packageSize = 1 // If you buy an item of this type, how many pieces do you get?
+    Long assetVersion = 1
+    String uuid = UUID.randomUUID().toString()
+    
+    /**
+     * If an ItemType is inactive (active==false), it should not be used by the application.
+     * ItemTypes are activated through the AssetManager. 
+     * The default for active is "true" so we can create items by script or at startup.
+     */
     Boolean active = true
 
     // option: maxStackSize
@@ -45,7 +55,8 @@ class ItemType {
         if (!(o instanceof ItemType)) return false
 
         ItemType itemType = o
-
+        
+        if (assetVersion != itemType.assetVersion) return false
         if (availability != itemType.availability) return false
         if (baseValue != itemType.baseValue) return false
         if (combatDice != itemType.combatDice) return false
@@ -62,5 +73,9 @@ class ItemType {
 
     int hashCode() {
         return name.hashCode()
+    }
+    
+    Long getMyId(){
+        return id
     }
 }

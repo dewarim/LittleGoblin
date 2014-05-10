@@ -290,6 +290,7 @@ class ProductionService implements ITickListener{
                 existingItem.amount++
             }
             else{
+                // TODO: find newest asset version of item.
                 Item item = new Item(type:type, owner:job.pc, amount:component.amount)
 //                pc.addToItems(item)
                 item.save()

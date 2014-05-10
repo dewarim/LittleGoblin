@@ -14,6 +14,7 @@ class PickupItem implements IEncounterScript {
     void execute(PlayerCharacter pc, Quest quest, String params) {
         def nodes = new XmlSlurper().parseText(params)
         for (name in nodes.items.item.list()) {
+            // TODO: find newest asset version of item.
             ItemType itemType = ItemType.findByName(name.text())
             if (itemType) {
                 new Item(itemType, pc).save()

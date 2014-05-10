@@ -1,5 +1,7 @@
 package de.dewarim.goblin
 
+import de.dewarim.goblin.asset.IAsset
+
 /**
  * This class is responsible for input validation and encoding.
  */
@@ -24,6 +26,13 @@ class InputValidationService {
         name = name.encodeAsHTML()
         def testName = myObject.class.findByName(name)
         if (testName && !testName.id.equals(myObject.id)) {
+            if(myObject instanceof IAsset){
+               // an asset may have more than one version, all having the same name.
+               def assetVersion = myObject.class.findByAssetVersion(myObject.assetVersion)
+               if(! assetVersion){
+                   return name
+               } 
+            }
             throw new RuntimeException('error.name.not.unique')
         }
         return name

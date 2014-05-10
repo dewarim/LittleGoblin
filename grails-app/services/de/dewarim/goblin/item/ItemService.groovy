@@ -16,6 +16,7 @@ class ItemService {
 	 * This simple version rolls for each ItemType if it is available.
 	 */
 	List<ItemType> fetchItemTypes(Shop shop){
+        // TODO: only return current asset versions of items.
 		return ItemType.list()
                 .findAll{ Math.random() < it.availability / 1000 }
                 .sort{a,b -> a.name <=> b.name}
@@ -93,6 +94,7 @@ class ItemService {
         Item part = new Item()
         item.amount -= amount
         part.amount = amount
+        // TODO: find current itemType.assetVersion?
         part.type = item.type
         part.equipped = false
         part.goldValue = item.type.baseValue

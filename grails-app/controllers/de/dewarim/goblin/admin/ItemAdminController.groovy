@@ -12,13 +12,17 @@ import de.dewarim.goblin.Category
 @Secured(["ROLE_ADMIN"])
 class ItemAdminController extends BaseController {
 
+    def assetService
+
     def index() {
         return [
                 itemTypes: ItemType.listOrderByName(),
                 itemCategoryIdList: []
         ]
     }
-
+    
+    // TODO: enable linking to a single item edit page 
+    // ('edit' action is currently just returning a fragment)
     def edit() {
         def itemType = ItemType.get(params.id)
         if (!itemType) {
@@ -44,12 +48,28 @@ class ItemAdminController extends BaseController {
             if (!itemType) {
                 throw new RuntimeException('error.object.not.found')
             }
-            updateFields itemType
-            itemType.save()
+            
+            if (assetService.isLive(itemType)) {
+                // TODO: check that this item does not has another type's name.
+                
+                ItemType newVersion = new ItemType()
+                updateFields(newVersion)
+                
+                def maxItemVersion = ItemType.find("from ItemType i where i.uuid=:uuid and i.assetVersion >= assetVersion order by i.assetVersion desc",
+                [uuid:itemType.uuid, assetVersion:itemType.assetVersion])?.assetVersion;
+                newVersion.assetVersion = maxItemVersion+(int) (Math.random() * 1000)
+                newVersion.save()                 
+                assetService.addAsset(itemType, fetchUser())
+            }
+            else{
+                updateFields itemType
+                itemType.save()
+                assetService.updateAsset(itemType, fetchUser())
+            }
             render(template: 'list', model: [itemTypes: ItemType.listOrderByName()])
         }
         catch (RuntimeException e) {
-            log.debug("failed to update itemType:",e)
+            log.debug("failed to update itemType:", e)
             renderException e
         }
     }
@@ -65,19 +85,19 @@ class ItemAdminController extends BaseController {
         itemType.usable = inputValidationService.checkAndEncodeBoolean(params, "usable", "itemType.usable")
         itemType.stackable = inputValidationService.checkAndEncodeBoolean(params, "stackable", "itemType.stackable")
         itemType.rechargeable = inputValidationService.checkAndEncodeBoolean(params, "rechargeable", "itemType.rechargeable")
-        if (params.combatDice){
+        if (params.combatDice) {
             itemType.combatDice = inputValidationService.checkObject(Dice.class, params.combatDice, true)
         }
 
-        def categories = params.list('category').collect{inputValidationService.checkObject(Category.class, it)}
-        itemType.itemCategories.collect{it}.each{ itemCategory ->
-            if(! categories.contains(itemCategory.category)){
+        def categories = params.list('category').collect { inputValidationService.checkObject(Category.class, it) }
+        itemType.itemCategories.collect { it }.each { itemCategory ->
+            if (!categories.contains(itemCategory.category)) {
                 itemCategory.deleteFully()
             }
         }
-        categories.each{Category category ->
-            if (! itemType.itemCategories.find{it.category.equals(category)}){
-                ItemCategory ic = new ItemCategory(itemType:itemType, category:category)
+        categories.each { Category category ->
+            if (!itemType.itemCategories.find { it.category.equals(category) }) {
+                ItemCategory ic = new ItemCategory(itemType: itemType, category: category)
                 ic.save()
             }
         }
@@ -88,6 +108,7 @@ class ItemAdminController extends BaseController {
         try {
             updateFields(itemType)
             itemType.save()
+            assetService.addAsset(itemType, fetchUser())
             render(template: 'list', model: [itemTypes: ItemType.listOrderByName()])
         }
         catch (RuntimeException e) {
