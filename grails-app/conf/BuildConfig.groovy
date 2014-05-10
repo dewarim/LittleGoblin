@@ -6,6 +6,7 @@ grails.project.target.level = 1.7
 grails.project.source.level = 1.7
 grails.project.war.file = "target/${appName}.war"
 grails.project.dependency.resolver="maven"
+grails.reload.enabled = true
 grails.project.dependency.resolution = {
 
     inherits("global") {
