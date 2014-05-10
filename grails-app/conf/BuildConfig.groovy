@@ -5,6 +5,7 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.7
 grails.project.source.level = 1.7
 grails.project.war.file = "target/${appName}.war"
+grails.project.dependency.resolver="maven"
 grails.project.dependency.resolution = {
 
     inherits("global") {
@@ -35,10 +36,10 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime ":hibernate:$grailsVersion", {
+        runtime ":hibernate:3.6.10.12", {
             export = false
         }
-        build ":tomcat:$grailsVersion", {
+        build ":tomcat:7.0.42", {
             export = false
         }
         build ':release:2.2.1', ':rest-client-builder:1.0.3', {
