@@ -98,7 +98,8 @@
         <div class="version_info">
             <pre>
                 Version 0.4.0 "Upgraded" / 2014-09-07
-                * 
+                * Upgrade to Grails 2.4.3. May contain bugs.
+                * AssetController is still work in progress.
             </pre>
             <pre>
                 Version 0.3.4 "Users" / 2013-06-30
