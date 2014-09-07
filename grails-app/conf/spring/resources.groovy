@@ -1,4 +1,6 @@
 import de.dewarim.goblin.ticks.TickTestBean
+import grails.plugin.springsecurity.authentication.dao.NullSaltSource
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 
 //import org.apache.camel.spring.CamelContextFactoryBean
 //import org.apache.camel.spring.CamelProducerTemplateFactoryBean
@@ -35,6 +37,7 @@ beans = {
 //    }
 
 //    learningDelayer(de.dewarim.goblin.camel.LearningDelayer)
-
+    
+    saltSource(NullSaltSource)
     listenerTestBean(TickTestBean)
 }

@@ -8,7 +8,8 @@ class CombatMessage {
 
     CombatMessage(){}
 
-    CombatMessage(msg, msgParams){
+    CombatMessage(msg, msgParams, combat){
+        this.combat = combat
         this.msg = msg
         def rankCounter = 0
         msgParams.each {mess ->

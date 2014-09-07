@@ -1,6 +1,6 @@
 package de.dewarim.goblin
 
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import groovy.xml.MarkupBuilder
 import de.dewarim.goblin.pc.skill.LearningQueueElement
 import de.dewarim.goblin.town.Academy

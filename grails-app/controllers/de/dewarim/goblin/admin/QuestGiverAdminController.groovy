@@ -2,7 +2,7 @@ package de.dewarim.goblin.admin
 
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.quest.QuestGiver
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 
 @Secured(["ROLE_ADMIN"])
 class QuestGiverAdminController extends BaseController {

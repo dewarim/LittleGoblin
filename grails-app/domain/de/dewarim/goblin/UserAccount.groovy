@@ -13,7 +13,11 @@ class UserAccount {
 
 	PlayerCharacter currentChar
 
-	String salt = UUID.randomUUID().toString()
+    /**
+     * Currently unused salt value (since we now use bcrypt), left in for legacy reasons
+     * and it's possible someone wants to use a different hashing algorithm.
+     */
+	String salt = null
 
 	/** Username */
 	String username
@@ -44,7 +48,7 @@ class UserAccount {
 	/** description */
 	String description = ''
 
-	/** plain password to create a MD5 password */
+	/** plain password to create a hashed password */
 	String pass = '[secret]'
 
     Integer coins = 0
@@ -58,6 +62,7 @@ class UserAccount {
 		email(nullable:true)
 		currentChar(nullable:true)
         lastPasswordReset(nullable: true)
+        salt(nullable: true)
 	}
 
     Boolean checkRole(String roleName){
@@ -77,9 +82,19 @@ class UserAccount {
             encodePassword()
         }
     }
+    
+    void setSalt(String salt){
+        log.warn("""You tried to set a salt value - but the current implementation of 
+        the Spring security plugin uses BCrypt without salt. Attempt ignored.
+""")
+    }
+    
+    String getSalt(){
+        return null
+    }
 
     protected void encodePassword() {
-        passwd = springSecurityService.encodePassword(passwd, username)
+        passwd = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(passwd) : passwd
     }
 
     boolean equals(o) {
@@ -104,7 +119,6 @@ class UserAccount {
         if (passwd != that.passwd) return false
         if (passwordExpired != that.passwordExpired) return false
         if (premiumMember != that.premiumMember) return false
-        if (salt != that.salt) return false
         if (userRealName != that.userRealName) return false
         if (username != that.username) return false
         if (wantsResetPassword != that.wantsResetPassword) return false
@@ -113,7 +127,7 @@ class UserAccount {
     }
 
     int hashCode() {
-        int result = salt != null ? salt.hashCode() : 0
+        int result = mailConfirmationToken != null ? mailConfirmationToken.hashCode() : 0
         result = 31 * result + (username != null ? username.hashCode() : 0)     
         return result
     }

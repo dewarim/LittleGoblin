@@ -1,6 +1,6 @@
 package de.dewarim.goblin.landing
 
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.HighScore
 import de.dewarim.goblin.Role

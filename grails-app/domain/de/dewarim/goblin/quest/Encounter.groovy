@@ -10,6 +10,7 @@ import de.dewarim.goblin.mob.EncounterMob
 class Encounter {
 
 	static hasMany = [steps:QuestStep, mobs:EncounterMob]
+    static mappedBy = [steps:'encounter']
 	static constraints = {
 	    script nullable:true
         config nullable:true, size:1..10241024

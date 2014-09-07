@@ -1,6 +1,6 @@
 package de.dewarim.goblin
 
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.combat.Combat
 import de.dewarim.goblin.mob.Mob
 import de.dewarim.goblin.mob.MobTemplate

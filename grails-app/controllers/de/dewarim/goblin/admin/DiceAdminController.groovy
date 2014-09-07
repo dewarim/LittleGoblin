@@ -2,7 +2,7 @@ package de.dewarim.goblin.admin
 
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.Dice
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.Creature
 import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.pc.PlayerCharacter

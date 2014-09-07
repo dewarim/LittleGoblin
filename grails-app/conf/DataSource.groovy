@@ -17,10 +17,15 @@ environments {
 		dataSource {
 			dbCreate = "create"
 			pooling = true
-			driverClassName = "com.mysql.jdbc.Driver"
-			logSql = false
-			dialect = 'org.hibernate.dialect.MySQL5InnoDBDialect'
-			url = "jdbc:mysql://localhost:3306/goblin_dev"
+            logSql = false
+//            driverClassName = "com.mysql.jdbc.Driver"
+//			dialect = 'org.hibernate.dialect.MySQL5InnoDBDialect'
+//			url = "jdbc:mysql://localhost:3306/goblin_dev"
+
+            driverClassName = "org.postgresql.Driver"
+            dialect = "org.hibernate.dialect.PostgreSQLDialect"
+            url = "jdbc:postgresql://127.0.0.1:5432/goblin"
+            
 			username = 'goblin'
 			password = 'goblin'
 		}

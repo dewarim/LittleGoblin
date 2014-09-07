@@ -1,7 +1,7 @@
 package de.dewarim.goblin.admin
 
 import de.dewarim.goblin.ticks.Tick
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
 @Secured(["ROLE_ADMIN"])

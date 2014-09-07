@@ -2,7 +2,7 @@ package de.dewarim.goblin.admin
 
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.quest.Encounter
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.GoblinScript
 import de.dewarim.goblin.mob.MobTemplate
 import de.dewarim.goblin.mob.EncounterMob

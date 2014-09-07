@@ -97,6 +97,10 @@
 
         <div class="version_info">
             <pre>
+                Version 0.4.0 "Upgraded" / 2014-09-07
+                * 
+            </pre>
+            <pre>
                 Version 0.3.4 "Users" / 2013-06-30
                 * #4: Added / fixed UserController. Still a little rough, but works.
                 * Upgraded to Grails 2.2.3

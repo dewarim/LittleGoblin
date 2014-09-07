@@ -2,7 +2,7 @@ package de.dewarim.goblin.admin
 
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.quest.QuestStep
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.quest.Encounter
 import de.dewarim.goblin.quest.QuestTemplate
 import de.dewarim.goblin.quest.StepChild

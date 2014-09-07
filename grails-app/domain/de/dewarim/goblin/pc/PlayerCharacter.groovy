@@ -58,7 +58,7 @@ class PlayerCharacter extends Creature {
     Integer victories = 0
     Long questLevel = 0
     Long level = 1
-
+    
     GoblinOrder goblinOrder
     Melee currentMelee
 

@@ -1,6 +1,6 @@
 package de.dewarim.goblin
 
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.pc.PlayerCharacter
 
 @Secured(['ROLE_USER'])

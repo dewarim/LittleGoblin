@@ -1,6 +1,6 @@
 package de.dewarim.goblin
 
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.combat.Combat
 import de.dewarim.goblin.item.Item
 import de.dewarim.goblin.mob.Mob
@@ -90,18 +90,19 @@ class FightController extends BaseController {
       * Show fight result
       */
     def fight() {
-        def user = fetchUser()
+        try {
+            def user = fetchUser()
 
-        flash.message = ""
-        log.debug("request: " + params)
-        PlayerCharacter pc = null
-        Mob mob = null
-        Combat combat = null
-        Combat.withTransaction {
-            combat = Combat.lock(params.combat)
-            if (!combat) {
-                redirect(controller: 'portal', action: 'start')                
-                return
+            flash.message = ""
+            log.debug("request: " + params)
+            PlayerCharacter pc = null
+            Mob mob = null
+            Combat combat = null
+            Combat.withTransaction {
+                combat = Combat.lock(params.combat)
+                if (!combat) {
+                    redirect(controller: 'portal', action: 'start')
+                    return
             }
             pc = combat.playerCharacter
 
@@ -126,9 +127,16 @@ class FightController extends BaseController {
         }
         if (!request.isRedirected()) {
             return [pc: pc,
-                    mob: mob,
-                    combat: combat,
+                    mob:
+                            mob,
+                    combat:
+                            combat,
             ]
+        }
+            }
+        catch (Exception e){
+            log.debug("Failed to fight.",e)
+            throw new RuntimeException(e)
         }
     }
 

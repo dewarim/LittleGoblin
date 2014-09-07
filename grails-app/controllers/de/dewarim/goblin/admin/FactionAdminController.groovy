@@ -5,7 +5,7 @@ import de.dewarim.goblin.Creature
 import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.pc.skill.CombatSkill
 import de.dewarim.goblin.shop.ShopOwner
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.reputation.Faction
 import de.dewarim.goblin.reputation.ReputationMessageMap
 

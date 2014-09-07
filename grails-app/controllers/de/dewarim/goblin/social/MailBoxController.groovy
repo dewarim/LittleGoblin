@@ -1,6 +1,6 @@
 package de.dewarim.goblin.social
 
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.pc.PlayerCharacter
 
@@ -77,7 +77,7 @@ class MailBoxController extends BaseController{
      * @param pc the current PlayerCharacter
      * @return the requested mailbox or the pc's inbox.
      */
-    MailBox fetchMailBox(PlayerCharacter pc){
+    protected MailBox fetchMailBox(PlayerCharacter pc){
         MailBox box = null
         if(params.box){
             box = pc.mailBoxes.find{it.id.equals(params.box?.toLong())}
@@ -92,7 +92,7 @@ class MailBoxController extends BaseController{
     }
 
 
-    List<Mail> fetchMails(pc,box){
+    protected List<Mail> fetchMails(pc,box){
         def max = params.max ?: 10
         def offset = params.offset ?: 0
         if(box?.boxType?.name?.equals('mail.inbox')){

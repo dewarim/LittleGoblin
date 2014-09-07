@@ -119,19 +119,22 @@ log4j = {
 
 
 grails.views.javascript.library = "jquery"
-/*jquery {
-    sources = 'jquery' // Holds the value where to store jQuery-js files /web-app/js/
-    version = '1.6.2' // The jQuery version in use
-}*/
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'de.dewarim.goblin.UserAccount'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'de.dewarim.goblin.UserRole'
-grails.plugins.springsecurity.authority.className = 'de.dewarim.goblin.Role'
-grails.plugins.springsecurity.userLookup.passwordPropertyName = 'passwd'
-grails.plugins.springsecurity.authority.nameField = 'name'
-grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/portal/start'
-grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'de.dewarim.goblin.UserAccount'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'de.dewarim.goblin.UserRole'
+grails.plugin.springsecurity.authority.className = 'de.dewarim.goblin.Role'
+grails.plugin.springsecurity.userLookup.passwordPropertyName = 'passwd'
+grails.plugin.springsecurity.authority.nameField = 'name'
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/portal/start'
+grails.plugin.springsecurity.dao.reflectionSaltSourceProperty = 'username'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+        '/assets/**':               ['permitAll'],
+]
+grails.plugin.springsecurity.providerNames = [
+        'daoAuthenticationProvider',
+        'anonymousAuthenticationProvider',
+        'rememberMeAuthenticationProvider']
 
 grails.views.gsp.keepgenerateddir = '/tmp/gsp'
 

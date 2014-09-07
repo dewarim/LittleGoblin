@@ -13,6 +13,7 @@ class Town {
             academies:Academy,
             homes:PlayerCharacter // a player character has a home town.
     ]
+    static mappedBy = [homes:'town']
 	static constraints = {
 		name(blank:false)
 		shortDescription(blank:false)

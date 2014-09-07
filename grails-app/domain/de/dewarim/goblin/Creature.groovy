@@ -1,5 +1,6 @@
 package de.dewarim.goblin
 
+import de.dewarim.goblin.combat.Combat
 import de.dewarim.goblin.combat.CombatAttributeType
 import de.dewarim.goblin.combat.CombatMessage
 import de.dewarim.goblin.item.Item
@@ -45,7 +46,7 @@ class Creature {
 	Long gold = 0
     Boolean male = true
 
-	CombatMessage attack(Creature opponent){
+	CombatMessage attack(Creature opponent, Combat combat){
 		CombatMessage cm
 		if(computeStrike() > opponent.computeParry()){
 			Integer dam = computeDamage()
@@ -78,13 +79,14 @@ class Creature {
             log.debug("combat damage after adding creature attributes vs. ${opponent.name}: ${dam}")
 
             // TODO: refactor combatAttributes and itemAttribute handling.
-			cm = new CombatMessage('fight.strike', [name, opponent.name, dam])
+			cm = new CombatMessage('fight.strike', [name, opponent.name, dam], combat)
 			opponent.hp = opponent.hp - dam
 		}
 		else{
 			// TODO: message for block / AR
-			cm = new CombatMessage('fight.miss', [name, opponent.name])
+			cm = new CombatMessage('fight.miss', [name, opponent.name], combat)
 		}
+        cm.save()
 		return cm
 	}
 

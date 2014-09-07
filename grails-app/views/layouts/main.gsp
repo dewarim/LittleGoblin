@@ -2,15 +2,12 @@
 <html>
 <head>
     <title><g:layoutTitle default="${grailsApplication.config.gameName ?: 'Little Goblin'}"/></title>
-    %{--<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}"/>--}%
-    <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon"/>
-    <r:require module="jquery"/>
-
-    <link rel="stylesheet" type="text/css" href="${resource(dir:'css', file:'layout.css')}">
-    <link rel="stylesheet" type="text/css" href="${resource(dir:'css', file:'goblin.css')}">
-
-    <script type="text/javascript" src="${resource(dir: 'js', file: 'goblin.js')}"></script>
-    <script type="text/javascript">
+    <asset:link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon"/>
+    <asset:stylesheet src="layout.css"/>
+    <asset:stylesheet src="goblin.css"/>
+    <asset:javascript src="jquery-2.1.1.js"/>
+    <asset:javascript src="goblin.js"/>
+    <asset:script type="text/javascript">
 
         function hideDiv(id) {
             $("#"+id).css('display','none');
@@ -27,16 +24,14 @@
         }
         </g:if>
 
-    </script>
+    </asset:script>
     
     <g:layoutHead/>
-    <r:layoutResources/>
 </head>
 
 <body>
 <g:render template="/shared/logo"/>
 <g:layoutBody/>
-<r:layoutResources/>
 <g:render template="/shared/footer"/>
 </body>
 </html>

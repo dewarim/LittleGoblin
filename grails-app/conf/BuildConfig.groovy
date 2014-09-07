@@ -5,7 +5,7 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.7
 grails.project.source.level = 1.7
 grails.project.war.file = "target/${appName}.war"
-grails.project.dependency.resolver="maven"
+grails.project.dependency.resolver = "maven"
 grails.reload.enabled = true
 grails.project.dependency.resolution = {
 
@@ -25,35 +25,37 @@ grails.project.dependency.resolution = {
         runtime 'postgresql:postgresql:9.1-901.jdbc4', {
             export = false
         }
-        compile 'javax.mail:mail:1.4.6'
+        compile 'javax.mail:mail:1.4.7'
         compile 'javax.activation:activation:1.1.1'
         compile("org.codehaus.groovy.modules.http-builder:http-builder:0.5.2") {
             excludes "groovy"
         }
-        compile 'org.codehaus.gpars:gpars:1.0.0'
+        compile 'org.codehaus.gpars:gpars:1.2.1'
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0", {
             export = false
         }
     }
 
     plugins {
-        runtime ":hibernate:3.6.10.12", {
+        runtime ":hibernate:3.6.10.14", {
             export = false
         }
         build ":tomcat:7.0.42", {
             export = false
         }
-        build ':release:2.2.1', ':rest-client-builder:1.0.3', {
+        build(':release:3.0.0') {
             export = false
         }
-        runtime ":jquery:1.8.3"
-        runtime ":resources:1.2.RC2"
-        compile ':spring-security-core:1.2.7.3'
+        compile(':spring-security-core:2.0-RC4')
+        compile(":rest-client-builder:2.0.3") {
+            export = false
+        }
         compile ":webxml:1.4.1"
         test(":spock:0.7") {
             exclude "spock-grails-support"
             export = false
         }
-        compile ":fixtures:1.2"
+        compile ":fixtures:1.3"
+        compile ":asset-pipeline:1.9.7"
     }
 }

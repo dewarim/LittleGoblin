@@ -4,7 +4,7 @@ import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.pc.GoblinOrder
 import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.town.Academy
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.validation.ObjectError
 
 @Secured(["ROLE_ADMIN"])

@@ -5,7 +5,7 @@ import de.dewarim.goblin.pc.PlayerCharacter
 
 class Combat {
 
-	static hasMany = [players:PlayerCharacter, mobs:Mob, messages:CombatMessage]
+	static hasMany = [players:PlayerCharacter, mobs:Mob]
 	static belongsTo = [playerCharacter:PlayerCharacter]
 	static constraints = {
 		finished(nullable:true)
@@ -33,6 +33,10 @@ class Combat {
 	Mob fetchFirstMob(){
 		return mobs ? mobs.asList()[0] : null
 	}
+    
+    List<CombatMessage> getCombatMessages(){
+        return CombatMessage.findAllByCombat(this);
+    }
 
     boolean equals(o) {
         if (is(o)) return true

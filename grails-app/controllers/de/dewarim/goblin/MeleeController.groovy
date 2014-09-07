@@ -1,6 +1,6 @@
 package de.dewarim.goblin
 
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.combat.Melee
 import de.dewarim.goblin.combat.MeleeFighter
 import de.dewarim.goblin.item.Item

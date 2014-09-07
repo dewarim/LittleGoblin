@@ -1,6 +1,6 @@
 package de.dewarim.goblin
 
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.pc.crafting.Product
 import de.dewarim.goblin.pc.crafting.ProductCategory
 import de.dewarim.goblin.pc.crafting.ProductionJob

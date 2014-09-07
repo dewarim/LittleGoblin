@@ -4,7 +4,7 @@ import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.Feature
 import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.shop.Shop
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 
 @Secured(["ROLE_ADMIN"])
 class FeatureAdminController extends BaseController {

@@ -3,7 +3,7 @@ package de.dewarim.goblin.admin
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.item.ItemCategory
 import de.dewarim.goblin.item.ItemType
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.Dice
 import de.dewarim.goblin.EquipmentSlotType
 import de.dewarim.goblin.RequiredSlot

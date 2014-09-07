@@ -1,6 +1,6 @@
 package de.dewarim.goblin.social
 
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.BaseController
 
 @Secured(['ROLE_USER'])

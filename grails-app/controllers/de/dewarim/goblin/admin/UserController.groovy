@@ -4,7 +4,7 @@ import de.dewarim.goblin.Role
 import de.dewarim.goblin.UserAccount
 import de.dewarim.goblin.UserRole
 import de.dewarim.goblin.pc.PlayerCharacter
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.Secured
 
 /**
  *

@@ -15,30 +15,30 @@ class FightService {
 //            combat.merge()
         try{
             if(roll_initiative(pc, mob)){
-                combat.addToMessages(pc.attack(mob))
+                pc.attack(mob, combat)
                 checkDeath(pc, mob)
-                combat.addToMessages(mob.attack(pc))
+                mob.attack(pc, combat)
             }
             else{
-                combat.addToMessages(mob.attack(pc))
+                mob.attack(pc, combat)
                 checkDeath(pc, mob)
-                combat.addToMessages(pc.attack(mob))
+                pc.attack(mob, combat)
             }
             combat.save()
             checkDeath(pc, mob)
         }
         catch(PlayerDeadException pde){
-            combat.addToMessages(new CombatMessage('fight.pc.dead', [pc.name]))
+            new CombatMessage('fight.pc.dead', [pc.name], combat).save()
             combat.save()
             return "death"
         }
         catch(MonsterDeadException mde){
-            combat.addToMessages(new CombatMessage('fight.mob.dead', [mob.name]))
+            new CombatMessage('fight.mob.dead', [mob.name], combat).save()
             combat.save()
             return "victory"
         }
         catch(SimultaneousDeathException sde){
-            combat.addToMessages(new CombatMessage('fight.all.dead', []))
+            new CombatMessage('fight.all.dead', [], combat).save()
             combat.save()
             return "death"
         }
