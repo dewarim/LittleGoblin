@@ -1,7 +1,7 @@
 class GoblinGrailsPlugin {
 
-    def version = "0.3.5"
-    def grailsVersion = "2.3 > *"
+    def version = "0.4.0"
+    def grailsVersion = "2.4 > *"
     def pluginExcludes = [
             "docs/**",
             "grails-app/views/error.gsp",
