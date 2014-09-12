@@ -78,4 +78,9 @@ class ItemType implements IAsset {
     Long getMyId(){
         return id
     }
+
+    @Override
+    boolean isActive() {
+        return active
+    }
 }
