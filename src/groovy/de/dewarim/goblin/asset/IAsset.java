@@ -10,7 +10,7 @@ public interface IAsset {
     
     Long getMyId();
     
-    Boolean getActive();
+    boolean isActive();
 
     /**
      * After an item has been accepted during the asset workflow, it's status 
