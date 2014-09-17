@@ -23,14 +23,12 @@
     </g:if>
     <g:else>
         <div class="info">
-            <p>
-                <g:if test="${grailsApplication.config.testMode}">
-                    <div style="background-color: #f5deb3; padding: 1ex; border: 1px black dotted; margin-bottom: 1ex;">
-                        <g:message code="registration.testMode"/>
-                    </div>
-                </g:if>
-                <g:message code="registration.info" args="[nameOfTheGame]"/>
-            </p>
+            <g:if test="${grailsApplication.config.testMode}">
+                <div style="background-color: #f5deb3; padding: 1ex; border: 1px black dotted; margin-bottom: 1ex;">
+                    <g:message code="registration.testMode"/>
+                </div>
+            </g:if>
+            <g:message code="registration.info" args="[nameOfTheGame]"/>
         </div>
     </g:else>
 

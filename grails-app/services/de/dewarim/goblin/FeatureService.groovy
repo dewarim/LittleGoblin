@@ -13,7 +13,7 @@ class FeatureService {
 	void executeFeature(Feature effect, String featureConfig, PlayerCharacter pc, Collection<Creature> mobs, Item item){
 		ICombatScript script
 		try{
-			script = effect.script.newInstance()
+			script = (ICombatScript) effect.script.newInstance()
 		}
 		catch (IllegalArgumentException e) {
 			throw new RuntimeException(e)

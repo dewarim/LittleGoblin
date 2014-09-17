@@ -20,7 +20,7 @@ class QuestService {
     void executeScript(Encounter encounter,PlayerCharacter pc){
         IEncounterScript encounterScript
 		try{
-			encounterScript = encounter.script.script.newInstance()
+			encounterScript = (IEncounterScript) encounter.script.script.newInstance()
 		}
         catch (ClassNotFoundException e){
             log.warn("Problem during executeScript: '${encounter.script.name}'",e)

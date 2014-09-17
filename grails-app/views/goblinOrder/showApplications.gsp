@@ -50,7 +50,6 @@
 						<td>${application.applicant.level}</td>
 						<td>${application.applicationMessage}</td>
 						<td class="application_cell">
-							<div>
 								<g:form action="acceptApplication" controller="goblinOrder">
 									<input type="hidden" name="application" value="${application.id}">
 									 <g:submitToRemote update="[success:'message', failure:'message']" onSuccess="hideRow('${applicationNodeId}');" value="${message(code:'order.accept.applicant')}" url="[action:'acceptApplication', controller:'goblinOrder']"/>
@@ -62,7 +61,6 @@
 									<g:message code="order.deny.reason"/>: <g:textField name="reason" value="// TODO: implement this."/><br>
 									 <g:submitToRemote update="[success:'message', failure:'message']" onSuccess="hideRow('${applicationNodeId}');" value="${message(code:'order.deny.applicant')}" url="[action:'denyApplication', controller:'goblinOrder']"/>
 								</g:form>
-							</div>
 						</td>
 					</tr>
 				</g:each>
