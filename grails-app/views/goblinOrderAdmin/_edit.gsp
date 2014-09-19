@@ -1,4 +1,4 @@
-<%@ page import="de.dewarim.goblin.goblinOrder.goblinOrder; de.dewarim.goblin.town.Town" %>
+<%@ page import="de.dewarim.goblin.pc.GoblinOrder; de.dewarim.goblin.town.Town" %>
 <td colspan="4">
 	<g:form>
 		<g:render template="fields" model="[goblinOrder:goblinOrder]"/>
