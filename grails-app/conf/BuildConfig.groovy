@@ -12,13 +12,12 @@ grails.project.dependency.resolution = {
     inherits("global") {
         excludes "xercesImpl", "xmlParserAPIs", "xml-apis", 'groovy'
     }
-    log "warn"
+    log "info"
 
     repositories {
         grailsCentral()
         mavenLocal()
         mavenCentral()
-        mavenRepo "http://download.java.net/maven/2/"
     }
 
     dependencies {
@@ -27,7 +26,7 @@ grails.project.dependency.resolution = {
         }
         compile 'javax.mail:mail:1.4.7'
         compile 'javax.activation:activation:1.1.1'
-        compile("org.codehaus.groovy.modules.http-builder:http-builder:0.5.2") {
+        compile("org.codehaus.groovy.modules.http-builder:http-builder:0.7.1") {
             excludes "groovy"
         }
         compile 'org.codehaus.gpars:gpars:1.2.1'
@@ -37,25 +36,25 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime ":hibernate:3.6.10.14", {
+        runtime ":hibernate:3.6.10.17", {
             export = false
         }
-        build ":tomcat:7.0.42", {
+        build ":tomcat:7.0.54", {
             export = false
         }
-        build(':release:3.0.0') {
+        compile ':release:3.0.1', ':rest-client-builder:1.0.3',  {
             export = false
         }
         compile(':spring-security-core:2.0-RC4')
-        compile(":rest-client-builder:2.0.3") {
-            export = false
-        }
+//        compile(":rest-client-builder:2.0.3") {
+//            export = false
+//        }
         compile ":webxml:1.4.1"
         test(":spock:0.7") {
             exclude "spock-grails-support"
             export = false
         }
         compile ":fixtures:1.3"
-        compile ":asset-pipeline:1.9.7"
+        compile ":asset-pipeline:1.9.9"
     }
 }
