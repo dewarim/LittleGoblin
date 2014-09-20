@@ -9,6 +9,7 @@ package de.dewarim.goblin
 class Artist {
 
     static hasMany = [images:Image]
+    static mappedBy = [images:'artist']
 
     static constraints = {
 		name(blank:false)
