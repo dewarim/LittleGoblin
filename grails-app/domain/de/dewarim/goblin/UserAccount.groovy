@@ -13,12 +13,6 @@ class UserAccount {
 
 	PlayerCharacter currentChar
 
-    /**
-     * Currently unused salt value (since we now use bcrypt), left in for legacy reasons
-     * and it's possible someone wants to use a different hashing algorithm.
-     */
-	String salt = null
-
 	/** Username */
 	String username
 	/** User Real Name*/
@@ -81,12 +75,6 @@ class UserAccount {
         if (isDirty('password')) {
             encodePassword()
         }
-    }
-    
-    void setSalt(String salt){
-        log.warn("""You tried to set a salt value - but the current implementation of 
-        the Spring security plugin uses BCrypt without salt. Attempt ignored.
-""")
     }
     
     String getSalt(){
