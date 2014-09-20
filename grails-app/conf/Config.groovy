@@ -127,13 +127,12 @@ grails.plugin.springsecurity.authority.className = 'de.dewarim.goblin.Role'
 grails.plugin.springsecurity.userLookup.passwordPropertyName = 'passwd'
 grails.plugin.springsecurity.authority.nameField = 'name'
 grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/portal/start'
-grails.plugin.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/assets/**':               ['permitAll'],
 ]
 grails.plugin.springsecurity.providerNames = [
         'daoAuthenticationProvider',
-        'anonymousAuthenticationProvider',
+//        'anonymousAuthenticationProvider',
         'rememberMeAuthenticationProvider']
 
 grails.views.gsp.keepgenerateddir = '/tmp/gsp'
