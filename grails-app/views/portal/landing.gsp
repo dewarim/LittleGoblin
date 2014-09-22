@@ -97,6 +97,10 @@
 
         <div class="version_info">
             <pre>
+                Version 0.4.1 "Fixed" / 2014-09-23
+                * Fixed JavaScript / Grails integration issues (would crash some pages)
+            </pre>
+            <pre>
                 Version 0.4.0 "Upgraded" / 2014-09-07
                 * Upgrade to Grails 2.4.3. May contain bugs.
                 * AssetController is still work in progress.

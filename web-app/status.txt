@@ -438,3 +438,11 @@ Version 0.3.4 "Users" / 2013-06-30
 * Upgraded to Grails 2.2.3
 * Code cleaning
 * Upgrade resources plugin to 1.2
+
+Version 0.4.0 "Upgraded" / 2014-09-07
+* Upgrade to Grails 2.4.3. May contain bugs.
+* AssetController is still work in progress.
+
+Version 0.4.1 "Fixed" / 2014-09-23
+* Fixed JavaScript / Grails integration issues (would crash some pages)
+ 
