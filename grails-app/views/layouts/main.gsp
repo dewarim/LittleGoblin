@@ -25,7 +25,7 @@
         </g:if>
 
     </asset:script>
-    
+    <asset:deferredScripts/>
     <g:layoutHead/>
 </head>
 
