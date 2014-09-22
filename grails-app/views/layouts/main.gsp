@@ -5,8 +5,9 @@
     <asset:link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon"/>
     <asset:stylesheet src="layout.css"/>
     <asset:stylesheet src="goblin.css"/>
-    <asset:javascript src="jquery-2.1.1.js"/>
-    <asset:javascript src="goblin.js"/>
+    <asset:javascript src="application.js"/>
+    %{--<asset:javascript src="jquery-2.1.1.js.disabled"/>--}%
+    %{--<asset:javascript src="goblin.js"/>--}%
     <asset:script type="text/javascript">
 
         function hideDiv(id) {

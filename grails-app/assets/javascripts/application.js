@@ -1,3 +1,8 @@
+/*
+*= require jquery
+*= require tree
+ */
+
 var Ajax;
 if (Ajax && (Ajax != null)) {
 	Ajax.Responders.register({

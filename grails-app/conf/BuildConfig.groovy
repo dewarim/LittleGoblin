@@ -49,6 +49,7 @@ grails.project.dependency.resolution = {
 //        compile(":rest-client-builder:2.0.3") {
 //            export = false
 //        }
+        runtime ':jquery:1.11.1'
         compile ":webxml:1.4.1"
         test(":spock:0.7") {
             exclude "spock-grails-support"
