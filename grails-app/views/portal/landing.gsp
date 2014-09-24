@@ -97,6 +97,10 @@
 
         <div class="version_info">
             <pre>
+                Version 0.4.2 "Crone" / 2014-09-24
+                * Fixed Crone quest.
+            </pre>
+            <pre>
                 Version 0.4.1 "Fixed" / 2014-09-23
                 * Fixed JavaScript / Grails integration issues (would crash some pages)
             </pre>

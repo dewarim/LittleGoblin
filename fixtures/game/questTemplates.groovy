@@ -71,16 +71,20 @@ fixture {
             description: 'quest.found.mushrooms',
             encounter: findShroomEncounter, questTemplate: mushroomQuest, firstStep: true,
             name:'step.shroom.1')
+    // 2nd step in quest with step stepChild connection Qs1 -> Qs2
     croneQs2(QuestStep, title: 'quest.shroom.title.pick.red',
             description: 'quest.shroom.pick.red.shroom',
             encounter: redShroomEncounter, questTemplate: mushroomQuest,
             name:'step.shroom.2')
     croneSc1(StepChild, parent:croneQs1, child:croneQs2)
+    
+    // 2nd step in quest with step stepChild connection Qs1 -> Qs3
     croneQs3(QuestStep,title: 'quest.shroom.title.pick.black',
             description: 'quest.shroom.pick.black.shroom',
             encounter: blackShroomEncounter, questTemplate: mushroomQuest,
             name:'step.shroom.3')
     croneSc2(StepChild, parent: croneQs1, child:croneQs3)
+    
     croneQs4(QuestStep, title: 'quest.shroom.title.deliver',
             description: 'quest.shroom.deliver',
             endOfQuest: false,
@@ -88,7 +92,7 @@ fixture {
             automaticTransition: true,
             questTemplate: mushroomQuest,
             name:'step.shroom.deliver')
-    croneSc2_4(StepChild, parent:croneQs1, child:croneQs4)
+    croneSc2_4(StepChild, parent:croneQs2, child:croneQs4)
     croneSc3_4(StepChild, parent:croneQs3, child:croneQs4)
     croneQs5(QuestStep, title: 'quest.step.shroom.success.title',
             description: 'quest.step.shroom.success',
