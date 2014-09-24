@@ -92,8 +92,9 @@ log4j = {
             'org.apache.naming',
             'grails.app.taglib.org.grails.plugin.resource.ResourceTagLib',
             'org.apache.commons',
-            'grails.plugin.fixtures.builder.processor.FixtureBeanPostProcessor'
-
+            'grails.plugin.fixtures.builder.processor.FixtureBeanPostProcessor',
+            'grails.plugin.springsecurity.web.filter'
+    
     debug 'grails.app.controller',
             'grails.app.domain.de.dewarim.goblin',
             'grails.app.domain.de.dewarim.goblin.Creature',
