@@ -1,7 +1,7 @@
 /*
-*= require jquery
-*= require tree
- */
+//= require jquery
+//= require tree
+*/
 
 var Ajax;
 if (Ajax && (Ajax != null)) {
