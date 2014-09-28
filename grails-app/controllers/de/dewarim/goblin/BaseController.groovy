@@ -18,6 +18,11 @@ class BaseController {
      */
     protected PlayerCharacter fetchPc() {
         def pc = null
+        /* 
+         TODO: always fetch pc from session. If user is logged in, session.pc must have him.
+         TODO: remove all pc.id parameters from links.
+         TODO: check if ajax function like remote_getMessages will still work.
+         */
         if (params.pc) {
             pc = PlayerCharacter.get(params.pc)
         }

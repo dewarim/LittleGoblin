@@ -128,45 +128,53 @@ class ShopController extends BaseController {
     }
 
     def buy() {
-        def pc = fetchPc()
-        Shop shop = Shop.get(params.shop)
-        log.debug("shop: $shop")
-        log.debug("player town: ${pc.town}")
-        if (!pc?.town?.shops?.find {it.equals(shop)}) {
-            /*
+        try {
+            def pc = fetchPc()
+            Shop shop = Shop.get(params.shop)
+            log.debug("shop: $shop")
+            log.debug("player town: ${pc.town}")
+            if (!pc?.town?.shops?.find { it.equals(shop) }) {
+                /*
             *  It has to be a shop in the player characters town,
             *  or something is wrong.
             */
-            render(status: 503, text: message(code: 'error.wrong_shop'))
-            return
-        }
-        def itemType = ItemType.get(params.itemType)
-        Integer amount = params.amount ? inputValidationService.checkAndEncodeInteger(params, 'amount', 'amount') : 1
-        if (shop.itemTypes.find {it.id.equals(itemType.id) }) {
-            Integer price = shop.owner.calculatePrice(itemType)
-            Integer totalCost = price * amount
-            if (pc.gold >= totalCost) {
-                pc.gold = pc.gold - totalCost
-                // check if the player already has one item of this type
-                Item existingItem = pc.items.find {
+                render(status: 503, text: message(code: 'error.wrong_shop'))
+                return
+            }
+            def itemType = ItemType.get(params.itemType)
+            Integer amount = params.amount ? inputValidationService.checkAndEncodeInteger(params, 'amount', 'amount') : 1
+            if (shop.itemTypes.find { it.id.equals(itemType.id) }) {
+                Integer price = shop.owner.calculatePrice(itemType)
+                Integer totalCost = price * amount
+                if (pc.gold >= totalCost) {
+                    pc.gold = pc.gold - totalCost
+                    def items = pc.items
+                    // check if the player already has one item of this type
+                    Item existingItem = pc.items.find {
                         it.type == itemType
-                }
-                if (itemType.stackable && existingItem) {
-                    existingItem.amount += amount * itemType.packageSize
+                    }
+                    if (itemType.stackable && existingItem) {
+                        existingItem.amount += amount * itemType.packageSize
+                    }
+                    else {
+                        Item item = new Item(type: itemType, owner: pc)
+                        item.initItem(amount * itemType.packageSize)
+                        item.save()
+                        items.add(item)
+                    }
+                    render(template: '/shared/sideInventory', model: [pc: pc, shop: shop, items:pc.items])
                 }
                 else {
-                    Item item = new Item(type: itemType, owner: pc)
-                    item.initItem(amount * itemType.packageSize)
-                    item.save()
+                    render(status: 503, text: message(code: 'error.insufficient.gold'))
                 }
-                render(template: '/shared/sideInventory', model: [pc: pc, shop: shop])
             }
             else {
-                render(status: 503, text: message(code: 'error.insufficient.gold'))
+                render(status: 503, text: message(code: 'error.item.not_found'))
             }
         }
-        else {
-            render(status: 503, text: message(code: 'error.item.not_found'))
+        catch (Exception e){
+            log.debug("Failed to buy item: ",e)
+            renderException(e)   
         }
     }
 
@@ -183,7 +191,8 @@ class ShopController extends BaseController {
                 throw new RuntimeException('error.wrong_shop')
             }
             def item = fetchItem(pc)
-
+            def items = pc.items
+            
             def amount = Math.abs(inputValidationService.checkAndEncodeInteger(params, "amount", 'item.amount'))
             amount = amount > item.amount ? item.amount : amount
             def sellPrice = (shop.owner.calculateSellPrice(item))
@@ -195,8 +204,16 @@ class ShopController extends BaseController {
             else {
                 item.amount -= amount
             }
-            item.delete()
-            render(template: '/shared/sideInventory', model: [pc: pc, shop: shop])
+            
+            if(item.amount == 0){
+                def id = item.id
+                def itemInList = items.find{it.id == id}
+                if(itemInList){
+                    items.remove(itemInList)
+                }
+                item.delete()
+            }
+            render(template: '/shared/sideInventory', model: [pc: pc, items: items, shop: shop])
         }
         catch (Exception e) {
             log.debug("failed to sell item: ", e)

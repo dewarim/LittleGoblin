@@ -139,7 +139,7 @@ class ItemController extends BaseController {
             }
             if(params.sideInventory){
                 // render left side inventory instead of main inventory
-                render(template: '/shared/sideInventory', model: [pc: pc, shop: shop])
+                render(template: '/shared/sideInventory', model: [pc: pc, shop: shop, items: pc.items])
             }
             else{
                 render(template: 'inventory', model: [pc: pc, shop: shop])

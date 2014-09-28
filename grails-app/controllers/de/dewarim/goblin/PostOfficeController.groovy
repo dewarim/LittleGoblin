@@ -69,6 +69,6 @@ class PostOfficeController extends BaseController {
         if(! pc){
             render(status: 503, text:message(code:'error.player_not_found'))
         }
-        render(template: '/shared/sideInventory', model:[pc:pc])
+        render(template: '/shared/sideInventory', model:[pc:pc, items: pc.items])
     }
 }
