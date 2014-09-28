@@ -448,3 +448,8 @@ Version 0.4.1 "Fixed" / 2014-09-23
 
 Version 0.4.2 "Crone" / 2014-09-24
 * Fixed Crone quest.
+
+Version 0.4.3 "Shopping" / 2014-09-28
+* Fixed JavaScript bug in shop page: jQuery was not being loaded.
+* Changed all pages containing inventory to use a better template/layout. (internal improvement, less GSP code)
+* Currently buggy: equip items, also see: https://github.com/dewarim/LittleGoblin/issues for outstanding issues.

@@ -97,6 +97,12 @@
 
         <div class="version_info">
             <pre>
+                Version 0.4.3 "Shopping" / 2014-09-28
+                * Fixed JavaScript bug in shop page: jQuery was not being loaded.
+                * Changed all pages containing inventory to use a better template/layout. (internal improvement, less GSP code)
+                * Currently buggy: equip items, also see: https://github.com/dewarim/LittleGoblin/issues for outstanding issues.
+            </pre>
+            <pre>
                 Version 0.4.2 "Crone" / 2014-09-24
                 * Fixed Crone quest.
             </pre>
@@ -109,23 +115,7 @@
                 * Upgrade to Grails 2.4.3. May contain bugs.
                 * AssetController is still work in progress.
             </pre>
-            <pre>
-                Version 0.3.4 "Users" / 2013-06-30
-                * #4: Added / fixed UserController. Still a little rough, but works.
-                * Upgraded to Grails 2.2.3
-                * Code cleaning
-                * Upgrade resources plugin to 1.2
-                
-                Version 0.3.3 "Fixtures"* / 2013-03-16
-
-                * Improved documentation
-                * Upgrade to Grails 2.2.1
-                * Migrated game and system data of the reference implementation to fixtures,
-                which allows you to edit them more easily.
-                * Fixed: when creating a new order, initialize its main chat.
-
-            </pre>
-            
+             
             <div class="">
                 <a href="${resource(dir: '/', file: 'status.txt')}" target="_blank"><g:message code="link.to.status.old"/></a>
             </div>
