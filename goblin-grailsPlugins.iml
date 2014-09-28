@@ -5,6 +5,7 @@
       <configuration>
         <webroots>
           <root url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/spring-security-core-2.0-RC4/grails-app/views" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/jquery-1.11.1/web-app" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -21,24 +22,30 @@
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/asset-pipeline-1.9.7">
-      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/asset-pipeline-1.9.7/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/asset-pipeline-1.9.7/grails-app/controllers" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/asset-pipeline-1.9.7/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/asset-pipeline-1.9.7/grails-app/taglib" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/asset-pipeline-1.9.9">
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/asset-pipeline-1.9.9/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/asset-pipeline-1.9.9/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/asset-pipeline-1.9.9/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/asset-pipeline-1.9.9/grails-app/taglib" isTestSource="false" />
     </content>
     <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/fixtures-1.3">
       <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/fixtures-1.3/src/groovy" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/hibernate-3.6.10.14">
-      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/hibernate-3.6.10.14/src/java" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/hibernate-3.6.10.14/grails-app/i18n" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/hibernate-3.6.10.17">
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/hibernate-3.6.10.17/src/java" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/release-3.0.0">
-      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/release-3.0.0/src/java" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/release-3.0.0/src/groovy" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/jquery-1.11.1">
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/jquery-1.11.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/jquery-1.11.1/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/jquery-1.11.1/grails-app/taglib" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/rest-client-builder-2.0.3" />
+    <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/release-3.0.1">
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/release-3.0.1/src/java" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/release-3.0.1/src/groovy" isTestSource="false" />
+    </content>
+    <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/rest-client-builder-1.0.3">
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/rest-client-builder-1.0.3/src/groovy" isTestSource="false" />
+    </content>
     <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/spock-0.7" />
     <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/spring-security-core-2.0-RC4">
       <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/spring-security-core-2.0-RC4/src/java" isTestSource="false" />
@@ -48,9 +55,9 @@
       <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/spring-security-core-2.0-RC4/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/spring-security-core-2.0-RC4/grails-app/taglib" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/tomcat-7.0.42">
-      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/tomcat-7.0.42/src/java" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/tomcat-7.0.42/src/groovy" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/tomcat-7.0.54">
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/tomcat-7.0.54/src/java" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/tomcat-7.0.54/src/groovy" isTestSource="false" />
     </content>
     <content url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/webxml-1.4.1">
       <sourceFolder url="file://$USER_HOME$/.grails/2.4.3/projects/goblin/plugins/webxml-1.4.1/src/groovy" isTestSource="false" />
@@ -62,15 +69,9 @@
       <library name="Grails User Library (goblin-grailsPlugins)">
         <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/xml-resolver/xml-resolver/1.2/xml-resolver-1.2.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/xml-apis/xml-apis/1.3.03/xml-apis-1.3.03.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/xerces/xercesImpl/2.8.1/xercesImpl-2.8.1.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/net/sourceforge/nekohtml/nekohtml/1.9.9/nekohtml-1.9.9.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/net/sf/ezmorph/ezmorph/1.0.6/ezmorph-1.0.6.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/net/sf/json-lib/json-lib/2.3/json-lib-2.3-jdk15.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.0.3/httpclient-4.0.3.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/modules/http-builder/http-builder/0.5.2/http-builder-0.5.2.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1.1/activation-1.1.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/3.6.10.Final/hibernate-core-3.6.10.Final.jar!/" />
@@ -104,27 +105,34 @@
           <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/plexus/plexus-container-default/1.0-alpha-9-stable-1/plexus-container-default-1.0-alpha-9-stable-1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/classworlds/classworlds/1.1-alpha-2/classworlds-1.1-alpha-2.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/maven/maven-ant-tasks/2.1.3/maven-ant-tasks-2.1.3.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/7.0.42/tomcat-embed-core-7.0.42.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/jdt/core/compiler/ecj/3.7.2/ecj-3.7.2.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-logging-log4j/7.0.42/tomcat-embed-logging-log4j-7.0.42.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-jasper/7.0.42/tomcat-embed-jasper-7.0.42.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-catalina-ant/7.0.42/tomcat-catalina-ant-7.0.42.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/javassist/javassist/3.17.1-GA/javassist-3.17.1-GA.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.8.0/commons-beanutils-1.8.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-orm/4.0.6.RELEASE/spring-orm-4.0.6.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/3.2.3.RELEASE/spring-security-web-3.2.3.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/3.2.3.RELEASE/spring-security-core-3.2.3.RELEASE.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-simple/3.1.0.RELEASE/grails-datastore-simple-3.1.0.RELEASE.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm/3.1.0.RELEASE/grails-datastore-gorm-3.1.0.RELEASE.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-core/3.1.0.RELEASE/grails-datastore-core-3.1.0.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/multiverse/multiverse-core/0.7.0/multiverse-core-0.7.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/javax/mail/mail/1.4.7/mail-1.4.7.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm-plugin-support/3.1.0.RELEASE/grails-datastore-gorm-plugin-support-3.1.0.RELEASE.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm-hibernate-core/3.1.0.RELEASE/grails-datastore-gorm-hibernate-core-3.1.0.RELEASE.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm-hibernate/3.1.0.RELEASE/grails-datastore-gorm-hibernate-3.1.0.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/asm/asm/3.1/asm-3.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib/2.2/cglib-2.2.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/mozilla/rhino/1.7R4/rhino-1.7R4.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/ant/ant-launcher/1.8.0/ant-launcher-1.8.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/ant/ant/1.8.0/ant-1.8.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/net/sourceforge/nekohtml/nekohtml/1.9.16/nekohtml-1.9.16.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.2.1/httpcore-4.2.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.2.1/httpclient-4.2.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/modules/http-builder/http-builder/0.7.1/http-builder-0.7.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm-plugin-support/3.1.2.RELEASE/grails-datastore-gorm-plugin-support-3.1.2.RELEASE.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm-hibernate-core/3.1.2.RELEASE/grails-datastore-gorm-hibernate-core-3.1.2.RELEASE.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm-hibernate/3.1.2.RELEASE/grails-datastore-gorm-hibernate-3.1.2.RELEASE.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/7.0.53/tomcat-embed-core-7.0.53.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-websocket/7.0.53/tomcat-embed-websocket-7.0.53.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-logging-log4j/7.0.53/tomcat-embed-logging-log4j-7.0.53.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-el/7.0.53/tomcat-embed-el-7.0.53.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-jasper/7.0.53/tomcat-embed-jasper-7.0.53.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-catalina-ant/7.0.53/tomcat-catalina-ant-7.0.53.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
