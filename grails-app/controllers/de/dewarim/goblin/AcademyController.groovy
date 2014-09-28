@@ -17,19 +17,25 @@ class AcademyController extends BaseController {
      */
     @Secured(['ROLE_USER'])
     def index() {
-        def pc = fetchPc()
+        try {
+            def pc = fetchPc()
 
-        Integer max = new Integer(params.max ?: 10)
-        Integer offset = new Integer(params.offset ?: 0)
-        def academies = academyService.fetchAccessibleAcademies(pc, max, offset)
-        def academyCount = academyService.fetchAccessibleAcademyCount(pc)
-        return [
-                pc:pc,
-                academies:academies,
-                academyCount:academyCount,
-                max:max,
-                offset:offset
-        ]
+            Integer max = new Integer(params.max ?: 10)
+            Integer offset = new Integer(params.offset ?: 0)
+            def academies = academyService.fetchAccessibleAcademies(pc, max, offset)
+            def academyCount = academyService.fetchAccessibleAcademyCount(pc)
+            return [
+                    pc          : pc,
+                    academies   : academies,
+                    academyCount: academyCount,
+                    max         : max,
+                    offset      : offset
+            ]
+        }
+        catch (Exception e){
+            log.debug("could not show index page",e)
+            renderException(e)
+        }
     }
 
     /**
