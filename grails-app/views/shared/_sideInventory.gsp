@@ -1,10 +1,10 @@
 <!-- inventory: -->
 
-<g:if test="${pc.items.size() > 0}">
+<g:if test="${items.size() > 0}">
 
     <h2><g:message code="pc.inventory"/></h2>
     <table>
-        <g:each in="${pc.items}" var="item">
+        <g:each in="${items}" var="item">
             <g:set var="hideRow" value="hideRow('item_${item.id}')"/>
             <g:if test="${! item.equipped}">
                 <tr id="item_${item.id}">

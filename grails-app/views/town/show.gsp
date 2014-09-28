@@ -3,8 +3,7 @@
 <html>
 <head>
 
-    <meta name="layout" content="main"/>
-   	
+    <meta name="layout" content="main_with_inventory"/>
 
 </head>
 
@@ -32,7 +31,7 @@
     <div class="col1">
 
         <div id="inventory" class="inventory">
-            <g:render template="/shared/sideInventory"/>
+            <g:render template="/shared/sideInventory" model="[items:pc.items]"/>
         </div>
 
     </div>

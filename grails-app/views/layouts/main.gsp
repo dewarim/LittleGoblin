@@ -32,6 +32,7 @@
 
 <body>
 <g:render template="/shared/logo"/>
+
 <g:layoutBody/>
 <g:render template="/shared/footer"/>
 </body>

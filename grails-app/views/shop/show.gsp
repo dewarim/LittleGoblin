@@ -2,25 +2,15 @@
 <html>
 <head>
 
-    <meta name="layout" content="main"/>
+    <meta name="layout" content="main_with_inventory"/>
    	
-
 </head>
 
 <body class=" main shop ">
-
-<div class="navigation">
+<content tag="nav">
     <g:link controller="town" action="show" params="[pc:pc.id]"><g:message code="link.to.town"/></g:link>
-</div>
+</content>
 
-<div class="colmask ">
-    <div class="col1">
-        <div id="inventory">
-            <g:render template="/shared/sideInventory" model="[pc:pc]"/>
-        </div>
-    </div>
-
-    <div class="col2">
         <div class="shop">
             <h1><g:message code="${shop.name}"/></h1>
 
@@ -59,13 +49,6 @@
         <!-- end of items list -->
 
         </div>
-
-    </div>
-
-    <div class="col3">
-        <g:render template="/shared/player_character" model="[showEquipment:true]"/>
-    </div>
-</div>
 
 </body>
 </html>

@@ -35,7 +35,7 @@
 
     <g:if test="${showEquipment}">
         <div id="equipment" class="equipment">
-            <g:render template="/shared/equipment" model="[pc:pc]"/>
+            <g:render template="/shared/equipment" model="[pc:pc, items: pc.items]"/>
         </div>
     </g:if>
 
