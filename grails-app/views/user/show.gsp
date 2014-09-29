@@ -77,7 +77,7 @@
                 <input type="hidden" name="id" value="${user.id}"/>
                 <span class="button"><g:actionSubmit class="edit" value="Edit"/></span>
                 <span class="button"><g:actionSubmit class="delete"
-                                                     onclick="return confirm('${message(code: 'user.disable.confirm')}');"
+                                                     onclick="return confirm('${message(code: "user.disable.confirm")}');"
                                                      value="Delete"/></span>
             </g:form>
         </div>
