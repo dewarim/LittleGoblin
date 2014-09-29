@@ -6,7 +6,7 @@ import de.dewarim.goblin.item.Item;
 import de.dewarim.goblin.pc.PlayerCharacter;
 
 public interface ICombatScript {
-
-	void execute(PlayerCharacter pc, Collection<Creature> mobs, Item item, String featureConfig);
+    
+    void execute(PlayerCharacter pc, Collection<Creature> mobs, Item item, String featureConfig);
 
 }
