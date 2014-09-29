@@ -1,7 +1,7 @@
 <%@ page import="de.dewarim.goblin.guild.Guild" %>
 <div id="guild_list">
     <div id="guild_description">&nbsp;</div>
-    <table class="guild_list_table" bguild="1">
+    <table class="guild_list_table">
         <thead>
         <tr>
             <th><g:message code="guild.name"/></th>
