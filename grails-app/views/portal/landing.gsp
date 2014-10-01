@@ -23,7 +23,6 @@
 
 <body class="landing_body main">
 
-
 <div class="navigation">
     <g:if test="${grailsApplication.config.facebook?.enableLikeButton}">
         <div id="fblike-root"></div>
@@ -97,6 +96,17 @@
 
         <div class="version_info">
             <pre>
+                Version 0.4.5 "Keeper" / 2014-10-01
+                * Fixed Shopkeeper's description / messageId
+                * Fixed broken redirect when another character joins the Grand Melee
+                * Fixed CSS issue with missing body.class attribute value.
+            </pre>
+            <pre>
+                Version 0.4.4 "Town" / 2014-09-29
+                * Fix layout bug in town
+                * Cleaned up a little.
+            </pre>
+            <pre>
                 Version 0.4.3 "Shopping" / 2014-09-28
                 * Fixed JavaScript bug in shop page: jQuery was not being loaded.
                 * Changed all pages containing inventory to use a better template/layout. (internal improvement, less GSP code)
@@ -107,13 +117,7 @@
                 * Fixed Crone quest.
             </pre>
             <pre>
-                Version 0.4.1 "Fixed" / 2014-09-23
-                * Fixed JavaScript / Grails integration issues (would crash some pages)
-            </pre>
-            <pre>
-                Version 0.4.0 "Upgraded" / 2014-09-07
-                * Upgrade to Grails 2.4.3. May contain bugs.
-                * AssetController is still work in progress.
+               
             </pre>
              
             <div class="">
@@ -150,8 +154,7 @@
 
     </div>
 </div>
-
-
+    
 <g:if test="${grailsApplication.config.facebook?.enabled}">
     <div id="fb-root"></div>
 </g:if>
