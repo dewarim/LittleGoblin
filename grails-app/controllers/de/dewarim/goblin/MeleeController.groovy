@@ -51,17 +51,8 @@ class MeleeController extends BaseController {
         }
         else {
             flash.message = message(code: 'melee.join.not.again')
-            redirect(controller: 'melee', action: 'index')
-            return
         }
-
-        if (melee.status == MeleeStatus.WAITING) {
-            redirect(controller: 'melee', action: 'index')
-        }
-        else {
-            redirect(controller: 'melee', action: 'show',
-                    params: [pc: pc, melee: melee, fighters: meleeService.listFighters(melee)])
-        }
+        redirect(controller: 'melee', action: 'index')
     }
 
     /**
@@ -190,9 +181,9 @@ class MeleeController extends BaseController {
             if (pc.currentMelee) {
                 items = itemService.fetchUsableItems(pc)
                 MeleeFighter mf = MeleeFighter.find("from MeleeFighter mf where mf.melee=:melee and mf.pc=:pc ",
-                    [melee: pc.currentMelee, pc: pc])
+                        [melee: pc.currentMelee, pc: pc])
                 currentAction = mf.action
-                opponents = fighters.findAll{it != pc}
+                opponents = fighters.findAll { it != pc }
             }
         }
         else {
@@ -202,11 +193,12 @@ class MeleeController extends BaseController {
             }
             fighters = meleeService.listFighters(waitingMelee)
         }
-        return [pc: pc, runningMelee: runningMelee,
-                waitingMelee: waitingMelee,
-                fighters: fighters,
-                opponents: opponents, // just fighters minus pc ... should refactor somehow.
-                items: items,
+        return [pc           : pc,
+                runningMelee : runningMelee,
+                waitingMelee : waitingMelee,
+                fighters     : fighters,
+                opponents    : opponents, // just fighters minus pc ... should refactor somehow.
+                items        : items,
                 currentAction: currentAction]
     }
 
