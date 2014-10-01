@@ -30,7 +30,7 @@
     <g:layoutHead/>
 </head>
 
-<body>
+<body class="${pageProperty(name:'body.class')}">
 <g:render template="/shared/logo"/>
 
 <g:layoutBody/>
