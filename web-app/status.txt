@@ -453,3 +453,12 @@ Version 0.4.3 "Shopping" / 2014-09-28
 * Fixed JavaScript bug in shop page: jQuery was not being loaded.
 * Changed all pages containing inventory to use a better template/layout. (internal improvement, less GSP code)
 * Currently buggy: equip items, also see: https://github.com/dewarim/LittleGoblin/issues for outstanding issues.
+
+Version 0.4.4 "Town" / 2014-09-29
+* Fix layout bug in town
+* Cleaned up a little.
+
+Version 0.4.5 "Keeper" / 2014-10-01
+* Fixed Shopkeeper's description / messageId
+* Fixed broken redirect when another character joins the Grand Melee
+* Fixed CSS issue with missing body.class attribute value.
