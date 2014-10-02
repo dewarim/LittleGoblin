@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2823981796">
+    <data-source source="LOCAL" name="PostgreSQL - goblin@localhost" uuid="46ef4a53-0970-46ec-98ce-f667a1ffa34f">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/goblin</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
