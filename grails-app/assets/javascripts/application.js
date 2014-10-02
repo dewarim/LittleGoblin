@@ -1,6 +1,6 @@
 /*
 //= require jquery
-//= require tree
+//= require_self
 */
 
 var Ajax;
