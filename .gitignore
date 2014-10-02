@@ -3,3 +3,5 @@
 /grails-goblin-*.zip
 /plugin.xml
 .settings
+.idea/dataSources.xml
+
