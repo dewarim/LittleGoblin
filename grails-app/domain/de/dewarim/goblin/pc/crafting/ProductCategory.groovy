@@ -6,7 +6,7 @@ package de.dewarim.goblin.pc.crafting
 class ProductCategory {
 
     static hasMany = [products:Product]
-
+    static mappedBy = [products: 'category']
     static constraints = {
         description nullable:true
         name unique: true
