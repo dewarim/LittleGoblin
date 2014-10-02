@@ -8,7 +8,8 @@ import de.dewarim.goblin.pc.PlayerCharacter
 class UserAccount {
 	static transients = ['pass']
 	static hasMany = [userRoles: UserRole,characters:PlayerCharacter]
-
+    static mappedBy = [characters: 'user']
+    
     def springSecurityService
 
 	PlayerCharacter currentChar

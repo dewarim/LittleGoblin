@@ -2,8 +2,7 @@ package de.dewarim.goblin.quest
 
 class QuestStep {
 
-    static belongsTo = [encounter: Encounter, questTemplate: QuestTemplate
-    ]
+    static belongsTo = [encounter: Encounter, questTemplate: QuestTemplate]
     static hasMany = [nextSteps: StepChild, parentSteps: StepChild]
     static mappedBy = [parentSteps: 'child', nextSteps: 'parent']
     static constraints = {

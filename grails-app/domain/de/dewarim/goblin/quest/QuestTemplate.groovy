@@ -3,6 +3,7 @@ package de.dewarim.goblin.quest
 class QuestTemplate {
 
 	static hasMany = [requirements:QuestRequirement, steps:QuestStep]
+    static mappedBy = [steps:'questTemplate']
     static belongsTo = [giver:QuestGiver]
 	static constraints = {
 		name blank:false
