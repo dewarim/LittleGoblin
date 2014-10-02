@@ -1,5 +1,7 @@
 package de.dewarim.goblin
 
+import grails.plugin.springsecurity.annotation.Secured
+
 /**
  * Render a help template using message ids and template names..
  * Alternatives would include:
@@ -7,6 +9,7 @@ package de.dewarim.goblin
  *  load help from external (template) file
  * Currently, using templates is easier and very flexible.
  */
+@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 class HelpController {
 
     def summonHelp(String messageId) {
