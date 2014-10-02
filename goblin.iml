@@ -128,7 +128,6 @@
           <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/3.2.3.RELEASE/spring-security-web-3.2.3.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/3.2.3.RELEASE/spring-security-core-3.2.3.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/multiverse/multiverse-core/0.7.0/multiverse-core-0.7.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/javax/mail/mail/1.4.7/mail-1.4.7.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/asm/asm/3.1/asm-3.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib/2.2/cglib-2.2.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/mozilla/rhino/1.7R4/rhino-1.7R4.jar!/" />

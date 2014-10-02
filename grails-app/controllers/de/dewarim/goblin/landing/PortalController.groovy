@@ -7,6 +7,7 @@ import de.dewarim.goblin.Role
 import de.dewarim.goblin.UserAccount
 import de.dewarim.goblin.UserRole
 
+@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 class PortalController extends BaseController {
 
     def globalConfigService
@@ -16,7 +17,7 @@ class PortalController extends BaseController {
     /**
      * The landing page (start page of Little Goblin)
      */
-    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+  
     def landing() {
 
         return [
@@ -45,7 +46,7 @@ class PortalController extends BaseController {
             ]
         }
     }
-
+    
     def register() {
         def minNameLength = globalConfigService.fetchValueAsInt('username.min.length', 3)
         def minPassLength = globalConfigService.fetchValueAsInt('password.min.length', 6)
@@ -111,20 +112,23 @@ class PortalController extends BaseController {
 
             def msgBody = groovyPageRenderer.render(template: '/portal/confirmMail',
                     model: [appName: mailConfig.appName, confirmationLink: link, teamName: regards, sysAdmin: sysAdmin])
-            myMailService.sendMail(theSender, [newAccount.email], message(code: 'registration.subject'), msgBody)
-
-            newAccount.confirmationMailSent
-            // return::success
-            flash.message = message(code: 'registration.mail.sent')
-            redirect(controller: 'portal', action: 'landing')
+            def result = myMailService.sendMail(theSender, [newAccount.email], message(code: 'registration.subject'), msgBody)
+            
+            if(result){
+                newAccount.confirmationMailSent
+                // return::success
+                flash.message = message(code: 'registration.mail.sent')
+                redirect(controller: 'portal', action: 'landing')
+                return
+            }
         }
         catch (Exception e) {
             log.debug("registration.fail: ", e)
-            session.name = params.name
-            session.email = params.email
-            flash.message = message(code: 'registration.fail', args: [message(code: e.message)])
-            render(view: 'register', model: params)
         }
+        session.name = params.name
+        session.email = params.email
+        flash.message = message(code: 'registration.fail', args: [message(code: e.message)])
+        render(view: 'register', model: params)
     }
 
     def confirmRegistration() {
