@@ -58,14 +58,14 @@
                 </label>
                 </td>
             </tr><tr>
-                <td><input type="text" id="r_password" name="password"
+                <td><input type="password" id="r_password" name="password"
                            title="${message(code:'registration.minPassLength', args:[minPassLength])}"></td>
             </tr>
             <tr>
                 <td><label for="r_password2"><g:message code="registration.password2"/></label>
                 </td>
             </tr><tr>
-                <td><input type="text" id="r_password2" name="password2" title="${message(code:'registration.repeat.pass')}"></td>
+                <td><input type="password" id="r_password2" name="password2" title="${message(code:'registration.repeat.pass')}"></td>
             </tr>
             <tr>
                 <td class="right"><input type="submit" name="register" value="${message(code: 'registration.submit')}">
