@@ -43,15 +43,15 @@ class Product {
     }
 
     Collection<Component> fetchInputItems(){
-        return components.findAll{it.type == ComponentType.INPUT}
+        return Component.findAllWhere(type: ComponentType.INPUT, product: this)
     }
-
+    
     Collection<Component> fetchOutputItems(){
-        return components.findAll{it.type == ComponentType.OUTPUT}
+        return Component.findAllWhere(type: ComponentType.OUTPUT, product:this)
     }
 
     Collection<Component> fetchTools(){
-        return components.findAll{it.type == ComponentType.TOOL}
+        return Component.findAllWhere(type: ComponentType.TOOL, product: this)
     }
 
     void deleteFully(){
