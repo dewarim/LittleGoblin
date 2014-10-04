@@ -28,7 +28,10 @@
 
     <g:if test="${products?.isEmpty()}">
         <g:message code="product.none.available"/><br>
-        <g:link controller="production" action="workshop"><g:message code="link.back.to.workshop"/></g:link>
+        <ul>
+            <li><g:link controller="production" action="workshop"><g:message code="link.back.to.workshop"/></g:link></li>
+            <li><g:link controller="academy" action="index"><g:message code="link.to.visit.academy"/> </g:link> </li>
+        </ul>
     </g:if>
     <g:else>
 
