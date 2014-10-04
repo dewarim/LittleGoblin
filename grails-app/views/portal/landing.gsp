@@ -96,6 +96,16 @@
 
         <div class="version_info">
             <pre>
+                Version 0.4.6 "Status" / 2014-10-04
+                * Fixed registration, so you do not need to be a registered user to register...
+                * Registration password field is now of type *** password instead plain text.
+                * You can view the complete changelog again
+                * Fixed some error messages on startup after grails clean #developer
+                * Set dataSources.xml file to be ignored by git (it's not the same for each dev) #developer
+                * Fixed broken methods in Product class #developer
+                * Added a link to academies from product list in workshop if the PC cannot craft yet.
+            </pre>
+            <pre>
                 Version 0.4.5 "Keeper" / 2014-10-01
                 * Fixed Shopkeeper's description / messageId
                 * Fixed broken redirect when another character joins the Grand Melee
@@ -112,14 +122,7 @@
                 * Changed all pages containing inventory to use a better template/layout. (internal improvement, less GSP code)
                 * Currently buggy: equip items, also see: https://github.com/dewarim/LittleGoblin/issues for outstanding issues.
             </pre>
-            <pre>
-                Version 0.4.2 "Crone" / 2014-09-24
-                * Fixed Crone quest.
-            </pre>
-            <pre>
-               
-            </pre>
-             
+
             <div class="">
                 <a href="${assetPath(src:'txt/status.txt')}" target="_blank"><g:message code="link.to.status.old"/></a>
             </div>

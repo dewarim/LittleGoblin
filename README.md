@@ -1,4 +1,4 @@
-# Release notes for Little Goblin v 0.4.0
+# Release notes for Little Goblin v 0.4.6
 
 Little Goblin is a browser game framework written with the Grails framework
 using Groovy, Java and JavaScript. It includes a reference implementation
@@ -26,7 +26,7 @@ For instructions to install the binary version, see: [INSTALL.md](INSTALL.md)
 You can include Little Goblin as a plugin in your own Grails application.
 In BuildConfig, just add 
 
-    compile ':goblin:0.4.0'
+    compile ':goblin:0.4.6'
 
 to the plugins section. 
 
