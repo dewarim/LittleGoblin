@@ -121,7 +121,7 @@
             </pre>
              
             <div class="">
-                <a href="${resource(dir: '/', file: 'status.txt')}" target="_blank"><g:message code="link.to.status.old"/></a>
+                <a href="${assetPath(src:'txt/status.txt')}" target="_blank"><g:message code="link.to.status.old"/></a>
             </div>
             
             <div class="highscore_link">
