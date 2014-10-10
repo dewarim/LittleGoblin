@@ -8,12 +8,15 @@ import groovy.mock.interceptor.MockFor
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.codehaus.groovy.grails.commons.GrailsDomainClass
 import org.springframework.context.ApplicationContext
+import spock.lang.Ignore
+import spock.lang.Specification
 
 /**
  *
  */
 @TestFor(Tick)
-class TickSpec extends UnitSpec {
+@Ignore
+class TickSpec extends Specification {
 
     Tick tick
 

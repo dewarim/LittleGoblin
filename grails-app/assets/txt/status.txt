@@ -471,4 +471,6 @@ Version 0.4.6 "Status" / 2014-10-04
 * Set dataSources.xml file to be ignored by git (it's not the same for each dev) #developer
 * Fixed broken methods in Product class #developer
 * Added a link to academies from product list in workshop if the PC cannot craft yet.
-    
+
+Version 0.4.7 "RegisterMe" / 2014-10-10
+* Fixed registration some more: added tests and improved stability
