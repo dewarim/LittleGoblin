@@ -9,6 +9,7 @@ fixture{
     userRole(Role, name:'ROLE_USER', description:'User')
     userRoleForAdmin(UserRole, user:admin, role:userRole)
 
-    anon(UserAccount, username:'anon', userRealName: 'Anonymous', enabled:true, passwd:'anon', coins:100)
+    anon(UserAccount, username:'anon', userRealName: 'Anonymous', 
+            enabled:true, passwd:'anon', coins:100, email:'anon@example.com')
     userRoleForAnon(UserRole, user:anon, role:userRole)
 }
