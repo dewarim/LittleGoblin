@@ -36,6 +36,11 @@ class RegistrationService {
             checkResult.addProblem('registration.bad.email')
         }
 
+        UserAccount existingAccount = UserAccount.findByUsername(username)
+        if(existingAccount){
+            checkResult.addProblem('registration.user.exists')
+        }
+        
         // check if we know this email
         UserAccount existingUser = UserAccount.findByEmail(email.toLowerCase())
         if (existingUser) {

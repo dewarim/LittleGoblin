@@ -47,12 +47,26 @@ class RegistrationServiceSpec extends Specification {
         def user = new UserAccount(username:'Gandalf', userRealName: 'Mithrandir', 
                 passwd: 'mellon', email:'gandalf@example.com')
         user.save()
-        def params = [username:'bilbo', password:'teabag', password2:'teabag', email:'gandalf@example.com']
+        def params = [username:'Gandalf', password:'teabag', password2:'teabag', email:'gandalf@example.com']
         RegistrationCheckResult checkResult = registrationService.checkRegistration(params)
 
         expect:
         !checkResult.isOkay()
         checkResult.problems.find{it.messageId.equals('registration.used.email')}
+        checkResult.problems.find{it.messageId.equals('registration.user.exists')}
+    }
+    
+    void "existingUserTest"(){
+        given:
+        def user = new UserAccount(username:'Gandalf', userRealName: 'Mithrandir', 
+                passwd: 'mellon', email:'g@example.com')
+        user.save()
+        def params = [username:'Gandalf', password:'teabag', password2:'teabag', email:'gandalf@example.com']
+        RegistrationCheckResult checkResult = registrationService.checkRegistration(params)
+
+        expect:
+        !checkResult.isOkay()
+        checkResult.problems.find{it.messageId.equals('registration.user.exists')}
     }
         
     void "badParamsTest"(){

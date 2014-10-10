@@ -96,6 +96,10 @@
 
         <div class="version_info">
             <pre>
+                Version 0.4.7 "RegisterMe" / 2014-10-10
+                * Fixed registration some more: added tests and improved stability
+            </pre>
+            <pre>
                 Version 0.4.6 "Status" / 2014-10-04
                 * Fixed registration, so you do not need to be a registered user to register...
                 * Registration password field is now of type *** password instead plain text.
