@@ -1,12 +1,16 @@
 package de.dewarim.goblin
 
 import de.dewarim.goblin.asset.IAsset
+import org.codehaus.groovy.grails.plugins.codecs.HTMLCodec
+import org.codehaus.groovy.grails.support.encoding.Encoder
 
 /**
  * This class is responsible for input validation and encoding.
  */
 class InputValidationService {
-
+    
+    // use static encoder to make testing easier.
+    static Encoder htmlEncoder = new HTMLCodec().encoder
     static transactional = false
 
     /**
@@ -19,6 +23,9 @@ class InputValidationService {
      * @throws RuntimeException either "error.missing.name", if the name is null or invalid,
      *  or "error.name.not.unique" there already exists another object with the same name in the database.
      */
+    // TODO: does it make sense to have the encoding part of this method?
+    // All output should be encoded properly anyway, and we do not want HTML encoded user/object names anyway
+    // in the database [which will further mess up encoding the output again somewhere later]
     String checkAndEncodeName(String name, myObject) {
         if (!name || name.trim().length() == 0) {
             throw new RuntimeException('error.missing.name')
@@ -50,7 +57,7 @@ class InputValidationService {
         if (!txt || txt.trim().length() == 0) {
             throw new RuntimeException('error.empty.field')
         }
-        return txt.encodeAsHTML()
+        return htmlEncoder.encode(txt)
     }
 
     Integer checkAndEncodeInteger(params, String fieldName, String fieldLabel) {

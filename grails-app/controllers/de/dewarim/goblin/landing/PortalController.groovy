@@ -1,11 +1,13 @@
 package de.dewarim.goblin.landing
 
+import de.dewarim.goblin.RegistrationCheckResult
 import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.HighScore
 import de.dewarim.goblin.Role
 import de.dewarim.goblin.UserAccount
 import de.dewarim.goblin.UserRole
+import org.springframework.web.servlet.support.RequestContextUtils
 
 @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 class PortalController extends BaseController {
@@ -13,11 +15,13 @@ class PortalController extends BaseController {
     def globalConfigService
     def myMailService
     def groovyPageRenderer
+    def registrationService
+    def userAccountService
 
     /**
      * The landing page (start page of Little Goblin)
      */
-  
+
     def landing() {
 
         return [
@@ -40,95 +44,72 @@ class PortalController extends BaseController {
             redirect(controller: 'admin', action: 'index')
         }
         else {
-            return [user: user,
-                    chars: user.characters?.sort { a, b -> a.name.toLowerCase() <=> b.name.toLowerCase() },
+            return [user       : user,
+                    chars      : user.characters?.sort { a, b -> a.name.toLowerCase() <=> b.name.toLowerCase() },
                     createError: params.createError
             ]
         }
     }
-    
+
     def register() {
         def minNameLength = globalConfigService.fetchValueAsInt('username.min.length', 3)
         def minPassLength = globalConfigService.fetchValueAsInt('password.min.length', 6)
         return [nameOfTheGame: grailsApplication.config.gameName ?: 'Little Goblin',
-                username: params.username?.encodeAsHTML(),
+                username     : params.username?.encodeAsHTML(),
                 minPassLength: minPassLength,
                 minNameLength: minNameLength,
-                email: params.username?.encodeAsHTML(),
+                problems     : [],
+                email        : params.username?.encodeAsHTML(),
 
         ]
     }
 
-    def doRegister() {
+    def doRegister(String username, String password, String email) {
         try {
-            if (params.username?.trim()?.length() == 0) {
-                throw new RuntimeException('registration.bad.name')
-            }
-            // check if username is free
-            def username = inputValidationService.checkAndEncodeText(params, "username", "registration.username")
-            def minNameLength = globalConfigService.fetchValueAsInt('username.min.length', 3)
-            if (username.length() < minNameLength) {
-                throw new RuntimeException(message(code: 'registration.short.username', args: [minNameLength]))
-            }
-            // check if passwords match
-            def password = params.password
-            def password2 = params.password2
-            if (password != password2) {
-                throw new RuntimeException('registration.password.mismatch')
-            }
-            def minPassLength = globalConfigService.fetchValueAsInt('password.min.length', 6)
-            if (password.length() < minPassLength) {
-                throw new RuntimeException(message(code: 'registration.short.password', args: [minPassLength]))
+            RegistrationCheckResult result = registrationService.checkRegistration(params)
+            if (!result.isOkay()) {
+                render(template: 'registrationForm', model: [username: username, email: email,
+                                                             problems: result.problems.collect {
+                                                                 message(code: it.messageId, args: it.args)
+                                                             }])
+                return
             }
 
-            // check if email at least looks like it may be a valid address
-            String email = params.email
-            if (!email || !email.contains('@')) {
-                throw new RuntimeException('registration.bad.email')
+            def accountResult = userAccountService.createUserAccount(username, password, email)
+            if (!accountResult.isOkay()) {
+                def problems = [message(code: 'registration.fail',
+                        args: [message(code: accountResult.errorMessage)])]
+                render(template: 'registrationForm', model: [username: username, email: email,
+                                                             problems: problems])
+                return
             }
-
-            // check if we know this email
-            UserAccount existingUser = UserAccount.findByEmail(email.toLowerCase())
-            if (existingUser) {
-                log.debug("user with email $email already exists as ${existingUser.username}")
-                throw new RuntimeException(message(code: 'registration.used.email'))
-            }
-
-            // create user
-            UserAccount newAccount = new UserAccount(username: username, email: email, userRealName: username)
-            newAccount.passwd = password
-            newAccount.save()
-            Role role = Role.findByName('ROLE_USER')
-            UserRole userRole = new UserRole(newAccount, role)
-            userRole.save()
-
+            def newAccount = accountResult.userAccount
             // send registration mail
             def mailConfig = grailsApplication.config.registration
-            def link = "http://${mailConfig.serverUrl}/portal/confirmRegistration?uuid=${newAccount.mailConfirmationToken}"
+            def link = "http://${mailConfig.serverUrl ?: 'localhost:8080'}/portal/confirmRegistration?uuid=${newAccount.mailConfirmationToken}"
             def sysAdmin = mailConfig.sysAdmin
             def regards = mailConfig.regards
             def theSender = mailConfig.sender
             log.debug("newAccount: ${newAccount.dump()}")
 
             def msgBody = groovyPageRenderer.render(template: '/portal/confirmMail',
-                    model: [appName: mailConfig.appName, confirmationLink: link, teamName: regards, sysAdmin: sysAdmin])
-            def result = myMailService.sendMail(theSender, [newAccount.email], message(code: 'registration.subject'), msgBody)
-            
-            if(result){
-                newAccount.confirmationMailSent
-                // return::success
-                flash.message = message(code: 'registration.mail.sent')
-                redirect(controller: 'portal', action: 'landing')
-                return
+                    model: [appName : mailConfig.appName, confirmationLink: link,
+                            teamName: regards, sysAdmin: sysAdmin, email:email])
+            def mailResult = myMailService.sendMail(theSender, [newAccount.email], message(code: 'registration.subject'), msgBody)
+
+            if (mailResult.isOkay()) {
+                newAccount.confirmationMailSent = true
+                render(template: 'registrationForm', model: [registrationSuccess: true, username: username, email: email])
+            }
+            else {
+                session.name = username
+                session.email = email
+                render(template: 'registrationForm', model: [username: username, email: email, problems: [message(code: 'registration.fail')]])
             }
         }
         catch (Exception e) {
-            log.debug("registration.fail: ", e)
+            log.debug("Failed doRegister:", e)
         }
-        session.name = params.name
-        session.email = params.email
-        flash.message = message(code: 'registration.fail', args: [message(code: e.message)])
-        render(view: 'register', model: params)
     }
 
     def confirmRegistration() {
@@ -140,7 +121,7 @@ class PortalController extends BaseController {
                     userAccount.enabled = true
                     flash.message = message(code: 'registration.complete',
                             args: [grailsApplication.config.registration?.appName,
-                                    userAccount.username
+                                   userAccount.username
                             ])
                     render(view: 'landing')
                     return

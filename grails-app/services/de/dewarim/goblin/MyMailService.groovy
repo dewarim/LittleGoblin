@@ -14,7 +14,7 @@ class MyMailService {
 
     static Properties mailProps = new Properties()
 
-    def sendMail(sender, recipients, subject, body) {
+    SendMailResult sendMail(String sender, recipients, String subject, body) {
         if(! mailProps.containsKey('mail.host')){
             def config = grailsApplication.config.mail
             mailProps.setProperty("mail.transport.protocol", config?.protocol ?: "smtp")
@@ -29,7 +29,7 @@ class MyMailService {
         MimeMessage message = new MimeMessage(mailSession)
         message.setSubject(subject)
         message.addFrom(new InternetAddress(sender))
-        message.setText(body, "UTF-8")
+        message.setContent(body, "text/html")
         recipients.each {recipient ->
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient))
         }
@@ -57,6 +57,6 @@ class MyMailService {
                 message.getRecipients(Message.RecipientType.TO))
         Thread.sleep(3000) // sleep a moment to in case the mail server is busy.
         transport.close()
-        return listener.event?.type != TransportEvent.MESSAGE_DELIVERED
+        return new SendMailResult(okay: listener.event?.type == TransportEvent.MESSAGE_DELIVERED)
     }
 }
