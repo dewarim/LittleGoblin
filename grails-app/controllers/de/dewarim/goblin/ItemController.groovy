@@ -1,5 +1,6 @@
 package de.dewarim.goblin
 
+import de.dewarim.goblin.pc.PlayerCharacter
 import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.combat.Combat
 import de.dewarim.goblin.item.Item
@@ -153,7 +154,7 @@ class ItemController extends BaseController {
 
     def showInventory() {
         // TODO: if pc is on a quest or in combat, prevent him from moving stuff from home to person.
-        def pc = fetchPc()
+        PlayerCharacter pc = fetchPc()
         if (!pc) {
             redirect(controller: 'portal', action: 'start')
             return
