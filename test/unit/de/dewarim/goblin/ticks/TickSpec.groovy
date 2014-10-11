@@ -15,7 +15,6 @@ import spock.lang.Specification
  *
  */
 @TestFor(Tick)
-@Ignore
 class TickSpec extends Specification {
 
     Tick tick
@@ -88,7 +87,7 @@ class TickSpec extends Specification {
         then:
         tick.errors['beanName'] == 'bean.missing'
         tick.errors['tickLength'] == 'too.small'
-        tick.errors['name'] == 'blank'
+        tick.errors['name'] == 'nullable' // dataBinder will convert empty String to null.
 
         where:
         tickLength = -1
