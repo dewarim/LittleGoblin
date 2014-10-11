@@ -6,5 +6,6 @@ package de.dewarim.goblin.ticks
 class TickResult {
 
     Boolean failed = false
+    Boolean interrupted = false
     List messages = []
 }

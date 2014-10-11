@@ -14,11 +14,19 @@ class TickService {
     }
 
     def stopAll() {
+        log.debug("Sending stop signal to Ticks.")
         tickMap.values().each { tickMaster ->
             tickMaster.stop()
         }
     }
-
+    
+    def terminateAll(){
+        log.debug("Sending terminate signal to Actors")
+        tickMap.values().each{ tickMaster ->
+            tickMaster.terminate()
+        }
+    }
+    
     def startAll() {
         tickMap.each { name, tickMaster ->
             def tick = Tick.findByName(name)

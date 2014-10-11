@@ -55,7 +55,10 @@ class TickMaster extends DefaultActor {
         if (running){
             TickCommand tc = new TickCommand(type: TickCommandType.DO_TICK, tickId: cmd.tickId)
             tickRunner.sendAndContinue(tc){TickResult result ->
-                if (result.failed){
+                if( result.interrupted){
+                    log.warn("Tick actor was interrupted: ${result.messages}")
+                }
+                else if (result.failed){
                     log.warn("Tick failed: ${result.messages}")
                 }
                 else{
@@ -70,4 +73,9 @@ class TickMaster extends DefaultActor {
         running = false
     }
 
+    @Override
+    protected void handleTermination() {
+        tickRunner.terminate()
+        super.handleTermination()
+    }
 }

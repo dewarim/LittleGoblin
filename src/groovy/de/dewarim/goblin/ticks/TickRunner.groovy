@@ -37,6 +37,20 @@ class TickRunner extends DynamicDispatchActor {
                 Thread.sleep(tick.tickLength)
             }
         }
+        catch(InterruptedException e){
+            result.failed = true
+            def msg
+            if(hasBeenStopped()){
+                msg = "TickRunner has been stopped. This is okay in case of shutdown."
+            }
+            else{
+                msg = "TickRunner thread was interrupted, but does not seem to be stopped."
+            }
+            result.failed = true
+            result.interrupted = true
+            result.messages.add(msg)
+            log.info("TickRunner: ${msg}")
+        }
         catch (Exception e) {
             result.failed = true
             result.messages.add(e.message)

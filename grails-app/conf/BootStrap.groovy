@@ -85,7 +85,7 @@ class BootStrap {
     }
 
     def destroy = {
-        tickService.stopAll()
+        tickService.terminateAll()
     }
 
     void initTicks(){
