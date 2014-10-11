@@ -17,6 +17,9 @@ class Academy {
     static belongsTo = [town:Town]
 
     static constraints = {
+        name nullable: false, blank: false, unique: 'town'
+        description blank: false
+        town nullable: false
     }
 
     String name

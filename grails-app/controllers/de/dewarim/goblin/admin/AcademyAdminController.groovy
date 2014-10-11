@@ -73,7 +73,7 @@ class AcademyAdminController extends BaseController {
     }
 
     void updateFields(academy){
-        academy.name = inputValidationService.checkAndEncodeName(params.name, academy)
+        academy.name = params.name
         academy.description =
             inputValidationService.checkAndEncodeText(params, "description", "academy.description")
         academy.town = (Town) inputValidationService.checkObject(Town.class, params.town)
