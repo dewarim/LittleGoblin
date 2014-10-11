@@ -474,3 +474,7 @@ Version 0.4.6 "Status" / 2014-10-04
 
 Version 0.4.7 "RegisterMe" / 2014-10-10
 * Fixed registration some more: added tests and improved stability
+
+Version 0.4.8 "" / 2014-10-
+* Fixed small JavaScript bug in inventory page.
+ 

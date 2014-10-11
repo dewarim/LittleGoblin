@@ -1,4 +1,4 @@
-<%@ page import="de.dewarim.goblin.ItemLocation" %>
+<%@ page import="de.dewarim.goblin.pc.PlayerCharacter; de.dewarim.goblin.ItemLocation" %>
 <!-- inventory: -->
 <script type="text/javascript">
     if (document.getElementById('pc_gold')) {
@@ -89,13 +89,11 @@
                             <span class="slotItem">
                                 <g:if test="${slot.item}">
 
-                                    <g:set var="resetText" value="setTextOfElement('eq_${slot.item.id}', '---')"/>
                                     <span id="eq_${slot.item.id}">
                                         <g:message code="${slot.item.type.name}"/>
                                         <g:if test="${shop}">
                                             <g:remoteLink action="unequipItem" controller="item"
                                                           update="[success:'inventory', failure:'message']"
-                                                          onComplete="${resetText}"
                                                           params="[item:slot.item.id, pc:pc.id, shopId:shop?.id]">
                                                 [<g:message code="equip.remove"/>]
                                             </g:remoteLink>
@@ -103,7 +101,6 @@
                                         <g:else>
                                             <g:remoteLink action="unequipItem" controller="item"
                                                           update="[success:'inventory', failure:'message']"
-                                                          onComplete="${resetText}"
                                                           params="[item:slot.item.id, pc:pc.id]">
                                                 [<g:message code="equip.remove"/>]
                                             </g:remoteLink>
