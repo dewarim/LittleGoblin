@@ -1,6 +1,7 @@
 package de.dewarim.goblin.landing
 
 import de.dewarim.goblin.RegistrationCheckResult
+import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.HighScore
@@ -24,8 +25,13 @@ class PortalController extends BaseController {
 
     def landing() {
 
-        return [
-                highscore: HighScore.list(max: 5, sort: 'xp', order: 'desc')
+        def config = SpringSecurityUtils.securityConfig
+
+        String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
+
+        return [postUrl            : postUrl,
+                rememberMeParameter: config.rememberMe.parameter,
+                highscore          : HighScore.list(max: 5, sort: 'xp', order: 'desc')
         ]
     }
 
@@ -94,7 +100,7 @@ class PortalController extends BaseController {
 
             def msgBody = groovyPageRenderer.render(template: '/portal/confirmMail',
                     model: [appName : mailConfig.appName, confirmationLink: link,
-                            teamName: regards, sysAdmin: sysAdmin, email:email])
+                            teamName: regards, sysAdmin: sysAdmin, email: email])
             def mailResult = myMailService.sendMail(theSender, [newAccount.email], message(code: 'registration.subject'), msgBody)
 
             if (mailResult.isOkay()) {

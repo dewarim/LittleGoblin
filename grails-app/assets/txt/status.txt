@@ -480,5 +480,5 @@ Version 0.4.8 "" / 2014-10-
 * Fixed ugly exception messages in development mode when using "grails stop-all"
 * Added unit test for Academy.
 * Start page after login does no longer show empty character table if no chars exist yet.
- 
+* Added login form from auth page to landing page.
  

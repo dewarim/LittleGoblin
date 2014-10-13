@@ -3,7 +3,8 @@
 <head>
 
     <meta name="layout" content="main"/>
-   	
+    <asset:stylesheet src="login.css"/>
+    
     <title><g:message code="portal.landing.title"/></title>
     <g:if test="${grailsApplication.config.facebook.enabled}">
         <script type="text/javascript">(function(d, s, id) {
@@ -48,7 +49,7 @@
         </noscript>
 
         <div class="landing_login">
-            <h2><g:message code="landing.login.title"/></h2>
+            %{--<h2><g:message code="landing.login.title"/></h2>--}%
             <sec:ifLoggedIn>
                 <g:message code="logged.in.as"/>:
                 <sec:loggedInUserInfo field="username"/>
@@ -59,14 +60,16 @@
                 </g:link>
             </sec:ifLoggedIn>
             <sec:ifNotLoggedIn>
-                <g:message code="landing.login.text"/><br/>
-                <g:link action="start" controller="portal"><g:message code="link.to.login"/></g:link>
+                <g:render template="/shared/login" model="[postUrl:postUrl]"/>
+                <!-- <g:link action="start" controller="portal"><g:message code="link.to.login"/></g:link>
                 <br>
                 <br>
-                <g:link action="register" controller="portal"><g:message code="link.to.registration"/></g:link>
                 <g:if test="${grailsApplication.config.facebook?.enableFacebookLogin}">
                     <div class="fb-login-button" data-show-faces="false" data-width="200" data-max-rows="1"></div>
                 </g:if>
+                -->
+                
+
             </sec:ifNotLoggedIn>
 
         </div>
