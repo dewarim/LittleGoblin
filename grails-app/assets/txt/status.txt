@@ -478,4 +478,7 @@ Version 0.4.7 "RegisterMe" / 2014-10-10
 Version 0.4.8 "" / 2014-10-
 * Fixed small JavaScript bug in inventory page.
 * Fixed ugly exception messages in development mode when using "grails stop-all"
+* Added unit test for Academy.
+* Start page after login does no longer show empty character table if no chars exist yet.
+ 
  
