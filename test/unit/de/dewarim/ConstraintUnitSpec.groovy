@@ -1,5 +1,6 @@
 package de.dewarim
 
+import org.springframework.validation.FieldError
 import spock.lang.Specification
 
 /**
@@ -11,8 +12,10 @@ class ConstraintUnitSpec extends Specification{
         def validated = obj.validate()
         if (error && error != 'valid') {
             assert !validated
-            assert obj.errors[field]
-            assert error == obj.errors[field]
+            assert obj.errors.hasFieldErrors(field)
+            obj.errors.getFieldErrors(field).each{FieldError fieldError ->
+                fieldError.codes.contains(error)
+            }
         } else {
             assert !obj.errors[field]
         }

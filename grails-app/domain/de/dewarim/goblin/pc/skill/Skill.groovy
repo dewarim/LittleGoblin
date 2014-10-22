@@ -1,18 +1,22 @@
 package de.dewarim.goblin.pc.skill
 
+import de.dewarim.goblin.ISkillScript
 import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.pc.crafting.SkillRequirement
 
 /**
  *
  */
-class Skill {
+abstract class Skill {
 
-    static hasMany = [creatureSkills:CreatureSkill, skillRequirements:SkillRequirement] // TODO: is this reverse mapping required?
+    static hasMany = [creatureSkills: CreatureSkill, skillRequirements: SkillRequirement]
+    // TODO: is this reverse mapping required?
     static constraints = {
-        script nullable:true
-        initParams size:1..4096
-        name unique: true
+        script nullable: true, validator: {
+            return it == null || (it in ISkillScript)
+        }
+        initParams size: 12..4096
+        name unique: true, blank: false
     }
 
     Class script
@@ -21,7 +25,7 @@ class Skill {
     Integer startLevel = 1
     String initParams = "<initParams />"
 
-    void initSkill(PlayerCharacter pc){
+    void initSkill(PlayerCharacter pc) {
         // do nothing
     }
 
