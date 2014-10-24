@@ -3,6 +3,7 @@ package de.dewarim.goblin.pc.skill
 import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.pc.crafting.PlayerProduct
 import de.dewarim.goblin.pc.crafting.Product
+import de.dewarim.goblin.pc.crafting.SkillRequirement
 
 /**
  *
@@ -27,13 +28,13 @@ class ProductionSkill extends Skill{
 
         // if the player now has all required skills, add this product to his portfolio
         products.each{ product ->
-            def unknownSkill = product.requiredSkills.find{ requirement ->
+            SkillRequirement unknownSkill = product.requiredSkills.find{ requirement ->
                 // find a skill which the player does not yet know:
                 ! pc.creatureSkills.find{it.skill.equals(requirement.skill)}
             }
 
             if(unknownSkill){
-                log.debug("Player still lacks a required skill for ${product.name}")
+                log.debug("Player still lacks the required skill ${unknownSkill.skill.name} for ${product.name}")
             }
             else{
                 def playerProduct = new PlayerProduct(pc:pc, product:product)
