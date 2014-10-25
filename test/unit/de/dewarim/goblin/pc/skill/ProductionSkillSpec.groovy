@@ -24,16 +24,12 @@ class ProductionSkillSpec extends ConstraintUnitSpec {
     
     void "initSkillTest"(){
         given:
-        def user = new UserAccount(username: "Bob's Uncle")
-        def pc = new PlayerCharacter(name:"Bob", user:user)
+        def pc = playerCharacter
         pc.save()
-        def product = new Product(name: "acme", 
-                category: new ProductCategory(name: "everything"),
-                timeNeeded: 1
-        )
+        def product = product
         product.save()
-        def skill = new ProductionSkill(name: 'acme.maker.skill')
-        def skillRequirement = new SkillRequirement(skill:skill, product: product)
+        def skill = productionSkill
+        def skillRequirement = defaultSkillRequirement
         skill.addToSkillRequirements(skillRequirement)
         product.addToRequiredSkills(skillRequirement)
         pc.addToCreatureSkills(new CreatureSkill(owner: pc, skill:skill))
