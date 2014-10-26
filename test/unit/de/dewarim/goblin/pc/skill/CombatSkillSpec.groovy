@@ -40,8 +40,8 @@ class CombatSkillSpec extends ConstraintUnitSpec {
         'nullable'          | 'name'       | ' ' // dataBinder turns blank String to null.
         'unique'            | 'name'       | 'someSkill'
         'nullable'          | 'initParams' | null
-        'toobig'            | 'initParams' | getDummyString(5000) // too large
-        'toosmall'          | 'initParams' | getDummyString(10) // too small
+        'size.toobig'       | 'initParams' | getDummyString(5000) // too large
+        'size.toosmall'     | 'initParams' | getDummyString(10) // too small
         'nullable'          | 'startLevel' | null
         'validator.invalid' | 'script'     | String.class
         'valid'             | 'script'     | DummySkillScript.class
