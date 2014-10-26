@@ -29,9 +29,7 @@ class ProductionSkillSpec extends ConstraintUnitSpec {
         def product = product
         product.save()
         def skill = productionSkill
-        def skillRequirement = defaultSkillRequirement
-        skill.addToSkillRequirements(skillRequirement)
-        product.addToRequiredSkills(skillRequirement)
+        def skillRequirement = getSkillRequirement(skill, product)
         pc.addToCreatureSkills(new CreatureSkill(owner: pc, skill:skill))
         skillRequirement.save()
         
