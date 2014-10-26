@@ -21,15 +21,15 @@ class ProductionService implements ITickListener{
      * current resources.
      */
     Integer computeMaxProduction(Product product, PlayerCharacter pc){
-        Integer minimum = Product.MAX_ITEMS_PER_RUN
+        Integer maxProduction = Product.MAX_ITEMS_PER_RUN
         product.fetchInputItems().each{component ->
             def type = component.itemType
             def maxOfThisType = pc.calculateSumOfItems(type)
-            if(minimum > maxOfThisType){
-                minimum = maxOfThisType
+            if(maxProduction > maxOfThisType){
+                maxProduction = maxOfThisType
             }
         }
-        return minimum
+        return maxProduction
     }
 
     /**
