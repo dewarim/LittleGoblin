@@ -17,6 +17,9 @@ class Product {
     static belongsTo = [category:ProductCategory]
     static constraints = {
         name unique:true
+        timeNeeded validator:{
+            return it >= 0
+        }
 //        productionScript nullable:true
     }
 
