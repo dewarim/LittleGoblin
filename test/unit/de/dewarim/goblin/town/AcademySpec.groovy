@@ -60,12 +60,14 @@ class AcademySpec extends ConstraintUnitSpec {
 
     void "create duplicate Academy"() {
         when:
+        // note: the constraint is (name,town), otherwise we could test this
+        // in the 'test constraints' method via 'unique'
         def academy = new Academy(name: name, description: '-', town: town)
         academy.validate()
 
         then:
-        academy.errors['name'] == 'unique'     
-            
+        academy.errors['name'] == 'unique'
+
         where:
         name = 'akka'
 
