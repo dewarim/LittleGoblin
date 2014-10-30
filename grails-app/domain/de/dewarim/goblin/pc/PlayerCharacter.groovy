@@ -113,7 +113,7 @@ class PlayerCharacter extends Creature {
      * @return the sum of all items of this type the player character owns
      */
     Integer calculateSumOfItems(ItemType type) {
-        def items = Item.findAll("from Item i where i.owner=:owner and i.type=:type", [owner: this, type: type])
+        def items = Item.findAllByOwnerAndType(this, type)
         Integer total = 0
         items.each {total = total + it.amount}
         return total

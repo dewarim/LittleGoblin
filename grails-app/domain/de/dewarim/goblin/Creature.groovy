@@ -274,7 +274,7 @@ class Creature {
     }
 
     List getItems(){
-        return Item.findAll("from Item as i where i.owner=:creature", [creature:this])
+        return Item.findAllByOwner(this)
     }
 
     boolean equals(o) {
