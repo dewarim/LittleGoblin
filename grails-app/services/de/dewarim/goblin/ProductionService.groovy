@@ -24,7 +24,7 @@ class ProductionService implements ITickListener{
         Integer maxProduction = Product.MAX_ITEMS_PER_RUN
         product.fetchInputItems().each{component ->
             def type = component.itemType
-            def maxOfThisType = pc.calculateSumOfItems(type)
+            def maxOfThisType = pc.calculateSumOfItems(type) / component.amount
             if(maxProduction > maxOfThisType){
                 maxProduction = maxOfThisType
             }
