@@ -21,15 +21,13 @@ class ProductionService implements ITickListener{
      * current resources.
      */
     Integer computeMaxProduction(Product product, PlayerCharacter pc){
-        Integer maxProduction = Product.MAX_ITEMS_PER_RUN
+        Integer maxProduction = 0
         product.fetchInputItems().each{component ->
             def type = component.itemType
-            def maxOfThisType = pc.calculateSumOfItems(type) / component.amount
-            if(maxProduction > maxOfThisType){
-                maxProduction = maxOfThisType
-            }
+            def sumOfType = pc.calculateSumOfItems(type)
+            maxProduction=  sumOfType / component.amount
         }
-        return maxProduction
+        return maxProduction > Product.MAX_ITEMS_PER_RUN ? Product.MAX_ITEMS_PER_RUN : maxProduction
     }
 
     /**
@@ -42,10 +40,8 @@ class ProductionService implements ITickListener{
      */
     Map fetchItemMap(Product product, PlayerCharacter pc){
         Map<Component, List<Item>> itemMap = [:]
-        log.debug("inputItems: ${product.fetchInputItems()?.size()}")
         product.fetchInputItems().each{component->
-            def myItems = Item.findAll("from Item i where i.owner=:owner and i.type=:type", [owner:pc, type:component.itemType])
-            log.debug("myItems: ${myItems?.dump()}")
+            def myItems = Item.findAllWhere(owner: pc, type: component.itemType)
             myItems.each{item ->
                 if(itemMap.get(component)){
                     itemMap.get(component).add(item)
