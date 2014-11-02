@@ -66,4 +66,15 @@ class Product {
         }
         delete()
     }
+
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", timeNeeded=" + timeNeeded +
+                ", category=" + category.name +
+                '}';
+    }
 }

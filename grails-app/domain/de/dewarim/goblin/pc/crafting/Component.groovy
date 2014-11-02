@@ -36,4 +36,16 @@ class Component {
         result = 31 * result + (product != null ? product.hashCode() : 0)
         return result
     }
+
+
+    @Override
+    public String toString() {
+        return "Component{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", itemType=" + itemType.name +
+                ", type=" + type +
+                ", product=" + product.name +
+                '}';
+    }
 }
