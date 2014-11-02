@@ -7,7 +7,8 @@ import de.dewarim.goblin.item.Item
  */
 class ProductionResource {
 
-    static belongsTo = [job:ProductionJob, item:Item]
+    static belongsTo = [item:Item]
+    ProductionJob job
     Integer amount = 1
 
     boolean equals(o) {

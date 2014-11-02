@@ -8,9 +8,7 @@ import de.dewarim.goblin.pc.skill.QueueElement
  */
 class ProductionJob extends QueueElement {
 
-    static belongsTo = [pc:PlayerCharacter, product:Product]
-    static hasMany = [resources:ProductionResource]
-
+    static belongsTo = [pc: PlayerCharacter, product: Product]
     Integer amount = 1
 
     /**
@@ -21,14 +19,13 @@ class ProductionJob extends QueueElement {
      */
     Integer ttl = 3
 
-
     /**
      * Check if the ttl (time to live) of this ProductionJob is still positive. A PJ whose
      * ttl is 0 or less has to be deleted because the player seems to be unable to come up
      * with the required resources.
      * @return
      */
-    Boolean alive(){
+    Boolean alive() {
         return ttl > 0
     }
 
@@ -37,16 +34,18 @@ class ProductionJob extends QueueElement {
      * This method will be used if the player (for some reason) has not enough resources
      * to create the product.
      */
-    void postpone(){
+    void postpone() {
         finished = new Date(finished.time + 3600 * 1000)
     }
 
-
+    List<ProductionResource> getResources() {
+        return ProductionResource.findAllWhere(job: this)
+    }
 
     /**
      * If a job contains the order to create multiple products
      */
-    void continueJob(){
+    void continueJob() {
         finished = new Date(finished.time + product.timeNeeded)
     }
 
