@@ -24,23 +24,23 @@ import de.dewarim.goblin.town.Town
 class PlayerCharacter extends Creature {
 
     static hasMany = [
-            reputations: Reputation,
-            pcMessages: PlayerMessage,
-            mailBoxes: MailBox,
-            productionJobs: ProductionJob,
-            guildMemberships: GuildMember,
-            academyLevels: AcademyLevel,
+            reputations          : Reputation,
+            pcMessages           : PlayerMessage,
+            mailBoxes            : MailBox,
+            productionJobs       : ProductionJob,
+            guildMemberships     : GuildMember,
+            academyLevels        : AcademyLevel,
             learningQueueElements: LearningQueueElement,
-            playerProducts: PlayerProduct
+            playerProducts       : PlayerProduct
     ]
 
     static mapping = {
     }
 
-    static belongsTo = [user: UserAccount,
-            town: Town,
-            currentCombat: Combat,
-            currentQuest: Quest,
+    static belongsTo = [user         : UserAccount,
+                        town         : Town,
+                        currentCombat: Combat,
+                        currentQuest : Quest,
     ]
 
     static constraints = {
@@ -58,7 +58,7 @@ class PlayerCharacter extends Creature {
     Integer victories = 0
     Long questLevel = 0
     Long level = 1
-    
+
     GoblinOrder goblinOrder
     Melee currentMelee
 
@@ -85,7 +85,7 @@ class PlayerCharacter extends Creature {
 
     void initializeMailboxes() {
         def boxes = ['mail.inbox', 'mail.outbox', 'mail.archive']
-        boxes.each {name ->
+        boxes.each { name ->
             def type = MailBoxType.findByName(name)
             def box = new MailBox(this, type)
             box.save()
@@ -113,9 +113,9 @@ class PlayerCharacter extends Creature {
      * @return the sum of all items of this type the player character owns
      */
     Integer calculateSumOfItems(ItemType type) {
-        def items = Item.findAllByOwnerAndType(this, type)
+        def items = Item.findAllWhere(owner: this, type: type)
         Integer total = 0
-        items.each {total = total + it.amount}
+        items.each { total = total + it.amount }
         return total
     }
 
@@ -125,12 +125,12 @@ class PlayerCharacter extends Creature {
      */
     void initializeEquipmentSlots() {
         // TODO: change from hard coded to soft coded and make them applicable for generic creatures, too.
-        def names = [head: 'slot.head', neck: 'slot.neck', body: 'slot.body',
-                'left.hand': 'slot.hand', 'left.ringfinger': 'slot.finger',
-                'right.hand': 'slot.hand', 'right.ringfinger': 'slot.finger',
-                'legs': 'slot.legs', feet: 'slot.feet']
+        def names = [head        : 'slot.head', neck: 'slot.neck', body: 'slot.body',
+                     'left.hand' : 'slot.hand', 'left.ringfinger': 'slot.finger',
+                     'right.hand': 'slot.hand', 'right.ringfinger': 'slot.finger',
+                     'legs'      : 'slot.legs', feet: 'slot.feet']
         Integer rank = 1
-        names.each {key, value ->
+        names.each { key, value ->
             EquipmentSlotType est = EquipmentSlotType.findByName(value)
             EquipmentSlot slot = new EquipmentSlot(name: key, type: est, rank: rank++, creature: this)
             est.addToEquipmentSlots slot
@@ -140,15 +140,15 @@ class PlayerCharacter extends Creature {
     }
 
     MailBox fetchInbox() {
-        return mailBoxes.find {it.boxType.name.equals('mail.inbox')}
+        return mailBoxes.find { it.boxType.name.equals('mail.inbox') }
     }
 
     MailBox fetchOutBox() {
-        return mailBoxes.find {it.boxType.name.equals('mail.outbox')}
+        return mailBoxes.find { it.boxType.name.equals('mail.outbox') }
     }
 
     MailBox fetchArchiveBox() {
-        return mailBoxes.find {it.boxType.name.equals('mail.archive')}
+        return mailBoxes.find { it.boxType.name.equals('mail.archive') }
     }
 
 
@@ -178,5 +178,25 @@ class PlayerCharacter extends Creature {
 
     List<Quest> fetchOpenQuests() {
         return Quest.findAll("from Quest q where q.playerCharacter=:pc and q.finished=false", [pc: this])
+    }
+
+
+    @Override
+    public String toString() {
+        return "PlayerCharacter{" +
+                "id=" + id +
+                ", name=" + name +
+                ", xp=" + xp +
+                ", spentExperience=" + spentExperience +
+                ", alive=" + alive +
+                ", deaths=" + deaths +
+                ", victories=" + victories +
+                ", questLevel=" + questLevel +
+                ", level=" + level +
+                ", goblinOrder=" + goblinOrder?.name +
+                ", currentMelee=" + currentMelee +
+                ", user=" + user.username +
+                ", town=" + town?.name +
+                '}';
     }
 }
