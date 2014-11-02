@@ -16,7 +16,7 @@ import spock.lang.Specification
  * Unit test for ProductionService.
  */
 @TestFor(ProductionService)
-@Mock([PlayerCharacter, Item, ItemType, Component, Product, UserAccount, ProductCategory])
+@Mock([PlayerCharacter, Item, ItemType, Component, Product, UserAccount, ProductCategory, ProductionJob, ProductionResource])
 class ProductionServiceSpec extends Specification {
 
     def productionService = new ProductionService()
@@ -47,19 +47,11 @@ class ProductionServiceSpec extends Specification {
     }
 
     void "test calculation of maximum products"() {
-        /*
-         * No need to save all objects, as many are saved by cascade.
-         * If you write more complex tests, it may be necessary to save more @Shared
-         * fields before using GORM methods on them.
-         */
         given:
         prodInputType.save()
         inputItems.amount = 10
-        inputItems.save(failOnError: true)
-        prodCat.save()
-        crownProduct.save(failOnError: true)
-        inputComponent.save(failOnError: true)
-
+        saveDomainObjects()
+        
         when:
         def allItems = Item.findAll()
         def items = playerCharacter.items
@@ -75,10 +67,8 @@ class ProductionServiceSpec extends Specification {
         given:
         playerCharacter.save()
         inputItems.amount = 10
-        inputItems.save()
-        crownProduct.save()
-        inputComponent.save()
-
+        saveDomainObjects()
+        
         when:
         def itemMap = productionService.fetchItemMap(crownProduct, playerCharacter)
 
@@ -88,5 +78,97 @@ class ProductionServiceSpec extends Specification {
         itemMap.get(inputComponent).contains(inputItems)
         itemMap.get(inputComponent).size() == 1
     }
+    
+    void "extract item list from params"(){
+        given:
+        inputItems.amount = 10
+        saveDomainObjects()
+        def params = ["item_${inputItems.id}":'5', "item_0":'100', "items_-1":'-1']
+        
+        when:
+        def items = productionService.extractItemListFromParams(params)
 
+        then:
+        items.size() == 1
+        items.contains(inputItems)
+    }
+    
+    void "fetch itemCountMap from params"(){
+        given:
+        inputItems.amount = 10
+        saveDomainObjects()
+        def params = ["item_${inputItems.id}":'5', "item_0":'100', "items_-1":'-1']
+        
+        when:
+        def itemTypeToAmountMap = productionService.fetchItemCountMapFromParams(params)
+        
+        then:
+        itemTypeToAmountMap.size() == 1
+        itemTypeToAmountMap.get(prodInputType) == 5 // returns selected amount, not actual
+    }
+    
+    void "enough resources selected"(){
+        given:
+        inputItems.amount = 10
+        saveDomainObjects()
+        def validSelection =  ["item_${inputItems.id}":'5']
+        def invalidSelection = ["item_${inputItems.id}":'1']
+        
+        when:
+        def hasEnough = productionService.enoughResourcesSelected(crownProduct, playerCharacter, validSelection)
+        def notEnough = productionService.enoughResourcesSelected(crownProduct, playerCharacter, invalidSelection)
+        
+        then:
+        hasEnough
+        ! notEnough
+    }
+    
+    void "create new production job"(){
+        given:
+        inputItems.amount = 10
+
+        saveDomainObjects()
+        def enough =  ["item_${inputItems.id}":'5']
+        def missing =  ["item_${inputItems.id}":'1']
+        
+        when:
+        def valid = productionService.createNewProductionJob(crownProduct, playerCharacter, enough)
+        def invalid = productionService.createNewProductionJob(crownProduct, playerCharacter, missing)
+        
+        then:
+        valid.result.isPresent()
+        !invalid.result.present
+        invalid.errors.find{it.equals('production.missing.resources')}
+    }
+    
+     void "detect new production job with stolen items"(){
+        given:
+        inputItems.amount = 10
+        def thief = new PlayerCharacter(name: "Crafter-2", user: user)
+        inputItems.owner = thief
+
+        saveDomainObjects()
+        def enough =  ["item_${inputItems.id}":'5']
+        def missing =  ["item_${inputItems.id}":'1']
+        
+        when:
+        def validButStolen = productionService.createNewProductionJob(crownProduct, playerCharacter, enough)
+        def invalidAndStolen = productionService.createNewProductionJob(crownProduct, playerCharacter, missing)
+        
+        then:
+        !validButStolen.result.present
+        !invalidAndStolen.result.present
+        
+        invalidAndStolen.errors.find{it.equals('production.missing.resources')}
+        validButStolen.errors.find{it.equals('production.foreign.item')}
+    }
+    
+    void saveDomainObjects(){
+        playerCharacter.save()
+        prodInputType.save()
+        inputItems.save()
+        prodCat.save()
+        crownProduct.save()
+        inputComponent.save()
+    }
 }
