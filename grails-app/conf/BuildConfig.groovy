@@ -24,8 +24,6 @@ grails.project.dependency.resolution = {
         runtime 'postgresql:postgresql:9.1-901.jdbc4', {
             export = false
         }
-//        compile 'javax.mail:javax.mail-api:1.5.2'
-//        compile 'javax.activation:activation:1.1.1'
         compile("org.codehaus.groovy.modules.http-builder:http-builder:0.7.1") {
             excludes "groovy"
         }
@@ -33,6 +31,7 @@ grails.project.dependency.resolution = {
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0", {
             export = false
         }
+        compile "com.google.guava:guava:18.0"
     }
 
     plugins {
