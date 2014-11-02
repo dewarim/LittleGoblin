@@ -115,7 +115,11 @@ class ProductionController extends BaseController{
             // check if the player has selected enough resources.
             if( productionService.enoughResourcesSelected(product, pc, params) ){
                 try{
-                    productionService.createNewProductionJob(product, pc, params)
+                    def optionalResultJob = productionService.createNewProductionJob(product, pc, params)
+                    if(optionalResultJob.hasErrors()){
+                        // TODO: replace with proper error handling and rendering.
+                        throw new RuntimeException(optionalResultJob.errors.join(""))
+                    }
                     def itemMap = productionService.fetchItemMap(product, pc)
                     def selectedItems = productionService.fetchItemCountMapFromParams(params)
                     def msg = message(code:'productionJob.created', args:[message(code:product.name)])
