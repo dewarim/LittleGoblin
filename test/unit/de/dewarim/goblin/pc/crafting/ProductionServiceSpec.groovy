@@ -1,52 +1,92 @@
 package de.dewarim.goblin.pc.crafting
 
-import de.dewarim.ConstraintUnitSpec
 import de.dewarim.goblin.ComponentType
 import de.dewarim.goblin.ProductionService
+import de.dewarim.goblin.UserAccount
 import de.dewarim.goblin.item.Item
 import de.dewarim.goblin.item.ItemService
 import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.pc.PlayerCharacter
 import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
+import spock.lang.Shared
+import spock.lang.Specification
 
 /**
  * Unit test for ProductionService.
  */
 @TestFor(ProductionService)
-@Mock([Component, Item, ItemType, Product, PlayerCharacter])
-class ProductionServiceSpec extends ConstraintUnitSpec {
+@Mock([PlayerCharacter, Item, ItemType, Component, Product, UserAccount, ProductCategory])
+class ProductionServiceSpec extends Specification {
 
     def productionService = new ProductionService()
     def itemService = new ItemService()
-    def pc = playerCharacter
-    def prodInput = getItemType("gold nugget")
-    def prodToolType = getItemType("hammer")
-    def prodOutput = getItemType("golden crown")
+
+    @Shared
+    def user = new UserAccount(username: "crafty", passwd: 'foodFood', userRealName: 'none')
+    @Shared
+    def playerCharacter = new PlayerCharacter(name: "Crafter-1", user: user)
+    @Shared
+    def prodInputType = new ItemType(name: "gold nugget")
+
+    @Shared
+    def inputItems = new Item(prodInputType, playerCharacter)
+
+    @Shared
+    def prodCat = new ProductCategory(name: "head.wear")
+
+    @Shared
+    def crownProduct = new Product(name: "Crown Product", timeNeeded: 1, category: prodCat)
+
+    @Shared
+    def inputComponent = new Component(type: ComponentType.INPUT, itemType: prodInputType,
+            product: crownProduct, amount: 2)
 
     void setup() {
         productionService.itemService = itemService
     }
 
     void "test calculation of maximum products"() {
-        def inputItems = new Item(prodInput, pc)
+        /*
+         * No need to save all objects, as many are saved by cascade.
+         * If you write more complex tests, it may be necessary to save more @Shared
+         * fields before using GORM methods on them.
+         */
+        given:
+        prodInputType.save()
         inputItems.amount = 10
-        inputItems.save()
-        def prodTool = new Item(prodToolType, pc)
-        prodTool.save()
-        def crownProduct = new Product(name: "Crown Product")
-        def inputComponent = new Component(type: ComponentType.INPUT, itemType: prodInput,
-                product: crownProduct, amount: 2)
-        inputComponent.save()
-        def toolComponent = new Component(type: ComponentType.TOOL, itemType: prodToolType,
-                product: crownProduct, amount: 1)
-        toolComponent.save()
-        
+        inputItems.save(failOnError: true)
+        prodCat.save()
+        crownProduct.save(failOnError: true)
+        inputComponent.save(failOnError: true)
+
         when:
-        def maxProduction = productionService.computeMaxProduction(crownProduct, pc)
+        def allItems = Item.findAll()
+        def items = playerCharacter.items
+        def maxProduction = productionService.computeMaxProduction(crownProduct, playerCharacter)
 
         then:
+        allItems.size() == 1
+        items.size() == 1
         maxProduction == 5
+    }
+
+    void "test fetch ItemMap"() {
+        given:
+        playerCharacter.save()
+        inputItems.amount = 10
+        inputItems.save()
+        crownProduct.save()
+        inputComponent.save()
+
+        when:
+        def itemMap = productionService.fetchItemMap(crownProduct, playerCharacter)
+
+        then:
+        itemMap != null
+        itemMap.size() == 1
+        itemMap.get(inputComponent).contains(inputItems)
+        itemMap.get(inputComponent).size() == 1
     }
 
 }
