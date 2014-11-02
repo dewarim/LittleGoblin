@@ -7,7 +7,7 @@ import de.dewarim.goblin.item.Item
 import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.pc.skill.CreatureSkill
 
-class Creature {
+abstract class Creature {
 
 	static hasMany = [
             slots:EquipmentSlot,
