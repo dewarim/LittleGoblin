@@ -82,4 +82,25 @@ class ItemType implements IAsset {
     boolean isActive() {
         return active
     }
+
+
+    @Override
+    public String toString() {
+        return "ItemType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", usable=" + usable +
+                ", rechargeable=" + rechargeable +
+                ", uses=" + uses +
+                ", baseValue=" + baseValue +
+                ", availability=" + availability +
+                ", combatDice=" + combatDice +
+                ", stackable=" + stackable +
+                ", packageSize=" + packageSize +
+                ", assetVersion=" + assetVersion +
+                ", uuid='" + uuid + '\'' +
+                ", active=" + active +
+                '}';
+    }
 }
