@@ -12,7 +12,7 @@ grails.project.dependency.resolution = {
     inherits("global") {
         excludes "xercesImpl", "xmlParserAPIs", "xml-apis", 'groovy'
     }
-    log "info"
+    log "verbose"
 
     repositories {
         grailsCentral()
@@ -36,10 +36,13 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
+//        runtime ":hibernate4:4.3.6.1",{
+//            export = false
+//        }
         runtime ":hibernate:3.6.10.17", {
             export = false
         }
-        build ":tomcat:7.0.54", {
+        build ":tomcat:8.0.14.1", {
             export = false
         }
         compile ':release:3.0.1', ':rest-client-builder:1.0.3',  {
@@ -57,5 +60,8 @@ grails.project.dependency.resolution = {
         }
         compile ":fixtures:1.3"
         compile ":asset-pipeline:1.9.9"
+//        compile ":build-test-data:2.2.2",{
+//            export = false
+//        }
     }
 }
