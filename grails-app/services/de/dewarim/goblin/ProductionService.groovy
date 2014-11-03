@@ -186,9 +186,8 @@ class ProductionService implements ITickListener {
      * Todo: multiple production lines. Crossover between PLs
      * @return the number of processed production jobs.
      */
-    Integer makeProducts() {
+    Integer makeProducts(List<ProductionJob> jobs) {
         int productCount = 0
-        def jobs = ProductionJob.findAll("from ProductionJob as pj where pj.finished < now()")
         log.debug("found ${jobs.size()} production jobs")
         jobs.each { job ->
             // check if sufficient resources are available
@@ -212,6 +211,11 @@ class ProductionService implements ITickListener {
             productCount++
         }
         return productCount
+    }
+
+    Integer makeProducts() {
+        def jobs = ProductionJob.findAllWhere("from ProductionJob as pj where pj.finished < now()")
+        return makeProducts(jobs)
     }
 
     /**
