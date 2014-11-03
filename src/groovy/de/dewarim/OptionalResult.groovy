@@ -33,7 +33,6 @@ class OptionalResult<T> {
     }
 
     Optional<T> getResult(){
-        logger.debug("result: $resultObject")
         return Optional.ofNullable(resultObject)
     }
     
