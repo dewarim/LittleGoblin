@@ -28,6 +28,9 @@ class ProductionServiceSpec extends Specification {
     def playerCharacter = new PlayerCharacter(name: "Crafter-1", user: user)
     @Shared
     def prodInputType = new ItemType(name: "gold nugget")
+    
+    @Shared
+    def prodOutputType = new ItemType(name: "golden crown")
 
     @Shared
     def inputItems = new Item(prodInputType, playerCharacter)
@@ -41,6 +44,10 @@ class ProductionServiceSpec extends Specification {
     @Shared
     def inputComponent = new Component(type: ComponentType.INPUT, itemType: prodInputType,
             product: crownProduct, amount: 2)
+    
+    @Shared
+    def outputComponent = new Component(type: ComponentType.OUTPUT, itemType: prodOutputType,
+            product: crownProduct, amount: 1 )
 
     void setup() {
         productionService.itemService = itemService
@@ -65,8 +72,8 @@ class ProductionServiceSpec extends Specification {
 
     void "test fetch ItemMap"() {
         given:
-        playerCharacter.save()
         inputItems.amount = 10
+        inputItems.owner = playerCharacter
         saveDomainObjects()
         
         when:
@@ -82,6 +89,7 @@ class ProductionServiceSpec extends Specification {
     void "extract item list from params"(){
         given:
         inputItems.amount = 10
+        inputItems.owner = playerCharacter
         saveDomainObjects()
         def params = ["item_${inputItems.id}":'5', "item_0":'100', "items_-1":'-1']
         
@@ -96,6 +104,7 @@ class ProductionServiceSpec extends Specification {
     void "fetch itemCountMap from params"(){
         given:
         inputItems.amount = 10
+        inputItems.owner = playerCharacter
         saveDomainObjects()
         def params = ["item_${inputItems.id}":'5', "item_0":'100', "items_-1":'-1']
         
@@ -110,6 +119,7 @@ class ProductionServiceSpec extends Specification {
     void "enough resources selected"(){
         given:
         inputItems.amount = 10
+        inputItems.owner = playerCharacter
         saveDomainObjects()
         def validSelection =  ["item_${inputItems.id}":'5']
         def invalidSelection = ["item_${inputItems.id}":'1']
@@ -126,6 +136,7 @@ class ProductionServiceSpec extends Specification {
     void "create new production job"(){
         given:
         inputItems.amount = 10
+        inputItems.owner = playerCharacter
 
         saveDomainObjects()
         def enough =  ["item_${inputItems.id}":'5']
@@ -137,6 +148,8 @@ class ProductionServiceSpec extends Specification {
         
         then:
         valid.result.isPresent()
+        valid.result.get() != null
+        valid.result.get() != Optional.empty()
         !invalid.result.present
         invalid.errors.find{it.equals('production.missing.resources')}
     }
@@ -159,8 +172,30 @@ class ProductionServiceSpec extends Specification {
         !validButStolen.result.present
         !invalidAndStolen.result.present
         
+        
         invalidAndStolen.errors.find{it.equals('production.missing.resources')}
         validButStolen.errors.find{it.equals('production.foreign.item')}
+    }
+    
+    void "make products"(){
+        given:
+        inputItems.amount = 10
+        inputItems.owner = playerCharacter
+        saveDomainObjects()
+        def enough =  ["item_${inputItems.id}":'5']
+        
+        when:
+        def optionalJob = productionService.createNewProductionJob(crownProduct, playerCharacter, enough)
+        assert ! optionalJob.hasErrors()
+        assert optionalJob.result.isPresent()
+        def productCount = productionService.makeProducts([optionalJob.result.get()])
+        
+        then:
+        Component.findByItemType(prodOutputType)
+        productCount == 1
+        playerCharacter.items.find{
+            it.type.equals(prodOutputType) && it.type.name.equals("golden crown")
+        }
     }
     
     void saveDomainObjects(){
@@ -169,6 +204,8 @@ class ProductionServiceSpec extends Specification {
         inputItems.save()
         prodCat.save()
         crownProduct.save()
+        prodOutputType.save()
         inputComponent.save()
+        outputComponent.save()
     }
 }
