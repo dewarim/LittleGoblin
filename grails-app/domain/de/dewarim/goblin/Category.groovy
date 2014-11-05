@@ -14,7 +14,11 @@ import de.dewarim.goblin.shop.ShopCategory
 class Category{
 
     static hasMany = [itemCategories:ItemCategory, shopCategories:ShopCategory]
-
+    
+    static constraints = {
+        name unique: true, blank: false
+    }
+    
     String name
 
     boolean equals(o) {
@@ -30,5 +34,13 @@ class Category{
 
     int hashCode() {
         return (name != null ? name.hashCode() : 0)
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
