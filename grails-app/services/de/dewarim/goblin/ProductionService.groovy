@@ -214,7 +214,7 @@ class ProductionService implements ITickListener {
     }
 
     Integer makeProducts() {
-        def jobs = ProductionJob.findAllWhere("from ProductionJob as pj where pj.finished < now()")
+        def jobs = ProductionJob.findAll("from ProductionJob as pj where pj.finished < now()")
         return makeProducts(jobs)
     }
 
