@@ -99,6 +99,19 @@
 
         <div class="version_info">
             <pre>
+                Version 0.4.8 "Test Test" / 2014-11-05
+                * Fixed small JavaScript bug in inventory page.
+                * Fixed ugly exception messages in development mode when using "grails stop-all"
+                * Added unit test for Academy.
+                * Start page after login does no longer show empty character table if no chars exist yet.
+                * Added login form from auth page to landing page.
+                * Upgrade to Grails 2.4.4
+                * Upgraded Tomcat plugin
+                * Use Java 8
+                * Add more unit tests (ProductionJob, ProductionService)
+                * Fix bugs in ProductionService
+            </pre>
+            <pre>
                 Version 0.4.7 "RegisterMe" / 2014-10-10
                 * Fixed registration some more: added tests and improved stability
             </pre>
@@ -112,24 +125,7 @@
                 * Fixed broken methods in Product class #developer
                 * Added a link to academies from product list in workshop if the PC cannot craft yet.
             </pre>
-            <pre>
-                Version 0.4.5 "Keeper" / 2014-10-01
-                * Fixed Shopkeeper's description / messageId
-                * Fixed broken redirect when another character joins the Grand Melee
-                * Fixed CSS issue with missing body.class attribute value.
-            </pre>
-            <pre>
-                Version 0.4.4 "Town" / 2014-09-29
-                * Fix layout bug in town
-                * Cleaned up a little.
-            </pre>
-            <pre>
-                Version 0.4.3 "Shopping" / 2014-09-28
-                * Fixed JavaScript bug in shop page: jQuery was not being loaded.
-                * Changed all pages containing inventory to use a better template/layout. (internal improvement, less GSP code)
-                * Currently buggy: equip items, also see: https://github.com/dewarim/LittleGoblin/issues for outstanding issues.
-            </pre>
-
+   
             <div class="">
                 <a href="${assetPath(src:'txt/status.txt')}" target="_blank"><g:message code="link.to.status.old"/></a>
             </div>
