@@ -8,7 +8,13 @@ import de.dewarim.goblin.item.ItemType
  */
 class Component {
     // basically, this is a Product-ItemType- 1..n join-class.
-
+    
+    static constraints = {
+        amount validator: {
+            return it > 0
+        }
+    }
+    
     ItemType itemType
     Integer amount = 1
     ComponentType type
