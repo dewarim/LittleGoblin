@@ -2,15 +2,17 @@ package de.dewarim.goblin.pc.crafting
 
 import de.dewarim.ConstraintUnitSpec
 import grails.test.mixin.TestFor
+import spock.lang.Specification
 import spock.lang.Unroll
 
 /**
  */
 @TestFor(Product)
-class ProductSpec extends ConstraintUnitSpec {
+class ProductSpec extends Specification {
 
     void setup() {
-        def sampleProduct = product
+        def sampleProduct = new Product(name: 'Wand of Annihilation', 
+                timeNeeded: 1, category: new ProductCategory(name: 'everything'))
         sampleProduct.save()
         mockForConstraintsTests(Product, [
                 sampleProduct
@@ -24,14 +26,14 @@ class ProductSpec extends ConstraintUnitSpec {
         def product = new Product("$field": val)
 
         then:
-        validateConstraints(product, field, error)
+        ConstraintUnitSpec.validateConstraints(product, field, error)
 
         where:
         error               | field        | val
         'nullable'          | 'name'       | null
         'nullable'          | 'name'       | ' '
         'valid'             | 'name'       | 'Wand of Wonders'
-        'unique'            | 'name'       | product.name
+        'unique'            | 'name'       | 'Wand of Annihilation'
         'nullable'          | 'timeNeeded' | null
         'valid'             | 'timeNeeded' | 1
         'valid'             | 'timeNeeded' | 0
