@@ -9,7 +9,6 @@ class Item {
      * attributes: passive effects like resist fire, see invisible.
      * features: active effects for which you must use an item, like heal self.
      */
-    static hasMany = [resources: ProductionResource]
     Integer uses = 1
     Boolean equipped = false
     Integer amount = 1 // if the itemType is stackable, amount may be larger than 1
@@ -39,7 +38,11 @@ class Item {
             this.amount = amount
         }
     }
-
+    
+    List<ProductionResource> getResources(){
+        return ProductionResource.findAllWhere([item: this])
+    }
+    
     boolean equals(o) {
         if (is(o)) return true
         if (!(o instanceof Item)) return false

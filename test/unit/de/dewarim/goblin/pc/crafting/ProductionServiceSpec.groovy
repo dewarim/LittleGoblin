@@ -9,6 +9,7 @@ import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.pc.PlayerCharacter
 import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
+import grails.test.mixin.TestMixin
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -16,38 +17,24 @@ import spock.lang.Specification
  * Unit test for ProductionService.
  */
 @TestFor(ProductionService)
-@Mock([PlayerCharacter, Item, ItemType, Component, Product, UserAccount, ProductCategory, ProductionJob, ProductionResource])
+@Mock([PlayerCharacter, Item, ItemType, Component, Product, UserAccount,
+        ProductCategory, ProductionJob, ProductionResource])
 class ProductionServiceSpec extends Specification {
 
     def productionService = new ProductionService()
     def itemService = new ItemService()
 
-    @Shared
     def user = new UserAccount(username: "crafty", passwd: 'foodFood', userRealName: 'none')
-    @Shared
     def playerCharacter = new PlayerCharacter(name: "Crafter-1", user: user)
-    @Shared
     def prodInputType = new ItemType(name: "gold nugget")
-    
-    @Shared
     def prodOutputType = new ItemType(name: "golden crown")
-
-    @Shared
     def inputItems = new Item(prodInputType, playerCharacter)
-
-    @Shared
     def prodCat = new ProductCategory(name: "head.wear")
-
-    @Shared
     def crownProduct = new Product(name: "Crown Product", timeNeeded: 1, category: prodCat)
-
-    @Shared
     def inputComponent = new Component(type: ComponentType.INPUT, itemType: prodInputType,
             product: crownProduct, amount: 2)
-    
-    @Shared
     def outputComponent = new Component(type: ComponentType.OUTPUT, itemType: prodOutputType,
-            product: crownProduct, amount: 1 )
+            product: crownProduct, amount: 1)
 
     void setup() {
         productionService.itemService = itemService
@@ -58,7 +45,7 @@ class ProductionServiceSpec extends Specification {
         prodInputType.save()
         inputItems.amount = 10
         saveDomainObjects()
-        
+
         when:
         def allItems = Item.findAll()
         def items = playerCharacter.items
@@ -75,7 +62,7 @@ class ProductionServiceSpec extends Specification {
         inputItems.amount = 10
         inputItems.owner = playerCharacter
         saveDomainObjects()
-        
+
         when:
         def itemMap = productionService.fetchItemMap(crownProduct, playerCharacter)
 
@@ -85,14 +72,14 @@ class ProductionServiceSpec extends Specification {
         itemMap.get(inputComponent).contains(inputItems)
         itemMap.get(inputComponent).size() == 1
     }
-    
-    void "extract item list from params"(){
+
+    void "extract item list from params"() {
         given:
         inputItems.amount = 10
         inputItems.owner = playerCharacter
         saveDomainObjects()
-        def params = ["item_${inputItems.id}":'5', "item_0":'100', "items_-1":'-1']
-        
+        def params = ["item_${inputItems.id}": '5', "item_0": '100', "items_-1": '-1']
+
         when:
         def items = productionService.extractItemListFromParams(params)
 
@@ -100,105 +87,108 @@ class ProductionServiceSpec extends Specification {
         items.size() == 1
         items.contains(inputItems)
     }
-    
-    void "fetch itemCountMap from params"(){
+
+    void "fetch itemCountMap from params"() {
         given:
         inputItems.amount = 10
         inputItems.owner = playerCharacter
         saveDomainObjects()
-        def params = ["item_${inputItems.id}":'5', "item_0":'100', "items_-1":'-1']
-        
+        def params = ["item_${inputItems.id}": '5', "item_0": '100', "items_-1": '-1']
+
         when:
         def itemTypeToAmountMap = productionService.fetchItemCountMapFromParams(params)
-        
+
         then:
         itemTypeToAmountMap.size() == 1
         itemTypeToAmountMap.get(prodInputType) == 5 // returns selected amount, not actual
     }
-    
-    void "enough resources selected"(){
+
+    void "enough resources selected"() {
         given:
         inputItems.amount = 10
         inputItems.owner = playerCharacter
         saveDomainObjects()
-        def validSelection =  ["item_${inputItems.id}":'5']
-        def invalidSelection = ["item_${inputItems.id}":'1']
-        
+        def validSelection = ["item_${inputItems.id}": '5']
+        def invalidSelection = ["item_${inputItems.id}": '1']
+
         when:
         def hasEnough = productionService.enoughResourcesSelected(crownProduct, playerCharacter, validSelection)
         def notEnough = productionService.enoughResourcesSelected(crownProduct, playerCharacter, invalidSelection)
-        
+
         then:
         hasEnough
-        ! notEnough
+        !notEnough
     }
-    
-    void "create new production job"(){
+
+    void "create new production job"() {
         given:
         inputItems.amount = 10
         inputItems.owner = playerCharacter
 
         saveDomainObjects()
-        def enough =  ["item_${inputItems.id}":'5']
-        def missing =  ["item_${inputItems.id}":'1']
-        
+        def enough = ["item_${inputItems.id}": '5']
+        def missing = ["item_${inputItems.id}": '1']
+
         when:
         def valid = productionService.createNewProductionJob(crownProduct, playerCharacter, enough)
         def invalid = productionService.createNewProductionJob(crownProduct, playerCharacter, missing)
-        
+
         then:
         valid.result.isPresent()
         valid.result.get() != null
         valid.result.get() != Optional.empty()
         !invalid.result.present
-        invalid.errors.find{it.equals('production.missing.resources')}
+        invalid.errors.find { it.equals('production.missing.resources') }
     }
-    
-     void "detect new production job with stolen items"(){
+
+    void "detect new production job with stolen items"() {
         given:
         inputItems.amount = 10
         def thief = new PlayerCharacter(name: "Crafter-2", user: user)
         inputItems.owner = thief
 
         saveDomainObjects()
-        def enough =  ["item_${inputItems.id}":'5']
-        def missing =  ["item_${inputItems.id}":'1']
-        
+        def enough = ["item_${inputItems.id}": '5']
+        def missing = ["item_${inputItems.id}": '1']
+
         when:
         def validButStolen = productionService.createNewProductionJob(crownProduct, playerCharacter, enough)
         def invalidAndStolen = productionService.createNewProductionJob(crownProduct, playerCharacter, missing)
-        
+
         then:
         !validButStolen.result.present
         !invalidAndStolen.result.present
-        
-        
-        invalidAndStolen.errors.find{it.equals('production.missing.resources')}
-        validButStolen.errors.find{it.equals('production.foreign.item')}
+
+        invalidAndStolen.errors.find { it.equals('production.missing.resources') }
+        validButStolen.errors.find { it.equals('production.foreign.item') }
     }
-    
-    void "make products"(){
+
+    void "make products"() {
         given:
         inputItems.amount = 10
         inputItems.owner = playerCharacter
         saveDomainObjects()
-        def enough =  ["item_${inputItems.id}":'5']
         
+        def enough = ["item_${inputItems.id}": '5']
+
         when:
         def optionalJob = productionService.createNewProductionJob(crownProduct, playerCharacter, enough)
-        assert ! optionalJob.hasErrors()
-        assert optionalJob.result.isPresent()
         def productCount = productionService.makeProducts([optionalJob.result.get()])
-        
+
         then:
-        Component.findByItemType(prodOutputType)
         productCount == 1
-        playerCharacter.items.find{
+        Component.findByItemType(prodOutputType)
+        playerCharacter.items.find {
             it.type.equals(prodOutputType) && it.type.name.equals("golden crown")
         }
+        ProductionResource.count() == 0
+        Item.count() == 2
+        playerCharacter.items.find {
+            it.type.equals(prodInputType) && it.amount.equals(8)
+        }
     }
-    
-    void saveDomainObjects(){
+
+    private void saveDomainObjects() {
         playerCharacter.save()
         prodInputType.save()
         inputItems.save()

@@ -6,8 +6,8 @@ import de.dewarim.goblin.item.Item
  * Mapping between a ProductionJob and an item that a player has selected as an input resource.
  */
 class ProductionResource {
-
-    static belongsTo = [item:Item]
+    
+    Item item
     ProductionJob job
     Integer amount = 1
 
@@ -30,5 +30,16 @@ class ProductionResource {
         result = 31 * result + (item != null ? item.hashCode() : 0)
         result = 31 * result + (job != null ? job.hashCode() : 0)
         return result
+    }
+
+
+    @Override
+    public String toString() {
+        return "ProductionResource{" +
+                "id=" + id +
+                ", job=" + job +
+                ", amount=" + amount +
+                ", item=" + item?.type?.name +
+                '}';
     }
 }

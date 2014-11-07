@@ -14,6 +14,7 @@ import de.dewarim.goblin.ticks.ITickListener
 
 class ProductionService implements ITickListener {
 
+    static transactional = true
     def itemService
 
     /**
@@ -92,7 +93,7 @@ class ProductionService implements ITickListener {
      * @return a map of itemType::amount
      */
     Map fetchItemCountMapFromParams(params) {
-        def itemTypeMap = [:]   
+        def itemTypeMap = [:]
         def itemList = extractItemListFromParams(params)
         itemList.each { item ->
             def amount = Ints.tryParse(params.get("item_${item.id}"))
@@ -248,19 +249,19 @@ class ProductionService implements ITickListener {
         log.debug("job needs ${resources?.size()} resources.")
         resources.each { resource ->
             Item item = resource.item
-            PlayerCharacter pc = job.pc
-            item.amount -= resource.amount
-            item.removeFromResources resource
-            resource.delete(flush: true)
-
-//            if(item.amount <= 0){
-//                // TODO: there may be a race condition here, so we use <= instead of ==
-//                // (perhaps run this inside a transaction?)
-//                // delete item:
-//                item.type.removeFromItems item
-//                pc.removeFromItems item
-//                item.delete()
-//            }
+            Component inputComponent = Component.findWhere([itemType: resource.item.type, product: job.product])
+            Integer cost = inputComponent.amount
+            log.debug("spending $cost of ${item.type.name}")
+            item.amount -= cost
+            if (job.amount <= 1) {
+                // no more items to produce
+                resource.delete()
+            }
+            log.debug("remaining: ${item.amount}")
+            if (item.amount <= 0) {
+                log.debug("delete spent item")
+                item.delete()
+            }
         }
     }
 
@@ -273,19 +274,21 @@ class ProductionService implements ITickListener {
     void createProduct(ProductionJob job) {
         Product product = job.product
         product.fetchOutputItems().each { component ->
-            ItemType type = component.itemType
+            ItemType outputType = component.itemType
             def pc = job.pc
             // check if player already has one of this item:
-            Item existingItem = pc.items.find { it.type == type }
-            if (type.stackable && existingItem) {
+            Item existingItem = pc.items.find { item ->
+                item.type == outputType
+            }
+            if (outputType.stackable && existingItem) {
                 existingItem.amount++
             }
             else {
                 // TODO: find newest asset version of item.
-                Item item = new Item(type: type, owner: job.pc, amount: component.amount)
-//                pc.addToItems(item)
-                item.save()
+                Item item = new Item(type: outputType, owner: job.pc, amount: component.amount)
+                item.save(flush: true)
             }
+
         }
         job.amount--
         if (job.amount == 0) {
