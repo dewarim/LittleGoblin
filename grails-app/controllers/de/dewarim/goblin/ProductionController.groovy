@@ -163,7 +163,7 @@ class ProductionController extends BaseController{
         def job = ProductionJob.get(params.job)
         if(job){
             if(job.pc.equals(pc)){
-                productionService.terminateJob job
+                job.deleteFully()
                 flash.message = message(code:'production.job.canceled')
                 if(pc.productionJobs.size() > 0){
                     redirect(action:'listProductionJobs', controller:'production')

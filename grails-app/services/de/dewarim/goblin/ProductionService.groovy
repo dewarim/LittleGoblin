@@ -206,7 +206,7 @@ class ProductionService implements ITickListener {
                     job.postpone()
                 }
                 else {
-                    terminateJob(job)
+                    job.deleteFully()
                 }
             }
             productCount++
@@ -294,21 +294,13 @@ class ProductionService implements ITickListener {
         }
         job.amount--
         if (job.amount == 0) {
-            terminateJob(job)
+            log.debug("Terminate job: $job")
+            job.deleteFully()
         }
         else {
+            log.debug("Continue job: $job")
             job.continueJob()
         }
-    }
-
-    /**
-     * Terminate a ProductionJob, either because the product is finished or because the
-     * player character has not been able to create this item.
-     * @param job the ProductionJob that will be deleted.
-     */
-    void terminateJob(ProductionJob job) {
-        job.pc.removeFromProductionJobs job
-        job.delete()
     }
 
     void tock() {

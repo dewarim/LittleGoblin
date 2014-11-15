@@ -8,9 +8,10 @@ import de.dewarim.goblin.pc.skill.QueueElement
  */
 class ProductionJob extends QueueElement {
 
-    static belongsTo = [pc: PlayerCharacter, product: Product]
     Integer amount = 1
-
+    PlayerCharacter pc
+    Product product
+    
     /**
      * Time to live - the PJ is examined several times until all components are
      * available or until the ttl is down to 0. With each check, the ttl is reduced
@@ -70,5 +71,10 @@ class ProductionJob extends QueueElement {
         result = 31 * result + (product != null ? product.hashCode() : 0)
         result = 31 * result + (pc != null ? pc.hashCode() : 0)
         return result
+    }
+    
+    void deleteFully(){
+        getResources().each {it.delete()}
+        delete(flush: true)
     }
 }

@@ -27,7 +27,6 @@ class PlayerCharacter extends Creature {
             reputations          : Reputation,
             pcMessages           : PlayerMessage,
             mailBoxes            : MailBox,
-            productionJobs       : ProductionJob,
             guildMemberships     : GuildMember,
             academyLevels        : AcademyLevel,
             learningQueueElements: LearningQueueElement,
@@ -203,5 +202,8 @@ class PlayerCharacter extends Creature {
     List getItems(){
         return Item.findAllByOwner(this)
     }
-
+    
+    List<ProductionJob> getProductionJobs(){
+        return ProductionJob.findAllByPc(this)
+    }
 }
