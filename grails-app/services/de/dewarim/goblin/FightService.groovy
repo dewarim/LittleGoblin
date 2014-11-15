@@ -1,6 +1,7 @@
 package de.dewarim.goblin
 
 import de.dewarim.goblin.combat.Combat
+import de.dewarim.goblin.combat.CombatAttributeType
 import de.dewarim.goblin.combat.CombatMessage
 import de.dewarim.goblin.exception.MonsterDeadException
 import de.dewarim.goblin.exception.PlayerDeadException
@@ -61,4 +62,49 @@ class FightService {
 			throw new MonsterDeadException()
 		}
 	}
+
+    CombatMessage attack(Creature attacker, Creature opponent, Combat combat){
+        CombatMessage cm
+        if(attacker.computeStrike() > opponent.computeParry()){
+            Integer dam = attacker.computeDamage()
+            
+                // collect item dice for damage
+            def itemTypes = attacker.slots.findAll { it.item != null }.collect { it.item.type }
+                itemTypes.each { itemType ->
+                    if (itemType.combatDice) {
+                        dam = dam + itemType.combatDice.roll()
+                    }
+                }
+            log.debug("combat damage from items vs. ${opponent.name}: ${dam}")
+            def resistanceAttributeMap = attacker.fetchResistanceAttributeMap(opponent)
+            // add item combat attributes & resistances
+            itemTypes.each {itemType ->
+                itemType.combatAttributes.each {ca ->
+                    dam = dam * ca.damageModifier
+                    CombatAttributeType cat = ca.combatAttributeType
+                    if (resistanceAttributeMap.containsKey(cat)) {
+                        resistanceAttributeMap.get(cat).each {combatModifier ->
+                            dam = dam * resistanceAttributeMap.get(cat)
+                        }
+                    }
+                }
+            }
+
+            log.debug("combat damage after adding item attributes vs. ${opponent.name}: ${dam}")
+            // add creature combat attributes & resistances
+            dam = attacker.addCreatureCombatAttributes(resistanceAttributeMap, dam)
+            log.debug("combat damage after adding creature attributes vs. ${opponent.name}: ${dam}")
+
+            // TODO: refactor combatAttributes and itemAttribute handling.
+            cm = new CombatMessage('fight.strike', [attacker.name, opponent.name, dam], combat)
+            opponent.hp = opponent.hp - dam
+        }
+        else{
+            // TODO: message for block / AR
+            cm = new CombatMessage('fight.miss', [attacker.name, opponent.name], combat)
+        }
+        cm.save()
+        return cm
+    }
 }
+
