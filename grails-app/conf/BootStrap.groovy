@@ -22,12 +22,14 @@ import de.dewarim.goblin.item.Item
 import de.dewarim.goblin.Help
 
 import grails.plugin.fixtures.*
+import org.codehaus.groovy.grails.commons.cfg.GrailsConfig
 
 class BootStrap {
     def springSecurityService
     def grailsApplication
     def tickService
     def fixtureLoader
+    def testService
 
 //    def camelContext
 //    def brokerService
@@ -82,6 +84,11 @@ class BootStrap {
         
         initHelp()
         initTicks()
+        
+        if(grailsApplication.config.runTests){
+            testService.testAllTheTings()
+        }
+        
     }
 
     def destroy = {
