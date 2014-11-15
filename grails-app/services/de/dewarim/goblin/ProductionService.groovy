@@ -255,11 +255,13 @@ class ProductionService implements ITickListener {
             item.amount -= cost
             if (job.amount <= 1) {
                 // no more items to produce
+                log.debug("job completed: free productionResource")
                 resource.delete()
             }
             log.debug("remaining: ${item.amount}")
             if (item.amount <= 0) {
-                log.debug("delete spent item")
+                log.debug("delete spent item and empty resource")
+                resource.delete()
                 item.delete()
             }
         }
@@ -286,7 +288,7 @@ class ProductionService implements ITickListener {
             else {
                 // TODO: find newest asset version of item.
                 Item item = new Item(type: outputType, owner: job.pc, amount: component.amount)
-                item.save(flush: true)
+                item.save()
             }
 
         }
