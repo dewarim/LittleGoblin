@@ -76,7 +76,7 @@ log4j = {
     appenders {
         //disable stacktrace file
         'null' name: 'stacktrace'
-        console name: 'stdout', layout: pattern(conversionPattern: '%c %m%n')
+        console name: 'stdout', layout: pattern(conversionPattern: '%d %c %m%n')
     }
 
     error 'org.springframework.core.io.support.PathMatchingResourcePatternResolver',
