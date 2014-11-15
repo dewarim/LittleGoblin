@@ -1,5 +1,6 @@
 package de.dewarim.goblin.item
 
+import de.dewarim.goblin.AttributeType
 import de.dewarim.goblin.Dice
 import de.dewarim.goblin.asset.IAsset
 import de.dewarim.goblin.RequiredSlot
@@ -8,12 +9,10 @@ import de.dewarim.goblin.combat.WeaponAttribute
 class ItemType implements IAsset {
 
     static hasMany = [
-            requiredSlots: RequiredSlot,
-            attributes: ItemAttribute,
-            combatAttributes: WeaponAttribute,
-            resistanceAttributes: WeaponAttribute,
+            requiredSlots   : RequiredSlot,
+            attributes      : ItemAttribute,
             itemTypeFeatures: ItemTypeFeature,
-            itemCategories: ItemCategory           
+            itemCategories  : ItemCategory
     ]
 
     static constraints = {
@@ -34,7 +33,7 @@ class ItemType implements IAsset {
     Integer packageSize = 1 // If you buy an item of this type, how many pieces do you get?
     Long assetVersion = 1
     String uuid = UUID.randomUUID().toString()
-    
+
     /**
      * If an ItemType is inactive (active==false), it should not be used by the application.
      * ItemTypes are activated through the AssetManager. 
@@ -50,12 +49,20 @@ class ItemType implements IAsset {
         return Item.findAll("from Item as i where i.type=:type", [type: this])
     }
 
+    List<WeaponAttribute> getResistanceAttributes() {
+        return WeaponAttribute.findAllWhere([itemType: this, subType: AttributeType.RESISTANCE])
+    }
+
+    List<WeaponAttribute> getCombatAttributes() {
+        return WeaponAttribute.findAllWhere([itemType: this, subType: AttributeType.ATTACK])
+    }
+
     boolean equals(o) {
         if (is(o)) return true
         if (!(o instanceof ItemType)) return false
 
         ItemType itemType = o
-        
+
         if (assetVersion != itemType.assetVersion) return false
         if (availability != itemType.availability) return false
         if (baseValue != itemType.baseValue) return false
@@ -74,8 +81,8 @@ class ItemType implements IAsset {
     int hashCode() {
         return name.hashCode()
     }
-    
-    Long getMyId(){
+
+    Long getMyId() {
         return id
     }
 

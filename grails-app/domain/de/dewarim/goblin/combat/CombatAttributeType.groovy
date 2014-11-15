@@ -10,7 +10,6 @@ import de.dewarim.goblin.CreatureAttribute
 class CombatAttributeType {
 
     String name
-    AttributeType subType = AttributeType.ATTACK
     
     static hasMany = [weaponAttributes:WeaponAttribute, creatureAttributes:CreatureAttribute]
     static constraints = {
@@ -24,8 +23,6 @@ class CombatAttributeType {
         CombatAttributeType that = (CombatAttributeType) o
 
         if (name != that.name) return false
-        if (subType != that.subType) return false
-
         return true
     }
 

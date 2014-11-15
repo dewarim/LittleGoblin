@@ -8,17 +8,18 @@ import de.dewarim.goblin.combat.CombatAttributeType
  * a dragon can breath fire or poison and his damage is accordingly (unless
  * the player character has a resistance against this combat attribute).
  */
-class CreatureAttribute implements ICombatAttribute{
+class CreatureAttribute implements ICombatAttribute {
 
-    static belongsTo = [creature:Creature, combatAttributeType:CombatAttributeType]
+    static belongsTo = [creature: Creature, combatAttributeType: CombatAttributeType]
 
     Double damageModifier = 1.0
+    AttributeType subType = AttributeType.ATTACK
 
-    CombatAttributeType fetchCombatAttributeType(){
+    CombatAttributeType fetchCombatAttributeType() {
         return combatAttributeType
     }
 
-    Double fetchDamageModifier(){
+    Double fetchDamageModifier() {
         return damageModifier
     }
 
@@ -30,6 +31,7 @@ class CreatureAttribute implements ICombatAttribute{
 
         if (combatAttributeType != that.combatAttributeType) return false
         if (creature != that.creature) return false
+        if (subType != that.subType) return false
         if (damageModifier != that.damageModifier) return false
 
         return true

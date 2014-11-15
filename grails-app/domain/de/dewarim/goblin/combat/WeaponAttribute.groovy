@@ -1,5 +1,6 @@
 package de.dewarim.goblin.combat
 
+import de.dewarim.goblin.AttributeType
 import de.dewarim.goblin.ICombatAttribute
 import de.dewarim.goblin.item.ItemType
 
@@ -10,17 +11,18 @@ import de.dewarim.goblin.item.ItemType
  * be added to the ItemType to specify the amount of damage caused.
  * Expansion possibility: also allow individual WeaponAttributes on crafted or enchanted items.
  */
-class WeaponAttribute implements ICombatAttribute{
+class WeaponAttribute implements ICombatAttribute {
 
     Double damageModifier = 1.0
     ItemType itemType
     CombatAttributeType combatAttributeType
-    
-    CombatAttributeType fetchCombatAttributeType(){
+    AttributeType subType = AttributeType.ATTACK
+
+    CombatAttributeType fetchCombatAttributeType() {
         return combatAttributeType
     }
 
-    Double fetchDamageModifier(){
+    Double fetchDamageModifier() {
         return damageModifier
     }
 
@@ -32,6 +34,7 @@ class WeaponAttribute implements ICombatAttribute{
 
         if (combatAttributeType != that.combatAttributeType) return false
         if (damageModifier != that.damageModifier) return false
+        if (subType != that.subType) return false
         if (itemType != that.itemType) return false
 
         return true
