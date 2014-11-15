@@ -4,6 +4,8 @@ import de.dewarim.goblin.test.crafting.ComponentSpec
 import de.dewarim.goblin.test.crafting.ProductSpec
 import de.dewarim.goblin.test.crafting.ProductionJobSpec
 import de.dewarim.goblin.test.crafting.ProductionServiceSpec
+import de.dewarim.goblin.test.skill.CombatSkillSpec
+import de.dewarim.goblin.test.skill.ProductionSkillSpec
 import grails.transaction.Transactional
 import org.junit.runner.notification.Failure
 import spock.util.EmbeddedSpecRunner
@@ -15,7 +17,7 @@ class TestService {
         def specRunner = new EmbeddedSpecRunner()
         specRunner.throwFailure = false
         
-        def testClasses = [ItemTypeSpec, ComponentSpec, ProductionJobSpec, ProductionServiceSpec, ProductSpec]
+        def testClasses = [ItemTypeSpec, ComponentSpec, ProductionJobSpec, ProductionServiceSpec, ProductSpec, CombatSkillSpec, ProductionSkillSpec]
         try {
             def result = specRunner.runClasses(testClasses)
             if (result.failureCount > 0) {
