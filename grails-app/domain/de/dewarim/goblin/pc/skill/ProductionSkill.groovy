@@ -25,7 +25,7 @@ class ProductionSkill extends Skill{
         Collection<Product> products = skillRequirements.findAll{ requirement ->
             ! pc.playerProducts.find{ it.product.equals(requirement.product) }
         }.collect{it.product}
-
+        log.debug("Player can create ${products.size()} new products.")
         // if the player now has all required skills, add this product to his portfolio
         products.each{ product ->
             SkillRequirement unknownSkill = product.requiredSkills.find{ requirement ->
