@@ -8,19 +8,18 @@ import de.dewarim.goblin.item.ItemService
 import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.pc.crafting.*
+import grails.util.Holders
+import org.springframework.context.ApplicationContext
 import spock.lang.Shared
 import spock.lang.Specification
 
 /**
  * Unit test for ProductionService.
  */
-//@TestFor(ProductionService)
-//@Mock([PlayerCharacter, Item, ItemType, Component, Product, UserAccount,
-//        ProductCategory, ProductionJob, ProductionResource])
 class ProductionServiceSpec extends Specification {
 
-    def productionService = new ProductionService()
-    def itemService = new ItemService()
+    @Shared
+    ProductionService productionService
     
     @Shared
     def user = new UserAccount(username: "crafty", passwd: 'foodFood', userRealName: 'none')
@@ -44,10 +43,18 @@ class ProductionServiceSpec extends Specification {
             product: crownProduct, amount: 1)
 
     void setup() {
-        productionService.itemService = itemService
+        
+    }
+    
+    void cleanupSpec(){
+        // delete any unfinished jobs.
+        ProductionJob.list().each{it.deleteFully()}
     }
     
     void setupSpec(){
+        ApplicationContext ctx = Holders.grailsApplication.mainContext
+        productionService = ctx.getBean(ProductionService)
+        
         user.save()
         playerCharacter.save()
         prodInputType.save()
@@ -175,7 +182,7 @@ class ProductionServiceSpec extends Specification {
         invalidAndStolen.errors.find { it.equals('production.missing.resources') }
         validButStolen.errors.find { it.equals('production.foreign.item') }
     }
-
+    
     void "make products"() {
         given:
         inputItems.amount = 10
@@ -184,12 +191,15 @@ class ProductionServiceSpec extends Specification {
         def enough = ["item_${inputItems.id}": '5']
 
         when:
+        def jobCount = ProductionJob.count
         def resourceCount = ProductionResource.count
         def oldItemCount = Item.count
         def optionalJob = productionService.createNewProductionJob(crownProduct, playerCharacter, enough)
-        def productCount = productionService.makeProducts([optionalJob.result.get()])
+        def job = optionalJob.result.get()
+        def productCount = productionService.makeProducts([job])
 
         then:
+        ProductionJob.list().size() == jobCount // the new job should have been deleted after makeProducts
         productCount == 1
         Component.findByItemType(prodOutputType)
         playerCharacter.items.find {
