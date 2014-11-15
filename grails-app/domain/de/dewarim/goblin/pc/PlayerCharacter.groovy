@@ -199,4 +199,9 @@ class PlayerCharacter extends Creature {
                 ", town=" + town?.name +
                 '}';
     }
+
+    List getItems(){
+        return Item.findAllByOwner(this)
+    }
+
 }

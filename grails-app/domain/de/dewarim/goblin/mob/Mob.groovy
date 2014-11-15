@@ -2,6 +2,7 @@ package de.dewarim.goblin.mob
 
 import de.dewarim.goblin.Creature
 import de.dewarim.goblin.combat.CombatAttributeType
+import de.dewarim.goblin.item.Item
 
 class Mob extends Creature{
 
@@ -76,4 +77,9 @@ class Mob extends Creature{
         result = 31 * result + (type != null ? type.hashCode() : 0)
         return result
     }
+
+    List getItems(){
+        return Item.findAllByMobOwner(this)
+    }
+
 }

@@ -1,6 +1,7 @@
 package de.dewarim.goblin.mob
 
 import de.dewarim.goblin.Creature
+import de.dewarim.goblin.item.Item
 
 class MobTemplate extends Creature {
 
@@ -33,5 +34,9 @@ class MobTemplate extends Creature {
         int result = super.hashCode()
         result = 31 * result + (xpValue != null ? xpValue.hashCode() : 0)
         return result
+    }
+
+    List getItems(){
+        return Item.findAllByMobOwner(this)
     }
 }

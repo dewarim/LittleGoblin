@@ -1,10 +1,23 @@
 package de.dewarim.goblin.item
 
 import de.dewarim.goblin.ItemLocation
+import de.dewarim.goblin.mob.Mob
 import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.pc.crafting.ProductionResource
 
 class Item {
+
+    static constraints = {
+        // an item may have a mob owner or an player owner. 
+        // (or both, if you want to implement "Sauron's Ring, now in possession of Frodo" [not recommended]) 
+        mobOwner nullable: true, validator: { val, obj ->
+            return val != null || obj.owner != null
+        }
+        owner nullable: true, validator: { val, obj ->
+            return val != null || obj.mobOwner != null
+        }
+    }
+
     /**
      * attributes: passive effects like resist fire, see invisible.
      * features: active effects for which you must use an item, like heal self.
@@ -16,6 +29,7 @@ class Item {
     ItemLocation location = ItemLocation.ON_PERSON
     ItemType type
     PlayerCharacter owner
+    Mob mobOwner
 
     Item() {}
 
@@ -38,11 +52,11 @@ class Item {
             this.amount = amount
         }
     }
-    
-    List<ProductionResource> getResources(){
+
+    List<ProductionResource> getResources() {
         return ProductionResource.findAllWhere([item: this])
     }
-    
+
     boolean equals(o) {
         if (is(o)) return true
         if (!(o instanceof Item)) return false
