@@ -5,7 +5,7 @@
         </g:if>
         <div class='fheader'><g:message code="login.please"/></div>
 
-        <form action='${postUrl}' method='POST' id='loginForm' class='cssform'>
+        <form action='${postUrl}' method='POST' id='loginForm' class='cssform'  >
             <p>
                 <label for='j_username'><g:message code="login.username"/></label>
                 <input type='text' class='text_' name='j_username' id='j_username'
@@ -29,11 +29,9 @@
     </div>
 </div>
 <script type='text/javascript'>
-    <!--
     (function () {
         document.forms['loginForm'].elements['j_username'].focus();
     })();
-    // -->
 </script>
 
 <div class="quick_login" style="text-align:center; padding-bottom: 1ex;">
