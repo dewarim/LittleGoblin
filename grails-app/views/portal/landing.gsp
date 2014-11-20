@@ -4,10 +4,10 @@
 
     <meta name="layout" content="main"/>
     <asset:stylesheet src="login.css"/>
-    
+
     <title><g:message code="portal.landing.title"/></title>
     <g:if test="${grailsApplication.config.facebook.enabled}">
-        <script type="text/javascript">(function(d, s, id) {
+        <script type="text/javascript">(function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) {
                 return;
@@ -49,18 +49,26 @@
         </noscript>
 
         <div class="landing_login">
-            %{--<h2><g:message code="landing.login.title"/></h2>--}%
             <sec:ifLoggedIn>
-                <g:message code="logged.in.as"/>:
-                <sec:loggedInUserInfo field="username"/>
-                <br>
+                <p>
+                    <g:message code="logged.in.as"/>:
+                    <sec:loggedInUserInfo field="username"/>
+                </p>
+                <sec:ifAnyGranted roles="ROLE_ADMIN">
+                    <g:link action="index" controller="admin">
+                        <g:message code="link.to.admin"/>
+                    </g:link>
+                    <br>
+                </sec:ifAnyGranted>
+                <sec:ifNotGranted roles="ROLE_ADMIN">
+                    <g:link action="start" controller="portal">
+                        <g:message code="link.to.characters"/>
+                    </g:link>
+                </sec:ifNotGranted>
 
-                <g:link action="start" controller="portal">
-                    <g:message code="link.to.characters"/>
-                </g:link>
             </sec:ifLoggedIn>
             <sec:ifNotLoggedIn>
-                <g:render template="/shared/login" model="[postUrl:postUrl]"/>
+                <g:render template="/shared/login" model="[postUrl: postUrl]"/>
                 <!-- <g:link action="start" controller="portal"><g:message code="link.to.login"/></g:link>
                 <br>
                 <br>
@@ -68,7 +76,6 @@
                     <div class="fb-login-button" data-show-faces="false" data-width="200" data-max-rows="1"></div>
                 </g:if>
                 -->
-                
 
             </sec:ifNotLoggedIn>
 
@@ -125,15 +132,15 @@
                 * Fixed broken methods in Product class #developer
                 * Added a link to academies from product list in workshop if the PC cannot craft yet.
             </pre>
-   
+
             <div class="">
-                <a href="${assetPath(src:'txt/status.txt')}" target="_blank"><g:message code="link.to.status.old"/></a>
+                <a href="${assetPath(src: 'txt/status.txt')}" target="_blank"><g:message code="link.to.status.old"/></a>
             </div>
-            
+
             <div class="highscore_link">
                 <g:link action="show" controller="score"><g:message code="link.to.score"/></g:link>
             </div>
-            
+
 
             <div class="langSelect">
                 <br>
@@ -144,7 +151,7 @@
                         <option value="fr"><g:message code="language.french"/></option>
                         <!-- <option value="de"></option> -->
                     </select>
-                    <noscript><g:submitButton name="changeLang" value="${message(code:'language.change')}"/></noscript>
+                    <noscript><g:submitButton name="changeLang" value="${message(code: 'language.change')}"/></noscript>
                 </g:form>
             </div>
 
@@ -160,7 +167,7 @@
 
     </div>
 </div>
-    
+
 <g:if test="${grailsApplication.config.facebook?.enabled}">
     <div id="fb-root"></div>
 </g:if>
