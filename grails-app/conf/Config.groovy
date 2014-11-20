@@ -2,8 +2,8 @@
 // config files can either be Java properties files or ConfigSlurper scripts
 
 grails.config.locations = ["classpath:${appName}-config.groovy",
-        "file:${userHome}/.grails/${appName}-config.groovy",
-        "file:${System.env.LITTLE_GOBLIN_HOME}/${appName}-config.groovy"
+                           "file:${userHome}/.grails/${appName}-config.groovy",
+                           "file:${System.env.LITTLE_GOBLIN_HOME}/${appName}-config.groovy"
 ]
 
 // if(System.properties["${appName}.config.location"]) {
@@ -11,18 +11,18 @@ grails.config.locations = ["classpath:${appName}-config.groovy",
 // }
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
-grails.mime.types = [html: ['text/html', 'application/xhtml+xml'],
-        xml: ['text/xml', 'application/xml'],
-        text: 'text/plain',
-        js: 'text/javascript',
-        rss: 'application/rss+xml',
-        atom: 'application/atom+xml',
-        css: 'text/css',
-        csv: 'text/csv',
-        all: '*/*',
-        json: ['application/json', 'text/json'],
-        form: 'application/x-www-form-urlencoded',
-        multipartForm: 'multipart/form-data'
+grails.mime.types = [html         : ['text/html', 'application/xhtml+xml'],
+                     xml          : ['text/xml', 'application/xml'],
+                     text         : 'text/plain',
+                     js           : 'text/javascript',
+                     rss          : 'application/rss+xml',
+                     atom         : 'application/atom+xml',
+                     css          : 'text/css',
+                     csv          : 'text/csv',
+                     all          : '*/*',
+                     json         : ['application/json', 'text/json'],
+                     form         : 'application/x-www-form-urlencoded',
+                     multipartForm: 'multipart/form-data'
 ]
 // The default codec used to encode data with ${}
 grails.views.default.codec = "html" // none, html, base64
@@ -94,14 +94,19 @@ log4j = {
             'org.apache.commons',
             'grails.plugin.fixtures.builder.processor.FixtureBeanPostProcessor',
             'grails.plugin.springsecurity.web.filter'
-    
+
+    warn 'grails.app.services.de.dewarim.goblin.SkillService',
+            'grails.app.services.de.dewarim.goblin.ProductionService',
+            'grails.app.services.de.dewarim.goblin.MeleeService',
+            'grails.plugin.springsecurity.web.authentication'
+
     debug 'grails.app.controller',
             'grails.app.domain.de.dewarim.goblin',
             'grails.app.domain.de.dewarim.goblin.Creature',
             'grails.app.bootstrap',
             'de.dewarim.goblin.admin',
             'de.dewarim.goblin.admin.EquipmentSlotTypeAdminController'
-            
+
 //			'org.codehaus.groovy.grails.web.servlet',  //  controllers
 //			'org.codehaus.groovy.grails.web.pages', //  GSP
 //			'org.codehaus.groovy.grails.web.sitemesh', //  layouts
@@ -128,17 +133,18 @@ grails.plugin.springsecurity.authority.className = 'de.dewarim.goblin.Role'
 grails.plugin.springsecurity.userLookup.passwordPropertyName = 'passwd'
 grails.plugin.springsecurity.authority.nameField = 'name'
 grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/portal/start'
+grails.plugin.springsecurity.logout.afterLogoutUrl = '/portal/landing'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-        '/assets/**':               ['permitAll'],
+        '/assets/**': ['permitAll'],
 ]
 grails.plugin.springsecurity.providerNames = [
         'daoAuthenticationProvider',
 //        'anonymousAuthenticationProvider',
-        'rememberMeAuthenticationProvider']
+'rememberMeAuthenticationProvider']
 
 grails.views.gsp.keepgenerateddir = '/tmp/gsp'
 
-grails.doc.images=new File('src/docs/images')
+grails.doc.images = new File('src/docs/images')
 
 // Uncomment and edit the following lines to start using Grails encoding & escaping improvements
 
