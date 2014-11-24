@@ -7,6 +7,10 @@ function Goblin(config) {
     }
 }
 
+function logger(msg){
+    console.log(msg);
+}
+
 /**
  * Connect to Little Goblin. Inspired (copied) from Cinnamon.js
  * @param errorHandler an optional function which is used to display a login error.
@@ -63,4 +67,34 @@ Goblin.prototype.goToStart = function () {
         }
     });
     return result;
+};
+
+/**
+ * Go to start page, then click on link to send character Gobli to his starting town.
+ * @returns {string} ("<nothing/>" or town result page)
+ */
+Goblin.prototype.goToTown = function(){
+    var result = "<nothing/>";
+    var self = this;
+    var startPage = this.goToStart();
+    var townLink = $(startPage).find('a:contains("Gobli")');
+    if(townLink.length == 0){
+        logger("Could not find link for Gobli.")
+        return result;
+    }
+    
+    $.ajax(townLink.attr('href'), {
+        type: 'get',
+        async: false,
+        success: function (data) {
+            result = data;
+        },
+        statusCode: {
+            500: function () {
+                console.log("Failed to go to town page.")
+                result = "<nothing/>";
+            }
+        }
+    });
+    return result; 
 };

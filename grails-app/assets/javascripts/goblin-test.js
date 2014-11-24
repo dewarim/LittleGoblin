@@ -5,7 +5,7 @@ function runTests(goblin) {
     goblin.connect();
     QUnit.config.reorder = false;
     
-    test("check login", function () {
+    QUnit.test("check login", function () {
         var orc = new Goblin();
         equal(false, orc.connect(), "Try to correct without proper configuration.");
         equal(false, orc.isConnected(), "Make sure orc is not connected after failed attempt.");
@@ -13,4 +13,10 @@ function runTests(goblin) {
         equal(true, goblin.isConnected(), "Check that default Goblin is connected");
     });
     
+    QUnit.test("go to town", function(){
+        var result = goblin.goToTown();
+        notEqual(result, '<nothing/>', "Check that goToTown did return something");
+        var townDiv = $(result).find('div').find('.town');
+        ok(townDiv.length > 0);
+    });
 }
