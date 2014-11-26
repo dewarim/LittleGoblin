@@ -11,6 +11,7 @@ class BaseController {
 
     def springSecurityService
     def inputValidationService
+    def invalidFormException = new InvalidFormException("invalid.form")
 
     /**
      * Fetch the player character specified by the "pc" parameter.
