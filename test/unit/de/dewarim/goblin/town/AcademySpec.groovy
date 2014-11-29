@@ -4,6 +4,7 @@ import de.dewarim.ConstraintUnitSpec
 import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import spock.lang.Shared
+import spock.lang.Specification
 import spock.lang.Unroll
 
 /**
@@ -11,7 +12,7 @@ import spock.lang.Unroll
  */
 @TestFor(Academy)
 @Mock(Town)
-class AcademySpec extends ConstraintUnitSpec {
+class AcademySpec extends Specification {
 
 
     @Shared
@@ -47,7 +48,7 @@ class AcademySpec extends ConstraintUnitSpec {
         def academy = new Academy("$field": val)
 
         then:
-        validateConstraints(academy, field, error)
+        ConstraintUnitSpec.validateConstraints(academy, field, error)
 
         where:
         error      | field         | val
