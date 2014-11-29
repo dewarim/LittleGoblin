@@ -1,22 +1,14 @@
 package de.dewarim.goblin.pc.skill
 
 import de.dewarim.ConstraintUnitSpec
-import de.dewarim.goblin.ISkillScript
-import de.dewarim.goblin.pc.PlayerCharacter
-import de.dewarim.goblin.pc.crafting.Product
-import de.dewarim.goblin.pc.crafting.ProductCategory
-import de.dewarim.goblin.pc.crafting.ProductionJob
-import de.dewarim.goblin.town.Academy
-import de.dewarim.goblin.town.Town
-import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
-import spock.lang.Shared
+import spock.lang.Specification
 import spock.lang.Unroll
 
 /**
  */
 @TestFor(CombatSkill)
-class CombatSkillSpec extends ConstraintUnitSpec {
+class CombatSkillSpec extends Specification {
 
     void setup() {
         def existingSkill = new CombatSkill(name: 'someSkill')
@@ -32,7 +24,7 @@ class CombatSkillSpec extends ConstraintUnitSpec {
         def skill = new CombatSkill("$field": val)
 
         then:
-        validateConstraints(skill, field, error)
+        ConstraintUnitSpec.validateConstraints(skill, field, error)
 
         where:
         error               | field        | val
