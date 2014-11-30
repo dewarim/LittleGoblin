@@ -7,7 +7,11 @@ class TestController {
      
     def grailsApplication
     
-    def index() {
+    def userTest() {
+        return [testModeEnabled: grailsApplication.config.testMode]
+    }    
+    
+    def adminTest() {
         return [testModeEnabled: grailsApplication.config.testMode]
     }
 }

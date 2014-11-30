@@ -35,5 +35,6 @@
 
 <g:layoutBody/>
 <g:render template="/shared/footer"/>
+<div id="page-info" style="display: none;" data-action="${actionName}" data-controller="${controllerName}"></div>
 </body>
 </html>

@@ -1,3 +1,5 @@
+var GOBLIN_NO_RESULT = "<nothing/>";
+
 function Goblin(config) {
     this.loggedIn = false;
     if (config) {
@@ -51,7 +53,7 @@ Goblin.prototype.connectionError = function (message) {
 
 
 Goblin.prototype.goToStart = function () {
-    var result = "<nothing/>";
+    var result = GOBLIN_NO_RESULT;
     var self = this;
     $.ajax(this.url + 'portal/start', {
         type: 'get',
@@ -62,7 +64,6 @@ Goblin.prototype.goToStart = function () {
         statusCode: {
             500: function () {
                 console.log("Failed to go to start page for logged in users.")
-                result = "<nothing/>";
             }
         }
     });
@@ -74,7 +75,7 @@ Goblin.prototype.goToStart = function () {
  * @returns {string} ("<nothing/>" or town result page)
  */
 Goblin.prototype.goToTown = function(){
-    var result = "<nothing/>";
+    var result = GOBLIN_NO_RESULT;
     var self = this;
     var startPage = this.goToStart();
     var townLink = $(startPage).find('a:contains("Gobli")');
@@ -92,9 +93,53 @@ Goblin.prototype.goToTown = function(){
         statusCode: {
             500: function () {
                 console.log("Failed to go to town page.")
-                result = "<nothing/>";
             }
         }
     });
     return result; 
 };
+
+/**
+ * Go directly to the requested page. Checks the result for a div with id page-info,
+ * which needs to contain data elements for controller and action.
+ * 
+ * Validation logic:
+ * 1. div#page-info.data(controller) == controllerName parameter
+ * 2. div#page-info.data(action) == actionName parameter
+ * 
+ * @returns {string} ("<nothing/>" or result page)
+ */
+Goblin.prototype.getPage = function(controllerName, actionName){
+    var result = GOBLIN_NO_RESULT;
+    var self = this;
+    var url = this.url + controllerName + "/"+actionName
+    console.log("getPage: "+url);
+    $.ajax(url, {
+        type: 'get',
+        async: false,
+        dataType:'html',
+        success: function (data) {
+            result = $('<html/>').html(data);
+        },
+        statusCode: {
+            500: function () {
+                console.log("Failed to get page for "+url);
+            }
+        }
+    });
+    var pageInfo = $(result).find('#page-info');
+    if(pageInfo.length == 0){
+        console.log("page-info is missing.");
+        return GOBLIN_NO_RESULT;
+    }
+    if(pageInfo.data('controller') != controllerName || pageInfo.data('action') != actionName){
+        console.log("page-Info element does not contain expected controller/action data.");
+        console.log("found: "+pageInfo.data('controller')+"/"+pageInfo.data('action'));
+        return GOBLIN_NO_RESULT;
+    } 
+    return result; 
+};
+
+Goblin.prototype.isValidResult = function(result){
+    return result != GOBLIN_NO_RESULT;
+}

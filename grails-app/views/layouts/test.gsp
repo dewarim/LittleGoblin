@@ -11,12 +11,17 @@
     <asset:javascript src="GoblinConfig.js"/>
     <asset:javascript src="Goblin.js"/>
     <asset:javascript src="goblin-test.js"/>
+    <asset:javascript src="admin-test.js"/>
     <asset:deferredScripts/>
     <g:layoutHead/>
 </head>
 
 <body class="${pageProperty(name: 'body.class')}">
 <g:render template="/shared/logo"/>
+
+<div class="navigation">
+    <g:pageProperty name="page.nav"/>
+</div>
 
 <g:layoutBody/>
 <g:render template="/shared/footer"/>

@@ -10,6 +10,7 @@
 
 <content tag="nav">
     <g:link controller="portal" action="landing"><g:message code="link.to.home"/></g:link>
+    <g:link controller="test" action="adminTest"><g:message code="link.to.admin.test"/></g:link>
 </content>
 
 <div class="colmask ">
