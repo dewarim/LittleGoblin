@@ -13,10 +13,14 @@ def iron = ItemType.findByName('item.iron.bar')
 fixture{
     
     gob(PlayerCharacter, name:'Gobli', user:user, gold:100, xp:10)
+    alice(PlayerCharacter, name:'Alice', user:user, gold:100, xp:10)
     MailBoxType.list().each{box ->
         "box${count++}"(MailBox, owner:gob, boxType:box)
+        "box${count++}"(MailBox, owner:alice, boxType:box)
     }
     gobOre(Item, type: ore, amount: 10, owner: gob)
+    gobOre(Item, type: ore, amount: 10, owner: alice)
     gobIron(Item, type: iron, amount: 10, owner: gob)
+    gobIron(Item, type: iron, amount: 10, owner: alice)
     
 }

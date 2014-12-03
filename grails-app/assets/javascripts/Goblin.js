@@ -59,7 +59,7 @@ Goblin.prototype.goToStart = function () {
         type: 'get',
         async: false,
         success: function (data) {
-            result = data;
+            result =  $('<html/>').html(data);
         },
         statusCode: {
             500: function () {
@@ -78,7 +78,7 @@ Goblin.prototype.goToTown = function(){
     var result = GOBLIN_NO_RESULT;
     var self = this;
     var startPage = this.goToStart();
-    var townLink = $(startPage).find('a:contains("Gobli")');
+    var townLink = startPage.find('a:contains("Gobli")');
     if(townLink.length == 0){
         logger("Could not find link for Gobli.")
         return result;
