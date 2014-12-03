@@ -21,9 +21,40 @@ function runTests(goblin) {
     );
 
     QUnit.test("go to town", function () {
-        var result = goblin.goToTown();
+        var result = goblin.goToTown('Gobli');
         notEqual(result, '<nothing/>', "Check that goToTown did return something");
         var townDiv = $(result).find('div').find('.town');
         ok(townDiv.length > 0);
     });
+
+    QUnit.test("enter Grand Melee with both characters", function () {
+
+        doJoinMelee('Gobli');
+        doJoinMelee('Alice');
+        // TODO: follow up with a test for the Grand Melee itself.
+    });
+}
+
+
+function doJoinMelee(name) {
+    goblin.goToTown(name);
+    var meleePage = goblin.getPage('melee', 'index');
+    var link = meleePage.find("a[href*='melee/join']");
+    ok(link.length > 0, "Expected link to join Grand Melee");
+    var result;
+    $.ajax(link.attr('href'), {
+        type: 'get',
+        async: false,
+        dataType:'html',
+        success: function (data) {
+            result = $('<html/>').html(data);
+        },
+        fail: {
+            500: function () {
+                result = $(GOBLIN_NO_RESULT);
+                console.log("Failed to get page for "+url);
+            }
+        }
+    });
+    ok(result.find("a[href*='melee/leave']").length > 0, "Expected link to leave melee");
 }

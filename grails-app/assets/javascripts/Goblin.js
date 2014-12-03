@@ -71,16 +71,17 @@ Goblin.prototype.goToStart = function () {
 };
 
 /**
- * Go to start page, then click on link to send character Gobli to his starting town.
+ * Go to start page, then click on link of the given character's name to continue to his starting town.
+ * @param name the character's name on whose behalf we visit the town.
  * @returns {string} ("<nothing/>" or town result page)
  */
-Goblin.prototype.goToTown = function(){
+Goblin.prototype.goToTown = function(name){
     var result = GOBLIN_NO_RESULT;
     var self = this;
     var startPage = this.goToStart();
-    var townLink = startPage.find('a:contains("Gobli")');
+    var townLink = startPage.find('a:contains("'+name+'")');
     if(townLink.length == 0){
-        logger("Could not find link for Gobli.")
+        logger("Could not find link for "+name);
         return result;
     }
     
