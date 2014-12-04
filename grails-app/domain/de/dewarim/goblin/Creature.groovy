@@ -46,7 +46,7 @@ abstract class Creature {
     Long gold = 0
     Boolean male = true
 
-    CombatMessage attack(Creature opponent, Combat combat) {
+    CombatMessage attack(Creature opponent, Combat combat, boolean saveMessage) {
         CombatMessage cm
         if (computeStrike() > opponent.computeParry()) {
             Integer dam = computeDamage()
@@ -86,7 +86,9 @@ abstract class Creature {
             // TODO: message for block / AR
             cm = new CombatMessage('fight.miss', [name, opponent.name], combat)
         }
-        cm.save()
+        if(saveMessage) {
+            cm.save()
+        }
         return cm
     }
 

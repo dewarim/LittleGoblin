@@ -16,14 +16,14 @@ class FightService {
 //            combat.merge()
         try{
             if(roll_initiative(pc, mob)){
-                pc.attack(mob, combat)
+                pc.attack(mob, combat, true)
                 checkDeath(pc, mob)
-                mob.attack(pc, combat)
+                mob.attack(pc, combat, true)
             }
             else{
-                mob.attack(pc, combat)
+                mob.attack(pc, combat, true)
                 checkDeath(pc, mob)
-                pc.attack(mob, combat)
+                pc.attack(mob, combat, true)
             }
             combat.save()
             checkDeath(pc, mob)

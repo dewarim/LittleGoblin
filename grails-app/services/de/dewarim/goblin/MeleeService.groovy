@@ -1,5 +1,6 @@
 package de.dewarim.goblin
 
+import de.dewarim.goblin.combat.Combat
 import de.dewarim.goblin.combat.CombatMessage
 import de.dewarim.goblin.combat.Melee
 import de.dewarim.goblin.combat.MeleeAction
@@ -151,7 +152,7 @@ class MeleeService implements ITickListener {
     void attack(MeleeAction action) {
         PlayerCharacter pc = action.actor
         PlayerCharacter adversary = action.target
-        CombatMessage combatMessage = pc.attack(adversary)
+        CombatMessage combatMessage = pc.attack(adversary, null, false)
         playerMessageService.createMessage(pc, combatMessage.msg, combatMessage.fetchArgs())
         playerMessageService.createMessage(adversary, combatMessage.msg, combatMessage.fetchArgs())
         // check effects:
