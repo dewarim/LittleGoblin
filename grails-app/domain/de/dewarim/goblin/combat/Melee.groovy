@@ -5,8 +5,6 @@ import de.dewarim.goblin.pc.PlayerCharacter
 
 class Melee{
 
-    static hasMany = [fighters:MeleeFighter]
-
     static constraints = {
         winner nullable: true
         startTime( nullable: true)
@@ -16,6 +14,10 @@ class Melee{
     Date startTime
     PlayerCharacter winner
     Integer round = 1
+    
+    List<MeleeFighter> getFighters(){
+        return MeleeFighter.findAllWhere(melee: this)
+    }
 
     boolean equals(o) {
         if (is(o)) return true
@@ -38,5 +40,18 @@ class Melee{
         result = 31 * result + (winner != null ? winner.hashCode() : 0)
         result = 31 * result + (round != null ? round.hashCode() : 0)
         return result
+    }
+
+
+    @Override
+    public String toString() {
+        return "Melee{" +
+                "id=" + id +
+                ", status=" + status +
+                ", startTime=" + startTime +
+                ", winner=" + winner +
+                ", round=" + round +
+                ", fighters=" + fighters +
+                '}';
     }
 }

@@ -5,8 +5,6 @@ import de.dewarim.goblin.pc.PlayerCharacter
 
 class MeleeFighter {
 
-    static belongsTo = [melee:Melee]
-
     static constraints = {
         action nullable: true
         pc nullable: true
@@ -23,6 +21,7 @@ class MeleeFighter {
         this.pc.currentMelee = melee
     }
 
+    Melee melee
     MeleeAction action
 
     Integer place = 0
