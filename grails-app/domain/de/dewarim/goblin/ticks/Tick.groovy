@@ -57,4 +57,17 @@ class Tick {
     Object fetchListener(){
         return grailsApplication.mainContext.getBean(beanName)
     }
+
+
+    @Override
+    public String toString() {
+        return "Tick{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", tickLength=" + tickLength +
+                ", beanName='" + beanName + '\'' +
+                ", currentTick=" + currentTick +
+                ", active=" + active +
+                '}';
+    }
 }

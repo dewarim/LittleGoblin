@@ -8,4 +8,12 @@ class TickCommand {
 
     TickCommandType type
     Long tickId = 0
+
+    @Override
+    public String toString() {
+        return "TickCommand{" +
+                "type=" + type +
+                ", tickId=" + tickId +
+                '}';
+    }
 }
