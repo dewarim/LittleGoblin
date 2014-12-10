@@ -30,9 +30,9 @@ class TickRunner extends DynamicDispatchActor {
                     result.failed = true
                     result.messages.add('error.tick.not.found')
                 }
-                else{
-                    log.debug("Running command for tick ${tick}")
-                }
+//                else{
+//                    log.debug("Running command for tick ${tick}")
+//                }
 
                 def listener = tick.fetchListener()
                 ((ITickListener) listener).tock()
