@@ -200,7 +200,6 @@ class FightController extends BaseController {
 
         pc.currentCombat.finished = new Date()
         pc.currentCombat = null
-        pc.alive = false
         pc.deaths = pc.deaths + 1
 
         pc.currentQuest.finishedDate = new Date()
