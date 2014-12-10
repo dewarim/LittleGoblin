@@ -25,40 +25,40 @@ fixture {
 
     orc(MobTemplate, name: 'mob.orc',
             strike: d20, parry: d20, initiative: iniDice, damage: d6,
-            hp: 10, xpValue: 4
+            maxHp: 10, xpValue: 4
     )
     imageOrc(MobImage, mobTemplate: orc, image: Image.findByName('orc'))
 
     troll(MobTemplate, name: 'mob.troll',
             strike: d20, parry: d20, initiative: iniDice, damage: d2x6,
-            hp: 20, xpValue: 8
+            maxHp: 20, xpValue: 8
     )
 
     redDragon(MobTemplate, name: 'mob.red.dragon',
             strike: d20, parry: d20, initiative: iniDice, damage: dice('6d6+5'),
-            hp: 100, xpValue: 2000
+            maxHp: 100, xpValue: 2000
     )
 
     hornet(MobTemplate, name: 'mob.angry.hornet', strike: dice('6d4+4'),
             parry: dice('6d4+4'), initiative: iniDice, damage: d1,
-            hp: 1, xpValue: 1
+            maxHp: 1, xpValue: 1
     )
 
     rabbit(MobTemplate, name: 'mob.rabid.rabbit', strike: d20, parry: d6,
             initiative: iniDice, damage: d2x6,
-            hp: 3, xpValue: 4)
+            maxHp: 3, xpValue: 4)
 
     kobold(MobTemplate, name: 'mob.kobold', strike: d20, parry: d20,
-            initiative: iniDice, damage: d6, hp: 7, xpValue: 3)
+            initiative: iniDice, damage: d6, maxHp: 7, xpValue: 3)
 
     halfling(MobTemplate, name: 'mob.halfling', strike: d1, parry: d1,
-            initiative: d1, damage: d1, hp: 1, xpValue: 1)
+            initiative: d1, damage: d1, maxHp: 1, xpValue: 1)
 
     puppet(MobTemplate, name: 'mob.training_puppet', strike: d1, parry: d1,
-            initiative: d1, damage: d1, hp: 500, xpValue: 5)
+            initiative: d1, damage: d1, maxHp: 500, xpValue: 5)
 
     strawMan(MobTemplate, name: 'mob.straw_man', strike: d20, parry: d1,
-            initiative: d1, damage: d6, hp: 100, xpValue: 30)
+            initiative: d1, damage: d6, maxHp: 100, xpValue: 30)
     // The straw man is vulnerable to fire:
     // Note: this does not work yet.
     fireAttr(CreatureAttribute, combatAttributeType: fireCat, damageModifier: 2.0, creature: strawMan)

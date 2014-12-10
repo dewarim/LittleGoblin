@@ -22,7 +22,7 @@
 	${mob.initiative?.toString()}
 </td>
 <td>
-	${mob.hp}
+	${mob.life.points}
 </td>
 <td>
 	${mob.maxHp}

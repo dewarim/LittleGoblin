@@ -38,7 +38,6 @@ abstract class Creature {
     String name
 
     Integer maxHp = 10
-    Integer hp = 10
     Dice strike
     Dice parry
     Dice damage
@@ -80,7 +79,7 @@ abstract class Creature {
 
             // TODO: refactor combatAttributes and itemAttribute handling.
             cm = new CombatMessage('fight.strike', [name, opponent.name, dam], combat)
-            opponent.hp = opponent.hp - dam
+            opponent.getLife().dealDamage(dam)
         }
         else {
             // TODO: message for block / AR
@@ -274,7 +273,32 @@ abstract class Creature {
     List fetchEquipment() {
         return slots.sort { a, b -> a.rank <=> b.rank }
     }
-
+    
+    CreatureLife getLife(){
+        CreatureLife life = CreatureLife.findByCreature(this)
+        if(life == null){
+            life = new CreatureLife(points:maxHp, creature: this)
+            life.save()
+        }
+        return life
+    }
+    
+    boolean alive(){
+        return getLife().alive
+    }
+    
+    boolean dead(){
+        return getLife().dead
+    }
+    
+    int addLife(int amount){
+        return getLife().heal(amount, maxHp)
+    }
+    
+    void dealDamage(int amount){
+        getLife().dealDamage(amount)
+    }
+    
     abstract List<Item> getItems()
 
     boolean equals(o) {
@@ -286,7 +310,6 @@ abstract class Creature {
         if (damage != creature.damage) return false
         if (description != creature.description) return false
         if (gold != creature.gold) return false
-        if (hp != creature.hp) return false
         if (initiative != creature.initiative) return false
         if (male != creature.male) return false
         if (maxHp != creature.maxHp) return false
@@ -302,7 +325,6 @@ abstract class Creature {
         result = (description != null ? description.hashCode() : 0)
         result = 31 * result + (name != null ? name.hashCode() : 0)
         result = 31 * result + (maxHp != null ? maxHp.hashCode() : 0)
-        result = 31 * result + (hp != null ? hp.hashCode() : 0)
         result = 31 * result + (gold != null ? gold.hashCode() : 0)
         return result
     }

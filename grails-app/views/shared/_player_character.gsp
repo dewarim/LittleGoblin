@@ -3,7 +3,7 @@
     <table>
         <tr>
             <td><g:message code="pc.hp"/></td>
-            <td>${pc.hp} / ${pc.maxHp}</td>
+            <td>${pc.life.points} / ${pc.maxHp}</td>
         </tr>
         <tr>
             <td><g:message code="pc.gold"/></td>

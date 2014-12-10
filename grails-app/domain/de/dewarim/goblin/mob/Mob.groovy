@@ -21,8 +21,7 @@ class Mob extends Creature{
 		parry = type.parry
 		initiative = type.initiative
 		damage = type.damage
-		hp = type.hp
-		maxHp = type.hp
+		maxHp = type.getLife().points
 		image = type.selectImage()
 	}
 

@@ -52,7 +52,6 @@ class PlayerCharacter extends Creature {
 
     Long xp = 0
     Long spentExperience = 0
-    Boolean alive = true
     Integer deaths = 0
     Integer victories = 0
     Long questLevel = 0
@@ -65,8 +64,7 @@ class PlayerCharacter extends Creature {
         if (xp > 0) {
             xp--
         }
-        hp = maxHp
-        alive = true
+        life.points = maxHp
     }
 
     void initializePlayerCharacter() {
@@ -158,7 +156,6 @@ class PlayerCharacter extends Creature {
 
         PlayerCharacter that = o
 
-        if (alive != that.alive) return false
         if (deaths != that.deaths) return false
         if (description != that.description) return false
         if (level != that.level) return false
@@ -187,7 +184,6 @@ class PlayerCharacter extends Creature {
                 ", name=" + name +
                 ", xp=" + xp +
                 ", spentExperience=" + spentExperience +
-                ", alive=" + alive +
                 ", deaths=" + deaths +
                 ", victories=" + victories +
                 ", questLevel=" + questLevel +

@@ -14,7 +14,7 @@
             <td>${fighter.name}</td>
             <td>${fighter.goblinOrder?.name}</td>
             <td>${fighter.xp}</td>
-            <td>${fighter.hp}</td>
+            <td>${fighter.life.points}</td>
         </tr>
     </g:each>
     </tbody>

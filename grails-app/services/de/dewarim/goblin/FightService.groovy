@@ -52,13 +52,13 @@ class FightService {
 	}
 
 	void checkDeath(pc, mob){
-		if(pc.hp < 0 && mob.hp < 0){
+		if(pc.dead() && mob.dead()){
 			throw new SimultaneousDeathException()
 		}
-		else if(pc.hp < 0){
+		else if(pc.dead()){
 			throw new PlayerDeadException()
 		}
-		if(mob.hp < 0){
+		if(mob.dead()){
 			throw new MonsterDeadException()
 		}
 	}
@@ -97,7 +97,7 @@ class FightService {
 
             // TODO: refactor combatAttributes and itemAttribute handling.
             cm = new CombatMessage('fight.strike', [attacker.name, opponent.name, dam], combat)
-            opponent.hp = opponent.hp - dam
+            opponent.dealDamage(dam)
         }
         else{
             // TODO: message for block / AR

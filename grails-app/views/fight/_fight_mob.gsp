@@ -8,7 +8,7 @@
 	</tr>
 	<tr>
 		<td><g:message code="mob.hp" /></td>
-		<td>${mob.hp} / ${mob.maxHp}</td>
+		<td>${mob.life.points} / ${mob.maxHp}</td>
 	</tr>
 	<tr>
 		<td><g:message code="mob.xpValue"/></td>

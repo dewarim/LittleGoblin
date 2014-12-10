@@ -14,7 +14,7 @@ class TownController extends BaseController {
             redirect(controller: 'portal', action:'start')
             return
         }
-        if (!pc.alive) {
+        if (!pc.alive()) {
             pc.resurrect()
             flash.message = message(code: 'character.resurrected', args: [pc.name])
         }

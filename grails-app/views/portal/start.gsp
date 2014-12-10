@@ -34,7 +34,7 @@
                             <g:link action="show" controller="town" params="[pc: c.id]">${c.name}</g:link>
                         </td>
                         <td class="center">${c.xp}</td>
-                        <td class="center">${c.alive ? message(code: 'pc.is_alive') : message(code: 'pc.is_dead')}</td>
+                        <td class="center">${c.alive() ? message(code: 'pc.is_alive') : message(code: 'pc.is_dead')}</td>
                     </tr>
                 </g:each>
             </table>

@@ -35,7 +35,7 @@
 		value="${mob?.initiative?.id}"/>
 <br>
 <label><g:message code="mob.hp"/> </label><br>
-<g:textField name="hp" value="${mob?.hp ?: '1'}"/>
+<g:textField name="lifePoints" value="${mob?.life?.points ?: '1'}"/>
 <br>
 <label><g:message code="mob.maxHp"/> </label><br>
 <g:textField name="maxHp" value="${mob?.maxHp ?: '2'}"/>

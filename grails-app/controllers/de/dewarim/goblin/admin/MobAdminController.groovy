@@ -65,7 +65,7 @@ class MobAdminController extends BaseController {
         mob.damage = (Dice) inputValidationService.checkObject(Dice.class, params.damage, true) ?: null
         mob.initiative = (Dice) inputValidationService.checkObject(Dice.class, params.initiative, true) ?: null
         mob.xpValue = inputValidationService.checkAndEncodeInteger(params, "xpValue", "mob.xpValue")
-        mob.hp = inputValidationService.checkAndEncodeInteger(params, "hp", "mob.hp")
+        mob.life.points = inputValidationService.checkAndEncodeInteger(params, "lifePoints", "mob.hp")
         mob.maxHp = inputValidationService.checkAndEncodeInteger(params, "maxHp", "mob.maxHp")
         mob.gold = inputValidationService.checkAndEncodeInteger(params, "gold", "mob.gold")
         mob.male = inputValidationService.checkAndEncodeBoolean(params, "male", 'mob.male')
