@@ -1,12 +1,12 @@
 package de.dewarim.goblin
 
-import de.dewarim.goblin.combat.Combat
 import de.dewarim.goblin.combat.CombatMessage
 import de.dewarim.goblin.combat.Melee
 import de.dewarim.goblin.combat.MeleeAction
 import de.dewarim.goblin.combat.MeleeFighter
 import de.dewarim.goblin.item.Item
 import de.dewarim.goblin.item.ItemType
+import de.dewarim.goblin.melee.MeleeResult
 import de.dewarim.goblin.pc.PlayerCharacter
 import de.dewarim.goblin.ticks.ITickListener
 
@@ -14,7 +14,6 @@ class MeleeService implements ITickListener {
 
     def globalConfigService
     def playerMessageService
-    def itemService
     def featureService
 
     Melee createMelee() {
@@ -45,6 +44,7 @@ class MeleeService implements ITickListener {
     MeleeFighter joinMelee(PlayerCharacter pc, Melee melee) {
         MeleeFighter mf = new MeleeFighter(melee, pc)
         mf.save()
+        pc.currentMelee = melee
         mf
     }
 
@@ -63,9 +63,9 @@ class MeleeService implements ITickListener {
     }
 
     void fightMelee(Melee melee) {
-        Map<PlayerCharacter, MeleeFighter> pcFighters = [:]
-        melee.fighters.findAll { it.state.equals(FighterState.ACTIVE) }.each {
-            pcFighters.put(it.pc, it)
+        List<PlayerCharacter> pcFighters = []
+        MeleeFighter.findAllWhere(state: FighterState.ACTIVE, melee: melee).each {
+            pcFighters.add(it.pc)
         }
 
         // 1. roll initiative
@@ -73,12 +73,9 @@ class MeleeService implements ITickListener {
 
         // 2. execute actions
         actions.each { action ->
-            MeleeFighter mf = pcFighters.get(action.actor)
-            if (mf.state.equals(FighterState.ACTIVE)) {
-                // only active fighters' actions are executed
+            if (action.actor.alive()) {
                 executeAction(action)
             }
-            mf.action = null // reset the melee action so it will not be automatically run again.
         }
 
         // check if fight is over
@@ -91,18 +88,8 @@ class MeleeService implements ITickListener {
             // surviving fighters: round++
             // set currentAction of all fighters to null
             melee.round++
-            updateFighters(melee)
         }
 
-    }
-
-    void updateFighters(Melee melee) {
-        melee.fighters.each { meleeFighter ->
-            if (meleeFighter.state == FighterState.ACTIVE) {
-                meleeFighter.action = null // reset melee action
-                meleeFighter.round++
-            }
-        }
     }
 
     void notifyWinner(Melee melee) {
@@ -129,12 +116,14 @@ class MeleeService implements ITickListener {
      * Compute the initiative value for all living fighters.
      * @return a list of MeleeActions sorted by initiative from highest to lowest.
      */
-    List<MeleeAction> rollInitiative(Map<PlayerCharacter, MeleeFighter> pcFighters) {
-        List<MeleeAction> actions = pcFighters.collect { pc, mf ->
-            if (!mf.action) {
-                mf.action = createDefaultAction(mf, pcFighters)
+    List<MeleeAction> rollInitiative(List<PlayerCharacter> pcFighters) {
+        List<MeleeAction> actions = MeleeAction.findAll()
+        pcFighters.each { fighter ->
+            def action = actions.find{it.actor==fighter}
+            if(! action){
+                action = createDefaultAction(fighter, pcFighters)
+                actions.add(action)
             }
-            mf.action
         }
         actions.each { action ->
             action.initiative = action.actor.initiative.roll()
@@ -147,6 +136,7 @@ class MeleeService implements ITickListener {
             case (MeleeActionType.FIGHT): attack(action); break
             case (MeleeActionType.USE_ITEM): useItem(action); break
         }
+        action.delete()
     }
 
     void attack(MeleeAction action) {
@@ -221,8 +211,7 @@ class MeleeService implements ITickListener {
     }
 
     void checkOpponentAlive(pc, adversary) {
-        if (adversary.hp < 0) {
-            adversary.alive = false
+        if (adversary.dead()) {
             adversary.deaths++
             MeleeFighter mf = MeleeFighter.findByPcAndMelee(adversary, pc.currentMelee)
             mf.state = FighterState.DEAD
@@ -265,12 +254,11 @@ class MeleeService implements ITickListener {
      * The default action is to attack the first player available who is not the current player.
      * Note: this means a player can attack another with a higher initiative.
      */
-    MeleeAction createDefaultAction(MeleeFighter mf, Map<PlayerCharacter, MeleeFighter> pcFighters) {
-        def pc = mf.pc
-        def target = pcFighters.values().find {
-            it.state.equals(FighterState.ACTIVE) && !it.pc.equals(pc)
-        }.pc
-        MeleeAction defaultAction = new MeleeAction(actor: pc, target: target, melee: mf.melee)
+    MeleeAction createDefaultAction(PlayerCharacter fighter, List<PlayerCharacter> pcFighters) {
+        def target = pcFighters.find {
+            !it.equals(fighter)
+        }
+        MeleeAction defaultAction = new MeleeAction(actor: fighter, target: target, melee: fighter.currentMelee)
         defaultAction.save()
         return defaultAction
     }
@@ -306,59 +294,71 @@ class MeleeService implements ITickListener {
      * @return a player's current meleeAction (or null if he has not selected one yet)
      */
     MeleeAction fetchAction(pc) {
-        def meleeFighter = fetchMeleeFighter(pc)
-        if (meleeFighter && meleeFighter.action != null) {
-            return meleeFighter.action
+        return MeleeAction.findWhere(actor: pc)
+    }
+
+    MeleeResult addAttackAction(pc, opponent) {
+        boolean adversaryIsValid = checkAdversary(pc, opponent)
+        MeleeResult meleeResult
+        if (adversaryIsValid) {
+            if (fetchAction(pc)) {
+                meleeResult = new MeleeResult(success: false, meleeMessage: 'melee.action.selected')
+            }
+            else {
+                getMeleeAction(pc, opponent, pc.currentMelee) 
+                meleeResult = new MeleeResult(success: true)
+            }
         }
         else {
-            return null
+            /*
+             * Adversary is invalid - set message, but do nothing
+             * This can happen if a PC flees from the melee or dies while the player
+             * is still making his decision.
+             */
+            meleeResult = new MeleeResult(success: false, meleeMessage: 'melee.adversary.missing')
         }
+        return meleeResult
     }
-
-    /**
-     * @param pc the PlayerCharacter whose MeleeFighter entry you need.
-     * @return the MeleeFighter entry for the player character and his current melee (or null).
-     */
-    MeleeFighter fetchMeleeFighter(pc) {
-        return MeleeFighter.find("from MeleeFighter mf where mf.pc=:pc and mf.melee=:melee", [pc: pc, melee: pc.currentMelee])
+    
+    MeleeAction getMeleeAction(pc, opponent, melee){
+        MeleeAction action = MeleeAction.findWhere(actor:pc)
+        if(!action){
+            action = new MeleeAction(actor:pc, target:opponent, melee: melee)
+        }
+        action.save()
     }
-
-    MeleeAction addAttackAction(pc, opponent) {
+    
+    void addUseItemAction(pc, opponent, item, itemTypeFeature) {
         Melee melee = pc.currentMelee
         if (fetchAction(pc)) {
             throw new RuntimeException('melee.action.selected')
         }
-        MeleeAction attack = new MeleeAction(actor: pc, target: opponent, melee: melee)
-        attack.save()
-        fetchMeleeFighter(pc).action = attack
-        return attack
-    }
-
-    MeleeAction addUseItemAction(pc, opponent, item, itemTypeFeature) {
-        Melee melee = pc.currentMelee
-        if (fetchAction(pc)) {
-            throw new RuntimeException('melee.action.selected')
-        }
-        MeleeAction useItem = new MeleeAction(actor: pc, target: opponent,
-                melee: melee, item: item, feature: itemTypeFeature.feature, featureConfig: itemTypeFeature.config, type: MeleeActionType.USE_ITEM)
-        useItem.save()
-        fetchMeleeFighter(pc).action = useItem
-        return useItem
+        MeleeAction useItem = getMeleeAction(pc, opponent, melee)
+        useItem.item = item
+        useItem.feature = itemTypeFeature.feature
+        useItem.featureConfig = itemTypeFeature.config
+        useItem.type = MeleeActionType.USE_ITEM
     }
 
     void tock() {
         Melee melee = Melee.findByStatus(MeleeStatus.RUNNING)
-        if (melee) {
-            melee.refresh()
-            fightMelee(melee)
-        }
-        else {
-            melee = findOrCreateMelee()
-            if (meleeIsReady(melee)) {
-                melee.refresh()
-                startMelee(melee)
+        try {
+            if (melee) {
+                log.debug("Found melee ${melee}")
+                fightMelee(melee)
             }
+            else {
+                melee = findOrCreateMelee()
+                log.debug("created new melee: ${melee}")
+                if (meleeIsReady(melee)) {
+                    startMelee(melee)
+                }
+            }
+            log.debug("meleeStatus: ${melee.status} / round: ${melee.round}")
         }
-        log.debug("meleeStatus: ${melee.status} / round: ${melee.round}")
+        catch (Exception e) {
+            log.debug("tock() failed with:", e)
+            throw e
+        }
     }
 }

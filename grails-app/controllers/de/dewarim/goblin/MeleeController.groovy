@@ -1,5 +1,7 @@
 package de.dewarim.goblin
 
+import de.dewarim.goblin.combat.MeleeAction
+import de.dewarim.goblin.melee.MeleeResult
 import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.combat.Melee
 import de.dewarim.goblin.combat.MeleeFighter
@@ -18,12 +20,18 @@ class MeleeController extends BaseController {
      * If now melee is running, the player may register for the next round.
      */
     def index() {
-        def pc = fetchPc()
-        if (!pc) {
-            redirect(controller: 'portal', action: 'start')
-            return
+        try {
+            def pc = fetchPc()
+            if (!pc) {
+                redirect(controller: 'portal', action: 'start')
+                return
+            }
+            return fetchViewParameters(pc)
         }
-        return fetchViewParameters(pc)
+        catch (Exception e){
+            log.debug("failed to show index",e)
+        }
+        return
     }
 
     /**
@@ -31,28 +39,34 @@ class MeleeController extends BaseController {
      * player may join.
      */
     def join() {
-        def pc = fetchPc()
-        if (!pc) {
-            flash.message = message(code: 'melee.join.failed')
-            redirect(controller: 'melee', action: 'index')
-            return
-        }
+        try {
+            def pc = fetchPc()
+            if (!pc) {
+                flash.message = message(code: 'melee.join.failed')
+                redirect(controller: 'melee', action: 'index')
+                return
+            }
 
-        if (pc.currentMelee) {
-            flash.message = message(code: 'melee.join.already')
-            redirect(controller: 'melee', action: 'index')
-            return
-        }
+            if (pc.currentMelee) {
+                flash.message = message(code: 'melee.join.already')
+                redirect(controller: 'melee', action: 'index')
+                return
+            }
 
-        def melee = meleeService.findOrCreateMelee()
-        log.debug("found melee: $melee")
-        if (meleeService.newFighterAllowed(pc, melee)) {
-            meleeService.joinMelee(pc, melee)
+            def melee = meleeService.findOrCreateMelee()
+            log.debug("found melee: $melee")
+            if (meleeService.newFighterAllowed(pc, melee)) {
+                meleeService.joinMelee(pc, melee)
+            }
+            else {
+                flash.message = message(code: 'melee.join.not.again')
+            }
+            redirect(controller: 'melee', action: 'index')
         }
-        else {
-            flash.message = message(code: 'melee.join.not.again')
+        catch (Exception e){
+            log.debug("failed to join melee: ",e)
+            renderException(e)
         }
-        redirect(controller: 'melee', action: 'index')
     }
 
     /**
@@ -142,29 +156,15 @@ class MeleeController extends BaseController {
             }
             def p
             PlayerCharacter adversary = inputValidationService.checkObject(PlayerCharacter.class, params.adversary)
-            if (meleeService.checkAdversary(pc, adversary)) {
-                if (meleeService.fetchAction(pc)) {
-                    // player has already selected an action
-                    p = fetchViewParameters(pc)
-                    p.put('meleeMessage', 'melee.action.selected')
-                }
-                else {
-                    meleeService.addAttackAction(pc, adversary)
-                    p = fetchViewParameters(pc)
-                }
-            }
-            else {
-                /*
-                 * Adversary is invalid - set message, but do nothing
-                 * This can happen if a PC flees from the melee or dies while the player
-                 * is still making his decision.
-                 */
-                p = fetchViewParameters(pc)
-                p.put('meleeMessage', 'melee.adversary.missing')
+            MeleeResult meleeResult = meleeService.addAttackAction(pc, adversary)
+            p = fetchViewParameters(pc)
+            if (!meleeResult.success) {
+                p.put('meleeMessage', meleeResult.meleeMessage)
             }
             render(template: 'chooseAction', model: p)
         }
         catch (Exception e) {
+            log.debug("Failed to attack:",e)
             render(status: 503, text: message(code: e.getMessage()))
         }
     }
@@ -182,7 +182,7 @@ class MeleeController extends BaseController {
                 items = itemService.fetchUsableItems(pc)
                 MeleeFighter mf = MeleeFighter.find("from MeleeFighter mf where mf.melee=:melee and mf.pc=:pc ",
                         [melee: pc.currentMelee, pc: pc])
-                currentAction = mf.action
+                currentAction = MeleeAction.findByActor(pc)
                 opponents = fighters.findAll { it != pc }
             }
         }
