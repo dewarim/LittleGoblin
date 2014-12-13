@@ -81,12 +81,14 @@ class MeleeService implements ITickListener {
         // check if fight is over
         if (fightIsOver(melee)) {
             notifyWinner(melee)
+            melee = melee.refresh()
             melee.status = MeleeStatus.FINISHED
             findOrCreateMelee()
         }
         else {
             // surviving fighters: round++
             // set currentAction of all fighters to null
+            melee = melee.refresh()
             melee.round++
         }
 
