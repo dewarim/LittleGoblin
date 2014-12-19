@@ -1,7 +1,7 @@
 package de.dewarim.goblin;
 
 /**
- *
+ * Types of components used for crafting and production.
  */
 public enum ComponentType {
 
