@@ -24,6 +24,9 @@ class PostOfficeController extends BaseController {
         ]
     }
 
+    /**
+     * Send an item from one player character to another.
+     */
     def sendItem() {
         def pc = fetchPc()
         try {
@@ -64,6 +67,9 @@ class PostOfficeController extends BaseController {
         }
     }
 
+    /**
+     * Ajax action to render a player character's inventory.
+     */
     def loadInventory() {
         def pc = fetchPc()
         if(! pc){
