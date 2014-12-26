@@ -36,8 +36,10 @@ class QuestService {
 
 		encounterScript.execute(pc, pc.currentQuest, encounter.config)
     }
-
-    // currently, we return all quest givers.
+   
+    /**
+     * Return a list of QuestGivers that have quests available for the given player character.
+     */
     List<QuestGiver> listQuestGivers(PlayerCharacter pc, Boolean filterForAvailableQuests){
         List<QuestGiver> questMasters = QuestGiver.list()
         if(filterForAvailableQuests){
