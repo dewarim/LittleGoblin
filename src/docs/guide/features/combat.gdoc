@@ -40,7 +40,7 @@ immune to fire with a +20 burning sword of [fire,death,chaos,poison] is not the 
 
 h3. The Grand Melee
 
-The Grand Melee is Highlander-style combat szenario where all participants will fight each other
+The Grand Melee is Highlander-style combat scenario where all participants will fight each other
 until only the winner is left standing. It is round based with a fixed timeout to prevent players
   from waiting too long before committing to an action. (If a player does not submit an action,
   his character will attack a random opponent).
