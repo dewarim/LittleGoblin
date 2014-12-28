@@ -43,7 +43,7 @@ Current combat attributes include:
 * light
 * chaos
 * sound
-* poision
+* poison
 * shards
 * normal
 
@@ -77,7 +77,7 @@ from a shop keeper. For example, buying "a dozen arrows" will add a stack of 12 
 h3. Usable and rechargeable items
 
 Some items can be used (activated) to create special effects, which may consume the item or reduce its
- life expectancy by one. A potion will have only one use, while a laster blaster may have a 100 shots
+ life expectancy by one. A potion will have only one use, while a laser blaster may have a 100 shots
   before it can be recharged.
 
 h3. Value and availability
