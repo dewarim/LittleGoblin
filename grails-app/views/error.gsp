@@ -18,7 +18,7 @@
 	  			background-color:white;
 	  			border:1px solid black;
 	  			margin:3px;
-	  			font-family:courier;
+                font-family: courier, monospace;
 	  		}
 	  </style>
   </head>
