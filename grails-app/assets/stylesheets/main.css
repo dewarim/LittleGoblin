@@ -67,7 +67,6 @@ input:focus, select:focus, textarea:focus {
 .nav {
     background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
     border: 1px solid #ccc;
-    border-style: solid none solid none;
     margin-top: 5px;
     padding: 7px 12px;
 }
@@ -204,7 +203,7 @@ th.desc a {
 }
 .paginateButtons a {
     background: #fff;
-    border: 1px solid #ccc;
+    border: 1px solid;
     border-color: #ccc #aaa #aaa #ccc;
     color: #666;
     margin: 0 3px;
