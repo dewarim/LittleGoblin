@@ -486,3 +486,10 @@ Version 0.4.8 "Test Test" / 2014-11-05
 * Use Java 8
 * Add more unit tests (ProductionJob, ProductionService)
 * Fix bugs in ProductionService
+
+Version 0.4.9 "Infernal Servant Error" / 2015-01-03
+* Fix typos
+* Translate mote messages to German
+* Improve tests
+* On start page, show link to admin page for admins
+* Refactor Grand Melee and fight code

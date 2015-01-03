@@ -106,6 +106,14 @@
 
         <div class="version_info">
             <pre>
+                Version 0.4.9 "Infernal Servant Error" / 2015-01-03
+                * Fix typos
+                * Translate mote messages to German
+                * Improve tests
+                * On start page, show link to admin page for admins
+                * Refactor Grand Melee and fight code
+            </pre>
+            <pre>
                 Version 0.4.8 "Test Test" / 2014-11-05
                 * Fixed small JavaScript bug in inventory page.
                 * Fixed ugly exception messages in development mode when using "grails stop-all"
@@ -118,21 +126,6 @@
                 * Add more unit tests (ProductionJob, ProductionService)
                 * Fix bugs in ProductionService
             </pre>
-            <pre>
-                Version 0.4.7 "RegisterMe" / 2014-10-10
-                * Fixed registration some more: added tests and improved stability
-            </pre>
-            <pre>
-                Version 0.4.6 "Status" / 2014-10-04
-                * Fixed registration, so you do not need to be a registered user to register...
-                * Registration password field is now of type *** password instead plain text.
-                * You can view the complete changelog again
-                * Fixed some error messages on startup after grails clean #developer
-                * Set dataSources.xml file to be ignored by git (it's not the same for each dev) #developer
-                * Fixed broken methods in Product class #developer
-                * Added a link to academies from product list in workshop if the PC cannot craft yet.
-            </pre>
-
             <div class="">
                 <a href="${assetPath(src: 'txt/status.txt')}" target="_blank"><g:message code="link.to.status.old"/></a>
             </div>
