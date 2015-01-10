@@ -136,10 +136,11 @@ grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/portal/start'
 grails.plugin.springsecurity.logout.afterLogoutUrl = '/portal/landing'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/assets/**': ['permitAll'],
+        '/':['permitAll']
 ]
 grails.plugin.springsecurity.providerNames = [
         'daoAuthenticationProvider',
-//        'anonymousAuthenticationProvider',
+        'anonymousAuthenticationProvider',
 'rememberMeAuthenticationProvider']
 
 grails.views.gsp.keepgenerateddir = '/tmp/gsp'
