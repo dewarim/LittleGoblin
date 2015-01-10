@@ -80,7 +80,7 @@ Goblin.prototype.goToTown = function(name){
     var self = this;
     var startPage = this.goToStart();
     var townLink = startPage.find('a:contains("'+name+'")');
-    if(townLink.length == 0){
+    if(townLink.length === 0){
         logger("Could not find link for "+name);
         return result;
     }
@@ -129,7 +129,7 @@ Goblin.prototype.getPage = function(controllerName, actionName){
         }
     });
     var pageInfo = $(result).find('#page-info');
-    if(pageInfo.length == 0){
+    if(pageInfo.length === 0){
         console.log("page-info is missing.");
         return GOBLIN_NO_RESULT;
     }
