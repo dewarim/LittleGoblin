@@ -21,6 +21,8 @@ class QuestStep {
     Boolean endOfQuest = false
     Boolean automaticTransition = false
 
+    Boolean descriptionContainsHtml = false
+
     /**
      * If this QuestStep is the first part of a Quest, set this to true.
      */
@@ -47,6 +49,7 @@ class QuestStep {
         if (firstStep != questStep.firstStep) return false
         if (intro != questStep.intro) return false
         if (title != questStep.title) return false
+        if (descriptionContainsHtml != questStep.descriptionContainsHtml) return false
 
         return true
     }
