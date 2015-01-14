@@ -55,6 +55,8 @@ class QuestStep {
     }
 
     int hashCode() {
-        return (title != null ? title.hashCode() : 0)
+        int hash =  (title != null ? title.hashCode() : 0)
+        hash = hash * 31 + name.hashCode()
+        return hash
     }
 }
