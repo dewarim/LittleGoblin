@@ -138,7 +138,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 ]
 grails.plugin.springsecurity.providerNames = [
         'daoAuthenticationProvider',
-//        'anonymousAuthenticationProvider',
+        'anonymousAuthenticationProvider',
 'rememberMeAuthenticationProvider']
 
 grails.views.gsp.keepgenerateddir = '/tmp/gsp'
