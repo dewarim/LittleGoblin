@@ -68,10 +68,6 @@ environments {
 
 // log4j configuration
 log4j = {
-    // Example of changing the log pattern for the default console
-    // appender:
-    //
-
 
     appenders {
         //disable stacktrace file
@@ -103,9 +99,11 @@ log4j = {
     debug 'grails.app.controller',
             'grails.app.domain.de.dewarim.goblin',
             'grails.app.domain.de.dewarim.goblin.Creature',
-            'grails.app.bootstrap',
+            'grails.app.conf.BootStrap',
             'de.dewarim.goblin.admin',
             'de.dewarim.goblin.admin.EquipmentSlotTypeAdminController'
+//    trace 'org.hibernate.type'
+//    debug 'org.hibernate.SQL'
 
 //			'org.codehaus.groovy.grails.web.servlet',  //  controllers
 //			'org.codehaus.groovy.grails.web.pages', //  GSP
@@ -136,6 +134,7 @@ grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/portal/start'
 grails.plugin.springsecurity.logout.afterLogoutUrl = '/portal/landing'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/assets/**': ['permitAll'],
+        '/':['permitAll']
 ]
 grails.plugin.springsecurity.providerNames = [
         'daoAuthenticationProvider',
