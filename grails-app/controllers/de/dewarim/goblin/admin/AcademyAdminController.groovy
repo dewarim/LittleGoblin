@@ -57,36 +57,39 @@ class AcademyAdminController extends BaseController {
             inputValidationService.checkObject(Guild.class, guild)
         }
         // remove deselected guilds
-        academy.guildAcademies.each {ga ->
-            if (!guildList.find {it.equals(ga.guild)}) {
+        academy.guildAcademies.each { ga ->
+            if (!guildList.find { it.equals(ga.guild) }) {
                 ga.deleteComplete()
             }
         }
         // add new guilds if necessary
-        guildList.each {Guild guild ->
+        guildList.each { Guild guild ->
             log.debug "Guild: ${guild}"
-            if (!academy.guildAcademies.find {it.guild.equals(guild)}) {
+            if (!academy.guildAcademies.find { it.guild.equals(guild) }) {
                 GuildAcademy ga = new GuildAcademy(guild, academy)
                 ga.save()
             }
         }
     }
 
-    void updateFields(academy){
+    void updateFields(academy) {
         academy.name = params.name
         academy.description =
-            inputValidationService.checkAndEncodeText(params, "description", "academy.description")
+                inputValidationService.checkAndEncodeText(params, "description", "academy.description")
         academy.town = (Town) inputValidationService.checkObject(Town.class, params.town)
     }
 
     def save() {
         Academy academy = new Academy()
         try {
-           updateFields(academy)
-           academy.save()
-           updateGuildAcademies(academy)
-
-           render(template: '/academyAdmin/list', model: [academies: Academy.listOrderByName()])
+            withForm {
+                updateFields(academy)
+                academy.save()
+                updateGuildAcademies(academy)
+                render(template: '/academyAdmin/list', model: [academies: Academy.listOrderByName()])
+            }.invalidToken {
+               renderException(invalidFormException) 
+            }
         }
         catch (RuntimeException e) {
 //            log.debug "failed to save academy", e
