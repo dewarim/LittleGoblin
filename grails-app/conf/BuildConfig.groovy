@@ -59,7 +59,7 @@ grails.project.dependency.resolution = {
             export = false
         }
         compile ":fixtures:1.3"
-        compile ":asset-pipeline:1.9.9"
+        compile ":asset-pipeline:2.3.9"
 //        compile ":build-test-data:2.2.2",{
 //            export = false
 //        }
