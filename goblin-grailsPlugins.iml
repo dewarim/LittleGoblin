@@ -5,7 +5,7 @@
       <configuration>
         <webroots>
           <root url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/jquery-1.11.1/web-app" relative="/" />
-          <root url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/spring-security-core-2.0-RC4/grails-app/views" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/spring-security-core-2.0-RC5/grails-app/views" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -44,6 +44,14 @@
     </content>
     <content url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/rest-client-builder-2.1.1" />
     <content url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/spock-0.7" />
+    <content url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/spring-security-core-2.0-RC5">
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/spring-security-core-2.0-RC5/src/java" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/spring-security-core-2.0-RC5/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/spring-security-core-2.0-RC5/grails-app/i18n" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/spring-security-core-2.0-RC5/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/spring-security-core-2.0-RC5/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/spring-security-core-2.0-RC5/grails-app/taglib" isTestSource="false" />
+    </content>
     <content url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/tomcat-8.0.15">
       <sourceFolder url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/tomcat-8.0.15/src/java" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/2.4.4/projects/goblin/plugins/tomcat-8.0.15/src/groovy" isTestSource="false" />
