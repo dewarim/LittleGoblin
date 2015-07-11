@@ -19,6 +19,7 @@ environments {
 			dbCreate = "create"
 			pooling = true
             logSql = false
+//            formatSql = true
 //            driverClassName = "com.mysql.jdbc.Driver"
 //			dialect = 'org.hibernate.dialect.MySQL5InnoDBDialect'
 //			url = "jdbc:mysql://localhost:3306/goblin_dev"

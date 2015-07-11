@@ -2,7 +2,7 @@ package de.dewarim.goblin.quest
 
 class QuestStep {
 
-    static belongsTo = [encounter: Encounter, questTemplate: QuestTemplate]
+    static belongsTo = [questTemplate: QuestTemplate]
     static hasMany = [nextSteps: StepChild, parentSteps: StepChild]
     static mappedBy = [parentSteps: 'child', nextSteps: 'parent']
     static constraints = {
@@ -10,6 +10,7 @@ class QuestStep {
         description blank: false
         intro nullable: true
         name unique: true
+        encounter nullable: true
     }
 
     /*
@@ -20,7 +21,7 @@ class QuestStep {
     Integer chance = 100
     Boolean endOfQuest = false
     Boolean automaticTransition = false
-
+    Encounter encounter
     Boolean descriptionContainsHtml = false
 
     /**

@@ -2,8 +2,6 @@ package de.dewarim.goblin.admin
 
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.Feature
-import de.dewarim.goblin.item.ItemType
-import de.dewarim.goblin.shop.Shop
 import grails.plugin.springsecurity.annotation.Secured
 
 @Secured(["ROLE_ADMIN"])

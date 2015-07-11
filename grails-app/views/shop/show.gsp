@@ -37,7 +37,7 @@
 
             <br>
 
-            <g:if test="${shop.itemTypes?.size() > 0}">
+            <g:if test="${session['currentItemTypes']?.size() > 0}">
                 <div id="itemList">
                     <g:render template="itemList" model="[pc:pc, shopItems:shopItems, shop:shop]"/>
                 </div>

@@ -4,6 +4,7 @@ import asset.pipeline.AbstractAssetFile
 
 /**
  * Asset file for handling static text files
+ * TODO: FIXME: since the last plugin upgrade (or before?), this class is broken.
  */
 class TxtAssetFile extends AbstractAssetFile{
 
@@ -12,7 +13,7 @@ class TxtAssetFile extends AbstractAssetFile{
     static compiledExtension = 'txt'
     static processors = []
     
-    @Override
+//    @Override
     String directiveForLine(String line) {
         return null
     }

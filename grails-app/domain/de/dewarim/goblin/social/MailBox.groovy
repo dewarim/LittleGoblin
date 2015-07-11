@@ -7,9 +7,10 @@ import de.dewarim.goblin.pc.PlayerCharacter
  */
 class MailBox {
 
-    static belongsTo = [owner:PlayerCharacter, boxType:MailBoxType]
     static hasMany = [mails:Mail]
-
+    
+    PlayerCharacter owner
+    MailBoxType boxType
     MailBox(){}
 
     MailBox(PlayerCharacter pc, MailBoxType type){

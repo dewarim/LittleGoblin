@@ -37,7 +37,6 @@ class PlayerCharacter extends Creature {
     }
 
     static belongsTo = [user         : UserAccount,
-                        town         : Town,
                         currentCombat: Combat,
                         currentQuest : Quest,
     ]
@@ -56,6 +55,7 @@ class PlayerCharacter extends Creature {
     Integer victories = 0
     Long questLevel = 0
     Long level = 1
+    Town town
 
     GoblinOrder goblinOrder
     Melee currentMelee
@@ -164,6 +164,7 @@ class PlayerCharacter extends Creature {
         if (spentExperience != that.spentExperience) return false
         if (victories != that.victories) return false
         if (xp != that.xp) return false
+        if (town != that.town) return false
 
         return true
     }

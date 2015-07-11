@@ -9,8 +9,6 @@ import de.dewarim.goblin.pc.crafting.SkillRequirement
  */
 abstract class Skill {
 
-    static hasMany = [creatureSkills: CreatureSkill, skillRequirements: SkillRequirement]
-    // TODO: is this reverse mapping required?
     static constraints = {
         script nullable: true, validator: {
             return it == null || (it in ISkillScript)
@@ -46,4 +44,13 @@ abstract class Skill {
     int hashCode() {
         return name != null ? name.hashCode() : 0
     }
+    
+    List<CreatureSkill> getCreatureSkills(){
+        return CreatureSkill.findAllBySkill(this)
+    }
+    
+    List<SkillRequirement> getSkillRequirements(){
+        return SkillRequirement.findAllBySkill(this)
+    }
+    
 }

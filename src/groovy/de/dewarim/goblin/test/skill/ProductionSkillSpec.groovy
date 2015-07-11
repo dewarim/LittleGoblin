@@ -38,7 +38,7 @@ class ProductionSkillSpec extends Specification {
         product.save()
         productionSkill.save()
         skillRequirement.save()
-        productionSkill.addToSkillRequirements(skillRequirement)
+//        productionSkill.addToSkillRequirements(skillRequirement)
     }
     
     void "initSkillTest"(){

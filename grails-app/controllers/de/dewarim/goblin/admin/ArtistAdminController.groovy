@@ -1,7 +1,6 @@
 package de.dewarim.goblin.admin
 
 import de.dewarim.goblin.BaseController
-import de.dewarim.goblin.Artist
 import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.Artist
 

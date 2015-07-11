@@ -106,6 +106,13 @@
 
         <div class="version_info">
             <pre>
+                Version 0.5.0 "Small Updates" / 2015-07-11
+                * Updated plugin versions
+
+                Version 0.5.1 "Fix Panic" / 2015-07-11
+                * Fixed broken many-to-many relations ("I haven't changed a thing!")
+            </pre>
+            <pre>
                 Version 0.4.9 "Infernal Servant Error" / 2015-01-03
                 * Fix typos
                 * Translate mote messages to German

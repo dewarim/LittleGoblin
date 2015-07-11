@@ -8,9 +8,6 @@ package de.dewarim.goblin
  */
 class Artist {
 
-    static hasMany = [images:Image]
-    static mappedBy = [images:'artist']
-
     static constraints = {
 		name(blank:false)
 		website(nullable:true)
@@ -36,5 +33,9 @@ class Artist {
         result = (name != null ? name.hashCode() : 0)
         result = 31 * result + (website != null ? website.hashCode() : 0)
         return result
+    }
+    
+    List<Image> getImages(){
+        return Image.findAllByArtist(this)
     }
 }

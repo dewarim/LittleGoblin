@@ -8,8 +8,9 @@ import de.dewarim.goblin.pc.skill.Skill
  */
 class SkillRequirement {
 
-    static belongsTo = [product:Product, skill:Skill]
-
+    Product product
+    Skill skill
+    
     /**
     * The minimum required level of the skill.
      */

@@ -12,33 +12,40 @@ class ShopController extends BaseController {
     def shopService
 
     def show() {
-        def pc = fetchPc()
-        session.filters = [] // start with showing all items.
-        Shop shop = Shop.get(params.shop)
-        if (!pc?.town?.shops?.find {it.equals(shop)}) {
-            /*
+        try {
+            def pc = fetchPc()
+            session.filters = [] // start with showing all items.
+            Shop shop = Shop.get(params.shop)
+            if (!pc?.town?.shops?.find { it.equals(shop) }) {
+                /*
             *  It has to be a shop in the player characters town,
             *  or something is wrong.
             */
-            redirect(controller: 'town', action: 'show', params: [pc: params.pc])
-            return
+                redirect(controller: 'town', action: 'show', params: [pc: params.pc])
+                return
+            }
+            if (!shop) {
+                flash.message = message(code: 'error.shop.not_found')
+                redirect(controller: 'town', action: 'show', params: [pc: params.pc])
+                return
+            }
+            if (! (session['currentItemTypes']?.size() > 0)) {
+                fetchWares(shop)
+            }
+            def categories = shopService.fetchCategoryList(shop).sort { message(code: it.name) }
+            def shopItems = session['currentItemTypes'].sort { message(code: it.name) }
+            return [shop      : shop,
+                    pc        : pc,
+                    shopping  : true,
+                    shopItems : shopItems,
+                    categories: categories
+            ]
         }
-        if (!shop) {
-            flash.message = message(code: 'error.shop.not_found')
-            redirect(controller: 'town', action: 'show', params: [pc: params.pc])
-            return
+        catch (Exception e) {
+            log.error("Failed to show shop:", e)
+            flash.message = message(code: 'error.shop.closed', args: [e.getLocalizedMessage()])
+            return redirect(controller: 'town', action: 'show')
         }
-        if (shop.itemTypes?.size() == 0) {
-            fetchWares(shop)
-        }
-//        def itemCategoryMap = itemService.fetchItemCategoryTypeMap(shop.itemTypes)
-        def categories = shopService.fetchCategoryList(shop).sort {message(code: it.name)}
-        return [shop: shop,
-                pc: pc,
-                shopping: true,
-                shopItems: shop.itemTypes.sort {message(code: it.name)},
-                categories: categories
-        ]
     }
 
     def addCategory() {
@@ -54,11 +61,11 @@ class ShopController extends BaseController {
             else {
                 filters.add(cat)
             }
-            def shopItems = itemService.filterItemTypesByCategory(shop.itemTypes, filters)
+            def shopItems = itemService.filterItemTypesByCategory(session['currentItemTypes'], filters)
 
-            render(template: 'itemList', model: [pc: pc,
-                    shop: shop,
-                    shopItems: shopItems.sort {message(code: it.name)}
+            render(template: 'itemList', model: [pc       : pc,
+                                                 shop     : shop,
+                                                 shopItems: shopItems.sort { message(code: it.name) }
             ])
         }
         catch (RuntimeException e) {
@@ -79,11 +86,11 @@ class ShopController extends BaseController {
             else {
                 filters.remove(cat)
             }
-            def shopItems = itemService.filterItemTypesByCategory(shop.itemTypes, filters)
+            def shopItems = itemService.filterItemTypesByCategory(session['currentItemTypes'], filters)
 
-            render(template: 'itemList', model: [pc: pc,
-                    shop: shop,
-                    shopItems: shopItems.sort {message(code: it.name)}
+            render(template: 'itemList', model: [pc       : pc,
+                                                 shop     : shop,
+                                                 shopItems: shopItems.sort { message(code: it.name) }
             ])
         }
         catch (RuntimeException e) {
@@ -96,10 +103,11 @@ class ShopController extends BaseController {
         def pc = fetchPc()
         try {
             Shop shop = (Shop) inputValidationService.checkObject(Shop.class, params.shop)
-//            def itemCategoryMap = itemService.fetchItemCategoryTypeMap(shop.itemTypes)
-            render(template: 'categoryFilter', model: [shop: shop,
-                    pc: pc,
-                    categories: shopService.fetchCategoryList(shop).sort {message(code: it.name)}])
+            render(template: 'categoryFilter', model: [shop      : shop,
+                                                       pc        : pc,
+                                                       categories: shopService.fetchCategoryList(shop).sort {
+                                                           message(code: it.name)
+                                                       }])
         }
         catch (RuntimeException e) {
             renderException e
@@ -112,9 +120,9 @@ class ShopController extends BaseController {
             Shop shop = (Shop) inputValidationService.checkObject(Shop.class, params.shop)
             session.categoryFilters = []
 
-            render(template: 'itemList', model: [pc: pc,
-                    shop: shop,
-                    shopItems: shop.itemTypes.sort {message(code: it.name)}
+            render(template: 'itemList', model: [pc       : pc,
+                                                 shop     : shop,
+                                                 shopItems: session['currentItemTypes'].sort { message(code: it.name) }
             ])
         }
         catch (RuntimeException e) {
@@ -124,7 +132,7 @@ class ShopController extends BaseController {
 
 
     protected void fetchWares(Shop shop) {
-        shop.itemTypes = itemService.fetchItemTypes(shop)
+        session['currentItemTypes'] = itemService.fetchItemTypes(shop)
     }
 
     def buy() {
@@ -143,7 +151,10 @@ class ShopController extends BaseController {
             }
             def itemType = ItemType.get(params.itemType)
             Integer amount = params.amount ? inputValidationService.checkAndEncodeInteger(params, 'amount', 'amount') : 1
-            if (shop.itemTypes.find { it.id.equals(itemType.id) }) {
+            if(session['currentItemTypes'] == null){
+                session['currentItemTypes'] = fetchWares(shop)
+            }
+            if (session['currentItemTypes'].find { it.id.equals(itemType.id) }) {
                 Integer price = shop.owner.calculatePrice(itemType)
                 Integer totalCost = price * amount
                 if (pc.gold >= totalCost) {
@@ -162,7 +173,7 @@ class ShopController extends BaseController {
                         item.save()
                         items.add(item)
                     }
-                    render(template: '/shared/sideInventory', model: [pc: pc, shop: shop, items:pc.items])
+                    render(template: '/shared/sideInventory', model: [pc: pc, shop: shop, items: pc.items])
                 }
                 else {
                     render(status: 503, text: message(code: 'error.insufficient.gold'))
@@ -172,9 +183,9 @@ class ShopController extends BaseController {
                 render(status: 503, text: message(code: 'error.item.not_found'))
             }
         }
-        catch (Exception e){
-            log.debug("Failed to buy item: ",e)
-            renderException(e)   
+        catch (Exception e) {
+            log.debug("Failed to buy item: ", e)
+            renderException(e)
         }
     }
 
@@ -183,7 +194,7 @@ class ShopController extends BaseController {
             def pc = fetchPc()
             Shop shop = (Shop) inputValidationService.checkObject(Shop.class, params.shop)
 
-            if (!pc?.town?.shops?.find {it.equals(shop)}) {
+            if (!pc?.town?.shops?.find { it.equals(shop) }) {
                 /*
                 *  It has to be a shop in the player characters town,
                 *  or something is wrong.
@@ -192,7 +203,7 @@ class ShopController extends BaseController {
             }
             def item = fetchItem(pc)
             def items = pc.items
-            
+
             def amount = Math.abs(inputValidationService.checkAndEncodeInteger(params, "amount", 'item.amount'))
             amount = amount > item.amount ? item.amount : amount
             def sellPrice = (shop.owner.calculateSellPrice(item))
@@ -204,11 +215,11 @@ class ShopController extends BaseController {
             else {
                 item.amount -= amount
             }
-            
-            if(item.amount == 0){
+
+            if (item.amount == 0) {
                 def id = item.id
-                def itemInList = items.find{it.id == id}
-                if(itemInList){
+                def itemInList = items.find { it.id == id }
+                if (itemInList) {
                     items.remove(itemInList)
                 }
                 item.delete()

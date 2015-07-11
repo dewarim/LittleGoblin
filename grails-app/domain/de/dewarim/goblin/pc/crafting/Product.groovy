@@ -14,7 +14,6 @@ class Product {
             crafters:PlayerProduct // players who know how to make this product
     ]
 
-    static belongsTo = [category:ProductCategory]
     static constraints = {
         name unique:true
         timeNeeded validator:{
@@ -25,6 +24,8 @@ class Product {
 
     String name
     Long timeNeeded
+    ProductCategory category
+    
     // productionScript is disabled at the moment - too much complexity.
 //    Class productionScript
 

@@ -9,20 +9,18 @@ import de.dewarim.goblin.shop.Shop
  */
 class Town {
 
-	static hasMany = [shops:Shop,
-            academies:Academy,
-            homes:PlayerCharacter // a player character has a home town.
+    static hasMany = [shops    : Shop,
+                      academies: Academy,
     ]
-    static mappedBy = [homes:'town']
-	static constraints = {
-		name(blank:false)
-		shortDescription(blank:false)
-		description(nullable:true, blank:false, size:1..4000)
-	}
+    static constraints = {
+        name(blank: false)
+        shortDescription(blank: false)
+        description(nullable: true, blank: false, size: 1..4000)
+    }
 
-	String name
-	String description
-	String shortDescription
+    String name
+    String description
+    String shortDescription
 
     boolean equals(o) {
         if (this.is(o)) return true
@@ -43,5 +41,9 @@ class Town {
         result = 31 * result + (description != null ? description.hashCode() : 0)
         result = 31 * result + (shortDescription != null ? shortDescription.hashCode() : 0)
         return result
+    }
+
+    List<PlayerCharacter> getHomes() {
+        return PlayerCharacter.findAllByTown(this)
     }
 }

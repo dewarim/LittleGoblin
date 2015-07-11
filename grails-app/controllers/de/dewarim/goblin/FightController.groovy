@@ -208,7 +208,7 @@ class FightController extends BaseController {
         pc.currentQuest = null
 
         Mob mob = combat.fetchFirstMob()
-        HighScore hs = new HighScore(character: pc, xp: pc.xp, killer: mob)
+        HighScore hs = new HighScore(character: pc, xp: pc.xp, killerMob: mob)
         hs.save()
 
         return [pc: pc,

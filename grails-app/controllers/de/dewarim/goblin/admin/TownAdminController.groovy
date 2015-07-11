@@ -3,7 +3,6 @@ package de.dewarim.goblin.admin
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.town.Town
 import grails.plugin.springsecurity.annotation.Secured
-import de.dewarim.goblin.town.Academy
 
 @Secured(["ROLE_ADMIN"])
 class TownAdminController extends BaseController {

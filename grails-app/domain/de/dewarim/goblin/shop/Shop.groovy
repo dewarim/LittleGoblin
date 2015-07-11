@@ -4,21 +4,20 @@ import de.dewarim.goblin.item.ItemType
 import de.dewarim.goblin.town.Town
 
 class Shop {
+
+    static constraints = {
+        name blank: false
+        description nullable: true
+    }
+
+    /**
+     * Name of the Shop
+     */
+    String name
+    String description
+    ShopOwner owner
+    Town town
     
-    // TODO: hasMany:itemTypes looks wrong, needs mapping class shop::itemType
-	static hasMany = [itemTypes:ItemType, shopCategories:ShopCategory]
-	static belongsTo = [owner:ShopOwner, town:Town]
-	static constraints = {
-		name blank:false
-		description nullable:true
-	}
-
-	/**
-	 * Name of the Shop
-	 */
-	String name
-	String description
-
     boolean equals(o) {
         if (is(o)) return true
         if (!(o instanceof Shop)) return false
@@ -39,4 +38,13 @@ class Shop {
         result = 31 * result + (town != null ? town.hashCode() : 0)
         return result
     }
+
+    List<ItemType> getItemTypes() {
+        return ShopItemType.findAllByShop(this).collect { it.itemType }
+    }
+    
+    List<ShopCategory> getShopCategories(){
+        return ShopCategory.findAllByShop(this)
+    }
+    
 }

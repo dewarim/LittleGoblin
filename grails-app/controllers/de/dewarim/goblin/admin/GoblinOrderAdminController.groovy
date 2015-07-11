@@ -3,9 +3,7 @@ package de.dewarim.goblin.admin
 import de.dewarim.goblin.BaseController
 import de.dewarim.goblin.pc.GoblinOrder
 import de.dewarim.goblin.pc.PlayerCharacter
-import de.dewarim.goblin.town.Academy
 import grails.plugin.springsecurity.annotation.Secured
-import org.springframework.validation.ObjectError
 
 @Secured(["ROLE_ADMIN"])
 class GoblinOrderAdminController extends BaseController {
