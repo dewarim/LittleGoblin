@@ -5,14 +5,14 @@ package de.dewarim.goblin
  */
 class Role {
 
-	/** description */
-	String description
-	/** ROLE String */
-	String name
+    /** description */
+    String description
+    /** ROLE String */
+    String name
 
-	static constraints = {
-		name(blank: false, unique: true)
-	}
+    static constraints = {
+        name(blank: false, unique: true)
+    }
 
     boolean equals(o) {
         if (is(o)) return true
@@ -29,8 +29,8 @@ class Role {
     int hashCode() {
         return name != null ? name.hashCode() : 0
     }
-    
-    List<UserRole> getUserRoles(){
+
+    List<UserRole> getUserRoles() {
         return UserRole.findAllByRole(this)
     }
 }

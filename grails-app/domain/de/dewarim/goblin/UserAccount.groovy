@@ -6,22 +6,22 @@ import de.dewarim.goblin.pc.PlayerCharacter
  * User domain class.
  */
 class UserAccount {
-	static transients = ['pass']
-	static hasMany = [characters:PlayerCharacter]
+    static transients = ['pass']
+    static hasMany = [characters: PlayerCharacter]
     static mappedBy = [characters: 'user']
-    
+
     def springSecurityService
 
-	PlayerCharacter currentChar
+    PlayerCharacter currentChar
 
-	/** Username */
-	String username
-	/** User Real Name*/
-	String userRealName
-	/** MD5 Password */
-	String passwd
-	/** enabled */
-	Boolean enabled = false
+    /** Username */
+    String username
+    /** User Real Name*/
+    String userRealName
+    /** MD5 Password */
+    String passwd
+    /** enabled */
+    Boolean enabled = false
 
     String mailConfirmationToken = UUID.randomUUID().toString()
     Boolean confirmationMailSent = false
@@ -36,36 +36,36 @@ class UserAccount {
     Boolean accountLocked = false
     Boolean passwordExpired = false
 
-	String email
+    String email
     Locale locale = new Locale('en')
-	Boolean emailShow = false
+    Boolean emailShow = false
 
-	/** description */
-	String description = ''
+    /** description */
+    String description = ''
 
-	/** plain password to create a hashed password */
-	String pass = '[secret]'
+    /** plain password to create a hashed password */
+    String pass = '[secret]'
 
     Integer coins = 0
     Boolean premiumMember = false
 
-	static constraints = {
-		username(blank: false, unique: true)
-		userRealName(blank: false)
-		passwd(blank: false)
-		enabled()
-		email(nullable:true)
-		currentChar(nullable:true)
+    static constraints = {
+        username(blank: false, unique: true)
+        userRealName(blank: false)
+        passwd(blank: false)
+        enabled()
+        email(nullable: true)
+        currentChar(nullable: true)
         lastPasswordReset(nullable: true)
         salt(nullable: true)
-	}
+    }
 
-    Boolean checkRole(String roleName){
-        return userRoles.any{it.role.name.equals(roleName)}
+    Boolean checkRole(String roleName) {
+        return userRoles.any { it.role.name.equals(roleName) }
     }
 
     Set<Role> getAuthorities() {
-       UserRole.findAllByUser(this).collect { it.role } as Set
+        UserRole.findAllByUser(this).collect { it.role } as Set
     }
 
     def beforeInsert() {
@@ -77,8 +77,8 @@ class UserAccount {
             encodePassword()
         }
     }
-    
-    String getSalt(){
+
+    String getSalt() {
         return null
     }
 
@@ -117,11 +117,11 @@ class UserAccount {
 
     int hashCode() {
         int result = mailConfirmationToken != null ? mailConfirmationToken.hashCode() : 0
-        result = 31 * result + (username != null ? username.hashCode() : 0)     
+        result = 31 * result + (username != null ? username.hashCode() : 0)
         return result
     }
-    
-    List<UserRole> getUserRoles(){
+
+    List<UserRole> getUserRoles() {
         return UserRole.findAllByUser(this)
     }
 }
