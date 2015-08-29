@@ -7,7 +7,7 @@ import de.dewarim.goblin.pc.PlayerCharacter
  */
 class UserAccount {
 	static transients = ['pass']
-	static hasMany = [userRoles: UserRole,characters:PlayerCharacter]
+	static hasMany = [characters:PlayerCharacter]
     static mappedBy = [characters: 'user']
     
     def springSecurityService
@@ -119,5 +119,9 @@ class UserAccount {
         int result = mailConfirmationToken != null ? mailConfirmationToken.hashCode() : 0
         result = 31 * result + (username != null ? username.hashCode() : 0)     
         return result
+    }
+    
+    List<UserRole> getUserRoles(){
+        return UserRole.findAllByUser(this)
     }
 }

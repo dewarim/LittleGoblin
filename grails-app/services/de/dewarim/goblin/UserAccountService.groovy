@@ -16,7 +16,7 @@ class UserAccountService {
             return new AccountCreationResult(userAccount: newAccount)
         }
         catch (Exception e){
-            log.debug("Failed to create account: "+e.getMessage())
+            log.debug("Failed to create account: "+e.getMessage(), e)
             return new AccountCreationResult(errorMessage: e.getMessage())
         }
     }

@@ -5,8 +5,6 @@ package de.dewarim.goblin
  */
 class Role {
 
-	static hasMany = [userRoles: UserRole]
-
 	/** description */
 	String description
 	/** ROLE String */
@@ -30,5 +28,9 @@ class Role {
 
     int hashCode() {
         return name != null ? name.hashCode() : 0
+    }
+    
+    List<UserRole> getUserRoles(){
+        return UserRole.findAllByRole(this)
     }
 }

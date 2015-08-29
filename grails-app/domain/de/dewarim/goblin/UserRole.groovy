@@ -7,7 +7,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder
  */
 class UserRole{
 
-    static belongsTo = [user:UserAccount, role:Role]
+	UserAccount user
+	Role role
 
     UserRole(){
 
@@ -16,8 +17,6 @@ class UserRole{
     UserRole(UserAccount user, Role role){
         this.user = user
         this.role = role
-        user.addToUserRoles(this)
-        role.addToUserRoles(this)
     }
 
 
