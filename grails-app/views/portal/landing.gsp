@@ -89,9 +89,9 @@
             <p>You are invited to test the current functionality by using the "anon" login with password "anon".
 
             If you want to report any bugs or if you miss a specific feature, please file a
-                <a href="https://sourceforge.net/tracker/?group_id=317345&amp;atid=1334697">bug report</a>
+                <a href="https://github.com/dewarim/LittleGoblin/issues/">bug report</a> or
                 or a
-                <a href="https://sourceforge.net/tracker/?group_id=317345&amp;atid=1334694">feature request</a> on Sourceforge.net
+                <a href="https://github.com/dewarim/LittleGoblin/issues/">feature request</a> on GitHub.com
             </p>
 
             <p>You can also just send a mail ( ingo_wiarda@dewarim.de ) or tweet me: <a
