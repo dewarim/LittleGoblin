@@ -3,9 +3,6 @@ package de.dewarim.goblin
 import de.dewarim.goblin.combat.Combat
 import de.dewarim.goblin.combat.CombatAttributeType
 import de.dewarim.goblin.combat.CombatMessage
-import de.dewarim.goblin.exception.MonsterDeadException
-import de.dewarim.goblin.exception.PlayerDeadException
-import de.dewarim.goblin.exception.SimultaneousDeathException
 import de.dewarim.goblin.fight.FightResult
 import de.dewarim.goblin.fight.FightResultType
 import de.dewarim.goblin.mob.Mob
@@ -14,35 +11,38 @@ import de.dewarim.goblin.pc.PlayerCharacter
 class FightService {
 
     def fight(Combat combat, PlayerCharacter pc, Mob mob) {
-        try {
-            if (roll_initiative(pc, mob)) {
-                pc.attack(mob, combat, true)
-                checkDeath(pc, mob)
+        if (roll_initiative(pc, mob)) {
+            pc.attack(mob, combat, true)
+            def dead = checkDeath(pc, mob)
+            if (dead.isEmpty()) {
                 mob.attack(pc, combat, true)
             }
-            else {
-                mob.attack(pc, combat, true)
-                checkDeath(pc, mob)
+        }
+        else {
+            mob.attack(pc, combat, true)
+            def dead = checkDeath(pc, mob)
+            if (dead.isEmpty()) {
                 pc.attack(mob, combat, true)
             }
-            checkDeath(pc, mob)
         }
-        catch (PlayerDeadException pde) {
-            new CombatMessage('fight.pc.dead', [pc.name], combat).save()
-            return new FightResult(type: FightResultType.DEATH, opponent: mob)
+        combat.save()
+
+        def dead = checkDeath(pc, mob)
+        if (dead.isEmpty()) {
+            return new FightResult(type: FightResultType.CONTINUE, opponent: mob)
         }
-        catch (MonsterDeadException mde) {
-            new CombatMessage('fight.mob.dead', [mob.name], combat).save()
-            return new FightResult(type: FightResultType.VICTORY, opponent: mob)
-        }
-        catch (SimultaneousDeathException sde) {
+        if (dead.size() == 2) {
             new CombatMessage('fight.all.dead', [], combat).save()
             return new FightResult(type: FightResultType.DEATH, opponent: mob)
         }
-        finally {
-            combat.save()
+        if (dead.contains(pc)) {
+            new CombatMessage('fight.pc.dead', [pc.name], combat).save()
+            return new FightResult(type: FightResultType.DEATH, opponent: mob)
         }
-        return new FightResult(type: FightResultType.CONTINUE, opponent: mob)
+        else {
+            new CombatMessage('fight.mob.dead', [mob.name], combat).save()
+            return new FightResult(type: FightResultType.VICTORY, opponent: mob)
+        }
     }
 
     Boolean roll_initiative(pc, mob) {
@@ -50,16 +50,17 @@ class FightService {
         return pc.initiative.roll() > mob.initiative.roll()
     }
 
-    void checkDeath(pc, mob) {
+    List<Creature> checkDeath(PlayerCharacter pc, Mob mob) {
         if (pc.dead() && mob.dead()) {
-            throw new SimultaneousDeathException()
+            return [pc, mob]
         }
         else if (pc.dead()) {
-            throw new PlayerDeadException()
+            return [pc]
         }
         if (mob.dead()) {
-            throw new MonsterDeadException()
+            return [mob]
         }
+        return []
     }
 
     CombatMessage attack(Creature attacker, Creature opponent, Combat combat) {

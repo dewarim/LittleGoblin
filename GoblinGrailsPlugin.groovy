@@ -1,6 +1,6 @@
 class GoblinGrailsPlugin {
 
-    def version = "0.5.2.2"
+    def version = "0.5.2.3"
     def grailsVersion = "2.4 > *"
     def pluginExcludes = [
             "docs/**",
