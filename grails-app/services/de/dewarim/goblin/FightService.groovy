@@ -6,14 +6,13 @@ import de.dewarim.goblin.combat.CombatMessage
 import de.dewarim.goblin.exception.MonsterDeadException
 import de.dewarim.goblin.exception.PlayerDeadException
 import de.dewarim.goblin.exception.SimultaneousDeathException
+import de.dewarim.goblin.fight.FightResult
 import de.dewarim.goblin.mob.Mob
 import de.dewarim.goblin.pc.PlayerCharacter
 
 class FightService {
 
     def fight(Combat combat, PlayerCharacter pc, Mob mob) {
-//        Combat.withTransaction {
-//            combat.merge()
         try{
             if(roll_initiative(pc, mob)){
                 pc.attack(mob, combat, true)
@@ -25,25 +24,24 @@ class FightService {
                 checkDeath(pc, mob)
                 pc.attack(mob, combat, true)
             }
-            combat.save()
             checkDeath(pc, mob)
         }
         catch(PlayerDeadException pde){
             new CombatMessage('fight.pc.dead', [pc.name], combat).save()
-            combat.save()
-            return "death"
+            return FightResult.DEATH
         }
         catch(MonsterDeadException mde){
             new CombatMessage('fight.mob.dead', [mob.name], combat).save()
-            combat.save()
-            return "victory"
+            return FightResult.VICTORY
         }
         catch(SimultaneousDeathException sde){
             new CombatMessage('fight.all.dead', [], combat).save()
-            combat.save()
-            return "death"
+            return FightResult.DEATH
         }
-        return null
+        finally {
+            combat.save()
+        }
+        return FightResult.CONTINUE
     }
 
     Boolean roll_initiative(pc, mob){

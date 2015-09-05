@@ -1,5 +1,6 @@
 package de.dewarim.goblin
 
+import de.dewarim.goblin.fight.FightResult
 import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.combat.Combat
 import de.dewarim.goblin.item.Item
@@ -18,6 +19,7 @@ class FightController extends BaseController {
     /*
       * Show opponent, option fight or flee.
       */
+
     def index() {
         def user = fetchUser()
 
@@ -37,9 +39,9 @@ class FightController extends BaseController {
         log.debug("pc: " + pc)
 
         return [
-                mob: combat.fetchFirstMob(),
-                pc: pc,
-                combat: combat,
+                mob    : combat.fetchFirstMob(),
+                pc     : pc,
+                combat : combat,
                 eqSlots: pc.fetchEquipment()
         ]
     }
@@ -81,7 +83,7 @@ class FightController extends BaseController {
         pc.currentCombat = null
 
         flash.message = message(code: 'fight.flee.success')
-        return [pc: pc,
+        return [pc   : pc,
                 quest: quest
         ]
     }
@@ -89,6 +91,7 @@ class FightController extends BaseController {
     /*
       * Show fight result
       */
+
     def fight() {
         try {
             def user = fetchUser()
@@ -103,39 +106,44 @@ class FightController extends BaseController {
                 if (!combat) {
                     redirect(controller: 'portal', action: 'start')
                     return
-            }
-            pc = combat.playerCharacter
+                }
+                pc = combat.playerCharacter
 
-            if (!pc.user.equals(user)) {// make sure it is this user's combat
-                flash.message = message(code: 'error.foreign.object')
-                redirect(action: 'start', controller: 'portal')
-                return
-            }
-            mob = combat.fetchFirstMob()
-            String action
-            try {
-                action = fightService.fight(combat, pc, mob)
-            }
-            catch (OptimisticLockingFailureException foo) {
-                // try once more: (a rather primitive approach...)
-                action = fightService.fight(combat, pc, mob)
-            }
+                if (!pc.user.equals(user)) {// make sure it is this user's combat
+                    flash.message = message(code: 'error.foreign.object')
+                    redirect(action: 'start', controller: 'portal')
+                    return
+                }
+                mob = combat.fetchFirstMob()
+                FightResult action
+                try {
+                    action = fightService.fight(combat, pc, mob)
+                }
+                catch (OptimisticLockingFailureException foo) {
+                    // try once more: (a rather primitive approach...)
+                    action = fightService.fight(combat, pc, mob)
+                }
 
-            if (action) {
-                redirect(action: action, params: [pc: pc.id, mob: mob.id, combat: combat.id])
+                switch (action) {
+                    case FightResult.VICTORY: redirect(action: 'victory', params: [pc: pc.id, mob: mob.id, combat:
+                            combat.id]); break
+                    case FightResult.DEATH: redirect(action: 'death', params: [pc: pc.id, mob: mob.id, combat: combat
+                            .id]); break
+                    default: break;
+                }
+
+            }
+            if (!request.isRedirected()) {
+                return [pc    : pc,
+                        mob   :
+                                mob,
+                        combat:
+                                combat,
+                ]
             }
         }
-        if (!request.isRedirected()) {
-            return [pc: pc,
-                    mob:
-                            mob,
-                    combat:
-                            combat,
-            ]
-        }
-            }
-        catch (Exception e){
-            log.debug("Failed to fight.",e)
+        catch (Exception e) {
+            log.debug("Failed to fight.", e)
             throw new RuntimeException(e)
         }
     }
@@ -175,16 +183,17 @@ class FightController extends BaseController {
         }
         pc.currentCombat = null
 
-        return [pc: pc,
-                mob: mob,
-                quest: quest,
+        return [pc      : pc,
+                mob     : mob,
+                quest   : quest,
                 treasure: treasure,
-                combat: Combat.get(params.combat)]
+                combat  : Combat.get(params.combat)]
     }
 
     /*
       * Character is dead, show death message and high score.
       */
+
     def death() {
         def user = fetchUser()
 
@@ -211,9 +220,9 @@ class FightController extends BaseController {
         HighScore hs = new HighScore(character: pc, xp: pc.xp, killerMob: mob)
         hs.save()
 
-        return [pc: pc,
-                mob: mob,
-                quest: quest,
+        return [pc    : pc,
+                mob   : mob,
+                quest : quest,
                 combat: Combat.get(params.combat)]
     }
 
@@ -221,7 +230,7 @@ class FightController extends BaseController {
         def pc = PlayerCharacter.get(params.pc)
         // def mob = Mob.get(params.mob)
 
-        return [pc: pc,
+        return [pc       : pc,
                 highscore: HighScore.list(sort: 'xp', order: 'desc')
         ]
     }
