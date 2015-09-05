@@ -56,4 +56,3 @@ This code may link to images on the web which have their own copyright
 * GitHub page: https://github.com/dewarim/LittleGoblin
 * Issue Tracker: https://github.com/dewarim/LittleGoblin/issues
 * Blog for LittleGoblin: http://dewarim.com
-* Sourceforge page: http://sourceforge.net/projects/littlegoblin
