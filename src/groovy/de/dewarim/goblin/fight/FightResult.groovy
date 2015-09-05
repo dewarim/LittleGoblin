@@ -1,10 +1,13 @@
 package de.dewarim.goblin.fight
 
-/**
- * 
- */
-enum FightResult {
+import de.dewarim.goblin.mob.Mob
 
-    VICTORY, DEATH, CONTINUE
-    
+/**
+ *
+ */
+class FightResult {
+
+    FightResultType type
+    Mob opponent
+
 }

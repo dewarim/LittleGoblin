@@ -1,6 +1,7 @@
 package de.dewarim.goblin
 
 import de.dewarim.goblin.fight.FightResult
+import de.dewarim.goblin.fight.FightResultType
 import grails.plugin.springsecurity.annotation.Secured
 import de.dewarim.goblin.combat.Combat
 import de.dewarim.goblin.item.Item
@@ -115,31 +116,23 @@ class FightController extends BaseController {
                     return
                 }
                 mob = combat.fetchFirstMob()
-                FightResult action
+                FightResult result
                 try {
-                    action = fightService.fight(combat, pc, mob)
+                    result = fightService.fight(combat, pc, mob)
                 }
                 catch (OptimisticLockingFailureException foo) {
                     // try once more: (a rather primitive approach...)
-                    action = fightService.fight(combat, pc, mob)
+                    result = fightService.fight(combat, pc, mob)
                 }
 
-                switch (action) {
-                    case FightResult.VICTORY: redirect(action: 'victory', params: [pc: pc.id, mob: mob.id, combat:
-                            combat.id]); break
-                    case FightResult.DEATH: redirect(action: 'death', params: [pc: pc.id, mob: mob.id, combat: combat
-                            .id]); break
-                    default: break;
+                switch (result.type) {
+                    case FightResultType.VICTORY: return redirect(action: 'victory', params:
+                            [pc: pc.id, mob: result.opponent.id, combat: combat.id]); break
+                    case FightResultType.DEATH: return redirect(action: 'death', params:
+                            [pc: pc.id, mob: result.opponent.id, combat: combat.id]); break
+                    default: return [pc: pc, mob: result.opponent, combat: combat]
                 }
 
-            }
-            if (!request.isRedirected()) {
-                return [pc    : pc,
-                        mob   :
-                                mob,
-                        combat:
-                                combat,
-                ]
             }
         }
         catch (Exception e) {

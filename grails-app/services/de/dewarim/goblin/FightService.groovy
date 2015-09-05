@@ -7,81 +7,82 @@ import de.dewarim.goblin.exception.MonsterDeadException
 import de.dewarim.goblin.exception.PlayerDeadException
 import de.dewarim.goblin.exception.SimultaneousDeathException
 import de.dewarim.goblin.fight.FightResult
+import de.dewarim.goblin.fight.FightResultType
 import de.dewarim.goblin.mob.Mob
 import de.dewarim.goblin.pc.PlayerCharacter
 
 class FightService {
 
     def fight(Combat combat, PlayerCharacter pc, Mob mob) {
-        try{
-            if(roll_initiative(pc, mob)){
+        try {
+            if (roll_initiative(pc, mob)) {
                 pc.attack(mob, combat, true)
                 checkDeath(pc, mob)
                 mob.attack(pc, combat, true)
             }
-            else{
+            else {
                 mob.attack(pc, combat, true)
                 checkDeath(pc, mob)
                 pc.attack(mob, combat, true)
             }
             checkDeath(pc, mob)
         }
-        catch(PlayerDeadException pde){
+        catch (PlayerDeadException pde) {
             new CombatMessage('fight.pc.dead', [pc.name], combat).save()
-            return FightResult.DEATH
+            return new FightResult(type: FightResultType.DEATH, opponent: mob)
         }
-        catch(MonsterDeadException mde){
+        catch (MonsterDeadException mde) {
             new CombatMessage('fight.mob.dead', [mob.name], combat).save()
-            return FightResult.VICTORY
+            return new FightResult(type: FightResultType.VICTORY, opponent: mob)
         }
-        catch(SimultaneousDeathException sde){
+        catch (SimultaneousDeathException sde) {
             new CombatMessage('fight.all.dead', [], combat).save()
-            return FightResult.DEATH
+            return new FightResult(type: FightResultType.DEATH, opponent: mob)
         }
         finally {
             combat.save()
         }
-        return FightResult.CONTINUE
+        return new FightResult(type: FightResultType.CONTINUE, opponent: mob)
     }
 
-    Boolean roll_initiative(pc, mob){
+    Boolean roll_initiative(pc, mob) {
         log.debug("roll initiative for ${pc.name} and ${mob.name}")
-		return pc.initiative.roll() > mob.initiative.roll()
-	}
+        return pc.initiative.roll() > mob.initiative.roll()
+    }
 
-	void checkDeath(pc, mob){
-		if(pc.dead() && mob.dead()){
-			throw new SimultaneousDeathException()
-		}
-		else if(pc.dead()){
-			throw new PlayerDeadException()
-		}
-		if(mob.dead()){
-			throw new MonsterDeadException()
-		}
-	}
+    void checkDeath(pc, mob) {
+        if (pc.dead() && mob.dead()) {
+            throw new SimultaneousDeathException()
+        }
+        else if (pc.dead()) {
+            throw new PlayerDeadException()
+        }
+        if (mob.dead()) {
+            throw new MonsterDeadException()
+        }
+    }
 
-    CombatMessage attack(Creature attacker, Creature opponent, Combat combat){
+    CombatMessage attack(Creature attacker, Creature opponent, Combat combat) {
         CombatMessage cm
-        if(attacker.computeStrike() > opponent.computeParry()){
+        if (attacker.computeStrike() > opponent.computeParry()) {
             Integer dam = attacker.computeDamage()
-            
-                // collect item dice for damage
+
+            // collect item dice for damage
             def itemTypes = attacker.slots.findAll { it.item != null }.collect { it.item.type }
-                itemTypes.each { itemType ->
-                    if (itemType.combatDice) {
-                        dam = dam + itemType.combatDice.roll()
-                    }
+            itemTypes.each { itemType ->
+                if (itemType.combatDice) {
+                    dam = dam + itemType.combatDice.roll()
                 }
+            }
             log.debug("combat damage from items vs. ${opponent.name}: ${dam}")
             def resistanceAttributeMap = attacker.fetchResistanceAttributeMap(opponent)
             // add item combat attributes & resistances
-            itemTypes.each {itemType ->
-                itemType.combatAttributes.each {ca ->
+            itemTypes.each { itemType ->
+                itemType.combatAttributes.each { ca ->
                     dam = dam * ca.damageModifier
                     CombatAttributeType cat = ca.combatAttributeType
                     if (resistanceAttributeMap.containsKey(cat)) {
-                        resistanceAttributeMap.get(cat).each {combatModifier ->
+                        resistanceAttributeMap.get(cat).each { combatModifier ->
                             dam = dam * resistanceAttributeMap.get(cat)
                         }
                     }
@@ -97,7 +98,7 @@ class FightService {
             cm = new CombatMessage('fight.strike', [attacker.name, opponent.name, dam], combat)
             opponent.dealDamage(dam)
         }
-        else{
+        else {
             // TODO: message for block / AR
             cm = new CombatMessage('fight.miss', [attacker.name, opponent.name], combat)
         }
