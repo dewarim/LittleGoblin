@@ -106,6 +106,12 @@
 
         <div class="version_info">
             <pre>
+                Version 0.5.2.x ""
+                * Changed link to issue tracker (use GitHub instead of Sourceforge).
+                * Refactored FightService slightly to improve code reusability in project Schedim.
+                * Link to complete changelog is working again.
+            </pre>
+            <pre>
                 Version 0.5.0 "Small Updates" / 2015-07-11
                 * Updated plugin versions
 
@@ -120,21 +126,8 @@
                 * On start page, show link to admin page for admins
                 * Refactor Grand Melee and fight code
             </pre>
-            <pre>
-                Version 0.4.8 "Test Test" / 2014-11-05
-                * Fixed small JavaScript bug in inventory page.
-                * Fixed ugly exception messages in development mode when using "grails stop-all"
-                * Added unit test for Academy.
-                * Start page after login does no longer show empty character table if no chars exist yet.
-                * Added login form from auth page to landing page.
-                * Upgrade to Grails 2.4.4
-                * Upgraded Tomcat plugin
-                * Use Java 8
-                * Add more unit tests (ProductionJob, ProductionService)
-                * Fix bugs in ProductionService
-            </pre>
             <div class="">
-                <a href="${assetPath(src: 'txt/status.txt')}" target="_blank"><g:message code="link.to.status.old"/></a>
+                <a href="${assetPath(src: 'status.txt')}" target="_blank"><g:message code="link.to.status.old"/></a>
             </div>
 
             <div class="highscore_link">
