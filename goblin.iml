@@ -28,6 +28,7 @@
         <fileset id="fileset1" name="XML Application Context" removed="false">
           <file>file://$MODULE_DIR$/web-app/WEB-INF/applicationContext.xml</file>
         </fileset>
+        <fileset id="Grails" name="Grails" removed="false" />
       </configuration>
     </facet>
     <facet type="web" name="GrailsWeb">
@@ -115,17 +116,8 @@
           <root url="jar://$MAVEN_REPOSITORY$/org/mozilla/rhino/1.7R4/rhino-1.7R4.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/ant/ant-launcher/1.8.0/ant-launcher-1.8.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/ant/ant/1.8.0/ant-1.8.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.2.1/httpcore-4.2.1.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.2.1/httpclient-4.2.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-orm/4.0.7.RELEASE/spring-orm-4.0.7.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib-nodep/2.2.2/cglib-nodep-2.2.2.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/3.6.10.Final/hibernate-core-3.6.10.Final.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-ehcache/3.6.10.Final/hibernate-ehcache-3.6.10.Final.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-commons-annotations/3.2.0.Final/hibernate-commons-annotations-3.2.0.Final.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-entitymanager/3.6.10.Final/hibernate-entitymanager-3.6.10.Final.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-validator/4.1.0.Final/hibernate-validator-4.1.0.Final.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.0.15/tomcat-embed-core-8.0.15.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/jdt/core/compiler/ecj/4.4/ecj-4.4.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-websocket/8.0.15/tomcat-embed-websocket-8.0.15.jar!/" />
@@ -133,7 +125,6 @@
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-logging-log4j/8.0.15/tomcat-embed-logging-log4j-8.0.15.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-jasper/8.0.15/tomcat-embed-jasper-8.0.15.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-el/8.0.15/tomcat-embed-el-8.0.15.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/bertramlabs/plugins/asset-pipeline-core/2.3.8/asset-pipeline-core-2.3.8.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-rest-client/3.1.4.RELEASE/grails-datastore-rest-client-3.1.4.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-simple/3.1.4.RELEASE/grails-datastore-simple-3.1.4.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm/3.1.4.RELEASE/grails-datastore-gorm-3.1.4.RELEASE.jar!/" />
@@ -141,18 +132,14 @@
           <root url="jar://$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache/2.9.0/ehcache-2.9.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm-plugin-support/3.1.4.RELEASE/grails-datastore-gorm-plugin-support-3.1.4.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm-hibernate-core/3.1.4.RELEASE/grails-datastore-gorm-hibernate-core-3.1.4.RELEASE.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm-hibernate/3.1.4.RELEASE/grails-datastore-gorm-hibernate-3.1.4.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/args4j/args4j/2.0.26/args4j-2.0.26.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/google/javascript/closure-compiler-externs/v20141023/closure-compiler-externs-v20141023.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/google/javascript/closure-compiler/v20141023/closure-compiler-v20141023.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/3.2.7.RELEASE/spring-security-web-3.2.7.RELEASE.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/3.2.7.RELEASE/spring-security-core-3.2.7.RELEASE.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
           <root url="jar://$USER_HOME$/.ideaLibSources/spring-security-core-3.2.3.RELEASE-sources.jar!/" />
           <root url="jar://$USER_HOME$/.ideaLibSources/javax.mail-1.5.2-sources.jar!/" />
           <root url="file://$USER_HOME$/java_libs2/javamail-1.5.2/mail/src/main/java" />
+          <root url="jar://$USER_HOME$/.ideaLibSources/asset-pipeline-core-2.3.8-sources.jar!/" />
         </SOURCES>
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
       </library>
@@ -160,5 +147,10 @@
     <orderEntry type="module" module-name="goblin-grailsPlugins" />
     <orderEntry type="library" name="grails-2.4.3" level="application" />
     <orderEntry type="library" name="grails-2.4.4" level="application" />
+    <orderEntry type="library" name="groovy-1.8.6" level="application" />
+  </component>
+  <component name="RModuleSettingsStorage">
+    <LOAD_PATH number="0" />
+    <I18N_FOLDERS number="1" string0="$MODULE_DIR$/i18n" />
   </component>
 </module>

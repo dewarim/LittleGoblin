@@ -106,6 +106,11 @@
 
         <div class="version_info">
             <pre>
+                Version 0.5.3 "GDPR - Great Dragon of Privacy Refinement" / 2018-05
+                * Added privacy notice to imprint.
+                * Disabled Facebook like button.
+            </pre>
+            <pre>
                 Version 0.5.2.x ""
                 * Changed link to issue tracker (use GitHub instead of Sourceforge).
                 * Refactored FightService slightly to improve code reusability in project Schedim.
